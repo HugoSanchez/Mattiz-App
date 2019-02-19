@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
-import { View, Button, StyleSheet } from 'react-native';
+import { View, StyleSheet } from 'react-native';
+import { Button } from 'react-native-elements';
+
+// Files import.
 import { logIn } from '../api/auth';
 
 export default class OutScreen extends Component {
@@ -17,6 +20,8 @@ export default class OutScreen extends Component {
         return (
             <View style={styles.container}>
                 <Button
+                    buttonStyle={{ margin: 10, borderRadius: 30 }}
+                    backgroundColor='#000'
                     title='Login'
                     onPress={this.onLogin}
                 />
