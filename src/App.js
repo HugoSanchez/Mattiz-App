@@ -5,12 +5,12 @@ import {Platform, StyleSheet, Text, View} from 'react-native';
 import { getRootNavigator } from './navigator';
 
 // Crypto imports.
-/**
+
 import crypto from 'crypto';
 import bip39 from 'react-native-bip39';
 import 'ethers/dist/shims.js'; // Required 'Shim' for ethers.js to work in React Native.
 import { ethers } from 'ethers';
- */
+
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
