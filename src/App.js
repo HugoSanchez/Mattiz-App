@@ -1,11 +1,16 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {Platform, StyleSheet, Text, View} from 'react-native';
 
+// Files import. 
+import { getRootNavigator } from './navigator';
+
 // Crypto imports.
+/**
 import crypto from 'crypto';
 import bip39 from 'react-native-bip39';
 import 'ethers/dist/shims.js'; // Required 'Shim' for ethers.js to work in React Native.
 import { ethers } from 'ethers';
+ */
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -23,6 +28,7 @@ export default class App extends Component<Props> {
   }
 
   async componentWillMount() {
+    /**
     // Generate a new mnemonic seed phrase using Bitcoin bip39 standard.
     let mnemonic = await bip39.generateMnemonic()
 
@@ -42,6 +48,7 @@ export default class App extends Component<Props> {
 
     // Set the state with the mnemonic seed and address we just generated.
     this.setState({ mnemonic, address: decrypted.address });
+     */
   }
 
   // Encryption progress callback
@@ -55,15 +62,8 @@ export default class App extends Component<Props> {
   }
   
   render() {
-    return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
-        <Text style={styles.instructions}>Mnemonic seed: {this.state.mnemonic}</Text>
-        <Text style={styles.instructions}>Ethereum Address: {this.state.address}</Text>
-      </View>
-    );
+    const Root = getRootNavigator();
+    return <Root />
   }
 }
 
