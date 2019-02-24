@@ -1,16 +1,22 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
-import { Button } from 'react-native-elements';
 
-// Files import.
-import { logIn } from '../api/auth';
 import { setToken } from '../actions';
+import LoginForm from '../components/LoginForm';
+import SignUpForm from '../components/SignUpForm';
+import InitialLoadingScreen from '../components/InitialLoadingScreen';
 
 class OutScreen extends Component {
     constructor(props) {
         super(props);
-        this.onLogin = this.onLogin.bind(this);
+        this.state = {
+            isUserSignedUp: false, 
+            loading: true
+        }
+    }
+
+    componentWillMount() {
+        this.setState({ loading: false });
     }
 
     async onLogin() {
@@ -19,26 +25,18 @@ class OutScreen extends Component {
     }
 
     render() {
-        return (
-            <View style={styles.container}>
-                <Button
-                    buttonStyle={{ margin: 10, borderRadius: 30 }}
-                    backgroundColor='#000'
-                    title='Login'
-                    onPress={ this.onLogin }
-                />
-            </View>
-        );
+        /** Conditional rendering */
+        if ( this.state.loading === true ) {
+            return <InitialLoadingScreen />;
+        }
+
+        if ( this.state.loading === false && this.state.isUserSignedUp === false ) {
+            return <SignUpForm />;
+        }
+
+        return <LoginForm />;
     }
 }
-
-const styles = StyleSheet.create({
-    container: {
-        flex: 1, 
-        justifyContent: 'center',
-        alignItems: 'center'
-    }
-})
 
 const MapStateToProps = state => {
     const { user, token, error } = state.auth;

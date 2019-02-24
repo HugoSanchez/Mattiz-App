@@ -7,7 +7,7 @@ export default class InitialLoadingScreen extends Component {
     render() {
         return (
             <View style={ styles.container }>
-                <Spinner type={ ArcAlt }/>
+                <Spinner type='ArcAlt' size={60} />
             </View>
         )
     }

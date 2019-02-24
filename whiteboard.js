@@ -34,6 +34,3 @@ decryptionProgress(progress) {
   console.log("Decrypting: " + parseInt(progress * 100) + "% complete");
 }
 
-
-
-TypeError: (0, _navigator.default) is not a function. (In '(0, _navigator.default)()', '(0, _navigator.default)' is undefined)
