@@ -31,7 +31,7 @@ class OutScreen extends Component {
         }
 
         if ( this.state.loading === false && this.state.isUserSignedUp === false ) {
-            return <SignUpForm />;
+            return <SignUpForm navigation={this.props.navigation}/>;
         }
 
         return <LoginForm />;

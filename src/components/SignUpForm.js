@@ -5,7 +5,7 @@ import {  Button } from 'react-native-elements';
 export default class SignUpForm extends Component {
 
     onSignUp() {
-        //this.props.navigation.navigate('Dashboard')
+        // this.props.navigation.navigate('Dashboard')
         console.log('SignUp')
     }
 
@@ -14,7 +14,7 @@ export default class SignUpForm extends Component {
             <View style={ styles.container }>
                 <Text> This is SignUp Form </Text>
 
-                <Button onPress={ this.onSignUp() }> Sign Up </Button>
+                <Button onPress={ () => this.props.navigation.navigate('Dashboard') }> Sign Up </Button>
             </View>
         )
     }

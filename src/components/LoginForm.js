@@ -14,7 +14,7 @@ export default class LoginForm extends Component {
             <View style={ styles.container }>
                 <Text> This is Login Form </Text>
 
-                <Button onPress={ this.onLogin() }> Login </Button>
+                <Button onPress={ this.onLogin.bind(this) }> Login </Button>
             </View>
         )
     }
