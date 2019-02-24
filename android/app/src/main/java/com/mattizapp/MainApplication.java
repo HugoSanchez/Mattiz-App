@@ -3,11 +3,13 @@ package com.mattizapp;
 import android.app.Application;
 
 import com.facebook.react.ReactApplication;
+import com.oblador.vectoricons.VectorIconsPackage;
 import com.tradle.react.UdpSocketsModule;
 import com.peel.react.TcpSocketsModule;
+import com.react.rnspinkit.RNSpinkitPackage;
+import com.bitgo.randombytes.RandomBytesPackage;
 import com.peel.react.rnos.RNOSModule;
 import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import com.bitgo.randombytes.RandomBytesPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -28,11 +30,13 @@ public class MainApplication extends Application implements ReactApplication {
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
           new MainReactPackage(),
+            new VectorIconsPackage(),
             new UdpSocketsModule(),
             new TcpSocketsModule(),
+            new RNSpinkitPackage(),
+            new RandomBytesPackage(),
             new RNOSModule(),
-            new RNGestureHandlerPackage(),
-            new RandomBytesPackage()
+            new RNGestureHandlerPackage()
       );
     }
 
