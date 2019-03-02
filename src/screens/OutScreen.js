@@ -25,7 +25,7 @@ class OutScreen extends Component {
     }
 
     render() {
-        /** Conditional rendering */
+        /* Conditional rendering */
         if ( this.state.loading === true ) {
             return <InitialLoadingScreen />;
         }
