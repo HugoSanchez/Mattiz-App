@@ -10,8 +10,6 @@
   "dependencies": {
     "@tradle/react-native-http": "^2.0.1",
     "assert": "^1.4.1",
-    "aws-amplify": "^1.1.19",
-    "aws-amplify-react-native": "^2.1.7",
     "browserify-zlib": "^0.1.4",
     "console-browserify": "^1.1.0",
     "constants-browserify": "^1.0.0",
