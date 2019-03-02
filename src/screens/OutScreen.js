@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import firebase from 'firebase';
 
 import { setToken } from '../actions';
+import config from '../config';
 import LoginForm from '../components/LoginForm';
 import SignUpForm from '../components/SignUpForm';
 import InitialLoadingScreen from '../components/InitialLoadingScreen';
@@ -16,6 +18,7 @@ class OutScreen extends Component {
     }
 
     componentWillMount() {
+        firebase.initializeApp(config)
         this.setState({ loading: false });
     }
 
