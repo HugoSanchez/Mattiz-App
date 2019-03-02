@@ -17,7 +17,11 @@ export default class SignUpForm extends Component {
     render() {
         return (
             <View style={ styles.container }>
-                <Button title='Sign Up' onPress={ console.log("SignUp") }/>
+                <Button 
+                    title='Sign Up' 
+                    onPress={ console.log("SignUp") }
+                    style={{ margin: 10 }}
+                />
                 <Input 
                     placeholder='Input Code'
                     onChangeText={ value => this.onChangeText(value) }
@@ -26,6 +30,7 @@ export default class SignUpForm extends Component {
                 <Button 
                     title='Confirm User'
                     onPress={ console.log("SignUp") }
+                    style={{ margin: 10 }}
                 />
             </View>
         );
@@ -41,6 +46,7 @@ const styles = StyleSheet.create({
     input: {
         height: 50,
         backgroundColor: '#ededed',
-        marginVertical: 10
+        margin: 30,
+        padding: 20
     }
 })

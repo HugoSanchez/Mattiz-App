@@ -19,6 +19,7 @@ class OutScreen extends Component {
 
     componentWillMount() {
         firebase.initializeApp(config)
+ 
         this.setState({ loading: false });
     }
 
