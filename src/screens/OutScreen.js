@@ -34,7 +34,7 @@ class OutScreen extends Component {
             return <SignUpForm navigation={this.props.navigation}/>;
         }
 
-        return <LoginForm />;
+        return <LoginForm navigation={this.props.navigation}/>;
     }
 }
 
