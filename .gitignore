@@ -35,7 +35,7 @@ local.properties
 node_modules/
 npm-debug.log
 yarn-error.log
-whiteboard.js
+./whiteboard.js
 src/config
 
 # BUCK
