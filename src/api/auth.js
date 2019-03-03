@@ -5,9 +5,13 @@ export const isLoggedIn = async () => {
     return !!token
 }
 
-export const logIn = async () => {
-    const token = 'example-token'
-    return await AsyncStorage.setItem('token', token)
+export const setUserInMemory = async (user) => {
+    console.log('Setting user object in memory. user: ', user)
+    return await AsyncStorage.setItem('user', user)
+}
+
+export const getUserFromMemory = async () => {
+    return await AsyncStorage.getItem('user')
 }
 
 export const logOut = async () => {

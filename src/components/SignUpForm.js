@@ -1,9 +1,13 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import {  Button, Input } from 'react-native-elements';
+import { connect } from 'react-redux';
 import firebase from 'firebase';
 
-export default class SignUpForm extends Component {
+import { setUserInMemory } from '../api/auth';
+import { setUser } from '../actions/AuthActions';
+
+class SignUpForm extends Component {
 
     state = {
         username: '',
@@ -14,9 +18,12 @@ export default class SignUpForm extends Component {
     onButtonPress() {
         console.log("Hello")
         const { username, email } = this.state;
-        firebase.auth().createUserWithEmailAndPassword("hugos@gmail.com", "superPassword")
+        const user = username + ',' + email;
+        firebase.auth().createUserWithEmailAndPassword("hugo@gmail.com", "superPassword")
          .then(res => {
              console.log(res)
+             setUserInMemory(user)
+             this.props.setUser({username, email})
          })
          .catch(() => {
              console.log("Authentication Failed.")
@@ -27,7 +34,7 @@ export default class SignUpForm extends Component {
         return (
             <View style={ styles.container }>
                 <Input 
-                    placeholder='Username ...'
+                    placeholder='User ...'
                     onChangeText={ value => this.setState({ username: value }) }
                     style={ styles.input }
                 />
@@ -64,3 +71,14 @@ const styles = StyleSheet.create({
         padding: 20
     }
 })
+
+const MapStateToProps = state => {
+    const { user, token, error } = state.auth;
+    return {
+        user,
+        token,
+        error
+    };
+}
+
+export default connect(MapStateToProps, { setUser })(SignUpForm);
