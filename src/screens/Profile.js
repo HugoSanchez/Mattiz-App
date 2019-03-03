@@ -22,7 +22,7 @@ export default class Profile extends Component {
             <View style={styles.container}>
                 <Button 
                     title="Logout"
-                    onPress={this.onLogout}
+                    onPress={this.onLogout.bind(this)}
                 />
             </View>
         );

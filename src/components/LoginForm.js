@@ -8,8 +8,8 @@ import firebase from 'firebase';
 class LoginForm extends Component {
 
     onButtonPress() {
-        firebase.auth.signInWithEmailAndPassword("hugo@gmail.com", "superPassword")
-         .then(res => console.log(res))
+        firebase.auth().signInWithEmailAndPassword("hugo@gmail.com", "superPassword")
+         .then(() => this.props.navigation.navigate('Dashboard'))
          .catch(()=> {
             console.log('Authentication Failed.')
         });

@@ -15,5 +15,5 @@ export const getUserFromMemory = () => {
 }
 
 export const logOut = async () => {
-    return await AsyncStorage.removeItem('token')
+    return await AsyncStorage.removeItem('user')
 }

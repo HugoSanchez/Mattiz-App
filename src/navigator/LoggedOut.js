@@ -4,8 +4,8 @@ import OutScreen from '../screens/OutScreen';
 
 const LoggedOutNavigator = createStackNavigator({
     Login: {
-        screen: OutScreen
-    }
+        screen: OutScreen,
+    },
 });
 
 export default LoggedOutNavigator;
