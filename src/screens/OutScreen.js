@@ -2,8 +2,12 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import firebase from 'firebase';
 
-import { setToken } from '../actions';
+/* System Files */ 
+import { getUserFromMemory } from '../api/auth';
+import { setUser } from '../actions';
 import { config } from '../config/index';
+
+/* Components */
 import LoginForm from '../components/LoginForm';
 import SignUpForm from '../components/SignUpForm';
 import InitialLoadingScreen from '../components/InitialLoadingScreen';
@@ -19,8 +23,14 @@ class OutScreen extends Component {
 
     componentWillMount() {
         firebase.initializeApp(config)
- 
-        this.setState({ loading: false });
+        getUserFromMemory().then(user => {
+            if (user) {
+                split = user.split(',');
+                this.props.setUser({ username: split[0], email: split[1] })
+                this.setState({ loading: false, isUserSignedUp: true })
+            }
+            this.setState({ loading: false })
+        });
     }
 
     async onLogin() {
@@ -51,4 +61,4 @@ const MapStateToProps = state => {
     };
 }
 
-export default connect(MapStateToProps, { setToken })(OutScreen);
+export default connect(MapStateToProps, { setUser })(OutScreen);

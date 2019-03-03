@@ -1,13 +1,12 @@
 import React, { Component } from 'react';
-import { View, StyleSheet } from 'react-native';
-import Spinner from 'react-native-spinkit';
+import { View, StyleSheet, ActivityIndicator } from 'react-native';
 
 export default class InitialLoadingScreen extends Component {
 
     render() {
         return (
             <View style={ styles.container }>
-                <Spinner type='ArcAlt' size={60} />
+                <ActivityIndicator size='large' />
             </View>
         )
     }

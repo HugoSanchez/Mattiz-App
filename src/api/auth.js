@@ -10,8 +10,8 @@ export const setUserInMemory = async (user) => {
     return await AsyncStorage.setItem('user', user)
 }
 
-export const getUserFromMemory = async () => {
-    return await AsyncStorage.getItem('user')
+export const getUserFromMemory = () => {
+    return AsyncStorage.getItem('user')
 }
 
 export const logOut = async () => {
