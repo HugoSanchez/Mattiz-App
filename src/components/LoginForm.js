@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import {  Button } from 'react-native-elements';
+import { connect } from 'react-redux';
 
 import firebase from 'firebase';
 
-export default class LoginForm extends Component {
+class LoginForm extends Component {
 
     onButtonPress() {
         firebase.auth.signInWithEmailAndPassword("hugo@gmail.com", "superPassword")
@@ -17,7 +18,7 @@ export default class LoginForm extends Component {
     render() {
         return (
             <View style={ styles.container }>
-                <Text> This is Login Form </Text>
+                <Text> Hello { this.props.user.username + "Alguien"}</Text>
 
                 <Button 
                     title='Ignite !'
@@ -36,3 +37,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#F5FCFF'
     }
 })
+
+const MapStateToProps = state => {
+    const { user, token, error } = state.auth;
+    return {
+        user,
+        token,
+        error
+    };
+}
+
+export default connect(MapStateToProps, {})(LoginForm);
