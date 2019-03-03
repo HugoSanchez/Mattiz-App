@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { View, StyleSheet } from 'react-native';
 import {  Button, Input } from 'react-native-elements';
-
+import firebase from 'firebase';
 
 export default class SignUpForm extends Component {
 
@@ -13,19 +13,14 @@ export default class SignUpForm extends Component {
 
     onButtonPress() {
         console.log("Hello")
-
-        /*
         const { username, email } = this.state;
-        firebase.auth().createUserWithEmailAndPassword("hugo@gmail.com", "superPassword")
-         .then(() => {
-             const user = { username: username, email: email }
-             setUserInMemory(user)
-             this.props.setUser(user)
+        firebase.auth().createUserWithEmailAndPassword("hugos@gmail.com", "superPassword")
+         .then(res => {
+             console.log(res)
          })
          .catch(() => {
              console.log("Authentication Failed.")
         });
-        */
     }
 
     render() {
