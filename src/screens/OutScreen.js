@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import firebase from 'firebase';
 
 import { setToken } from '../actions';
-import config from '../config';
+import { config } from '../config/index';
 import LoginForm from '../components/LoginForm';
 import SignUpForm from '../components/SignUpForm';
 import InitialLoadingScreen from '../components/InitialLoadingScreen';
