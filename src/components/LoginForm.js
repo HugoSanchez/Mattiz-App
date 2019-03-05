@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
-import {  Button } from 'react-native-elements';
+import { View, Text, ImageBackground, StyleSheet } from 'react-native';
+import {  Button, Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 import firebase from 'firebase';
@@ -17,15 +17,21 @@ class LoginForm extends Component {
 
     render() {
         return (
-            <View style={ styles.container }>
-                <Text> Hello { this.props.user.username + "Alguien"}</Text>
+            <ImageBackground source={require('../assets/LoginBackground.png')}>
+                <View style={ styles.container }>
+                    <Input 
+                        placeholder='Password ...'
+                        onChangeText={ value => this.setState({ password: value }) }
+                        style={ styles.input }
+                    />
 
-                <Button 
-                    title='Ignite !'
-                    onPress={ this.onButtonPress.bind(this) }
-                    style={{ margin: 10 }}
-                />
-            </View>
+                    <Button 
+                        title='Ignite !'
+                        onPress={ this.onButtonPress.bind(this) }
+                        style={{ margin: 10 }}
+                    />
+                </View>
+            </ImageBackground>
         )
     }
 }
