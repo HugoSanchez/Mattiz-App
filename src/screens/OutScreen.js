@@ -16,7 +16,7 @@ class OutScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            isUserSignedUp: false, 
+            isUserSignedUp: true, 
             loading: true
         }
     }

@@ -1,11 +1,16 @@
 import React, { Component } from 'react';
-import { View, Text, ImageBackground, StyleSheet } from 'react-native';
+import { View, ImageBackground, StyleSheet } from 'react-native';
 import {  Button, Input } from 'react-native-elements';
+import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 
 import firebase from 'firebase';
 
 class LoginForm extends Component {
+
+    state = {
+        password: null
+    }
 
     onButtonPress() {
         firebase.auth().signInWithEmailAndPassword("hugo@gmail.com", "superPassword")
@@ -16,22 +21,39 @@ class LoginForm extends Component {
     }
 
     render() {
+        const {container, input, viewStyle } = styles;
         return (
-            <ImageBackground source={require('../assets/LoginBackground.png')}>
-                <View style={ styles.container }>
+            <View style={ container }>
+                <ImageBackground 
+                    source={require('../assets/LoginBackground.png')} 
+                    style={{ width:'100%', height:'100%', flex: 1 }}
+                    resizeMode='cover'
+                >
+                <View style={ viewStyle }>
                     <Input 
-                        placeholder='Password ...'
+                        placeholder="Password "
+                        inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
+                        placeholderTextColor='gray'
                         onChangeText={ value => this.setState({ password: value }) }
-                        style={ styles.input }
-                    />
-
-                    <Button 
-                        title='Ignite !'
-                        onPress={ this.onButtonPress.bind(this) }
-                        style={{ margin: 10 }}
+                        fontStyle={ this.state.password? 'italic' : 'normal' }
+                        onFocus={() => this.setState({ isFocused: true })}
+                        style={ input }
                     />
                 </View>
-            </ImageBackground>
+                <Button 
+                    title='Next !'
+                    titleStyle={{ color: '#03001A' }}
+                    buttonStyle={{ margin: 12, marginTop: this.state.isFocused ? 10 : 347, height: 47, backgroundColor: 'transparent' }}
+                    onPress={ () => this.setState({ formStatus: 'password' }) }
+                    ViewComponent={LinearGradient}
+                    linearGradientProps={{
+                        colors: ['rgba(214, 213, 213, 1)', 'rgba(163, 209, 100, .4)'],
+                        start: { x: 0.3, y: 0.5 },
+                        end: { x:1, y: 0.5 },
+                    }}
+                />
+                </ImageBackground>
+            </View>
         )
     }
 }
@@ -40,7 +62,26 @@ const styles = StyleSheet.create({
     container: {
         flex: 1, 
         justifyContent: 'center',
-        backgroundColor: '#F5FCFF'
+        backgroundColor: '#03001A'
+    },
+    input: {
+        height: 50,
+        backgroundColor: '#ededed',
+        margin: 30,
+        padding: 20
+    },
+    viewStyle: {
+        marginTop: 315, 
+        backgroundColor: 'rgba(255, 255, 255, 0.8)', 
+        borderRadius: 2,
+        margin: 12, 
+        height: 45
+    },
+    signUpButton: {
+        marginTop: 700,
+        margin: 12, 
+        backgroundColor: 'transparent',
+        height: 45
     }
 })
 

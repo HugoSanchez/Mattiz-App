@@ -4,7 +4,6 @@ import {  Button, Input } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 
 import { connect } from 'react-redux';
-import firebase from 'firebase';
 
 import { setUserInMemory } from '../api/auth';
 import { setUser } from '../actions/AuthActions';
@@ -20,17 +19,11 @@ class SignUpForm extends Component {
     }
 
     onButtonPress() {
-        const { username, email } = this.state;
+        const { username, password, confirmPassword } = this.state;
         const user = username + ',' + email;
-        firebase.auth().createUserWithEmailAndPassword("hugo@gmail.com", "superPassword")
-         .then(res => {
-             console.log(res)
-             setUserInMemory(user)
-             this.props.setUser({username, email})
-         })
-         .catch(() => {
-             console.log("Authentication Failed.")
-        });
+        if ( password === confirmPassword ) {
+            console.log('Auth!')
+        }
     }
 
     render() {
