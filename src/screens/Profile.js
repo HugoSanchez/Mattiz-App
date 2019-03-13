@@ -1,19 +1,23 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet, Button } from 'react-native';
-import firebase from 'firebase';
+import { connect } from 'react-redux';
 
 // Files import.
-import { logOut } from '../api/auth';
+import { removeTokenFromMemory } from '../api/auth';
+import { deleteUserFromReduxState } from '../actions'
 
-export default class Profile extends Component {
+class Profile extends Component {
     constructor(props) {
         super(props);
         this.onLogout = this.onLogout.bind(this);
     }
 
     async onLogout() {
-        await logOut();
-        firebase.auth.signOut();
+        // Remove token from memory.
+        await removeTokenFromMemory();
+        // Set initial state back in redux.
+        this.props.deleteUserFromReduxState();
+        // Navigate user out.
         this.props.navigation.navigate('Login')
     }
 
@@ -36,3 +40,13 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     }
 })
+
+const MapStateToProps = state => {
+    const { user, error } = state.auth;
+    return {
+        user,
+        error
+    };
+}
+
+export default connect(MapStateToProps, { deleteUserFromReduxState })(Profile);

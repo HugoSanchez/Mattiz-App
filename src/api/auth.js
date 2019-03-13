@@ -40,6 +40,6 @@ export const getTokenFromMemory = () => {
 }
 
 // REMOVE TOKEN.
-export const logOut = async () => {
+export const removeTokenFromMemory = async () => {
     return await AsyncStorage.removeItem('token')
 }

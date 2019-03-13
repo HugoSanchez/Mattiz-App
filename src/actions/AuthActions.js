@@ -1,4 +1,4 @@
-import { SET_TOKEN, SET_USER } from './types';
+import { SET_TOKEN, SET_USER, LOGOUT_USER } from './types';
 
 export const setToken = () => {
     return {
@@ -13,3 +13,10 @@ export const setUser = (user) => {
         payload: user
     };
 };
+
+export const deleteUserFromReduxState = () => {
+    return {
+        type: LOGOUT_USER,
+        payload: null
+    }
+}
