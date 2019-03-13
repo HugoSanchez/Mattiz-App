@@ -1,13 +1,13 @@
 import { AsyncStorage } from 'react-native';
 import axios from 'axios';
 
-const URL = 'http://localhost:3000/api/auth'
+const URL = 'http://192.168.0.15:3000/api/auth'
 
-    //* Auth API Functions *//
+    // AUTH API FUNCTIONS //
 
-// CALL "/register" ENDPOINT
+// CALL "/register" ENDPOINT.
 export const authCreateUser = (name, password) => {
-    return axios.post(URL + 'register', {name, password})
+    return axios.post(URL + '/register', {name, password})
 }
 
 // CALL "/identify" ENDPOINT, RETURNS NAME & ID.
@@ -16,11 +16,11 @@ export const identifyUser = (token) => {
 }
 
 // CALL "/login" ENDPOINT, RETURNS OBJECT { auth: bool, token: token }
-export const verifyUserAndLogIn = (userID, password) => {
+export const verifyUser = (userID, password) => {
     return axios.post(URL + '/login', {_id: userID, password })
 }
 
-    //* AsyncStorage Token Functions *//
+    // ASYNCSTORAGE TOKEN FUNCTIONS //
 
 // CHECK IF TOKEN EXISTS, RETURNS BOOLEAN.
 export const isLoggedIn = async () => {
@@ -34,12 +34,12 @@ export const setTokenInMemory = async (token) => {
     return await AsyncStorage.setItem('token', token)
 }
 
-// GET TOKEN 
+// GET TOKEN. 
 export const getUserFromMemory = () => {
     return AsyncStorage.getItem('token')
 }
 
-// REMOVE TOKEN
+// REMOVE TOKEN.
 export const logOut = async () => {
     return await AsyncStorage.removeItem('token')
 }

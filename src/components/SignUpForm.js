@@ -5,24 +5,33 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { connect } from 'react-redux';
 
-import { setUserInMemory } from '../api/auth';
+import { authCreateUser } from '../api/auth';
 import { setUser } from '../actions/AuthActions';
 
 class SignUpForm extends Component {
 
     state = {
         username: null,
-        password: '',
-        confirmPassword: '',
+        password: null,
+        confirmPassword: null,
         formStatus: false,
-        isFocused: false
+        isFocused: false,
+        loading: false
     }
 
     onButtonPress() {
+        // Deconstruct state.
         const { username, password, confirmPassword } = this.state;
-        const user = username + ',' + email;
-        if ( password === confirmPassword ) {
-            console.log('Auth!')
+        // Check passwords are correct.
+        if ( password == confirmPassword ) {
+            // If so, call the '/register' endpoint which returns token.
+            authCreateUser(username, password).then(res => {
+                if (res.data.auth) {
+                    // If token, save it in memory
+                    console.log(res.data.token)
+                    // And set user in redux state.
+                }
+            })
         }
     }
 
@@ -52,7 +61,8 @@ class SignUpForm extends Component {
                 </View>
             )
         } 
-
+        
+        //*  SET USERNAME   *//
         if ( this.state.formStatus === 'username') {
             return (
                 <View style={ container }>
@@ -66,6 +76,7 @@ class SignUpForm extends Component {
                             placeholder="What's your name?"
                             inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
                             placeholderTextColor='gray'
+                            value={this.state.username}
                             onChangeText={ value => this.setState({ username: value }) }
                             fontStyle={ this.state.password? 'italic' : 'normal' }
                             onFocus={() => this.setState({ isFocused: true })}
@@ -88,7 +99,8 @@ class SignUpForm extends Component {
                 </View>
             )
         }
-        
+
+        //*  SET PASSWORD   *//
         if ( this.state.formStatus === 'password') {
             return (
                 <View style={ container }>
@@ -102,8 +114,10 @@ class SignUpForm extends Component {
                             placeholder="Choose your Password"
                             inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
                             placeholderTextColor='gray'
+                            value={this.state.password}
+                            secureTextEntry={true}
                             onChangeText={ value => this.setState({ password: value }) }
-                            fontStyle={ this.state.username ? 'italic' : 'normal' }
+                            fontStyle={ this.state.password ? 'italic' : 'normal' }
                             onFocus={() => this.setState({ isFocused: true })}
                             style={ input }
                         />
@@ -125,6 +139,7 @@ class SignUpForm extends Component {
             )
         }
 
+        //*  CONFIRM PASSWORD   *//
         if ( this.state.formStatus === 'confirm') {
             return (
                 <View style={ container }>
@@ -138,17 +153,19 @@ class SignUpForm extends Component {
                             placeholder="Confirm your Password"
                             inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
                             placeholderTextColor='gray'
-                            onChangeText={ value => this.setState({ password: value }) }
-                            fontStyle={ this.state.username ? 'italic' : 'normal' }
+                            value={this.state.confirmPassword}
+                            secureTextEntry={true}
+                            onChangeText={ value => this.setState({ confirmPassword: value }) }
+                            fontStyle={ this.state.confirmPassword ? 'italic' : 'normal' }
                             onFocus={() => this.setState({ isFocused: true })}
                             style={ input }
                         />
                     </View>
                     <Button 
-                        title='Sign Up'
+                        title='Sign Up !'
                         titleStyle={{ color: '#03001A' }}
                         buttonStyle={{ margin: 12, marginTop: this.state.isFocused ? 10 : 347, height: 47, backgroundColor: 'transparent' }}
-                        onPress={ () => this.setState({ formStatus: 'confirm' }) }
+                        onPress={ this.onButtonPress.bind(this) }
                         ViewComponent={LinearGradient}
                         linearGradientProps={{
                             colors: ['rgba(214, 213, 213, 1)', 'rgba(163, 209, 100, .4)'],
@@ -176,7 +193,7 @@ const styles = StyleSheet.create({
         padding: 20
     },
     viewStyle: {
-        marginTop: 315, 
+        marginTop: 281, 
         backgroundColor: 'rgba(255, 255, 255, 0.8)', 
         borderRadius: 2,
         margin: 12, 

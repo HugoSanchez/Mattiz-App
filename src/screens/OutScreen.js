@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import firebase from 'firebase';
 
 /* System Files */ 
 import { getUserFromMemory } from '../api/auth';
 import { setUser } from '../actions';
-import { config } from '../config/index';
 
 /* Components */
 import LoginForm from '../components/LoginForm';
@@ -17,25 +15,11 @@ class OutScreen extends Component {
         super(props);
         this.state = {
             isUserSignedUp: false, 
-            loading: true
+            loading: false
         }
     }
 
     componentWillMount() {
-        firebase.initializeApp(config)
-        getUserFromMemory().then(user => {
-            if (user) {
-                split = user.split(',');
-                this.props.setUser({ username: split[0], email: split[1] })
-                this.setState({ loading: false, isUserSignedUp: true })
-            }
-            this.setState({ loading: false })
-        });
-    }
-
-    async onLogin() {
-        this.props.setToken();
-        // this.props.navigation.navigate('Dashboard');
     }
 
     render() {
