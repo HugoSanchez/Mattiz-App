@@ -35,7 +35,7 @@ export const setTokenInMemory = async (token) => {
 }
 
 // GET TOKEN. 
-export const getUserFromMemory = () => {
+export const getTokenFromMemory = () => {
     return AsyncStorage.getItem('token')
 }
 

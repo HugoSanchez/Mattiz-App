@@ -5,7 +5,7 @@ import LinearGradient from 'react-native-linear-gradient';
 
 import { connect } from 'react-redux';
 
-import { authCreateUser } from '../api/auth';
+import { authCreateUser, setTokenInMemory } from '../api/auth';
 import { setUser } from '../actions/AuthActions';
 
 class SignUpForm extends Component {
@@ -28,8 +28,11 @@ class SignUpForm extends Component {
             authCreateUser(username, password).then(res => {
                 if (res.data.auth) {
                     // If token, save it in memory
-                    console.log(res.data.token)
+                    setTokenInMemory(res.data.token)
                     // And set user in redux state.
+                    setUser({username})
+                    // Navigate user inside app. 
+                    this.props.navigation.navigate('Dashboard')
                 }
             })
         }

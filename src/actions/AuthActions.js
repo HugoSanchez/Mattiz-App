@@ -8,7 +8,6 @@ export const setToken = () => {
 };
 
 export const setUser = (user) => {
-    console.log("Seting User in state")
     return {
         type: SET_USER,
         payload: user
