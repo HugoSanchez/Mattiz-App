@@ -12,7 +12,7 @@ export const authCreateUser = (name, password) => {
 
 // CALL "/identify" ENDPOINT, RETURNS NAME & ID.
 export const identifyUser = (token) => {
-    return axios.post(URL + '/identify', token)
+    return axios.post(URL + '/identify', {token})
 }
 
 // CALL "/login" ENDPOINT, RETURNS OBJECT { auth: bool, token: token }
@@ -30,13 +30,12 @@ export const isLoggedIn = async () => {
 
 // SET TOKEN IN MEMORY.
 export const setTokenInMemory = async (token) => {
-    console.log('Setting Token object in memory. Token: ', token)
     return await AsyncStorage.setItem('token', token)
 }
 
 // GET TOKEN. 
-export const getTokenFromMemory = () => {
-    return AsyncStorage.getItem('token')
+export const getTokenFromMemory = async () => {
+    return await AsyncStorage.getItem('token')
 }
 
 // REMOVE TOKEN.

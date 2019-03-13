@@ -2,24 +2,41 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
 /* System Files */ 
-import { getUserFromMemory } from '../api/auth';
-import { setUser } from '../actions';
+import { getTokenFromMemory, identifyUser } from '../api/auth';
+import { setUserInReduxState, setToken } from '../actions';
 
 /* Components */
 import LoginForm from '../components/LoginForm';
 import SignUpForm from '../components/SignUpForm';
 import InitialLoadingScreen from '../components/InitialLoadingScreen';
 
+
 class OutScreen extends Component {
     constructor(props) {
         super(props);
         this.state = {
             isUserSignedUp: false, 
-            loading: false
+            loading: true
         }
     }
 
-    componentWillMount() {
+    async componentWillMount() {
+        // Get token from memory if there is one.
+        let token = await getTokenFromMemory()
+        // Check if there is token
+        !token ?
+        // If there is no token, go to signUpForm.
+        this.setState({ loading: false })
+        :
+        // If there is, call '/identify' endpoint.
+        identifyUser(token).then(res => {
+            // Then set user in redux state.
+            console.log('Res: ', res.data)
+            setToken()
+            setUserInReduxState(res.data)
+            // Go to Login page.
+            this.setState({ loading: false, isUserSignedUp: true })
+        })
     }
 
     render() {
@@ -45,4 +62,4 @@ const MapStateToProps = state => {
     };
 }
 
-export default connect(MapStateToProps, { setUser })(OutScreen);
+export default connect(MapStateToProps, { setUserInReduxState, setToken })(OutScreen);

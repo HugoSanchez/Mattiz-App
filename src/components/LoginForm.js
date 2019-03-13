@@ -4,7 +4,6 @@ import {  Button, Input } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 import { connect } from 'react-redux';
 
-import firebase from 'firebase';
 
 class LoginForm extends Component {
 
@@ -12,12 +11,12 @@ class LoginForm extends Component {
         password: null
     }
 
+    componentWillMount() {
+        console.log(this.props)
+    }
+
     onButtonPress() {
-        firebase.auth().signInWithEmailAndPassword("hugo@gmail.com", "superPassword")
-         .then(() => this.props.navigation.navigate('Dashboard'))
-         .catch(()=> {
-            console.log('Authentication Failed.')
-        });
+
     }
 
     render() {
@@ -34,6 +33,7 @@ class LoginForm extends Component {
                         placeholder="Password "
                         inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
                         placeholderTextColor='gray'
+                        secureTextEntry={true}
                         onChangeText={ value => this.setState({ password: value }) }
                         fontStyle={ this.state.password? 'italic' : 'normal' }
                         onFocus={() => this.setState({ isFocused: true })}
@@ -71,7 +71,7 @@ const styles = StyleSheet.create({
         padding: 20
     },
     viewStyle: {
-        marginTop: 315, 
+        marginTop: 281, 
         backgroundColor: 'rgba(255, 255, 255, 0.8)', 
         borderRadius: 2,
         margin: 12, 

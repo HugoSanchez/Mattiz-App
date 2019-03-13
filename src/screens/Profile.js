@@ -13,8 +13,6 @@ class Profile extends Component {
     }
 
     async onLogout() {
-        // Remove token from memory.
-        await removeTokenFromMemory();
         // Set initial state back in redux.
         this.props.deleteUserFromReduxState();
         // Navigate user out.
