@@ -53,7 +53,7 @@ class SignUpForm extends Component {
                         resizeMode='cover'
                     >
                     <Button 
-                        title='Sign Up !'
+                        title='Set Sail !'
                         titleStyle={{ color: '#03001A' }}
                         buttonStyle={ signUpButton }
                         onPress={() => this.setState({ formStatus: 'username' }) }
