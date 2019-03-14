@@ -3,26 +3,30 @@ import { View, ImageBackground, StyleSheet } from 'react-native';
 import {  Button, Input } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 
+// Connect.
 import { connect } from 'react-redux';
 
+// Reducx Actions and Auth Functions. 
 import { authCreateUser, setTokenInMemory } from '../api/auth';
-import { setUserInReduxState } from '../actions/AuthActions';
+import { setUserInReduxState } from '../actions';
 
 class SignUpForm extends Component {
-
-    state = {
-        username: null,
-        password: null,
-        confirmPassword: null,
-        formStatus: false,
-        isFocused: false,
-        loading: false
+    constructor(props) {
+        super(props);
+        this.state = {
+            username: null,
+            password: null,
+            confirmPassword: null,
+            formStatus: false,
+            isFocused: false,
+            loading: false
+        }
     }
 
     onButtonPress() {
         // Deconstruct state.
         const { username, password, confirmPassword } = this.state;
-        // Check passwords are correct.
+        // Check if passwords are correct.
         if ( password == confirmPassword ) {
             // If so, call the '/register' endpoint which returns token.
             authCreateUser(username, password).then(res => {
@@ -30,7 +34,7 @@ class SignUpForm extends Component {
                     // If token, save it in memory
                     setTokenInMemory(res.data.token)
                     // And set user in redux state.
-                    setUserInReduxState({username})
+                    this.props.setUserInReduxState({username})
                     // Navigate user inside app. 
                     this.props.navigation.navigate('Dashboard')
                 }
@@ -62,10 +66,10 @@ class SignUpForm extends Component {
                     />
                     </ImageBackground>
                 </View>
-            )
+            );
         } 
         
-        //*  SET USERNAME   *//
+        //  SET USERNAME   //
         if ( this.state.formStatus === 'username') {
             return (
                 <View style={ container }>
@@ -100,10 +104,10 @@ class SignUpForm extends Component {
                     />
                     </ImageBackground>
                 </View>
-            )
+            );
         }
 
-        //*  SET PASSWORD   *//
+        //  SET PASSWORD   //
         if ( this.state.formStatus === 'password') {
             return (
                 <View style={ container }>
@@ -139,10 +143,10 @@ class SignUpForm extends Component {
                     />
                     </ImageBackground>
                 </View>
-            )
+            );
         }
 
-        //*  CONFIRM PASSWORD   *//
+        //   CONFIRM PASSWORD   //
         if ( this.state.formStatus === 'confirm') {
             return (
                 <View style={ container }>
@@ -178,7 +182,7 @@ class SignUpForm extends Component {
                     />
                     </ImageBackground>
                 </View>
-            )
+            );
         }
     }
 }

@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 
-/* System Files */ 
+// System Files // 
 import { getTokenFromMemory, identifyUser } from '../api/auth';
-import { setUserInReduxState, setToken } from '../actions';
+import { setUserInReduxState, setTokeninReduxState } from '../actions';
 
-/* Components */
+// Components //
 import LoginForm from '../components/LoginForm';
 import SignUpForm from '../components/SignUpForm';
 import InitialLoadingScreen from '../components/InitialLoadingScreen';
@@ -30,25 +30,27 @@ class OutScreen extends Component {
         :
         // If there is, call '/identify' endpoint.
         identifyUser(token).then(res => {
-            // Then set user in redux state.
-            console.log('Res: ', res.data)
-            setToken()
-            setUserInReduxState(res.data)
+            // Set user in redux state.
+            this.props.setUserInReduxState(res.data)
+            // Set the token in redux state. 
+            this.props.setTokeninReduxState(token)
             // Go to Login page.
             this.setState({ loading: false, isUserSignedUp: true })
         })
     }
 
     render() {
-        /* Conditional rendering */
+        // First render loading screen
         if ( this.state.loading === true ) {
             return <InitialLoadingScreen />;
         }
 
+        // Then if user is not signed up, render SignUpForm
         if ( this.state.loading === false && this.state.isUserSignedUp === false ) {
             return <SignUpForm navigation={this.props.navigation}/>;
         }
 
+        // Else render LoginForm.
         return <LoginForm navigation={this.props.navigation}/>;
     }
 }
@@ -62,4 +64,4 @@ const MapStateToProps = state => {
     };
 }
 
-export default connect(MapStateToProps, { setUserInReduxState, setToken })(OutScreen);
+export default connect(MapStateToProps, { setUserInReduxState, setTokeninReduxState })(OutScreen);

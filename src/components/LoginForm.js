@@ -6,9 +6,11 @@ import { connect } from 'react-redux';
 
 
 class LoginForm extends Component {
-
-    state = {
-        password: null
+    constructor(props) {
+        super(props);
+        this.state = {
+            password: null
+        }
     }
 
     componentWillMount() {
@@ -16,7 +18,7 @@ class LoginForm extends Component {
     }
 
     onButtonPress() {
-
+        // Call '/login' endpoint with password and user id (from props) 
     }
 
     render() {

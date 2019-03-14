@@ -1,9 +1,10 @@
 import { SET_TOKEN, SET_USER, LOGOUT_USER } from './types';
 
-export const setToken = () => {
+
+export const setTokeninReduxState = (token) => {
     return {
         type: SET_TOKEN,
-        payload: null
+        payload: token
     };
 };
 
