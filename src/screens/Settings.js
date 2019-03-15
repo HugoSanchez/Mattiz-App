@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import { removeTokenFromMemory } from '../api/auth';
 import { deleteUserFromReduxState } from '../actions'
 
-class Profile extends Component {
+class Settings extends Component {
     constructor(props) {
         super(props);
         this.onLogout = this.onLogout.bind(this);
@@ -47,4 +47,4 @@ const MapStateToProps = state => {
     };
 }
 
-export default connect(MapStateToProps, { deleteUserFromReduxState })(Profile);
+export default connect(MapStateToProps, { deleteUserFromReduxState })(Settings);

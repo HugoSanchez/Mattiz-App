@@ -8,11 +8,11 @@ export const RootNavigator = () => createSwitchNavigator(
         LoggedOut: {
             screen: LoggedOutNavigator
         },
-        loggedIn: {
+        LoggedIn: {
             screen: LoggedInNavigator
         }
     },
     {
-        initialRouteName: 'LoggedOut'
+        initialRouteName: 'LoggedIn'
     }
 );
