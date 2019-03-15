@@ -61,7 +61,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderBottomWidth: 0,
         borderRadius: 2,
-        borderColor: '#E5F2D4',
+        borderColor: '#E5F2D4'
     },
     boxContainer: {
         flex: 1,
