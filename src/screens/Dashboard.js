@@ -19,19 +19,27 @@ export default class Dashboard extends Component {
                 </View>
 
                 <View style={styles.boxContainer}>
+                    <View style={styles.statusAvatar}>
 
+                    </View>
                 </View>
 
                 <View style={styles.boxContainer}>
+                    <View style={styles.statusAvatar}>
 
+                    </View>
                 </View>
 
                 <View style={styles.boxContainer}>
+                    <View style={styles.statusAvatar}>
 
+                    </View>
                 </View>
 
                 <View style={styles.boxContainer}>
+                    <View style={styles.statusAvatar}>
 
+                    </View>
                 </View>
             </View>
         );
@@ -57,8 +65,8 @@ const styles = StyleSheet.create({
     },
     boxContainer: {
         flex: 1,
+        flexDirection: 'row',
         alignSelf: 'stretch',
-        justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 2,
         borderBottomWidth: 0,
@@ -78,5 +86,12 @@ const styles = StyleSheet.create({
         borderLeftWidth: 1,
         borderRadius: 2,
         borderColor: '#E5F2D4',
+    },
+    statusAvatar: {
+        width: 20,
+        height: 20, 
+        borderRadius: 10,
+        backgroundColor: '#E5F2D4',
+        marginLeft: 16
     }
 })
