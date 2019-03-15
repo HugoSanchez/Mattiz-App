@@ -9,11 +9,13 @@ export default class Dashboard extends Component {
                     <Text> You are now looged in! </Text>
                 </View>
 
-                <View style={styles.boxContainer}>
-                    <View style={styles.splitBox}>
+                <View style={[styles.boxContainer, styles.splitBox ]}>
+                    <View style={styles.smalleBoxContainer}>
 
                     </View>
+                    <View style={styles.smalleBoxContainer}>
 
+                    </View>
                 </View>
 
                 <View style={styles.boxContainer}>
@@ -58,8 +60,22 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1,
+        borderWidth: 2,
         borderBottomWidth: 0,
+        borderRadius: 2,
+        borderColor: '#E5F2D4',
+    },
+    splitBox: {
+        flexDirection: 'row'
+    },
+    smalleBoxContainer: {
+        flex: 1,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        alignItems: 'center',
+        borderWidth: 0,
+        borderBottomWidth: 0,
+        borderLeftWidth: 1,
         borderRadius: 2,
         borderColor: '#E5F2D4',
     }

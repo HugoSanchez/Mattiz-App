@@ -70,7 +70,7 @@ const LoggedInNavigator = createBottomTabNavigator({
         activeTintColor: '#A3D164',
         inactiveTintColor: '#5E5E5E',
         showIcon: true, 
-        showLabel: false
+        showLabel: false,
     }
 });
 
