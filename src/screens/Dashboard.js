@@ -1,12 +1,19 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 
+// Components 
+import OnboardingModal from '../components/OnboardingModal';
+
 export default class Dashboard extends Component {
+    state = {
+        showModal: false
+    }
+
     render() {
         return (
             <View style={styles.container}>
                 <View style={styles.balanceBoxContainer}>
-                    <Text> You are now looged in! </Text>
+                    <Text style={styles.textStyle}> You are now looged in! </Text>
                 </View>
 
                 <View style={[styles.boxContainer, styles.splitBox ]}>
@@ -61,7 +68,7 @@ const styles = StyleSheet.create({
         borderWidth: 1,
         borderBottomWidth: 0,
         borderRadius: 2,
-        borderColor: '#E5F2D4'
+        borderColor: '#E5F2D4',
     },
     boxContainer: {
         flex: 1,
@@ -93,5 +100,9 @@ const styles = StyleSheet.create({
         borderRadius: 10,
         backgroundColor: '#E5F2D4',
         marginLeft: 16
+    },
+    textStyle: {
+        fontFamily: 'Raleway-Light',
+        fontSize: 22
     }
 })
