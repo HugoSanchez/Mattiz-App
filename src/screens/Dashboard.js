@@ -1,15 +1,33 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import PlaidAuthenticator from 'react-native-plaid-link';
 
-// Components 
-import OnboardingModal from '../components/OnboardingModal';
 
 export default class Dashboard extends Component {
     state = {
-        showModal: false
+        showModal: false,
+        showPlaid: true
+    }
+
+    onMessage = (data) => {
+        console.log(data)
     }
 
     render() {
+
+        if ( this.state.showPlaid ) {
+            return (
+                <PlaidAuthenticator
+                    onMessage={this.onMessage}
+                    publicKey="cbc3786c0826ebad66f33cecc745dc"
+                    env="sandbox"
+                    product="auth,transactions"
+                    clientName="Mattiz"
+                    selectAccount={false}
+                />
+            );
+        }
+
         return (
             <View style={styles.container}>
                 <View style={styles.balanceBoxContainer}>
@@ -18,7 +36,7 @@ export default class Dashboard extends Component {
 
                 <View style={[styles.boxContainer, styles.splitBox ]}>
                     <View style={styles.smalleBoxContainer}>
-
+                        
                     </View>
                     <View style={styles.smalleBoxContainer}>
 
