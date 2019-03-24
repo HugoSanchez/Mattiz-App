@@ -2,6 +2,7 @@ import { createStackNavigator } from 'react-navigation';
 
 // Components.
 import SignUpForm from '../../screens/SignUpForm';
+import NewUserWelcomeScreen from '../../screens/NewUserWelcomeScreen';
 
 
 const OnboardingNavigator = createStackNavigator({
@@ -11,6 +12,15 @@ const OnboardingNavigator = createStackNavigator({
             header: null,
         }
     },
+    Welcome: {
+        screen: NewUserWelcomeScreen,
+        navigationOptions: {
+            header: null,
+        }
+    },
+},
+{
+    initialRouteName: 'Welcome'
 });
 
 export default OnboardingNavigator;

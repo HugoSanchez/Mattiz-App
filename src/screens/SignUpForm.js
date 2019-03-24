@@ -35,8 +35,8 @@ class SignUpForm extends Component {
                     setTokenInMemory(res.data.token)
                     // And set user in redux state.
                     this.props.setUserInReduxState({username})
-                    // Navigate user inside app. 
-                    this.props.navigation.navigate('Dashboard')
+                    // Navigate user to onboarding set up. 
+                    this.props.navigation.navigate('Welcome')
                 }
             })
         }
