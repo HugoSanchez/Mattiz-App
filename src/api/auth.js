@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import axios from 'axios';
 
-const URL = 'http://192.168.0.15:3000/api/auth'
+const URL = 'http://192.168.1.35:3000/api/auth'
 
     // AUTH API FUNCTIONS //
 
@@ -17,7 +17,7 @@ export const identifyUser = (token) => {
 
 // CALL "/login" ENDPOINT, RETURNS OBJECT { auth: bool, token: token }
 export const verifyUser = (userID, password) => {
-    return axios.post(URL + '/login', {_id: userID, password })
+    return axios.post(URL + '/login', { _id: userID, password })
 }
 
     // ASYNCSTORAGE TOKEN FUNCTIONS //

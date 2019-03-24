@@ -6,9 +6,9 @@ import { getTokenFromMemory, identifyUser } from '../api/auth';
 import { setUserInReduxState, setTokeninReduxState } from '../actions';
 
 // Components //
-import LoginForm from '../components/LoginForm';
-import SignUpForm from '../components/SignUpForm';
-import InitialLoadingScreen from '../components/InitialLoadingScreen';
+import LoginForm from './LoginForm';
+import SignUpForm from './SignUpForm';
+import InitialLoadingScreen from './InitialLoadingScreen';
 
 
 class OutScreen extends Component {

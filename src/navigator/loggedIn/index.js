@@ -3,10 +3,10 @@ import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
 
 // Components 
-import Dashboard from '../screens/Dashboard';
-import Settings from '../screens/Settings';
-import Transactions from '../screens/Transactions';
-import Products from '../screens/Products';
+import Dashboard from '../../screens/Dashboard';
+import Settings from '../../screens/Settings';
+import Transactions from '../../screens/Transactions';
+import Products from '../../screens/Products';
 
 // Icons
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
