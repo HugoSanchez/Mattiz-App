@@ -15,6 +15,8 @@ class Settings extends Component {
     async onLogout() {
         // Set initial state back in redux.
         this.props.deleteUserFromReduxState();
+        // Remove token from memory.
+        removeTokenFromMemory('token');
         // Navigate user out.
         this.props.navigation.navigate('Login')
     }

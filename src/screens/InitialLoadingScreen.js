@@ -15,7 +15,7 @@ class InitialLoadingScreen extends Component {
 
     async initiateFunction() {
         // Get token from memory if there is one.
-        let token = await getTokenFromMemory()
+        let token = await getTokenFromMemory('token')
         // Check if there is token
         !token ?
         // If there is no token, go to signUpForm.

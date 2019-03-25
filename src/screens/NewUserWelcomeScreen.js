@@ -20,9 +20,9 @@ const NewUserWelcomeScreen = (props) => {
                         onPress={ () => props.navigation.navigate('PlaidLink') }
                         ViewComponent={ LinearGradient }
                         linearGradientProps={{
-                            colors: ['rgba(4, 0, 38, 1)', 'rgba(163, 209, 100, 1)'],
-                            start: { x: 0.3, y: 0.5 },
-                            end: { x:1, y: 0.5 },
+                            colors: ['rgba(163, 209, 100, 1)', 'rgba(4, 0, 38, 1)'],
+                            start: { x: 0, y: 0.5 },
+                            end: { x: 1, y: 0.5 },
                         }}
                     />
                 </View>
@@ -42,9 +42,10 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway'
     },
     buttonStyle: {
-        margin: 12, 
+        margin: 20, 
         marginTop: 690, 
         height: 60, 
+        borderRadius: 10,
         backgroundColor: 'transparent'
     }
 

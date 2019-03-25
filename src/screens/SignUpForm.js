@@ -32,7 +32,7 @@ class SignUpForm extends Component {
             authCreateUser(username, password).then(res => {
                 if (res.data.auth) {
                     // If token, save it in memory
-                    setTokenInMemory(res.data.token)
+                    setTokenInMemory('token', res.data.token)
                     // And set user in redux state.
                     this.props.setUserInReduxState({username})
                     // Navigate user to onboarding set up. 
