@@ -1,5 +1,4 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
 
 import PlaidAuthenticator from 'react-native-plaid-link';
 
@@ -7,11 +6,8 @@ import { getAccessToken, setTokenInMemory, getTokenFromMemory } from '../api/aut
 
 class PlaidLink extends Component {
 
-    // TODO: Change token functions.
-    // Create access token array and set in memory. (if, else)
-
     onMessage = (data) => {
-        console.log(data)
+        // Parse message results to a readable key.
         const key = data.action.substr(data.action.lastIndexOf(':') + 1).toUpperCase();
 
         if (key === 'CONNECTED') {
@@ -24,41 +20,43 @@ class PlaidLink extends Component {
                         // If so,
                         if (tokens) {
                             // Parse it to get the token array,
-                            JSON.parse(tokens).push(res.access_token)
-                            // Push the new token and save again.
-                            await setTokenInMemory('plaid-tokens', JSON.stringify(tokens));
+                            const tokenObject = JSON.parse(tokens)
+                            // Push the new token
+                            tokenObject.tokenArray.push(res.data.access_token)
+                            // And save again.
+                            await setTokenInMemory('plaid-tokens', JSON.stringify(tokenObject))
                             // If not, 
                         } else {
-                            // Create the token array and push the first token into it.
-                            tokens = [].push(res.access_token)
+                            // Create the token object and array 
+                            const tokenObject = {'tokenArray': []};
+                            // And push the first token into it.
+                            tokenObject.tokenArray.push(res.data.access_token)
                             // Then save it in memory.
-                            await setTokenInMemory('plaid-tokens', JSON.stringify(tokens))
+                            await setTokenInMemory('plaid-tokens', JSON.stringify(tokenObject))
                         }
-                        // Finally, navigate user to onboardingTransition screen.
-                        this.props.navigation.navigate('onboardingTransition') 
+                        // Finally, navigate user to OnboardingTransition screen.
+                        this.props.navigation.navigate('OnboardingTransition') 
                     })
                 })
                 .catch(error => {
                     // Navigate to transition screen
-                    if (error) { this.props.navigation.navigate('onboardingTransition') }
+                    if (error) { this.props.navigation.navigate('OnboardingTransition') }
                 })
         }
     }
 
     render() {
         return (
-            <View>
-                <PlaidAuthenticator
-                    onMessage={this.onMessage}
-                    publicKey="cbc3786c0826ebad66f33cecc745dc"
-                    env="sandbox"
-                    product="auth,transactions"
-                    clientName="Mattiz"
-                    selectAccount={false}
-                />
-            </View>
+            <PlaidAuthenticator
+                onMessage={this.onMessage}
+                publicKey="cbc3786c0826ebad66f33cecc745dc"
+                env="sandbox"
+                product="auth,transactions"
+                clientName="Mattiz"
+                selectAccount={false}
+            />
         );
     }
 }
 
-// Export class and connect to redux state. 
+export default PlaidLink;
