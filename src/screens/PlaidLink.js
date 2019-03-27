@@ -62,7 +62,7 @@ class PlaidLink extends Component {
                         }
                         this.refs[WEBVIEW_REF].reload()
                         // Finally, navigate user to OnboardingTransition screen.
-                        // this.props.navigation.navigate('OnboardingTransition') 
+                        this.props.navigation.navigate('OnboardingTransition') 
                     })
                 })
                 .catch(error => {
