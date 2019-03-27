@@ -25,7 +25,7 @@ class OnboardingTransition extends Component {
                         title='Link more Accounts'
                         titleStyle={ titleStyle }
                         buttonStyle={ buttonStyle }
-                        onPress={ () => this.props.navigation.navigate('PlaidLink') }
+                        onPress={ () => this.props.navigation.navigate('PlaidLink', {reload: true}) }
                         ViewComponent={ LinearGradient }
                         linearGradientProps={{
                             colors: ['rgba(163, 209, 100, 1)', 'rgba(4, 0, 38, 1)'],

@@ -1,13 +1,39 @@
 import React, { Component } from 'react';
+import { WebView } from 'react-native';
 
 import PlaidAuthenticator from 'react-native-plaid-link';
 
 import { getAccessToken, setTokenInMemory, getTokenFromMemory } from '../api/auth';
 
+const WEBVIEW_REF = 'webview';
+const publicKey = "cbc3786c0826ebad66f33cecc745dc";
+const env = 'sandbox';
+const product = "auth,transactions";
+const clientName = "Mattiz."
+const selectAccount = false
+const uri = `https://cdn.plaid.com/link/v2/stable/link.html?key=${
+      publicKey
+    }&apiVersion=v2&env=${env}&product=${product}&clientName=${
+      clientName
+    }&isWebView=true&isMobile=true&selectAccount=${
+      selectAccount
+    }`;
+
 class PlaidLink extends Component {
 
-    onMessage = (data) => {
-        // Parse message results to a readable key.
+    state = {
+        ref: null
+    }
+
+    componentWillMount() {
+        if (this.props.navigation.getParam('reload')) {
+            console.log('PARAAAM!!!', this.props.navigation.getParam('reload'))
+        }
+    }
+
+    onMessage = e => {
+
+        const data = JSON.parse(e.nativeEvent.data)
         const key = data.action.substr(data.action.lastIndexOf(':') + 1).toUpperCase();
 
         if (key === 'CONNECTED') {
@@ -34,18 +60,32 @@ class PlaidLink extends Component {
                             // Then save it in memory.
                             await setTokenInMemory('plaid-tokens', JSON.stringify(tokenObject))
                         }
+                        this.refs[WEBVIEW_REF].reload()
                         // Finally, navigate user to OnboardingTransition screen.
-                        this.props.navigation.navigate('OnboardingTransition') 
+                        // this.props.navigation.navigate('OnboardingTransition') 
                     })
                 })
                 .catch(error => {
                     // Navigate to transition screen
-                    if (error) { this.props.navigation.navigate('OnboardingTransition') }
+                    console.log('Error ', error)
+                    // if (error) { this.props.navigation.navigate('OnboardingTransition') }
                 })
         }
     }
 
+    reloadWebView() {
+        this.refs[WEBVIEW_REF].reload();
+    }
+
     render() {
+        return(
+        <WebView
+            ref={WEBVIEW_REF}
+            source={{ uri }}
+            onMessage={this.onMessage}
+            useWebKit
+        />
+        /** 
         return (
             <PlaidAuthenticator
                 onMessage={this.onMessage}
@@ -54,7 +94,11 @@ class PlaidLink extends Component {
                 product="auth,transactions"
                 clientName="Mattiz"
                 selectAccount={false}
+                onLoad={() => console.log('loading... ')}
+                onLoadEnd={() => console.log('loading ended ...')}
+                ref={WEBVIEW_REF}
             />
+        */
         );
     }
 }
