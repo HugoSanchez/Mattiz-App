@@ -73,10 +73,6 @@ class PlaidLink extends Component {
         }
     }
 
-    reloadWebView() {
-        this.refs[WEBVIEW_REF].reload();
-    }
-
     render() {
         return(
         <WebView
