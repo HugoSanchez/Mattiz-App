@@ -1,7 +1,7 @@
 import { SET_TOKEN, SET_USER, LOGOUT_USER } from '../actions/types';
 
 const INITIAL_STATE = {
-    user: null,
+    user: {name: 'Pepito', password: 'superSecretPassword'},
     token: false, 
     error: null
 }

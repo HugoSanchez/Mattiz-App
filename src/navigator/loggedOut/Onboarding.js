@@ -5,6 +5,7 @@ import SignUpForm from '../../screens/SignUpForm';
 import NewUserWelcomeScreen from '../../screens/NewUserWelcomeScreen';
 import PlaidLink from '../../screens/PlaidLink';
 import OnboardingTransition from '../../screens/OnboardingTransition'
+import GenerateWallet from '../../screens/GenerateWallet';
 
 
 const OnboardingNavigator = createStackNavigator({
@@ -32,9 +33,15 @@ const OnboardingNavigator = createStackNavigator({
             header: null,
         }
     },
+    GenerateWallet: {
+        screen: GenerateWallet,
+        navigationOptions: {
+            header: null,
+        }
+    },
 },
 {
-    initialRouteName: 'Welcome'
+    initialRouteName: 'OnboardingTransition'
 });
 
 export default OnboardingNavigator;

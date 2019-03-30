@@ -10,6 +10,7 @@ class OnboardingTransition extends Component {
     render() {
         const { 
             container,
+            viewStyle,
             titleStyle,
             buttonStyle
         } = styles;
@@ -21,6 +22,8 @@ class OnboardingTransition extends Component {
                     style={{ width:'100%', height:'100%', flex: 1 }}
                     resizeMode='cover'
                 >
+
+                    <View style={ viewStyle }>
                     <Button 
                         title='Link more Accounts'
                         titleStyle={ titleStyle }
@@ -33,6 +36,20 @@ class OnboardingTransition extends Component {
                             end: { x: 1, y: 0.5 },
                         }}
                     />
+
+                    <Button 
+                        title='Get Private Keys'
+                        titleStyle={ titleStyle }
+                        buttonStyle={ buttonStyle }
+                        onPress={ () => this.props.navigation.navigate('GenerateWallet') }
+                        ViewComponent={ LinearGradient }
+                        linearGradientProps={{
+                            colors: ['rgba(163, 209, 100, 1)', 'rgba(4, 0, 38, 1)'],
+                            start: { x: 0, y: 0.5 },
+                            end: { x: 1, y: 0.5 },
+                        }}
+                    />
+                    </View> 
                 </ImageBackground>
             </View>
         );
@@ -45,13 +62,16 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center'
     },
+    viewStyle: {
+        marginTop: 600,
+        marginBottom: 40,
+    },
     titleStyle: {
         color: 'white', 
         fontFamily: 'Raleway'
     },
     buttonStyle: {
-        margin: 20, 
-        marginTop: 690, 
+        margin: 10, 
         height: 60, 
         borderRadius: 10,
         backgroundColor: 'transparent'
