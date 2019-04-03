@@ -88,7 +88,9 @@ class GenerateWallet extends Component {
 
 
                             <View style={ mnemonicContainer }>
-                                <MnemonicDisplay mnemonic={this.state.mnemonic} />
+                                <View style={{ marginLeft: 20, marginRight: 20 }}>
+                                    <MnemonicDisplay mnemonic={this.state.mnemonic} />
+                                </View>
                             </View>
 
                         </View>
@@ -102,7 +104,7 @@ class GenerateWallet extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, 
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center'
     },
@@ -120,8 +122,8 @@ const styles = StyleSheet.create({
     },
     topContainer: {
         marginTop: 30,
-        marginRight: 30,
-        marginLeft: 30,
+        marginRight: 20,
+        marginLeft: 20,
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
