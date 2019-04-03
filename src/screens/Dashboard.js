@@ -4,30 +4,12 @@ import PlaidAuthenticator from 'react-native-plaid-link';
 
 
 export default class Dashboard extends Component {
+    
     state = {
         showModal: false,
-        showPlaid: true
-    }
-
-    onMessage = (data) => {
-        console.log(data)
     }
 
     render() {
-
-        if ( this.state.showPlaid ) {
-            return (
-                <PlaidAuthenticator
-                    onMessage={this.onMessage}
-                    publicKey="cbc3786c0826ebad66f33cecc745dc"
-                    env="sandbox"
-                    product="auth,transactions"
-                    clientName="Mattiz"
-                    selectAccount={false}
-                />
-            );
-        }
-
         return (
             <View style={styles.container}>
                 <View style={styles.balanceBoxContainer}>
