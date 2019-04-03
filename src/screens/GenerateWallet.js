@@ -9,31 +9,37 @@ import bip39 from 'react-native-bip39';
 import 'ethers/dist/shims.js'; // Required 'Shim' for ethers.js to work in React Native.
 import { ethers } from 'ethers';
 
-const Spinner = require('react-native-spinkit');
+// Custom components
+import LoadingScreen from '../components/LoadingScreen';
+
 
 class GenerateWallet extends Component {
 
     state = {
-        loading: false,
+        loading: true,
         encryptionProgress: 0,
+        mnemonic: [],
+        encryptedKeys: null
     }
 
-    async onButtonPress() {
-        // Set loading = true.
-        this.setState({ loading: true })
+    async componentWillMount() {
 
         // Generate a mnemonic seed phrase using Bitcoin bip39 standard.
         let mnemonic = await bip39.generateMnemonic()
 
         // Use the same mnemonic to generate a Ethereum Wallet.
         let wallet = ethers.Wallet.fromMnemonic(mnemonic);
-        console.log(wallet)
 
         // Encrypt wallet using password.
         let encrypted = await wallet.encrypt(this.props.user.password, this.encryptionProgress)
-        console.log('Encrypted wallet object: ', encrypted)
 
-        this.setState({ loading: false })
+        // Stop loading, set mnemonic and encrypted wallet.
+        this.setState({ loading: false, encryptedKeys: encrypted, mnemonic: mnemonic.split('')})
+        console.log('Complete')
+    }
+
+    async onButtonPress() {
+        
     }
 
     encryptionProgress(progress) {
@@ -44,7 +50,8 @@ class GenerateWallet extends Component {
         const { 
             container,
             titleStyle,
-            buttonStyle
+            buttonStyle,
+            messageText
         } = styles;
 
         console.log(this.props.user)
@@ -58,28 +65,13 @@ class GenerateWallet extends Component {
                 >
                     {
                         this.state.loading ?
-                        <View style={ container }>
-                            <Spinner 
-                                style={{ alignSelf: 'center' }} 
-                                isVisible={true} 
-                                size={100} 
-                                type='CircleFlip' 
-                                color='#A3D164'
-                            />
-                        </View>
+                        <LoadingScreen>
+                            <Text style={ messageText }>
+                                CREATING YOU PRIVATE KEYS...
+                            </Text>
+                        </LoadingScreen>
                         :
-                        <Button 
-                            title='Get Keys'
-                            titleStyle={ titleStyle }
-                            buttonStyle={ buttonStyle }
-                            onPress={ () => this.onButtonPress() }
-                            ViewComponent={ LinearGradient }
-                            linearGradientProps={{
-                                colors: ['rgba(163, 209, 100, 1)', 'rgba(4, 0, 38, 1)'],
-                                start: { x: 0, y: 0.5 },
-                                end: { x: 1, y: 0.5 },
-                            }}
-                        />
+                        null
                     }
                 </ImageBackground>
             </View>
@@ -103,7 +95,13 @@ const styles = StyleSheet.create({
         height: 60, 
         borderRadius: 10,
         backgroundColor: 'transparent'
-    }
+    },
+    messageText: {
+        color: '#A3D164', 
+        fontFamily: 'Raleway',
+        fontSize: 36,
+        marginTop: 50
+    },
 });
 
 const MapStateToProps = state => {
