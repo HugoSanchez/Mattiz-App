@@ -72,26 +72,31 @@ class GenerateWallet extends Component {
                         </LoadingScreen>
                         :
                         <View>
+
                             <View style={ titleContainer }>
                                 <Text style={ titleStyle }> Awesome! </Text>
                             </View>
+
                             <View style={ topContainer }>
                                 <Text>
-                                    <Text style={ textStyle } suppressHighlighting={true}> 
+                                    <Text style={[ textStyle, { fontFamily: 'Raleway-Bold'} ]} suppressHighlighting={true}> 
                                         Now, pay attention because this is very important: 
-                                        This set of words control your private keys, and your private keys control your money. 
-                                        ¡ Make sure to save them somewhere save (not your computer, not yout phone, no screenshots neither)! 
+                                    </Text>
+                                    <Text />
+                                    <Text style={ textStyle } suppressHighlighting={true}> 
+                                        Make sure to save them somewhere save (not your computer, not yout phone, no screenshots neither)! 
                                         Remember, we don't have a copy of it, if you lose this, you lose your funds! 
                                     </Text>
                                 </Text>
                             </View>
-
 
                             <View style={ mnemonicContainer }>
                                 <View style={{ marginLeft: 20, marginRight: 20 }}>
                                     <MnemonicDisplay mnemonic={this.state.mnemonic} />
                                 </View>
                             </View>
+
+                            
 
                         </View>
                     }

@@ -75,7 +75,8 @@ const styles = {
     },
     textStyle: {
         fontFamily: 'Raleway',
-        fontSize: 16
+        fontSize: 16,
+        color: '#040026'
     }
 };
 
