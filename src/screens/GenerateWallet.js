@@ -11,19 +11,20 @@ import { ethers } from 'ethers';
 
 // Custom components
 import LoadingScreen from '../components/LoadingScreen';
+import MnemonicDisplay from '../components/MnemonicDisplay';
 
 
 class GenerateWallet extends Component {
 
     state = {
-        loading: false,
+        loading: true,
         encryptionProgress: 0,
-        mnemonic: ["jaguar"],
+        mnemonic: [""],
         encryptedKeys: null
     }
 
     async componentWillMount() {
-        /** 
+        
         // Generate a mnemonic seed phrase using Bitcoin bip39 standard.
         let mnemonic = await bip39.generateMnemonic()
         console.log(mnemonic.split(' '))
@@ -37,7 +38,6 @@ class GenerateWallet extends Component {
         // Stop loading, set mnemonic and encrypted wallet.
         this.setState({ loading: false, encryptedKeys: encrypted, mnemonic: mnemonic.split(' ')})
         console.log('Complete')
-        */
     }
 
     encryptionProgress(progress) {
@@ -48,15 +48,12 @@ class GenerateWallet extends Component {
         const { 
             container,
             messageText,
-            balanceBoxContainer,
-            boxContainer,
-            splitBox,
-            smalleBoxContainer,
-            statusAvatar,
+            topContainer,
+            mnemonicContainer,
+            titleContainer,
+            titleStyle,
             textStyle
         } = styles;
-
-        console.log(this.props.user)
 
         return (
             <View style={ container }>
@@ -65,6 +62,7 @@ class GenerateWallet extends Component {
                     style={{ width:'100%', height:'100%', flex: 1 }}
                     resizeMode='cover'
                 >
+
                     {
                         this.state.loading ?
                         <LoadingScreen>
@@ -73,88 +71,29 @@ class GenerateWallet extends Component {
                             </Text>
                         </LoadingScreen>
                         :
-                        <View style={styles.container}>
-                            <View style={styles.balanceBoxContainer}>
-                                <Text style={styles.textStyle}> You are now looged in! </Text>
+                        <View>
+                            <View style={ titleContainer }>
+                                <Text style={ titleStyle }> Awesome! </Text>
+                            </View>
+                            <View style={ topContainer }>
+                                <Text>
+                                    <Text style={ textStyle } suppressHighlighting={true}> 
+                                        Now, pay attention because this is very important: 
+                                        This set of words control your private keys, and your private keys control your money. 
+                                        ¡ Make sure to save them somewhere save (not your computer, not yout phone, no screenshots neither)! 
+                                        Remember, we don't have a copy of it, if you lose this, you lose your funds! 
+                                    </Text>
+                                </Text>
                             </View>
 
-                            <View style={styles.boxContainer}>
-                                <View style={styles.statusAvatar}>
 
-                                </View>
-                            </View>
-
-                            <View style={[styles.boxContainer, styles.splitBox ]}>
-                                <View style={styles.smalleBoxContainer}>
-                                    <Text style={textStyle}> 1. {this.state.mnemonic[0]}</Text>
-                                </View>
-
-                                <View style={styles.smalleBoxContainer}>
-
-                                </View>
-
-                                <View style={styles.smalleBoxContainer}>
-
-                                </View>
-                            </View>
-
-                            <View style={[styles.boxContainer, styles.splitBox ]}>
-                                <View style={styles.smalleBoxContainer}>
-                                    
-                                </View>
-                                
-                                <View style={styles.smalleBoxContainer}>
-
-                                </View>
-
-                                <View style={styles.smalleBoxContainer}>
-
-                                </View>
-                            </View>
-
-                            <View style={[styles.boxContainer, styles.splitBox ]}>
-                                <View style={styles.smalleBoxContainer}>
-                                    
-                                </View>
-                                
-                                <View style={styles.smalleBoxContainer}>
-
-                                </View>
-
-                                <View style={styles.smalleBoxContainer}>
-
-                                </View>
-                            </View>
-
-                            <View style={[styles.boxContainer, styles.splitBox ]}>
-                                <View style={styles.smalleBoxContainer}>
-                                    
-                                </View>
-                                
-                            </View>
-
-                            <View style={styles.boxContainer}>
-                                <View style={styles.statusAvatar}>
-
-                                </View>
-                            </View>
-
-                            <View style={styles.boxContainer}>
-                                <View style={styles.statusAvatar}>
-
-                                </View>
-                            </View>
-
-                            <View style={styles.boxContainer}>
-                                <View style={styles.statusAvatar}>
-
-                                </View>
+                            <View style={ mnemonicContainer }>
+                                <MnemonicDisplay mnemonic={this.state.mnemonic} />
                             </View>
 
                         </View>
                     }
 
-                    
                 </ImageBackground>
             </View>
         );
@@ -173,54 +112,38 @@ const styles = StyleSheet.create({
         fontSize: 28,
         marginTop: 50
     },
-    balanceBoxContainer: {
-        flex: 4,
+    titleContainer: {
+        marginTop: 110,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        alignItems: 'center',
+    },
+    topContainer: {
+        marginTop: 30,
+        marginRight: 30,
+        marginLeft: 30,
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
         borderWidth: 1,
-        borderBottomWidth: 0,
+        borderBottomWidth: 1,
         borderRadius: 2,
         borderColor: '#E5F2D4',
     },
-    boxContainer: {
-        flex: 1,
-        flexDirection: 'row',
-        alignSelf: 'stretch',
-        alignItems: 'center',
+    mnemonicContainer : {
+        marginTop: 30, 
+        height: 300, 
+        width: '100%'
     },
-    splitBox: {
-        flexDirection: 'row',
-        margin: 5
-    },
-    smalleBoxContainer: {
-        flex: 1,
-        margin: 5,
-        alignSelf: 'stretch',
-        alignItems: 'center',
-        justifyContent: 'center',
-        borderRadius: 15,
-        backgroundColor: '#FDFFFE',
-        shadowColor: '#000',
-        shadowOffset: {
-            width: 0,
-            height: 3,
-        },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-
-        elevation: 7,
-    },
-    statusAvatar: {
-        width: 20,
-        height: 20, 
-        borderRadius: 10,
-        backgroundColor: '#E5F2D4',
-        marginLeft: 16
+    titleStyle: {
+        fontFamily: 'Raleway',
+        fontSize: 32,
+        color: '#040026'
     },
     textStyle: {
-        fontFamily: 'Raleway-Light',
-        fontSize: 16
+        fontFamily: 'Raleway',
+        fontSize: 16,
+        color: '#040026'
     }
 });
 
