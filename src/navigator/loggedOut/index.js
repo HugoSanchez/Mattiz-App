@@ -1,4 +1,4 @@
-import { createStackNavigator } from 'react-navigation';
+import { createSwitchNavigator } from 'react-navigation';
 
 // Screens.
 import InitialLoadingScreen from '../../screens/InitialLoadingScreen';
@@ -8,7 +8,7 @@ import LoginForm from '../../screens/LoginForm';
 import OnboardingNavigator from './Onboarding';
 
 
-const LoggedOutNavigator = createStackNavigator({
+const LoggedOutNavigator = createSwitchNavigator({
     InitialLoading: {
         screen: InitialLoadingScreen,
         navigationOptions: {

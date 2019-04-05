@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { WebView } from 'react-native';
 
-import PlaidAuthenticator from 'react-native-plaid-link';
-
 import { getAccessToken, setTokenInMemory, getTokenFromMemory } from '../api/auth';
 
 const WEBVIEW_REF = 'webview';
@@ -20,16 +18,6 @@ const uri = `https://cdn.plaid.com/link/v2/stable/link.html?key=${
     }`;
 
 class PlaidLink extends Component {
-
-    state = {
-        ref: null
-    }
-
-    componentWillMount() {
-        if (this.props.navigation.getParam('reload')) {
-            console.log('PARAAAM!!!', this.props.navigation.getParam('reload'))
-        }
-    }
 
     onMessage = e => {
 
@@ -74,27 +62,16 @@ class PlaidLink extends Component {
     }
 
     render() {
+
         return(
-        <WebView
-            ref={WEBVIEW_REF}
-            source={{ uri }}
-            onMessage={this.onMessage}
-            useWebKit
-        />
-        /** 
-        return (
-            <PlaidAuthenticator
-                onMessage={this.onMessage}
-                publicKey="cbc3786c0826ebad66f33cecc745dc"
-                env="sandbox"
-                product="auth,transactions"
-                clientName="Mattiz"
-                selectAccount={false}
-                onLoad={() => console.log('loading... ')}
-                onLoadEnd={() => console.log('loading ended ...')}
+            <WebView
                 ref={WEBVIEW_REF}
+                source={{ uri }}
+                onLoadStart={() => console.log('start')}
+                onLoadEnd={() => console.log('Loading')}
+                onMessage={this.onMessage}
+                useWebKit
             />
-        */
         );
     }
 }

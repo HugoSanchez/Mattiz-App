@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
 import { View, ImageBackground, StyleSheet } from 'react-native';
-import {  Button, Input } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
+import { Input } from 'react-native-elements';
+
+// Custom Components.
+import MattizButton from '../components/common/MattizButton';
 
 // Connect.
 import { connect } from 'react-redux';
 
-// Reducx Actions and Auth Functions. 
+// Redux Actions and Auth Functions. 
 import { authCreateUser, setTokenInMemory } from '../api/auth';
 import { setUserInReduxState } from '../actions';
 
@@ -43,7 +45,8 @@ class SignUpForm extends Component {
     }
 
     render() {
-        const {container, input, signUpButton, viewStyle } = styles;
+        const {container, input, viewStyle } = styles;
+
         if ( this.state.formStatus == false ) {
             return (
                 <View style={ container }>
@@ -52,18 +55,14 @@ class SignUpForm extends Component {
                         style={{ width:'100%', height:'100%', flex: 1 }}
                         resizeMode='cover'
                     >
-                    <Button 
-                        title='Set Sail !'
-                        titleStyle={{ color: '#03001A' }}
-                        buttonStyle={ signUpButton }
-                        onPress={() => this.setState({ formStatus: 'username' }) }
-                        ViewComponent={LinearGradient}
-                        linearGradientProps={{
-                            colors: ['rgba(214, 213, 213, 1)', 'rgba(163, 209, 100, .4)'],
-                            start: { x: 0.3, y: 0.5 },
-                            end: { x:1, y: 0.5 },
-                        }}
-                    />
+                    <View style={{ marginTop: 700 }}>
+                        <MattizButton 
+                            title={'Set Sail !'}
+                            titleStyle={{ color: '#040026'}}
+                            onPress={ () => this.setState({ formStatus: 'username' })}
+                            linearColor={'rgba(214, 213, 213, 1)'}
+                        />
+                    </View>
                     </ImageBackground>
                 </View>
             );
@@ -90,18 +89,14 @@ class SignUpForm extends Component {
                             style={ input }
                         />
                     </View>
-                    <Button 
-                        title='Next !'
-                        titleStyle={{ color: '#03001A' }}
-                        buttonStyle={{ margin: 12, marginTop: this.state.isFocused ? 10 : 347, height: 47, backgroundColor: 'transparent' }}
-                        onPress={ () => this.setState({ formStatus: 'password' }) }
-                        ViewComponent={LinearGradient}
-                        linearGradientProps={{
-                            colors: ['rgba(214, 213, 213, 1)', 'rgba(163, 209, 100, .4)'],
-                            start: { x: 0.3, y: 0.5 },
-                            end: { x:1, y: 0.5 },
-                        }}
-                    />
+                    <View style={{ marginTop: this.state.isFocused ? 10 : 347}}>
+                        <MattizButton 
+                            title={'Next !'}
+                            titleStyle={{ color: '#040026'}}
+                            onPress={ () => this.setState({ formStatus: 'password' })}
+                            linearColor={'rgba(214, 213, 213, 1)'}
+                        />
+                    </View>
                     </ImageBackground>
                 </View>
             );
@@ -129,18 +124,14 @@ class SignUpForm extends Component {
                             style={ input }
                         />
                     </View>
-                    <Button 
-                        title='Next !'
-                        titleStyle={{ color: '#03001A' }}
-                        buttonStyle={{ margin: 12, marginTop: this.state.isFocused ? 10 : 347, height: 47, backgroundColor: 'transparent' }}
-                        onPress={ () => this.setState({ formStatus: 'confirm' }) }
-                        ViewComponent={LinearGradient}
-                        linearGradientProps={{
-                            colors: ['rgba(214, 213, 213, 1)', 'rgba(163, 209, 100, .4)'],
-                            start: { x: 0.3, y: 0.5 },
-                            end: { x:1, y: 0.5 },
-                        }}
-                    />
+                    <View style={{ marginTop: this.state.isFocused ? 10 : 347}}>
+                        <MattizButton 
+                            title={'Next !'}
+                            titleStyle={{ color: '#040026'}}
+                            onPress={ () => this.setState({ formStatus: 'confirm' })}
+                            linearColor={'rgba(214, 213, 213, 1)'}
+                        />
+                    </View>
                     </ImageBackground>
                 </View>
             );
@@ -168,18 +159,14 @@ class SignUpForm extends Component {
                             style={ input }
                         />
                     </View>
-                    <Button 
-                        title='Sign Up !'
-                        titleStyle={{ color: '#03001A' }}
-                        buttonStyle={{ margin: 12, marginTop: this.state.isFocused ? 10 : 347, height: 47, backgroundColor: 'transparent' }}
-                        onPress={ this.onButtonPress.bind(this) }
-                        ViewComponent={LinearGradient}
-                        linearGradientProps={{
-                            colors: ['rgba(214, 213, 213, 1)', 'rgba(163, 209, 100, .4)'],
-                            start: { x: 0.3, y: 0.5 },
-                            end: { x:1, y: 0.5 },
-                        }}
-                    />
+                    <View style={{ marginTop: this.state.isFocused ? 10 : 347}}>
+                        <MattizButton 
+                            title={'Sign Up !'}
+                            titleStyle={{ color: '#040026'}}
+                            onPress={ this.onButtonPress.bind(this) }
+                            linearColor={'rgba(214, 213, 213, 1)'}
+                        />
+                    </View>
                     </ImageBackground>
                 </View>
             );
@@ -204,12 +191,6 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255, 255, 255, 0.8)', 
         borderRadius: 2,
         margin: 12, 
-        height: 45
-    },
-    signUpButton: {
-        marginTop: 700,
-        margin: 12, 
-        backgroundColor: 'transparent',
         height: 45
     }
 })

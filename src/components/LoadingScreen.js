@@ -9,8 +9,8 @@ const LoadingScreen = props => {
             <Spinner 
                 style={{ alignSelf: 'center' }} 
                 isVisible={true} 
-                size={100} 
-                type='CircleFlip' 
+                size={75} 
+                type='Arc' 
                 color='#A3D164'
             />
             {
@@ -22,7 +22,7 @@ const LoadingScreen = props => {
 
 const styles = {
     container: {
-        flex: 1, 
+        flex: 1,
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white'

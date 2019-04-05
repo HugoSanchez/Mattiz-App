@@ -1,59 +1,33 @@
-import React, { Component } from 'react';
+import React from 'react';
 import { View, ImageBackground, StyleSheet } from 'react-native';
-import { Button } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
+import MattizButton from '../components/common/MattizButton';
 
+const OnboardingTransition = props => {
 
+    const { container, viewStyle } = styles;
+    const { navigation } = props;
 
-class OnboardingTransition extends Component {
+    return (
+        <View style={ container }>
+            <ImageBackground 
+                source={require('../assets/topLogo.png')} 
+                style={{ width:'100%', height:'100%', flex: 1 }}
+                resizeMode='cover'
+            >
+                <View style={ viewStyle }>
+                <MattizButton
+                    title={'Link more Accounts'}
+                    onPress={() => navigation.navigate('PlaidLink')} 
+                />
 
-    render() {
-        const { 
-            container,
-            viewStyle,
-            titleStyle,
-            buttonStyle
-        } = styles;
-
-        return (
-            <View style={ container }>
-                <ImageBackground 
-                    source={require('../assets/topLogo.png')} 
-                    style={{ width:'100%', height:'100%', flex: 1 }}
-                    resizeMode='cover'
-                >
-
-                    <View style={ viewStyle }>
-                    <Button 
-                        title='Link more Accounts'
-                        titleStyle={ titleStyle }
-                        buttonStyle={ buttonStyle }
-                        onPress={ () => this.props.navigation.navigate('PlaidLink', {reload: true}) }
-                        ViewComponent={ LinearGradient }
-                        linearGradientProps={{
-                            colors: ['rgba(163, 209, 100, 1)', 'rgba(4, 0, 38, 1)'],
-                            start: { x: 0, y: 0.5 },
-                            end: { x: 1, y: 0.5 },
-                        }}
-                    />
-
-                    <Button 
-                        title='Get Private Keys'
-                        titleStyle={ titleStyle }
-                        buttonStyle={ buttonStyle }
-                        onPress={ () => this.props.navigation.navigate('GenerateWallet') }
-                        ViewComponent={ LinearGradient }
-                        linearGradientProps={{
-                            colors: ['rgba(163, 209, 100, 1)', 'rgba(4, 0, 38, 1)'],
-                            start: { x: 0, y: 0.5 },
-                            end: { x: 1, y: 0.5 },
-                        }}
-                    />
-                    </View> 
-                </ImageBackground>
-            </View>
-        );
-    }
+                <MattizButton
+                    title={'Get Private Keys'}
+                    onPress={() => navigation.navigate('GenerateWallet')} 
+                />
+                </View> 
+            </ImageBackground>
+        </View>
+    );
 }
 
 const styles = StyleSheet.create({
@@ -66,16 +40,6 @@ const styles = StyleSheet.create({
         marginTop: 600,
         marginBottom: 40,
     },
-    titleStyle: {
-        color: 'white', 
-        fontFamily: 'Raleway'
-    },
-    buttonStyle: {
-        margin: 10, 
-        height: 60, 
-        borderRadius: 10,
-        backgroundColor: 'transparent'
-    }
 });
 
 export default OnboardingTransition;

@@ -1,4 +1,4 @@
-import { createStackNavigator } from 'react-navigation';
+import { createSwitchNavigator } from 'react-navigation';
 
 // Screens.
 import SignUpForm from '../../screens/SignUpForm';
@@ -8,7 +8,7 @@ import OnboardingTransition from '../../screens/OnboardingTransition'
 import GenerateWallet from '../../screens/GenerateWallet';
 
 
-const OnboardingNavigator = createStackNavigator({
+const OnboardingNavigator = createSwitchNavigator({
     SignUp: {
         screen: SignUpForm,
         navigationOptions: {
@@ -41,7 +41,7 @@ const OnboardingNavigator = createStackNavigator({
     },
 },
 {
-    initialRouteName: 'OnboardingTransition'
+    initialRouteName: 'SignUp'
 });
 
 export default OnboardingNavigator;
