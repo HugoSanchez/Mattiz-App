@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ImageBackground, StyleSheet } from 'react-native';
+import { View, ImageBackground, Image, StyleSheet } from 'react-native';
 import {  Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 
@@ -46,17 +46,21 @@ class LoginForm extends Component {
         return (
             <View style={ container }>
                 <ImageBackground 
-                    source={require('../assets/LoginBackground.png')} 
-                    style={{ width:'100%', height:'100%', flex: 1 }}
-                    resizeMode='cover'
+                    source={require('../assets/Background.jpeg')} 
+                    style={{ width: '100%', height: '100%', flex: 1 }}
+                    resizeMode={'cover'}
                 >
                 {
                     this.state.loading ?
                     // If loading == true, render spinner,
                     <ActivityIndicator size='large' />
                     : // else, render form and button.
-                    <View>
-                        <View style={ viewStyle }>
+                    <View style={{ alignItems: 'center' }}>
+                        <Image
+                            source={require('../assets/MattizLogo.png')} 
+                            style={{ width: 200, height: 200, marginTop: 40 }}
+                        />
+                        <View style={[ viewStyle, { marginTop: 33, alignSelf: 'stretch' } ]}>
                             <Input 
                                 placeholder="Password "
                                 inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
@@ -68,10 +72,11 @@ class LoginForm extends Component {
                                 style={ input }
                             />
                         </View>
-                        <View style={{ marginTop: this.state.isFocused ? 10 : 347 }}>
+                        <View style={{ marginTop: this.state.isFocused ? 2 : 370, alignSelf: 'stretch' }}>
                             <MattizButton 
                                 title={'Log In! '}
                                 titleStyle={{ color: '#040026'}}
+                                buttonStyle={{ height: 55, borderRadius: 10 }}
                                 onPress={ () => this.onButtonPress.bind(this)}
                                 linearColor={'rgba(214, 213, 213, 1)'}
                             />
@@ -86,22 +91,21 @@ class LoginForm extends Component {
 
 const styles = StyleSheet.create({
     container: {
-        flex: 1, 
-        justifyContent: 'center',
-        backgroundColor: '#03001A'
+        flex: 1,
+        alignItems: 'center', 
+        backgroundColor: '#fff'
     },
     input: {
         height: 50,
         backgroundColor: '#ededed',
-        margin: 30,
+        margin: 5,
         padding: 20
     },
     viewStyle: {
-        marginTop: 281, 
         backgroundColor: 'rgba(255, 255, 255, 0.8)', 
         borderRadius: 2,
-        margin: 12, 
-        height: 45
+        margin: 5, 
+        height: 50,
     },
 })
 

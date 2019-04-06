@@ -44,7 +44,7 @@ const styles = {
     },
     titleStyle: {
         color: 'white', 
-        fontFamily: 'Raleway'
+        fontFamily: 'Raleway-Regular'
     },
     buttonStyle: {
         height: 60, 
