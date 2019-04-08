@@ -195,7 +195,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const MapStateToProps = state => {
+const mapStateToProps = state => {
     const { user, token, error } = state.auth;
     return {
         user,
@@ -204,4 +204,4 @@ const MapStateToProps = state => {
     };
 }
 
-export default connect(MapStateToProps, { setUserInReduxState })(SignUpForm);
+export default connect(mapStateToProps, { setUserInReduxState })(SignUpForm);

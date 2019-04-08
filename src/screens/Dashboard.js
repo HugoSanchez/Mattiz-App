@@ -1,12 +1,21 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
-import PlaidAuthenticator from 'react-native-plaid-link';
+import { withNavigationFocus } from 'react-navigation';
 
+// Connect.
+import { connect } from 'react-redux';
 
-export default class Dashboard extends Component {
-    
+// Redux actions.
+import { loadPlaidInfo } from '../actions/PlaidActions';
+
+class Dashboard extends Component {
+
     state = {
         showModal: false,
+    }
+
+    componentWillMount() {
+        this.props.loadPlaidInfo();
     }
 
     render() {
@@ -106,3 +115,17 @@ const styles = StyleSheet.create({
         fontSize: 22
     }
 })
+
+const mapDispatchtoProps = dispatch => ({
+    loadPlaidInfo: () => dispatch(loadPlaidInfo()),
+});
+
+const mapStateToProps = state => {
+    const { balance, transactions } = state.plaid;
+    return {
+        balance,
+        transactions
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchtoProps)(withNavigationFocus(Dashboard));
