@@ -67,8 +67,6 @@ class PlaidLink extends Component {
             <WebView
                 ref={WEBVIEW_REF}
                 source={{ uri }}
-                onLoadStart={() => console.log('start')}
-                onLoadEnd={() => console.log('Loading')}
                 onMessage={this.onMessage}
                 useWebKit
             />

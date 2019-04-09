@@ -1,6 +1,5 @@
 import { AsyncStorage } from 'react-native';
 import axios from 'axios';
-import { get } from 'http';
 
 const URL = 'http://192.168.0.15:3000/api'
 
@@ -48,6 +47,7 @@ export const identifyUser = (token) => {
 
 // CALL "/login" ENDPOINT, RETURNS OBJECT { auth: bool, token: token }
 export const verifyUser = (userID, password) => {
+    console.log('hit verify')
     return axios.post(URL + '/auth/login', { _id: userID, password })
 }
 
@@ -58,12 +58,18 @@ export const getAccessToken = async (publicToken) => {
     return await axios.post(URL + '/plaid/get_access_token', { public_token: publicToken })
 }
 
+export const testEndpoint = () => {
+    return axios.post(URL + '/plaid/test', {data: 'tu puta madre'})
+}
+
 export const getBalance = async () => {
-    const accessTokenArray = await getTokenFromMemory('plaid-tokens')
-    return await axios.post(URL + '/plaid/accounts', { accessTokenArray })
+    console.log('HIT GET BALANCE')
+    const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
+    return await axios.post(URL + '/plaid/accounts', { accessTokenArray: tokens.tokenArray })
 }
 
 export const getTransactions = async () => {
-    const accessTokenArray = await getTokenFromMemory('plaid-tokens')
-    return await axios.post(URL + 'i/plaid/last_90_days_transactions', { accessTokenArray })
+    console.log('CALLED GET TRANSACTIONS')
+    const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
+    return await axios.post(URL + '/plaid/last_90_days_transactions', { accessTokenArray: tokens.tokenArray })
 } 

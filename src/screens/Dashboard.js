@@ -10,15 +10,13 @@ import { loadPlaidInfo } from '../actions/PlaidActions';
 
 class Dashboard extends Component {
 
-    state = {
-        showModal: false,
-    }
-
     componentWillMount() {
+
         this.props.loadPlaidInfo();
     }
 
     render() {
+
         return (
             <View style={styles.container}>
                 <View style={styles.balanceBoxContainer}>
@@ -124,7 +122,7 @@ const mapStateToProps = state => {
     const { balance, transactions } = state.plaid;
     return {
         balance,
-        transactions
+        transactions,
     }
 }
 

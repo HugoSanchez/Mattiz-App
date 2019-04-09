@@ -1,4 +1,8 @@
-import { SET_BALANCE, SET_TRANSACTIONS, LOAD_PLAID_INFO } from './types';
+import { 
+    SET_BALANCE, 
+    SET_TRANSACTIONS, 
+    LOAD_PLAID_INFO,
+} from './types';
 
 export const loadPlaidInfo = () => {
     return {
@@ -19,3 +23,4 @@ export const setTransactionsInReduxState = transactions => {
         payload: transactions 
     }
 }
+

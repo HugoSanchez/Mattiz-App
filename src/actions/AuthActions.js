@@ -9,12 +9,9 @@ export const setTokeninReduxState = (token) => {
 };
 
 export const setUserInReduxState = ( user ) => {
-    console.log('Action: ', user)
-    return (dispatch) => {
-        dispatch({ 
-            type: SET_USER,
-            payload: user
-        })
+    return {
+        type: SET_USER,
+        payload: user
     };
 };
 

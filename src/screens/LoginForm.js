@@ -46,7 +46,7 @@ class LoginForm extends Component {
         return (
             <View style={ container }>
                 <ImageBackground 
-                    source={require('../assets/Background.jpeg')} 
+                    source={require('../assets/whiteBackground.png')} 
                     style={{ width: '100%', height: '100%', flex: 1 }}
                     resizeMode={'cover'}
                 >
