@@ -25,14 +25,13 @@ class Dashboard extends Component {
         return (
             <View style={styles.container}>
                 <View style={styles.balanceBoxContainer}>
-                    <View style={{ flex: 2, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center'}}>
+                    <View style={{ alignSelf: 'stretch', alignItems: 'center' }}>
+                        <View style={{ marginTop: 95}}>
                         <Text style={[styles.textStyle, { fontSize: 32, marginBottom: 5 }]}>
                             $ {  this.props.balance }
                         </Text>                    
                         <Text style={styles.textStyle}> Your aggregated Balance </Text>
-                    </View>
-
-                    <View style={{ flex: 3, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center', borderWidth: 2, borderColor: 'gray'}}>
+                        </View>
                         <StackedAreaExample />
                     </View>
                 </View>
