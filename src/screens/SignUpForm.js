@@ -51,7 +51,7 @@ class SignUpForm extends Component {
             return (
                 <View style={ container }>
                     <ImageBackground 
-                        source={require('../assets/whiteBackground.png')} 
+                        source={require('../assets/LoginForm.png')} 
                         style={{ width:'100%', height:'100%', flex: 1 }}
                         resizeMode='cover'
                     >
@@ -73,7 +73,7 @@ class SignUpForm extends Component {
             return (
                 <View style={ container }>
                     <ImageBackground 
-                        source={require('../assets/whiteBackground.png')} 
+                        source={require('../assets/LoginForm.png')} 
                         style={{ width:'100%', height:'100%', flex: 1 }}
                         resizeMode='cover'
                     >
@@ -107,7 +107,7 @@ class SignUpForm extends Component {
             return (
                 <View style={ container }>
                     <ImageBackground 
-                        source={require('../assets/whiteBackground.png')} 
+                        source={require('../assets/LoginForm.png')} 
                         style={{ width:'100%', height:'100%', flex: 1 }}
                         resizeMode='cover'
                     >
@@ -142,7 +142,7 @@ class SignUpForm extends Component {
             return (
                 <View style={ container }>
                     <ImageBackground 
-                        source={require('../assets/whiteBackground.png')} 
+                        source={require('../assets/LoginForm.png')} 
                         style={{ width:'100%', height:'100%', flex: 1 }}
                         resizeMode='cover'
                     >

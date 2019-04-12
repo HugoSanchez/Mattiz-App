@@ -1,26 +1,34 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
-
-// Connect.
 import { connect } from 'react-redux';
+
+// Components.
+import { LoadingScreen } from '../components/LoadingScreen';
 
 // Redux actions.
 import { loadPlaidInfo } from '../actions/PlaidActions';
 
 class Dashboard extends Component {
+    constructor(props) {
+        super(props);
+    }
 
     componentWillMount() {
 
-        this.props.loadPlaidInfo();
+        // this.props.loadPlaidInfo();
     }
 
     render() {
 
+        console.log( this.props.transactions)
         return (
             <View style={styles.container}>
                 <View style={styles.balanceBoxContainer}>
-                    <Text style={styles.textStyle}> You are now looged in! </Text>
+                    <Text style={[styles.textStyle, { fontSize: 32, marginBottom: 5 }]}>
+                        $ {  this.props.balance }
+                    </Text>                    
+                    <Text style={styles.textStyle}> Your aggregated Balance </Text>
                 </View>
 
                 <View style={[styles.boxContainer, styles.splitBox ]}>
@@ -110,7 +118,7 @@ const styles = StyleSheet.create({
     },
     textStyle: {
         fontFamily: 'Raleway-Light',
-        fontSize: 22
+        fontSize: 14
     }
 })
 
@@ -119,10 +127,11 @@ const mapDispatchtoProps = dispatch => ({
 });
 
 const mapStateToProps = state => {
-    const { balance, transactions } = state.plaid;
+    const { balance, transactions, loading } = state.plaid;
     return {
         balance,
         transactions,
+        loading
     }
 }
 

@@ -3,9 +3,13 @@ import { View, ImageBackground, Image, StyleSheet } from 'react-native';
 import {  Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 
+// Components.
+import LoadingScreen from '../components/LoadingScreen'
 import MattizButton from '../components/common/MattizButton';
 
+// Auth & Actions.
 import { verifyUser } from '../api/auth';
+import { loadPlaidInfo } from '../actions/PlaidActions';
 
 
 class LoginForm extends Component {
@@ -22,16 +26,17 @@ class LoginForm extends Component {
         // TODO:
         // Render welcome message with user name.
         // Render error message.
-        console.log(this.props)
     }
 
     onButtonPress() {
         // Clean input and set spinner.
-        this.setState({ password: null, loading: true})
+        this.setState({ password: null, loading: true});
+        // Fire Plaid API calls.
+        this.props.loadPlaidInfo();
         // Call '/login' endpoint with password and user id.
         verifyUser(this.props.user._id, this.state.password).then(res => {
             // If succesful,
-            if (res.auth) {
+            if (res.data.auth) {
                 // Navigate user inside the app.
                 this.props.navigation.navigate('Dashboard')
             } else {
@@ -43,23 +48,22 @@ class LoginForm extends Component {
 
     render() {
         const { container, input, viewStyle } = styles;
+
+        if ( this.state.loading ) {
+            return (
+                <View style={ container }>
+                    <LoadingScreen />
+                </View>
+            );
+        }
         return (
             <View style={ container }>
                 <ImageBackground 
-                    source={require('../assets/whiteBackground.png')} 
+                    source={require('../assets/LoginForm.png')} 
                     style={{ width: '100%', height: '100%', flex: 1 }}
                     resizeMode={'cover'}
                 >
-                {
-                    this.state.loading ?
-                    // If loading == true, render spinner,
-                    <ActivityIndicator size='large' />
-                    : // else, render form and button.
                     <View style={{ alignItems: 'center' }}>
-                        <Image
-                            source={require('../assets/MattizLogo.png')} 
-                            style={{ width: 200, height: 200, marginTop: 40 }}
-                        />
                         <View style={[ viewStyle, { marginTop: 33, alignSelf: 'stretch' } ]}>
                             <Input 
                                 placeholder="Password "
@@ -77,12 +81,11 @@ class LoginForm extends Component {
                                 title={'Log In! '}
                                 titleStyle={{ color: '#040026'}}
                                 buttonStyle={{ height: 55, borderRadius: 10 }}
-                                onPress={ () => this.onButtonPress.bind(this)}
+                                onPress={ () => this.onButtonPress()}
                                 linearColor={'rgba(214, 213, 213, 1)'}
                             />
                         </View>
                     </View>
-                }
                 </ImageBackground>
             </View>
         )
@@ -109,13 +112,19 @@ const styles = StyleSheet.create({
     },
 })
 
+const mapDispatchtoProps = dispatch => ({
+    loadPlaidInfo: () => dispatch(loadPlaidInfo()),
+});
+
 const MapStateToProps = state => {
-    const { user, token, error } = state.auth;
+    const { user, token, error } = state.auth
+    const loading = state.plaid
     return {
         user,
         token,
-        error
+        error,
+        loading
     };
 }
 
-export default connect(MapStateToProps, {})(LoginForm);
+export default connect(MapStateToProps, mapDispatchtoProps)(LoginForm);

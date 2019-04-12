@@ -36,7 +36,7 @@ class InitialLoadingScreen extends Component {
         return (
             <View style={ styles.container }>
                 <ImageBackground 
-                    source={require('../assets/Background.jpeg')} 
+                    source={require('../assets/InitialLoading.png')} 
                     style={{ width:'100%', height:'100%', flex: 1 }}
                     resizeMode='cover'
                 >

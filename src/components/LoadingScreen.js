@@ -23,6 +23,7 @@ const LoadingScreen = props => {
 const styles = {
     container: {
         flex: 1,
+        alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
         backgroundColor: 'white'

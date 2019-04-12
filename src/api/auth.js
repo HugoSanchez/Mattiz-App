@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import axios from 'axios';
 
-const URL = 'http://192.168.0.15:3000/api'
+const URL = 'http://192.168.30.163:3000/api'
 
 
     // ASYNCSTORAGE TOKEN FUNCTIONS // 
@@ -47,7 +47,6 @@ export const identifyUser = (token) => {
 
 // CALL "/login" ENDPOINT, RETURNS OBJECT { auth: bool, token: token }
 export const verifyUser = (userID, password) => {
-    console.log('hit verify')
     return axios.post(URL + '/auth/login', { _id: userID, password })
 }
 
@@ -63,13 +62,11 @@ export const testEndpoint = () => {
 }
 
 export const getBalance = async () => {
-    console.log('HIT GET BALANCE')
     const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
     return await axios.post(URL + '/plaid/accounts', { accessTokenArray: tokens.tokenArray })
 }
 
 export const getTransactions = async () => {
-    console.log('CALLED GET TRANSACTIONS')
     const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
     return await axios.post(URL + '/plaid/last_90_days_transactions', { accessTokenArray: tokens.tokenArray })
 } 

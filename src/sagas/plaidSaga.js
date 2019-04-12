@@ -9,12 +9,12 @@ import {
 
 function* handleBalanceLoad() {
     const response = yield call(getBalance);
-    yield put(setBalanceInReduxState(response.data.balance))
+    yield put(setBalanceInReduxState(JSON.parse(response.data.balance)))
 }
 
 function* handleTransactionLoad() {
     const response = yield call(getTransactions);
-    yield put(setTransactionsInReduxState(response.data.tx))
+    yield put(setTransactionsInReduxState(response.data.tx));
 }
 
 function* handlePlaidLoad() {

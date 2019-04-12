@@ -3,7 +3,6 @@ import { View, Text } from 'react-native';
 import CustomCard from './common/CustomCard';
 
 const MnemonicDisplay = props => {
-    console.log(props.mnemonic[0])
     return (
         <View style={{ height: '100%', width: '100%'}}>
             <View style={ styles.container }>
