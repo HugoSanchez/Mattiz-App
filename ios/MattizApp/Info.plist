@@ -55,16 +55,25 @@
 	</dict>
 	<key>UIAppFonts</key>
 	<array>
-		<string>Lato-Black.ttf</string>
-		<string>Lato-BlackItalic.ttf</string>
-		<string>Lato-Bold.ttf</string>
-		<string>Lato-BoldItalic.ttf</string>
-		<string>Lato-Hairline.ttf</string>
-		<string>Lato-HairlineItalic.ttf</string>
-		<string>Lato-Italic.ttf</string>
-		<string>Lato-Light.ttf</string>
-		<string>Lato-LightItalic.ttf</string>
-		<string>Lato-Regular.ttf</string>
+		<string>NunitoSans-Black.ttf</string>
+		<string>NunitoSans-BlackItalic.ttf</string>
+		<string>NunitoSans-Bold.ttf</string>
+		<string>NunitoSans-BoldItalic.ttf</string>
+		<string>NunitoSans-ExtraBold.ttf</string>
+		<string>NunitoSans-ExtraBoldItalic.ttf</string>
+		<string>NunitoSans-ExtraLight.ttf</string>
+		<string>NunitoSans-ExtraLightItalic.ttf</string>
+		<string>NunitoSans-Italic.ttf</string>
+		<string>NunitoSans-Light.ttf</string>
+		<string>NunitoSans-LightItalic.ttf</string>
+		<string>NunitoSans-Regular.ttf</string>
+		<string>NunitoSans-SemiBold.ttf</string>
+		<string>NunitoSans-SemiBoldItalic.ttf</string>
+		<string>Rajdhani-Bold.ttf</string>
+		<string>Rajdhani-Light.ttf</string>
+		<string>Rajdhani-Medium.ttf</string>
+		<string>Rajdhani-Regular.ttf</string>
+		<string>Rajdhani-SemiBold.ttf</string>
 		<string>Raleway-Black.ttf</string>
 		<string>Raleway-BlackItalic.ttf</string>
 		<string>Raleway-Bold.ttf</string>
@@ -98,25 +107,6 @@
 		<string>Octicons.ttf</string>
 		<string>SimpleLineIcons.ttf</string>
 		<string>Zocial.ttf</string>
-		<string>NunitoSans-Black.ttf</string>
-		<string>NunitoSans-BlackItalic.ttf</string>
-		<string>NunitoSans-Bold.ttf</string>
-		<string>NunitoSans-BoldItalic.ttf</string>
-		<string>NunitoSans-ExtraBold.ttf</string>
-		<string>NunitoSans-ExtraBoldItalic.ttf</string>
-		<string>NunitoSans-ExtraLight.ttf</string>
-		<string>NunitoSans-ExtraLightItalic.ttf</string>
-		<string>NunitoSans-Italic.ttf</string>
-		<string>NunitoSans-Light.ttf</string>
-		<string>NunitoSans-LightItalic.ttf</string>
-		<string>NunitoSans-Regular.ttf</string>
-		<string>NunitoSans-SemiBold.ttf</string>
-		<string>NunitoSans-SemiBoldItalic.ttf</string>
-		<string>Rajdhani-Bold.ttf</string>
-		<string>Rajdhani-Light.ttf</string>
-		<string>Rajdhani-Medium.ttf</string>
-		<string>Rajdhani-Regular.ttf</string>
-		<string>Rajdhani-SemiBold.ttf</string>
 	</array>
 </dict>
 </plist>
