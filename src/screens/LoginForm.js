@@ -4,7 +4,8 @@ import {  Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 // Components.
-import LoadingScreen from '../components/LoadingScreen'
+import LoadingScreen from '../components/LoadingScreen';
+import CustomCard from '../components/common/CustomCard';
 import MattizButton from '../components/common/MattizButton';
 
 // Auth & Actions.
@@ -18,7 +19,8 @@ class LoginForm extends Component {
         this.state = {
             password: null,
             loading: false,
-            error: ''
+            error: '',
+            isFocused: false 
         }
     }
 
@@ -63,10 +65,13 @@ class LoginForm extends Component {
                     style={{ width: '100%', height: '100%', flex: 1 }}
                     resizeMode={'cover'}
                 >
-                    <View style={{ alignItems: 'center' }}>
-                        <View style={[ viewStyle, { marginTop: 33, alignSelf: 'stretch' } ]}>
+                    <View style={{ alignItems: 'center'}}>
+                        <CustomCard 
+                            style={{ margin: 10, marginTop: 250, height: 55, borderRadius: 10, backgroundColor: '#EFEFEF'}}
+                            elevated={ this.state.isFocused ? true : false }
+                        >
                             <Input 
-                                placeholder="Password "
+                                placeholder="Password ..."
                                 inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
                                 placeholderTextColor='gray'
                                 secureTextEntry={true}
@@ -75,8 +80,8 @@ class LoginForm extends Component {
                                 onFocus={() => this.setState({ isFocused: true })}
                                 style={ input }
                             />
-                        </View>
-                        <View style={{ marginTop: this.state.isFocused ? 2 : 370, alignSelf: 'stretch' }}>
+                        </CustomCard>
+                        <View style={{ marginTop: this.state.isFocused ? 10 : 390, alignSelf: 'stretch' }}>
                             <MattizButton 
                                 title={'Log In! '}
                                 titleStyle={{ color: '#040026'}}

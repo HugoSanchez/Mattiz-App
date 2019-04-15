@@ -4,7 +4,7 @@ import { withNavigationFocus } from 'react-navigation';
 import { connect } from 'react-redux';
 
 // Components.
-import LoadingScreen  from '../components/LoadingScreen';
+import CustomCard  from '../components/common/CustomCard';
 import StackedAreaExample from '../components/common/LineChart';
 
 // Redux actions.
@@ -24,7 +24,7 @@ class Dashboard extends Component {
 
         return (
             <View style={styles.container}>
-                <View style={styles.balanceBoxContainer}>
+                <CustomCard style={styles.balanceBoxContainer} elevated={true}>
                     <View style={{ alignSelf: 'stretch', alignItems: 'center' }}>
                         <View style={{ marginTop: 95}}>
                         <Text style={[styles.textStyle, { fontSize: 32, marginBottom: 5 }]}>
@@ -34,7 +34,7 @@ class Dashboard extends Component {
                         </View>
                         <StackedAreaExample />
                     </View>
-                </View>
+                </CustomCard>
 
                 <View style={[styles.boxContainer, styles.splitBox ]}>
                     <View style={styles.smalleBoxContainer}>
@@ -82,13 +82,12 @@ const styles = StyleSheet.create({
     },
     balanceBoxContainer: {
         flex: 4,
+        marginTop: 0, 
+        marginLeft: 0,
+        marginRight: 0,
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1,
-        borderBottomWidth: 0,
-        borderRadius: 2,
-        borderColor: '#E5F2D4',
     },
     boxContainer: {
         flex: 1,
