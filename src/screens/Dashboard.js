@@ -26,12 +26,10 @@ class Dashboard extends Component {
             <View style={styles.container}>
                 <CustomCard style={styles.balanceBoxContainer} elevated={true}>
                     <View style={{ alignSelf: 'stretch', alignItems: 'center' }}>
-                        <View style={{ marginTop: 95}}>
-                        <Text style={[styles.textStyle, { fontSize: 32, marginBottom: 5 }]}>
+                        <Text style={[styles.textStyle, { fontSize: 32, marginTop: 75, marginBottom: 5 }]}>
                             $ {  this.props.balance }
                         </Text>                    
-                        <Text style={styles.textStyle}> Your aggregated Balance </Text>
-                        </View>
+                        <Text style={styles.textStyle}> Aggregated Balance </Text>
                         <StackedAreaExample />
                     </View>
                 </CustomCard>
@@ -81,13 +79,14 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     balanceBoxContainer: {
-        flex: 4,
+        flex: 5,
         marginTop: 0, 
         marginLeft: 0,
         marginRight: 0,
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: 25,
     },
     boxContainer: {
         flex: 1,

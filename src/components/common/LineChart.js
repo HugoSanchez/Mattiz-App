@@ -37,7 +37,7 @@ export default class StackedAreaExample extends React.PureComponent {
             },
         ]
  
-        const colors = [ '#A3D164', '#B3D980', '#C4E19C', '#DDEEC6' ]
+        const colors = [ 'white', '#B3D980', '#C4E19C', '#DDEEC6' ]
         const keys   = [ 'apples', 'bananas', 'cherries', 'dates' ]
         const svgs = [
                     { onPress: () => console.log('apples') },
