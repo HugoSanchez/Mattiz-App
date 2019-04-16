@@ -52,7 +52,7 @@ export default class StackedAreaExample extends React.PureComponent {
                 data={ data }
                 keys={ keys }
                 colors={ colors }
-                curve={ shape.curveBasis }
+                curve={ shape.curveLinear }
                 showGrid={ false }
                 svgs={ svgs }
             />

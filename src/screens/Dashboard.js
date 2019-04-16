@@ -5,7 +5,9 @@ import { connect } from 'react-redux';
 
 // Components.
 import CustomCard  from '../components/common/CustomCard';
+import StatusDot from '../components/common/StatusDot'
 import StackedAreaExample from '../components/common/LineChart';
+import StatsCard from '../components/StatsCard';
 
 // Redux actions.
 import { loadPlaidInfo } from '../actions/PlaidActions';
@@ -36,35 +38,50 @@ class Dashboard extends Component {
 
                 <View style={[styles.boxContainer, styles.splitBox ]}>
                     <View style={styles.smalleBoxContainer}>
-                        
+                        <StatusDot positive={true} size={10}/>
+                        <Text style={[styles.textStyle, { fontSize: 22, marginLeft: 5 }]}>
+                            $1,365 <Text style={[styles.textStyle, { fontSize: 12 }]}> ETH </Text>
+                        </Text> 
                     </View>
+
                     <View style={styles.smalleBoxContainer}>
-
+                        <StatusDot positive={false} size={10}/>
+                        <Text style={[styles.textStyle, { fontSize: 22, marginLeft: 5 }]}>
+                            $3,445 <Text style={[styles.textStyle, { fontSize: 12 }]}> BTC</Text>
+                        </Text> 
                     </View>
                 </View>
 
                 <View style={styles.boxContainer}>
-                    <View style={styles.statusAvatar}>
-
-                    </View>
+                    <StatsCard
+                        icon={"credit-card"}
+                        text={"April Spenditures: "}
+                        amount={'347,85'} 
+                    />
                 </View>
 
                 <View style={styles.boxContainer}>
-                    <View style={styles.statusAvatar}>
-
-                    </View>
+                    <StatsCard
+                        icon={"arrow-right-circle"}
+                        text={"April Income: "}
+                        amount={'3.323,85'} 
+                    />
                 </View>
 
                 <View style={styles.boxContainer}>
-                    <View style={styles.statusAvatar}>
-
-                    </View>
+                    <StatsCard
+                        icon={"activity"}
+                        text={"April Interests Earned: "}
+                        amount={'127,85'} 
+                    />
                 </View>
 
                 <View style={styles.boxContainer}>
-                    <View style={styles.statusAvatar}>
-
-                    </View>
+                    <StatsCard
+                        icon={"trending-up"}
+                        text={"Total Investment Value: "}
+                        amount={'4.810,00'} 
+                    />
                 </View>
             </View>
         );
@@ -93,7 +110,7 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignSelf: 'stretch',
         alignItems: 'center',
-        borderWidth: 2,
+        borderWidth: 1,
         borderBottomWidth: 0,
         borderRadius: 2,
         borderColor: '#E5F2D4',
@@ -103,14 +120,14 @@ const styles = StyleSheet.create({
     },
     smalleBoxContainer: {
         flex: 1,
+        flexDirection: 'row',
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 0,
+        borderWidth: 1,
         borderBottomWidth: 0,
-        borderLeftWidth: 1,
-        borderRadius: 2,
-        borderColor: '#E5F2D4',
+        borderColor: 'white',
+        backgroundColor: '#E5F2D4',
     },
     statusAvatar: {
         width: 20,

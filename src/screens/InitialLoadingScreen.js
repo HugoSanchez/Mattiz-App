@@ -11,13 +11,11 @@ const Spinner = require('react-native-spinkit');
 class InitialLoadingScreen extends Component {
 
     async componentDidMount() {
-        console.log('1')
          // This is just to test the interaction 
          setTimeout(this.initiateFunction.bind(this), 3000)
     }
 
     async initiateFunction() {
-        console.log('2')
         // Get token from memory if there is one.
         let token = await getTokenFromMemory('token')
         // Check if there is token
