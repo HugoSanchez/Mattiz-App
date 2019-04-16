@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
         backgroundColor: '#fff'
     },
     balanceBoxContainer: {
-        flex: 5,
+        flex: 4,
         marginTop: 0, 
         marginLeft: 0,
         marginRight: 0,

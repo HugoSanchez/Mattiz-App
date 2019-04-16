@@ -65,9 +65,13 @@ class LoginForm extends Component {
                     style={{ width: '100%', height: '100%', flex: 1 }}
                     resizeMode={'cover'}
                 >
+                    <Image 
+                        source={require('../assets/MattizLogo.png')} 
+                        style={{ width: 250, height: 250, alignSelf: 'center', marginTop: 15 }}
+                    />
                     <View style={{ alignItems: 'center'}}>
                         <CustomCard 
-                            style={{ margin: 10, marginTop: 250, height: 55, borderRadius: 10, backgroundColor: '#EFEFEF'}}
+                            style={{ margin: 10, marginTop: 0, height: 55, borderRadius: 10, backgroundColor: '#EFEFEF'}}
                             elevated={ this.state.isFocused ? true : false }
                         >
                             <Input 
@@ -81,7 +85,7 @@ class LoginForm extends Component {
                                 style={ input }
                             />
                         </CustomCard>
-                        <View style={{ marginTop: this.state.isFocused ? 10 : 390, alignSelf: 'stretch' }}>
+                        <View style={{ marginTop: this.state.isFocused ? 10 : 380, alignSelf: 'stretch' }}>
                             <MattizButton 
                                 title={'Log In! '}
                                 titleStyle={{ color: '#040026'}}

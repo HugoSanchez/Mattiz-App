@@ -6,14 +6,7 @@ export default class StackedAreaExample extends React.PureComponent {
  
     render() {
  
-        const data = [
-            {
-                month: new Date(2015, 0, 1),
-                apples: 3840,
-                bananas: 1920,
-                cherries: 960,
-                dates: 400,
-            },
+        const data = [     
             {
                 month: new Date(2015, 1, 1),
                 apples: 1600,
@@ -35,6 +28,13 @@ export default class StackedAreaExample extends React.PureComponent {
                 cherries: 640,
                 dates: 400,
             },
+            {
+                month: new Date(2015, 0, 1),
+                apples: 3840,
+                bananas: 1920,
+                cherries: 960,
+                dates: 400,
+            },
         ]
  
         const colors = [ 'white', '#B3D980', '#C4E19C', '#DDEEC6' ]
@@ -48,11 +48,11 @@ export default class StackedAreaExample extends React.PureComponent {
  
         return (
             <StackedAreaChart
-                style={ { height: 200, width: '100%', paddingVertical: 16 } }
+                style={ { height: 170, width: '100%', paddingVertical: 16 } }
                 data={ data }
                 keys={ keys }
                 colors={ colors }
-                curve={ shape.curveNatural }
+                curve={ shape.curveBasis }
                 showGrid={ false }
                 svgs={ svgs }
             />

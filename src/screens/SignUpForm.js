@@ -1,9 +1,10 @@
 import React, { Component } from 'react';
-import { View, ImageBackground, StyleSheet } from 'react-native';
+import { View, ImageBackground, Image, StyleSheet } from 'react-native';
 import { Input } from 'react-native-elements';
 
 // Custom Components.
 import MattizButton from '../components/common/MattizButton';
+import CustomCard from '../components/common/CustomCard';
 
 // Connect.
 import { connect } from 'react-redux';
@@ -55,14 +56,18 @@ class SignUpForm extends Component {
                         style={{ width:'100%', height:'100%', flex: 1 }}
                         resizeMode='cover'
                     >
-                    <View style={{ marginTop: 700 }}>
-                        <MattizButton 
-                            title={'Set Sail !'}
-                            titleStyle={{ color: '#040026'}}
-                            onPress={ () => this.setState({ formStatus: 'username' })}
-                            linearColor={'rgba(214, 213, 213, 1)'}
+                        <Image 
+                            source={require('../assets/MattizLogo.png')} 
+                            style={{ width: 250, height: 250, alignSelf: 'center', marginTop: 15 }}
                         />
-                    </View>
+                        <View style={{ marginTop: 440 }}>
+                            <MattizButton 
+                                title={'Set Sail !'}
+                                titleStyle={{ color: '#040026'}}
+                                onPress={ () => this.setState({ formStatus: 'username' })}
+                                linearColor={'rgba(214, 213, 213, 1)'}
+                            />
+                        </View>
                     </ImageBackground>
                 </View>
             );
@@ -77,26 +82,33 @@ class SignUpForm extends Component {
                         style={{ width:'100%', height:'100%', flex: 1 }}
                         resizeMode='cover'
                     >
-                    <View style={ viewStyle }>
-                        <Input 
-                            placeholder="What's your name?"
-                            inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
-                            placeholderTextColor='gray'
-                            value={this.state.username}
-                            onChangeText={ value => this.setState({ username: value }) }
-                            fontStyle={ this.state.password? 'italic' : 'normal' }
-                            onFocus={() => this.setState({ isFocused: true })}
-                            style={ input }
+                        <Image 
+                            source={require('../assets/MattizLogo.png')} 
+                            style={{ width: 250, height: 250, alignSelf: 'center', marginTop: 15 }}
                         />
-                    </View>
-                    <View style={{ marginTop: this.state.isFocused ? 10 : 347}}>
-                        <MattizButton 
-                            title={'Next !'}
-                            titleStyle={{ color: '#040026'}}
-                            onPress={ () => this.setState({ formStatus: 'password' })}
-                            linearColor={'rgba(214, 213, 213, 1)'}
-                        />
-                    </View>
+                        <CustomCard 
+                            style={ viewStyle }
+                            elevated={ this.state.isFocused ? true : false }
+                        >
+                            <Input 
+                                placeholder="What's your name?"
+                                inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
+                                placeholderTextColor='gray'
+                                value={this.state.username}
+                                onChangeText={ value => this.setState({ username: value }) }
+                                fontStyle={ this.state.password? 'italic' : 'normal' }
+                                onFocus={() => this.setState({ isFocused: true })}
+                                style={ input }
+                            />
+                        </CustomCard>
+                        <View style={{ marginTop: this.state.isFocused ? 10 : 380}}>
+                            <MattizButton 
+                                title={'Next !'}
+                                titleStyle={{ color: '#040026'}}
+                                onPress={ () => this.setState({ formStatus: 'password' })}
+                                linearColor={'rgba(214, 213, 213, 1)'}
+                            />
+                        </View>
                     </ImageBackground>
                 </View>
             );
@@ -111,27 +123,34 @@ class SignUpForm extends Component {
                         style={{ width:'100%', height:'100%', flex: 1 }}
                         resizeMode='cover'
                     >
-                    <View style={ viewStyle }>
-                        <Input 
-                            placeholder="Choose your Password"
-                            inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
-                            placeholderTextColor='gray'
-                            value={this.state.password}
-                            secureTextEntry={true}
-                            onChangeText={ value => this.setState({ password: value }) }
-                            fontStyle={ this.state.password ? 'italic' : 'normal' }
-                            onFocus={() => this.setState({ isFocused: true })}
-                            style={ input }
+                        <Image 
+                            source={require('../assets/MattizLogo.png')} 
+                            style={{ width: 250, height: 250, alignSelf: 'center', marginTop: 15 }}
                         />
-                    </View>
-                    <View style={{ marginTop: this.state.isFocused ? 10 : 347}}>
-                        <MattizButton 
-                            title={'Next !'}
-                            titleStyle={{ color: '#040026'}}
-                            onPress={ () => this.setState({ formStatus: 'confirm' })}
-                            linearColor={'rgba(214, 213, 213, 1)'}
-                        />
-                    </View>
+                        <CustomCard 
+                            style={ viewStyle }
+                            elevated={ this.state.isFocused ? true : false }
+                        >
+                            <Input 
+                                placeholder="Choose your Password"
+                                inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
+                                placeholderTextColor='gray'
+                                value={this.state.password}
+                                secureTextEntry={true}
+                                onChangeText={ value => this.setState({ password: value }) }
+                                fontStyle={ this.state.password ? 'italic' : 'normal' }
+                                onFocus={() => this.setState({ isFocused: true })}
+                                style={ input }
+                            />
+                        </CustomCard>
+                        <View style={{ marginTop: this.state.isFocused ? 10 : 380}}>
+                            <MattizButton 
+                                title={'Next !'}
+                                titleStyle={{ color: '#040026'}}
+                                onPress={ () => this.setState({ formStatus: 'confirm' })}
+                                linearColor={'rgba(214, 213, 213, 1)'}
+                            />
+                        </View>
                     </ImageBackground>
                 </View>
             );
@@ -146,27 +165,34 @@ class SignUpForm extends Component {
                         style={{ width:'100%', height:'100%', flex: 1 }}
                         resizeMode='cover'
                     >
-                    <View style={ viewStyle }>
-                        <Input 
-                            placeholder="Confirm your Password"
-                            inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
-                            placeholderTextColor='gray'
-                            value={this.state.confirmPassword}
-                            secureTextEntry={true}
-                            onChangeText={ value => this.setState({ confirmPassword: value }) }
-                            fontStyle={ this.state.confirmPassword ? 'italic' : 'normal' }
-                            onFocus={() => this.setState({ isFocused: true })}
-                            style={ input }
+                        <Image 
+                            source={require('../assets/MattizLogo.png')} 
+                            style={{ width: 250, height: 250, alignSelf: 'center', marginTop: 15 }}
                         />
-                    </View>
-                    <View style={{ marginTop: this.state.isFocused ? 10 : 347}}>
-                        <MattizButton 
-                            title={'Sign Up !'}
-                            titleStyle={{ color: '#040026'}}
-                            onPress={ this.onButtonPress.bind(this) }
-                            linearColor={'rgba(214, 213, 213, 1)'}
-                        />
-                    </View>
+                        <CustomCard 
+                            style={ viewStyle }
+                            elevated={ this.state.isFocused ? true : false }
+                        >
+                            <Input 
+                                placeholder="Confirm your Password"
+                                inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
+                                placeholderTextColor='gray'
+                                value={this.state.confirmPassword}
+                                secureTextEntry={true}
+                                onChangeText={ value => this.setState({ confirmPassword: value }) }
+                                fontStyle={ this.state.confirmPassword ? 'italic' : 'normal' }
+                                onFocus={() => this.setState({ isFocused: true })}
+                                style={ input }
+                            />
+                        </CustomCard>
+                        <View style={{ marginTop: this.state.isFocused ? 10 : 380}}>
+                            <MattizButton 
+                                title={'Sign Up !'}
+                                titleStyle={{ color: '#040026'}}
+                                onPress={ this.onButtonPress.bind(this) }
+                                linearColor={'rgba(214, 213, 213, 1)'}
+                            />
+                        </View>
                     </ImageBackground>
                 </View>
             );
@@ -187,11 +213,12 @@ const styles = StyleSheet.create({
         padding: 20
     },
     viewStyle: {
-        marginTop: 281, 
-        backgroundColor: 'rgba(255, 255, 255, 0.8)', 
-        borderRadius: 2,
+        marginTop: 0,
         margin: 12, 
-        height: 45
+        backgroundColor: 'rgba(255, 255, 255, 0.8)', 
+        height: 55, 
+        borderRadius: 10, 
+        backgroundColor: '#EFEFEF'
     }
 })
 

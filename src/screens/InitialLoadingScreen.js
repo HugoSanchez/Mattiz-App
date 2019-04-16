@@ -6,12 +6,14 @@ import { connect } from 'react-redux';
 import { getTokenFromMemory, identifyUser } from '../api/auth';
 import { setUserInReduxState, setTokeninReduxState } from '../actions';
 
+const Spinner = require('react-native-spinkit');
+
 class InitialLoadingScreen extends Component {
 
     async componentDidMount() {
         console.log('1')
          // This is just to test the interaction 
-         setTimeout(this.initiateFunction.bind(this), 2000)
+         setTimeout(this.initiateFunction.bind(this), 3000)
     }
 
     async initiateFunction() {
@@ -42,6 +44,15 @@ class InitialLoadingScreen extends Component {
                     style={{ width:'100%', height:'100%', flex: 1 }}
                     resizeMode='cover'
                 >
+                    <View style={ styles.viewStyle }>
+                        <Spinner 
+                            style={{ alignSelf: 'center' }} 
+                            isVisible={true} 
+                            size={123} 
+                            type='Arc' 
+                            color='#A3D164'
+                        />
+                    </View>
                 </ImageBackground>
             </View>
         )
@@ -62,6 +73,12 @@ const styles = StyleSheet.create({
         flex: 1, 
         justifyContent: 'center',
         alignItems: 'center'
+    },
+    viewStyle: {
+        flex: 1,
+        alignSelf: 'stretch',
+        justifyContent: 'center',
+        alignItems: 'center',
     }
 });
 
