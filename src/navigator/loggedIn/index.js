@@ -3,10 +3,13 @@ import React from 'react';
 import { createBottomTabNavigator } from 'react-navigation';
 
 // Components 
-import Dashboard from '../../screens/Dashboard';
-import Settings from '../../screens/Settings';
-import Transactions from '../../screens/Transactions';
-import Products from '../../screens/Products';
+import Dashboard from '../../screens/loggedIn/Dashboard';
+import Settings from '../../screens/loggedIn/Settings';
+import Transactions from '../../screens/loggedIn/Transactions';
+import Products from '../../screens/loggedIn/Products';
+
+// Nested Navigators
+import ethNavigator from './ethNavigator';
 
 // Icons
 import Icon from 'react-native-vector-icons/SimpleLineIcons';

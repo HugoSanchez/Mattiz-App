@@ -1,6 +1,7 @@
 import React from 'react';
 import { View, ImageBackground, StyleSheet } from 'react-native';
-import MattizButton from '../components/common/MattizButton';
+
+import MattizButton from '../../components/common/MattizButton';
 
 const OnboardingTransition = props => {
 
@@ -10,7 +11,7 @@ const OnboardingTransition = props => {
     return (
         <View style={ container }>
             <ImageBackground 
-                source={require('../assets/topLogo.png')} 
+                source={require('../../assets/topLogo.png')} 
                 style={{ width:'100%', height:'100%', flex: 1 }}
                 resizeMode='cover'
             >

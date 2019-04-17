@@ -3,8 +3,8 @@ import { View, Text, StyleSheet, Button } from 'react-native';
 import { connect } from 'react-redux';
 
 // Files import.
-import { removeTokenFromMemory } from '../api/auth';
-import { deleteUserFromReduxState } from '../actions'
+import { removeTokenFromMemory } from '../../api/auth';
+import { deleteUserFromReduxState } from '../../actions';
 
 class Settings extends Component {
     constructor(props) {

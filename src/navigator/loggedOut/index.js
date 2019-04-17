@@ -1,8 +1,8 @@
 import { createSwitchNavigator } from 'react-navigation';
 
 // Screens.
-import InitialLoadingScreen from '../../screens/InitialLoadingScreen';
-import LoginForm from '../../screens/LoginForm';
+import InitialLoadingScreen from '../../screens/loggedOut/InitialLoadingScreen';
+import LoginForm from '../../screens/loggedOut/LoginForm';
 
 // Nested onboarding navigator.
 import OnboardingNavigator from './Onboarding';

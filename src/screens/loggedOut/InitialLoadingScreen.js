@@ -3,8 +3,8 @@ import { View, ImageBackground, StyleSheet, } from 'react-native';
 import { connect } from 'react-redux';
  
 // Auth Actions & Functions
-import { getTokenFromMemory, identifyUser } from '../api/auth';
-import { setUserInReduxState, setTokeninReduxState } from '../actions';
+import { getTokenFromMemory, identifyUser } from '../../api/auth';
+import { setUserInReduxState, setTokeninReduxState } from '../../actions';
 
 const Spinner = require('react-native-spinkit');
 
@@ -38,7 +38,7 @@ class InitialLoadingScreen extends Component {
         return (
             <View style={ styles.container }>
                 <ImageBackground 
-                    source={require('../assets/InitialLoading.png')} 
+                    source={require('../../assets/InitialLoading.png')} 
                     style={{ width:'100%', height:'100%', flex: 1 }}
                     resizeMode='cover'
                 >

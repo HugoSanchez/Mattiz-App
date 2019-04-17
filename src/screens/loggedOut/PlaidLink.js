@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { WebView } from 'react-native';
 
-import { getAccessToken, setTokenInMemory, getTokenFromMemory } from '../api/auth';
+import { getAccessToken, setTokenInMemory, getTokenFromMemory } from '../../api/auth';
 
 const WEBVIEW_REF = 'webview';
 const publicKey = "cbc3786c0826ebad66f33cecc745dc";

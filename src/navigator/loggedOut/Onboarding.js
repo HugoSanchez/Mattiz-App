@@ -1,11 +1,11 @@
 import { createSwitchNavigator } from 'react-navigation';
 
 // Screens.
-import SignUpForm from '../../screens/SignUpForm';
-import NewUserWelcomeScreen from '../../screens/NewUserWelcomeScreen';
-import PlaidLink from '../../screens/PlaidLink';
-import OnboardingTransition from '../../screens/OnboardingTransition'
-import GenerateWallet from '../../screens/GenerateWallet';
+import SignUpForm from '../../screens/loggedOut/SignUpForm';
+import NewUserWelcomeScreen from '../../screens/loggedOut/NewUserWelcomeScreen';
+import PlaidLink from '../../screens/loggedOut/PlaidLink';
+import OnboardingTransition from '../../screens/loggedOut/OnboardingTransition'
+import GenerateWallet from '../../screens/loggedOut/GenerateWallet';
 
 
 const OnboardingNavigator = createSwitchNavigator({

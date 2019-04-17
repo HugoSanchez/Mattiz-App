@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { View, ScrollView, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 
-import ListItemTx from '../components/ListItemTxs';
+import ListItemTx from '../../components/ListItemTxs';
 
 class Transactions extends Component {
 

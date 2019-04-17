@@ -3,8 +3,8 @@ import { View, Text, ImageBackground, Image, StyleSheet } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import { connect } from 'react-redux';
 
-import { setTokenInMemory } from '../api/auth';
-import { loadPlaidInfo } from '../actions';
+import { setTokenInMemory } from '../../api/auth';
+import { loadPlaidInfo } from '../../actions';
 
 // Crypto imports
 import bip39 from 'react-native-bip39';
@@ -12,9 +12,9 @@ import 'ethers/dist/shims.js'; // Required 'Shim' for ethers.js to work in React
 import { ethers } from 'ethers';
 
 // Custom components
-import MattizButton from '../components/common/MattizButton';
-import LoadingScreen from '../components/LoadingScreen';
-import MnemonicDisplay from '../components/MnemonicDisplay';
+import MattizButton from '../../components/common/MattizButton';
+import LoadingScreen from '../../components/LoadingScreen';
+import MnemonicDisplay from '../../components/MnemonicDisplay';
 
 
 class GenerateWallet extends Component {
@@ -77,7 +77,7 @@ class GenerateWallet extends Component {
         return (
             <View style={ container }>
                 <ImageBackground 
-                    source={require('../assets/topLogo.png')} 
+                    source={require('../../assets/topLogo.png')} 
                     style={{ width:'100%', height:'100%', flex: 1 }}
                     resizeMode='cover'
                 >
@@ -89,7 +89,7 @@ class GenerateWallet extends Component {
                         <View style={ topContainer }>
                             <Image 
                                 style={{ height: 190, width: 335}}
-                                source={require('../assets/SeedWarning.png')}
+                                source={require('../../assets/SeedWarning.png')}
                             />
                         </View>
 

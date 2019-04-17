@@ -4,13 +4,13 @@ import { withNavigationFocus } from 'react-navigation';
 import { connect } from 'react-redux';
 
 // Components.
-import CustomCard  from '../components/common/CustomCard';
-import StatusDot from '../components/common/StatusDot'
-import StackedAreaExample from '../components/common/LineChart';
-import StatsCard from '../components/StatsCard';
+import CustomCard  from '../../components/common/CustomCard';
+import StatusDot from '../../components/common/StatusDot'
+import StackedAreaExample from '../../components/common/LineChart';
+import StatsCard from '../../components/StatsCard';
 
 // Redux actions.
-import { loadPlaidInfo } from '../actions/PlaidActions';
+import { loadPlaidInfo } from '../../actions';
 
 class Dashboard extends Component {
     constructor(props) {
@@ -27,61 +27,41 @@ class Dashboard extends Component {
         return (
             <View style={styles.container}>
                 <CustomCard style={styles.balanceBoxContainer} elevated={true}>
-                    <View style={{ alignSelf: 'stretch', alignItems: 'center', marginTop: 27 }}>
-                        <Text style={[styles.textStyle, { fontSize: 32, marginTop: 75, marginBottom: 5 }]}>
-                            $ {  this.props.balance }
-                        </Text>                    
-                        <Text style={styles.textStyle}> Aggregated Balance </Text>
+                    <View style={{ alignSelf: 'stretch', alignItems: 'center', marginTop: 27 }}>              
+                        <Text style={styles.textStyle}> Eth Price </Text>
                         <StackedAreaExample />
                     </View>
                 </CustomCard>
 
+
+                <View style={styles.boxContainer}>
+
+                </View>
+
                 <View style={[styles.boxContainer, styles.splitBox ]}>
-                    <View style={styles.smalleBoxContainer}>
-                        <StatusDot positive={true} size={10}/>
-                        <Text style={[styles.textStyle, { fontSize: 22, marginLeft: 5 }]}>
-                            $1,365 <Text style={[styles.textStyle, { fontSize: 12 }]}> ETH </Text>
-                        </Text> 
-                    </View>
+                    <CustomCard style={styles.smalleBoxContainer} elevated={true}>
+                        <Text style={styles.textStyle}> Send </Text>
+                    </CustomCard>
 
-                    <View style={styles.smalleBoxContainer}>
-                        <StatusDot positive={false} size={10}/>
-                        <Text style={[styles.textStyle, { fontSize: 22, marginLeft: 5 }]}>
-                            $3,445 <Text style={[styles.textStyle, { fontSize: 12 }]}> BTC</Text>
-                        </Text> 
-                    </View>
+                    <CustomCard style={styles.smalleBoxContainer} elevated={true}>
+                        <Text style={styles.textStyle}> Receive </Text>
+                    </CustomCard>
                 </View>
 
                 <View style={styles.boxContainer}>
-                    <StatsCard
-                        icon={"credit-card"}
-                        text={"April Spenditures: "}
-                        amount={'347,85'} 
-                    />
+
                 </View>
 
                 <View style={styles.boxContainer}>
-                    <StatsCard
-                        icon={"arrow-right-circle"}
-                        text={"April Income: "}
-                        amount={'3.323,85'} 
-                    />
+
                 </View>
 
                 <View style={styles.boxContainer}>
-                    <StatsCard
-                        icon={"activity"}
-                        text={"April Interests Earned: "}
-                        amount={'127,85'} 
-                    />
+
                 </View>
 
                 <View style={styles.boxContainer}>
-                    <StatsCard
-                        icon={"trending-up"}
-                        text={"Total Investment Value: "}
-                        amount={'4.810,00'} 
-                    />
+
                 </View>
             </View>
         );
@@ -124,9 +104,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        borderWidth: 1,
-        borderBottomWidth: 0,
-        borderColor: '#E5F2D4',
+        borderRadius: 10
     },
     statusAvatar: {
         width: 20,

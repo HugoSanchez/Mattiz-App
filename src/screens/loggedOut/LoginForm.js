@@ -4,13 +4,13 @@ import {  Input } from 'react-native-elements';
 import { connect } from 'react-redux';
 
 // Components.
-import LoadingScreen from '../components/LoadingScreen';
-import CustomCard from '../components/common/CustomCard';
-import MattizButton from '../components/common/MattizButton';
+import LoadingScreen from '../../components/LoadingScreen';
+import CustomCard from '../../components/common/CustomCard';
+import MattizButton from '../../components/common/MattizButton';
 
 // Auth & Actions.
-import { verifyUser } from '../api/auth';
-import { loadPlaidInfo } from '../actions';
+import { verifyUser } from '../../api/auth';
+import { loadPlaidInfo } from '../../actions';
 
 
 class LoginForm extends Component {
@@ -61,12 +61,12 @@ class LoginForm extends Component {
         return (
             <View style={ container }>
                 <ImageBackground 
-                    source={require('../assets/LoginForm.png')} 
+                    source={require('../../assets/LoginForm.png')} 
                     style={{ width: '100%', height: '100%', flex: 1 }}
                     resizeMode={'cover'}
                 >
                     <Image 
-                        source={require('../assets/MattizLogo.png')} 
+                        source={require('../../assets/MattizLogo.png')} 
                         style={{ width: 250, height: 250, alignSelf: 'center', marginTop: 15 }}
                     />
                     <View style={{ alignItems: 'center'}}>

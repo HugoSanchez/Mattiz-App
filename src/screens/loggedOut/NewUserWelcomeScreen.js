@@ -1,13 +1,14 @@
 import React from 'react';
 import { View, ImageBackground, StyleSheet } from 'react-native';
-import MattizButton from '../components/common/MattizButton';
+
+import MattizButton from '../../components/common/MattizButton';
 
 const NewUserWelcomeScreen = props => {
     const { navigation } = props;
     return (
         <View style={ styles.container }>
             <ImageBackground 
-                source={require('../assets/newUserGreeting.png')} 
+                source={require('../../assets/newUserGreeting.png')} 
                 style={{ width:'100%', height:'100%', flex: 1 }}
                 resizeMode='cover'
             >
