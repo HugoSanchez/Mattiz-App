@@ -27,7 +27,7 @@ class Dashboard extends Component {
         return (
             <View style={styles.container}>
                 <CustomCard style={styles.balanceBoxContainer} elevated={true}>
-                    <View style={{ alignSelf: 'stretch', alignItems: 'center' }}>
+                    <View style={{ alignSelf: 'stretch', alignItems: 'center', marginTop: 27 }}>
                         <Text style={[styles.textStyle, { fontSize: 32, marginTop: 75, marginBottom: 5 }]}>
                             $ {  this.props.balance }
                         </Text>                    
@@ -103,7 +103,7 @@ const styles = StyleSheet.create({
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 25,
+        borderRadius: 0,
     },
     boxContainer: {
         flex: 1,
@@ -126,8 +126,7 @@ const styles = StyleSheet.create({
         alignItems: 'center',
         borderWidth: 1,
         borderBottomWidth: 0,
-        borderColor: 'white',
-        backgroundColor: '#E5F2D4',
+        borderColor: '#E5F2D4',
     },
     statusAvatar: {
         width: 20,

@@ -4,6 +4,7 @@ import { withNavigationFocus } from 'react-navigation';
 import { connect } from 'react-redux';
 
 import { setTokenInMemory } from '../api/auth';
+import { loadPlaidInfo } from '../actions';
 
 // Crypto imports
 import bip39 from 'react-native-bip39';
@@ -24,10 +25,12 @@ class GenerateWallet extends Component {
         encryptedKeys: null
     }
 
-    async componentWillMount() {   
+    async componentWillMount() {
+        // Load plaid info.
+        this.props.loadPlaidInfo();
+
         // Generate a mnemonic seed phrase using Bitcoin bip39 standard.
         let mnemonic = await bip39.generateMnemonic()
-        console.log(mnemonic.split(' '))
 
         // Use the same mnemonic to generate a Ethereum Wallet.
         let wallet = ethers.Wallet.fromMnemonic(mnemonic);
@@ -44,7 +47,7 @@ class GenerateWallet extends Component {
 
     componentWillUnmount() {
         // When component gets unmounted, delete mnemonic from state. 
-        this.setState({ loading: true, mnemonic: [""], encryptedKeys: null})
+        this.setState({ loading: true, mnemonic: [""], encryptedKeys: null })
     }
 
     render() {
@@ -150,6 +153,10 @@ const styles = StyleSheet.create({
     },
 });
 
+const mapDispatchtoProps = dispatch => ({
+    loadPlaidInfo: () => dispatch(loadPlaidInfo()),
+});
+
 const MapStateToProps = state => {
     const { user, token, error } = state.auth;
     return {
@@ -159,4 +166,4 @@ const MapStateToProps = state => {
     };
 }
 
-export default connect(MapStateToProps, null)(withNavigationFocus(GenerateWallet));
+export default connect(MapStateToProps, mapDispatchtoProps)(withNavigationFocus(GenerateWallet));

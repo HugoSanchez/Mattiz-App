@@ -5,6 +5,7 @@ import { Input } from 'react-native-elements';
 // Custom Components.
 import MattizButton from '../components/common/MattizButton';
 import CustomCard from '../components/common/CustomCard';
+import LoadingScreen from '../components/LoadingScreen';
 
 // Connect.
 import { connect } from 'react-redux';
@@ -31,6 +32,8 @@ class SignUpForm extends Component {
         const { username, password, confirmPassword } = this.state;
         // Check if passwords are correct.
         if ( password == confirmPassword ) {
+            // Set loading == true.
+            this.setState({ loading: true })
             // If so, call the '/register' endpoint which returns token.
             authCreateUser(username, password).then(res => {
                 if (res.data.auth) {
@@ -38,15 +41,23 @@ class SignUpForm extends Component {
                     setTokenInMemory('token', res.data.token)
                     // And set user in redux state.
                     this.props.setUserInReduxState(res.data.user)
-                    // Navigate user to onboarding set up. 
+                    // Navigate user to onboarding set up.
                     this.props.navigation.navigate('Welcome')
                 }
-            })
+            });
         }
     }
 
     render() {
         const { container, input, viewStyle } = styles;
+
+        if ( this.state.loading ) {
+            return (
+                <View style={ container }>
+                    <LoadingScreen />
+                </View>
+            );
+        }
 
         if ( this.state.formStatus == false ) {
             return (
@@ -218,9 +229,12 @@ const styles = StyleSheet.create({
         backgroundColor: 'rgba(255, 255, 255, 0.8)', 
         height: 55, 
         borderRadius: 10, 
-        backgroundColor: '#EFEFEF'
     }
 })
+
+const mapDispatchtoProps = dispatch => ({
+    setUserInReduxState: user => dispatch(setUserInReduxState(user))
+});
 
 const mapStateToProps = state => {
     const { user, token, error } = state.auth;
@@ -231,4 +245,4 @@ const mapStateToProps = state => {
     };
 }
 
-export default connect(mapStateToProps, { setUserInReduxState })(SignUpForm);
+export default connect(mapStateToProps, mapDispatchtoProps)(SignUpForm);

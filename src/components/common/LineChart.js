@@ -37,7 +37,7 @@ export default class StackedAreaExample extends React.PureComponent {
             },
         ]
  
-        const colors = [ 'white', '#B3D980', '#C4E19C', '#DDEEC6' ]
+        const colors = [ '#E0EFCB', '#E3F1D0', '#E9F4DA', '#EFF7E5' ]
         const keys   = [ 'apples', 'bananas', 'cherries', 'dates' ]
         const svgs = [
                     { onPress: () => console.log('apples') },
@@ -48,7 +48,7 @@ export default class StackedAreaExample extends React.PureComponent {
  
         return (
             <StackedAreaChart
-                style={ { height: 170, width: '100%', paddingVertical: 16 } }
+                style={ { height: 170, width: '100%', marginBottom: 0 } }
                 data={ data }
                 keys={ keys }
                 colors={ colors }

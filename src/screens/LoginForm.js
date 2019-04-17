@@ -10,7 +10,7 @@ import MattizButton from '../components/common/MattizButton';
 
 // Auth & Actions.
 import { verifyUser } from '../api/auth';
-import { loadPlaidInfo } from '../actions/PlaidActions';
+import { loadPlaidInfo } from '../actions';
 
 
 class LoginForm extends Component {
@@ -33,12 +33,12 @@ class LoginForm extends Component {
     onButtonPress() {
         // Clean input and set spinner.
         this.setState({ password: null, loading: true});
-        // Fire Plaid API calls.
-        this.props.loadPlaidInfo();
         // Call '/login' endpoint with password and user id.
         verifyUser(this.props.user._id, this.state.password).then(res => {
             // If succesful,
             if (res.data.auth) {
+                // Fire Plaid API calls.
+                this.props.loadPlaidInfo();
                 // Navigate user inside the app.
                 this.props.navigation.navigate('Dashboard')
             } else {
@@ -71,7 +71,7 @@ class LoginForm extends Component {
                     />
                     <View style={{ alignItems: 'center'}}>
                         <CustomCard 
-                            style={{ margin: 10, marginTop: 0, height: 55, borderRadius: 10, backgroundColor: '#EFEFEF'}}
+                            style={{ margin: 10, marginTop: 0, height: 55, borderRadius: 10 }}
                             elevated={ this.state.isFocused ? true : false }
                         >
                             <Input 
