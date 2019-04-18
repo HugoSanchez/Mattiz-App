@@ -70,3 +70,9 @@ export const getTransactions = async () => {
     const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
     return await axios.post(URL + '/plaid/last_90_days_transactions', { accessTokenArray: tokens.tokenArray })
 } 
+
+    // MARKET DATA FUNCTIONS // 
+
+export const getMarketData = async () => {
+    return await axios.get(URL + '/data/get_historical_data')
+}

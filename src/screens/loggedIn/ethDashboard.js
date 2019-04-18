@@ -1,51 +1,64 @@
 import React, { Component } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
+import Icon from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux';
+
+import { getMarketData } from '../../api/auth';
 
 // Components.
 import CustomCard  from '../../components/common/CustomCard';
 import StatusDot from '../../components/common/StatusDot'
 import StackedAreaExample from '../../components/common/LineChart';
+import SimpleLineChart from '../../components/charts/SimpleLineChart';
 import StatsCard from '../../components/StatsCard';
 
 // Redux actions.
 import { loadPlaidInfo } from '../../actions';
 
-class Dashboard extends Component {
+class ethDashboard extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            data: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+        }
     }
 
     componentWillMount() {
-
-        // this.props.loadPlaidInfo();
+        console.log('STATE: ', this.state.data)
+        getMarketData()
+            .then(response => this.setState({ data: response.data.rates}))
     }
 
     render() {
 
         return (
             <View style={styles.container}>
-                <CustomCard style={styles.balanceBoxContainer} elevated={true}>
+                <CustomCard style={styles.balanceBoxContainer} elevated={false}>
+                    <TouchableOpacity
+                        style={{ marginLeft: 15, marginTop: 10, alignSelf: 'flex-start' }}
+                        onPress={() => this.props.navigation.navigate('Dashboard')} 
+                    >
+                        <Icon name='arrow-left' size={25} color={'#000'}/>
+                    </TouchableOpacity>
                     <View style={{ alignSelf: 'stretch', alignItems: 'center', marginTop: 27 }}>              
                         <Text style={styles.textStyle}> Eth Price </Text>
-                        <StackedAreaExample />
+                        <SimpleLineChart  data={this.state.data}/>
                     </View>
                 </CustomCard>
 
+                <View style={[styles.boxContainer, styles.splitBox ]}>
+                    <CustomCard style={styles.smalleBoxContainer} elevated={true}>
+                        <Text style={[styles.textStyle, { fontSize: 18 }]}> Send </Text>
+                    </CustomCard>
+
+                    <CustomCard style={styles.smalleBoxContainer} elevated={true}>
+                        <Text style={[styles.textStyle, { fontSize: 18 }]}> Receive </Text>
+                    </CustomCard>
+                </View>
 
                 <View style={styles.boxContainer}>
 
-                </View>
-
-                <View style={[styles.boxContainer, styles.splitBox ]}>
-                    <CustomCard style={styles.smalleBoxContainer} elevated={true}>
-                        <Text style={styles.textStyle}> Send </Text>
-                    </CustomCard>
-
-                    <CustomCard style={styles.smalleBoxContainer} elevated={true}>
-                        <Text style={styles.textStyle}> Receive </Text>
-                    </CustomCard>
                 </View>
 
                 <View style={styles.boxContainer}>
@@ -132,4 +145,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchtoProps)(withNavigationFocus(Dashboard));
+export default connect(mapStateToProps, mapDispatchtoProps)(withNavigationFocus(ethDashboard));

@@ -38,7 +38,7 @@ class Dashboard extends Component {
 
                 <View style={[styles.boxContainer, styles.splitBox ]}>
                     <CustomCard style={styles.smalleBoxContainer} elevated={true}>
-                        <TouchableOpacity onPress={() => this.props.navigation.navigate('ethNavigator')} >
+                        <TouchableOpacity onPress={() => this.props.navigation.navigate('ethDashboard')} >
                             <StatusDot positive={true} size={10}/>
                             <Text style={[styles.textStyle, { fontSize: 22, marginLeft: 5 }]}>
                                 $1,365 <Text style={[styles.textStyle, { fontSize: 12 }]}> ETH </Text>
