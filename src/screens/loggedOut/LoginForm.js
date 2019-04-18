@@ -10,7 +10,7 @@ import MattizButton from '../../components/common/MattizButton';
 
 // Auth & Actions.
 import { verifyUser } from '../../api/auth';
-import { loadPlaidInfo } from '../../actions';
+import { loadPlaidInfo, setUserInReduxState } from '../../actions';
 
 
 class LoginForm extends Component {
@@ -39,6 +39,8 @@ class LoginForm extends Component {
             if (res.data.auth) {
                 // Fire Plaid API calls.
                 this.props.loadPlaidInfo();
+                // Set user in Redux State.
+                this.props.setUserInReduxState(res.data.user)
                 // Navigate user inside the app.
                 this.props.navigation.navigate('Dashboard')
             } else {
@@ -123,6 +125,7 @@ const styles = StyleSheet.create({
 
 const mapDispatchtoProps = dispatch => ({
     loadPlaidInfo: () => dispatch(loadPlaidInfo()),
+    setUserInReduxState: user => dispatch(setUserInReduxState(user))
 });
 
 const MapStateToProps = state => {

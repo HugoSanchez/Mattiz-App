@@ -3,6 +3,7 @@ import { View, Text, TouchableOpacity, StyleSheet } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux';
+import axios from 'axios';
 
 import { getMarketData } from '../../api/auth';
 
@@ -20,7 +21,8 @@ class ethDashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1]
+            data: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
+            price: ''
         }
     }
 
@@ -28,6 +30,9 @@ class ethDashboard extends Component {
         console.log('STATE: ', this.state.data)
         getMarketData()
             .then(response => this.setState({ data: response.data.rates}))
+
+        axios.get('https://api.cryptonator.com/api/ticker/eth-usd')
+            .then( res => console.log('RES: ', parseInt(res.data.ticker.price) ))
     }
 
     render() {
@@ -49,11 +54,19 @@ class ethDashboard extends Component {
 
                 <View style={[styles.boxContainer, styles.splitBox ]}>
                     <CustomCard style={styles.smalleBoxContainer} elevated={true}>
-                        <Text style={[styles.textStyle, { fontSize: 18 }]}> Send </Text>
+                        <TouchableOpacity
+                            onPress={() => this.props.navigation.navigate('sendForm')} 
+                        >
+                            <Text style={[styles.textStyle, { fontSize: 18 }]}>
+                                Send 
+                            </Text>
+                        </TouchableOpacity>
                     </CustomCard>
 
                     <CustomCard style={styles.smalleBoxContainer} elevated={true}>
-                        <Text style={[styles.textStyle, { fontSize: 18 }]}> Receive </Text>
+                        <Text style={[styles.textStyle, { fontSize: 18 }]}> 
+                            Receive 
+                        </Text>
                     </CustomCard>
                 </View>
 

@@ -37,7 +37,7 @@ class GenerateWallet extends Component {
 
         // Encrypt wallet using password.
         let encrypted = await wallet.encrypt(this.props.user.password, this.encryptionProgress)
-
+        console.log('password: ', this.props.user.password)
         // Set wallet in memory.
         await setTokenInMemory('wallet', encrypted)
 

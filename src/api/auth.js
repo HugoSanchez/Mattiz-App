@@ -10,6 +10,7 @@ const URL = 'http://192.168.0.10:3000/api'
  * Keys used so far:
  *  @ 'token' - unique user token returned from the auth backend.
  *  @ 'plaid-tokens' - array of plaid access_tokens.  
+ *  @ 'wallet' - ethers encrypted wallet.
  */
 
 // CHECK IF TOKEN EXISTS, RETURNS BOOLEAN.
