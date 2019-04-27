@@ -27,28 +27,26 @@ class ethDashboard extends Component {
     }
 
     componentWillMount() {
-        console.log('STATE: ', this.state.data)
         getMarketData()
-            .then(response => this.setState({ data: response.data.rates}))
+            .then(response => { this.setState({ data: response.data.rates}) })
 
         axios.get('https://api.cryptonator.com/api/ticker/eth-usd')
-            .then( res => console.log('RES: ', parseInt(res.data.ticker.price) ))
+            .then( res => this.setState({price: parseInt(res.data.ticker.price)}) )
     }
 
     render() {
-
         return (
             <View style={styles.container}>
                 <CustomCard style={styles.balanceBoxContainer} elevated={false}>
                     <TouchableOpacity
-                        style={{ marginLeft: 15, marginTop: 10, alignSelf: 'flex-start' }}
+                        style={{ marginLeft: 15, marginTop: 25, alignSelf: 'flex-start' }}
                         onPress={() => this.props.navigation.navigate('Dashboard')} 
                     >
                         <Icon name='arrow-left' size={25} color={'#000'}/>
                     </TouchableOpacity>
                     <View style={{ alignSelf: 'stretch', alignItems: 'center', marginTop: 27 }}>              
                         <Text style={styles.textStyle}> Eth Price </Text>
-                        <SimpleLineChart  data={this.state.data}/>
+                        <SimpleLineChart  data={this.state.data} price={this.state.price}/>
                     </View>
                 </CustomCard>
 
@@ -110,13 +108,15 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 0,
+        borderWidth: 1,
+        borderColor: '#E5F2D4',
     },
     boxContainer: {
         flex: 1,
         flexDirection: 'row',
         alignSelf: 'stretch',
         alignItems: 'center',
-        borderWidth: 1,
+        borderWidth: 0,
         borderBottomWidth: 0,
         borderRadius: 2,
         borderColor: '#E5F2D4',

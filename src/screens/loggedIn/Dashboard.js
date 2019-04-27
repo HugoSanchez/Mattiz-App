@@ -47,10 +47,12 @@ class Dashboard extends Component {
                     </CustomCard>
 
                     <CustomCard style={styles.smalleBoxContainer} elevated={true}>
-                        <StatusDot positive={false} size={10}/>
-                        <Text style={[styles.textStyle, { fontSize: 22, marginLeft: 5 }]}>
-                            $3,445 <Text style={[styles.textStyle, { fontSize: 12 }]}> BTC</Text>
-                        </Text> 
+                        <TouchableOpacity onPress={() => null} >
+                            <StatusDot positive={false} size={10}/>
+                            <Text style={[styles.textStyle, { fontSize: 22, marginLeft: 5 }]}>
+                                $3,445 <Text style={[styles.textStyle, { fontSize: 12 }]}> BTC</Text>
+                            </Text> 
+                        </TouchableOpacity > 
                     </CustomCard>
                 </View>
 

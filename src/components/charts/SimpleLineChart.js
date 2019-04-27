@@ -19,7 +19,7 @@ class SimpleLineChart extends React.PureComponent {
             >
                 <View style={{ alignSelf: 'stretch', alignItems: 'center'}}>
                     <Text style={{ fontFamily: 'Raleway-Light', fontSize: 14, fontSize: 32, marginTop: 15, marginBottom: 5 }}>
-                        $ { parseInt(data[-1]) }
+                        $ { this.props.price },84
                     </Text> 
                 </View>
             </LineChart>
