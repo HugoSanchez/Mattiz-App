@@ -17,4 +17,3 @@ export const buildTx = async (wallet, address, amount) => {
     }
 }
 
-export const 

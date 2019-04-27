@@ -3,13 +3,16 @@ import { View } from 'react-native';
 
 const Spinner = require('react-native-spinkit');
 
+// Props:
+// @size: 75 by default.
+
 const LoadingScreen = props => {
     return (
         <View style={ styles.container }>
             <Spinner 
                 style={{ alignSelf: 'center' }} 
                 isVisible={true} 
-                size={75} 
+                size={ props.size || 75} 
                 type='Arc' 
                 color='#A3D164'
             />
