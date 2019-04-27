@@ -1,30 +1,33 @@
 import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
+import { connect } from 'react-redux';
+
 
 import LoadingScreen from '../../components/LoadingScreen';
 
-export default class loadingTx extends Component {
+class loadingTx extends Component {
 
     componentWillMount() {
 
     }
 
     render() {
-        return (
-            <View style={styles.container}>
-                <View style={{ justifyContent: 'center', alignItems: 'center'}}>
-                    <LoadingScreen>
-                        <Text style={ styles.messageText }>
-                            Sending Transaction...
-                            {
-                                this.props.message
-                            }
-                        </Text>
-                    </LoadingScreen>
+
+            return (
+                <View style={styles.container}>
+                    <View style={{ justifyContent: 'center', alignItems: 'center'}}>
+                        <LoadingScreen>
+                            <Text style={ styles.messageText }>
+                                Sending Transaction...
+                                {
+                                    this.props.message
+                                }
+                            </Text>
+                        </LoadingScreen>
+                    </View>
                 </View>
-            </View>
-        );
-    }
+            );
+        }
 }
 
 const styles = StyleSheet.create({
@@ -42,4 +45,13 @@ const styles = StyleSheet.create({
         marginLeft: 30,
         marginRight: 30
     },
-})
+});
+
+const MapStateToProps = state => {
+    const { loading } = state.ethTx;
+    return {
+        loading,
+    };
+}
+
+export default connect(MapStateToProps, {})(loadingTx);

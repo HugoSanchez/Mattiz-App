@@ -7,6 +7,7 @@ import { setTokenInMemory } from '../../api/auth';
 import { loadPlaidInfo } from '../../actions';
 
 // Crypto imports
+import crypto from 'crypto'
 import bip39 from 'react-native-bip39';
 import 'ethers/dist/shims.js'; // Required 'Shim' for ethers.js to work in React Native.
 import { ethers } from 'ethers';
@@ -29,8 +30,11 @@ class GenerateWallet extends Component {
         // Load plaid info.
         this.props.loadPlaidInfo();
 
+        // Create source of entropy
+        let randomBytes = crypto.randomBytes(16)
+
         // Generate a mnemonic seed phrase using Bitcoin bip39 standard.
-        let mnemonic = await bip39.generateMnemonic()
+        let mnemonic = bip39.entropyToMnemonic(randomBytes.toString('hex'))
 
         // Use the same mnemonic to generate a Ethereum Wallet.
         let wallet = ethers.Wallet.fromMnemonic(mnemonic);

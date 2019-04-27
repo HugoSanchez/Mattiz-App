@@ -2,7 +2,8 @@ import {
     SET_AMOUNT, 
     SET_ADDRESS,
     RESET_STATE,
-    CLEAR_TX_FORM
+    CLEAR_TX_FORM,
+    SET_LOADING
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -20,6 +21,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, amount: action.payload };
         case SET_ADDRESS:
             return { ...state, address: action.payload };
+        case RESET_STATE:
+            return { ...state, loading: true };
         case CLEAR_TX_FORM:
             return { ...state, address: null, amount: null };
         case RESET_STATE:

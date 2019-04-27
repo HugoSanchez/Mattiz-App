@@ -10,24 +10,22 @@ import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux';
 
-// Components 
-import MattizButton from '../../components/common/MattizButton';
-import CustomCard from '../../components/common/CustomCard';
-
 // Crypto imports
 import 'ethers/dist/shims.js'; 
 import { ethers } from 'ethers';
-import { config } from '../../../config';
+import { config } from '../../../node_modules/config';
+
+// Components 
+import MattizButton from '../../components/common/MattizButton';
+import CustomCard from '../../components/common/CustomCard';
 
 // Actions.
 import { 
     setAmountInReduxState, 
     setAddressInReduxState,
-    clearTxForm,
     initiateTxSend
 } from '../../actions';
 
-let infuraProvider = new ethers.providers.InfuraProvider('mainnet');
 
 class SendForm extends Component {
     constructor(props) {
@@ -41,14 +39,8 @@ class SendForm extends Component {
     }
 
     async componentWillMount() {
-
-        // Future.
-        // let wallet = await getTokenFromMemory('wallet')
-        // console.log('user: ', this.props.user  0xCc74308838BbAcEEC226611A0C2b3fD5f4a7D8a2
-
-        // Use the same mnemonic to generate a Ethereum Wallet.
         let wallet = ethers.Wallet.fromMnemonic(config.seed);
-        console.log(wallet)
+        console.log('wallet: ', wallet)
         
         let wallet2 = new ethers.Wallet(wallet.privateKey, infuraProvider);
         this.setState({ wallet: wallet2 })
@@ -65,51 +57,10 @@ class SendForm extends Component {
     }
 
     async sendTx() {
-
         // Initiate sendTx logic. 
         this.props.initiateTxSend();
-
         // And navigate user to loading screen.
         this.props.navigation.navigate('loadingTx')
-
-
-        /** 
-        console.log('hit', this.state.wallet.getTransactionCount())
-        
-        let transaction = {
-            nonce: await this.state.wallet.getTransactionCount(),
-            gasLimit: 21000,
-            gasPrice: ethers.utils.bigNumberify("20000000000"),    
-            to: this.state.address,
-            value: ethers.utils.parseEther(this.state.amount),
-            data: "0x",
-            chainId: ethers.utils.getNetwork('homestead').chainId
-        }
-        
-        console.log(transaction)
-
-        this.cleaState()
-        
-        
-        let signPromise = this.state.wallet.sign(transaction)
-        signPromise.then((signedTransaction) => {
-
-            console.log(signedTransaction);
-
-            
-            let provider = ethers.getDefaultProvider()
-            provider.sendTransaction(signedTransaction).then((tx) => {
-                
-                console.log('Transaction sent');
-
-                let provider = ethers.getDefaultProvider()
-                provider.waitForTransaction(tx).then(tx => {
-                    console.log('Transaction mined', tx)
-                })
-            });
-        })
-        */
-    
     }
 
     render() {
@@ -217,7 +168,6 @@ const MapStateToProps = state => {
 const mapDispatchtoProps = dispatch => ({
     setAmountInReduxState: amount => dispatch(setAmountInReduxState(amount)),
     setAddressInReduxState: address => dispatch(setAddressInReduxState(address)),
-    clearTxForm: () => dispatch(clearTxForm()),
     initiateTxSend: () => dispatch(initiateTxSend())
 });
 
