@@ -18,7 +18,11 @@ import 'ethers/dist/shims.js'; // Required 'Shim' for ethers.js to work in React
 import { ethers } from 'ethers';
 
 import { config } from '../../../config';
-import { getTokenFromMemory } from '../../api/auth';
+import { 
+    setAmountInReduxState, 
+    setAddressInReduxState,
+    clearTxForm,
+} from '../../actions';
 
 let infuraProvider = new ethers.providers.InfuraProvider('mainnet');
 
@@ -59,8 +63,15 @@ class SendForm extends Component {
 
     async sendTx() {
 
+        // First, clear form.
+        this.props.clearTxForm();
 
+        // Then initiate sendTx logic. 
+
+        // And navigate user to loading screen.
         this.props.navigation.navigate('loadingTx')
+
+
         /** 
         console.log('hit', this.state.wallet.getTransactionCount())
         
@@ -136,8 +147,9 @@ class SendForm extends Component {
                         placeholder="Amount"
                         inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
                         placeholderTextColor='gray'
+                        value={this.props.amount}
                         secureTextEntry={false}
-                        onChangeText={ value => this.setState({ amount: value }) }
+                        onChangeText={ value => this.props.setAmountInReduxState(value) }
                         style={ styles.input }
                     />
                 </CustomCard>
@@ -150,8 +162,9 @@ class SendForm extends Component {
                         placeholder="Address..."
                         inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
                         placeholderTextColor='gray'
+                        value={this.props.address}
                         secureTextEntry={false}
-                        onChangeText={ value => this.setState({ address: value }) }
+                        onChangeText={ value => this.props.setAddressInReduxState(value) }
                         style={ styles.input }
                     />
                 </CustomCard>
@@ -193,11 +206,17 @@ const styles = StyleSheet.create({
 })
 
 const MapStateToProps = state => {
-    const { user, error } = state.auth;
+    const { amount, address } = state.ethTx;
     return {
-        user,
-        error
+        amount,
+        address
     };
 }
 
-export default connect(MapStateToProps, {})(SendForm);
+const mapDispatchtoProps = dispatch => ({
+    setAmountInReduxState: amount => dispatch(setAmountInReduxState(amount)),
+    setAddressInReduxState: address => dispatch(setAddressInReduxState(address)),
+    clearTxForm: () => dispatch(clearTxForm())
+});
+
+export default connect(MapStateToProps, mapDispatchtoProps)(SendForm);
