@@ -10,18 +10,21 @@ import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux';
 
+// Components 
 import MattizButton from '../../components/common/MattizButton';
 import CustomCard from '../../components/common/CustomCard';
 
 // Crypto imports
-import 'ethers/dist/shims.js'; // Required 'Shim' for ethers.js to work in React Native.
+import 'ethers/dist/shims.js'; 
 import { ethers } from 'ethers';
-
 import { config } from '../../../config';
+
+// Actions.
 import { 
     setAmountInReduxState, 
     setAddressInReduxState,
     clearTxForm,
+    initiateTxSend
 } from '../../actions';
 
 let infuraProvider = new ethers.providers.InfuraProvider('mainnet');
@@ -63,10 +66,8 @@ class SendForm extends Component {
 
     async sendTx() {
 
-        // First, clear form.
-        this.props.clearTxForm();
-
-        // Then initiate sendTx logic. 
+        // Initiate sendTx logic. 
+        this.props.initiateTxSend();
 
         // And navigate user to loading screen.
         this.props.navigation.navigate('loadingTx')
@@ -216,7 +217,8 @@ const MapStateToProps = state => {
 const mapDispatchtoProps = dispatch => ({
     setAmountInReduxState: amount => dispatch(setAmountInReduxState(amount)),
     setAddressInReduxState: address => dispatch(setAddressInReduxState(address)),
-    clearTxForm: () => dispatch(clearTxForm())
+    clearTxForm: () => dispatch(clearTxForm()),
+    initiateTxSend: () => dispatch(initiateTxSend())
 });
 
 export default connect(MapStateToProps, mapDispatchtoProps)(SendForm);

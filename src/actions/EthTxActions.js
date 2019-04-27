@@ -2,7 +2,8 @@ import {
     SET_AMOUNT, 
     SET_ADDRESS, 
     RESET_STATE,
-    CLEAR_TX_FORM 
+    CLEAR_TX_FORM,
+    SEND_TX 
 } from './types';
 
 
@@ -30,6 +31,13 @@ export const resetIntitialState = ( ) => {
 export const clearTxForm = ( ) => {
     return {
         type: CLEAR_TX_FORM,
+        payload: null
+    };
+};
+
+export const initiateTxSend = ( ) => {
+    return {
+        type: SEND_TX,
         payload: null
     };
 };

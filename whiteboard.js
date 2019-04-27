@@ -28,4 +28,3 @@
      */
 
 
-    Invariant Violation: requireNativeComponent: "RNSVGPath" was not found in the UIManager.
