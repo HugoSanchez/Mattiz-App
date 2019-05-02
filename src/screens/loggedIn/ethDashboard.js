@@ -2,28 +2,19 @@ import React, { Component } from 'react';
 import { 
     View, 
     Text,
-    Modal, 
     TouchableOpacity, 
     StyleSheet } from 'react-native';
-import { Input } from 'react-native-elements';
 import { withNavigationFocus } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux';
 
 
 // Components.
-import MattizButton from '../../components/common/MattizButton';
 import CustomCard  from '../../components/common/CustomCard';
 import SimpleLineChart from '../../components/charts/SimpleLineChart';
-import LoadingScreen from '../../components/LoadingScreen';
 
 // Redux actions.
 import { 
-    setAmountInReduxState, 
-    setAddressInReduxState,
-    setGasPrice,
-    showForm,
-    initiateTxSend,
     loadEthBalances,
     loadMarketData
 } from '../../actions';
@@ -32,19 +23,8 @@ import {
 import GS from '../../styles';
 
 class ethDashboard extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            data: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            fee: 0,
-            amountElevated: false,
-            toElevated: false,
-            showModal: false,
-            showSecondModal: false,
-        }
-    }
 
-    async componentDidMount() {
+    componentDidMount() {
         this.props.loadEthBalances()
         this.props.loadMarketData()
     }
@@ -61,7 +41,7 @@ class ethDashboard extends Component {
                     </TouchableOpacity>
                     <View style={{ alignSelf: 'stretch', alignItems: 'center', marginTop: 27 }}>              
                         
-                        <SimpleLineChart  data={this.props.historicEthPrice} price={this.state.price}>
+                        <SimpleLineChart  data={this.props.historicEthPrice} >
                             <View style={{ alignItems: 'center'}}>
                                 <Text style={ GS.bigNumberStyle}>
                                 {
@@ -83,7 +63,7 @@ class ethDashboard extends Component {
                 <View style={ styles.boxContainer }>
                     <View style={[styles.smalleBoxContainer, { marginLeft: 20, borderLeftWidth: 0 }]}>
                         <TouchableOpacity
-                            onPress={() => this.props.showForm()} >
+                            onPress={() => this.props.navigation.navigate('sendForm')} >
                             <Text style={[styles.textStyle, { fontSize: 18, marginBottom: 10 }]}>
                                 Send 
                             </Text>
@@ -100,218 +80,6 @@ class ethDashboard extends Component {
                 <View style={{ flex: 4 }}>
 
                 </View>
-
-                
-                <Modal
-                    animationType='slide'
-                    transparent={true}
-                    visible={this.props.showSendForm}
-                    onRequestClose={() => null}>
-
-                    <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.4)'}}>
-
-                        <View style={{ flex: 4 }}>
-                        </View>
-
-                        <View style={{ flex: 10, justifyContent: 'center', backgroundColor: '#FFF', borderRadius: 30 }}>
-
-                            <View style={{ flex: 1.5, flexDirection: 'row' }}>
-                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                    <TouchableOpacity
-                                        style={{ paddingBottom: 40 }} 
-                                        onPress={() => this.setState({ showModal: false })}>
-                                        <Icon name='x' size={30} color={'#040026'}/>
-                                    </TouchableOpacity>
-                                </View>
-                                <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ GS.bigLightTitle, { marginTop: 10, fontWeight: 'bold' }]}>
-                                        Send Ether
-                                    </Text>
-                                    <Text style={[ GS.smallLightNumber, { marginTop: 5 }]}>
-                                        { parseFloat(this.state.price * this.props.amount).toFixed(2) }$
-                                    </Text>
-                                </View>
-                                <View style={{ flex: 1, alignItems: 'center' }}>
-                                    <TouchableOpacity
-                                        style={{ paddingTop: 22 }} 
-                                        onPress={() => this.setState({ showModal: false })}>
-                                        <Icon name='maximize' size={30} color={'#040026'}/>
-                                    </TouchableOpacity>
-                                </View>
-                            </View>
-
-                            <CustomCard 
-                                style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
-                                elevated={this.state.amountElevated}
-                            >
-                                <View style={{ flex: 3 }}>
-                                    <Text style={[ GS.smallLightTitle, { marginLeft: 20 } ]}>
-                                        Amount: 
-                                    </Text>
-                                </View>
-                                <View style={{ flex: 1.5 }}>
-                                    <Input 
-                                        placeholder="0.000"
-                                        inputContainerStyle={{ borderBottomColor: 'transparent', marginRight: 45, marginTop: 5 }}
-                                        placeholderTextColor='#040026'
-                                        value={this.props.amount}
-                                        secureTextEntry={false}
-                                        onFocus={ () => this.setState({ amountElevated: true })}
-                                        onEndEditing={ () => this.setState({ amountElevated: false })}
-                                        onChangeText={ value => this.props.setAmountInReduxState(value)}
-                                    />
-                                </View>
-                            </CustomCard>
-
-                            <CustomCard 
-                                style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
-                                elevated={this.state.toElevated}>
-                                <View style={{ flex: 1 }}>
-                                    <Text style={[ GS.smallLightTitle, { marginLeft: 20 } ]}>
-                                        To: 
-                                    </Text>
-                                </View>
-                                <View style={{ flex: 4 }}>
-                                    <Input 
-                                        placeholder="0x ..."
-                                        inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
-                                        placeholderTextColor='#040026'
-                                        value={null}
-                                        secureTextEntry={false}
-                                        onFocus={ () => this.setState({ toElevated: true })}
-                                        onEndEditing={ () => this.setState({ toElevated: false })}
-                                        onChangeText={ value => this.props.setAddressInReduxState(value) }
-                                        style={ styles.input }
-                                    />
-                                </View>
-                                <View style={{ flex: 0.8 }}>
-                                </View>
-                            </CustomCard>
-
-                            <View style={{ flex: 1, flexDirection: 'row',  alignItems: 'center' }}>
-                                <View style={{ flex: 4 }}>
-                                    <Text style={[ GS.smallLightTitle, { marginLeft: 20 } ]}>
-                                        Your Balance:  
-                                    </Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'column', marginRight:  28 }}>
-                                    <Text style={[ GS.extraSmallBoldNumber, {alignSelf: 'flex-start'}]}>
-                                        {   
-                                            parseFloat((this.state.balance * this.state.price) - (this.props.amount * this.state.price + this.state.fee)).toFixed(2)
-                                        }$
-                                    </Text>
-                                </View>
-                            </View>
-
-                            <View style={{ flex: 1, flexDirection: 'row',  alignItems: 'center' }}>
-                                <View style={{ flex: 4 }}>
-                                    <Text style={[ GS.smallLightTitle, { marginLeft: 20 } ]}>
-                                        Fee:  
-                                    </Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'column' }}>
-                                    <View style={{ flex: 1 }}>
-                                        <Text style={[ GS.extraSmallBoldNumber, {alignSelf: 'flex-end', marginTop: 15 }]}>
-                                            {   
-                                                this.state.fee < 0.0001 ? 
-                                                '0.0000'
-                                                :
-                                                parseFloat(this.state.fee).toFixed(2)
-                                            }
-                                        </Text>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'column' }}>
-                                        <Text style={[ GS.extraSmallLightNumber, {alignSelf: 'flex-end'}]}>
-                                            {   
-                                                parseFloat(this.state.gasPrice).toFixed(4)
-                                            }
-                                        </Text>
-                                    </View>
-                                </View>
-
-                                <View style={{ flex: 1, flexDirection: 'column' }}>
-                                    <View style={{ flex: 1 }}>
-                                        <Text style={[ GS.extraSmallBoldNumber, { marginTop: 15 } ]}>
-                                            $
-                                        </Text>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'column' }}>
-                                        <Text style={ GS.extraSmallLightNumber}>
-                                            Eth
-                                        </Text>
-                                    </View>
-                                </View>
-                            </View>
-
-                            <View style={{ flex: 1, flexDirection: 'row',  alignItems: 'center'  }}>
-                                <View style={{ flex: 4 }}>
-                                    <Text style={[ GS.smallLightTitle, { marginLeft: 20 } ]}>
-                                        Total:  
-                                    </Text>
-                                </View>
-                                <View style={{ flex: 1, flexDirection: 'column' }}>
-                                    <View style={{ flex: 1 }}>
-                                        <Text style={[ GS.extraSmallBoldNumber, {alignSelf: 'flex-end', marginTop: 15 }]}>
-                                            {
-                                                parseFloat(this.props.amount * this.state.price + this.state.fee).toFixed(2)
-                                            }
-                                        </Text>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'column' }}>
-                                        <Text style={[ GS.extraSmallLightNumber, {alignSelf: 'flex-end'}]}>
-                                            {
-                                                parseFloat(this.props.amount + this.state.gasPrice).toFixed(4)
-                                            }
-                                        </Text>
-                                    </View>
-                                </View>
-
-                                <View style={{ flex: 1, flexDirection: 'column' }}>
-                                    <View style={{ flex: 1 }}>
-                                        <Text style={[ GS.extraSmallBoldNumber, { marginTop: 15 } ]}>
-                                            $
-                                        </Text>
-                                    </View>
-                                    <View style={{ flex: 1, flexDirection: 'column' }}>
-                                        <Text style={ GS.extraSmallLightNumber}>
-                                            Eth
-                                        </Text>
-                                    </View>
-                                </View>
-                            </View>
-
-                            <View style={{ flex: 2, justifyContent: 'center'}}>
-                                <MattizButton
-                                    title={'Send'}
-                                    onPress={() => this.props.initiateTxSend() } 
-                                />
-                            </View>
-                        </View>
-                    </View>
-                    <Modal
-                        animationType='slide'
-                        transparent={true}
-                        visible={this.props.loading}
-                        onRequestClose={() => null}>
-
-                        <View style={{ flex: 1 }}>
-
-                            <View style={{ flex: 4 }}>
-                            </View>
-
-                            <View style={{ flex: 10, justifyContent: 'center', backgroundColor: '#FFF', borderRadius: 30 }}>
-                                <View style={{ marginTop: 10 }}>                  
-                                    <LoadingScreen>
-                                        {
-                                            // console.log('EP: ', this.props.historicEthPrice)
-                                        }
-                                        <Text> Sending Transaction.. </Text>
-                                    </LoadingScreen>
-                                </View>
-                            </View>
-                        </View>
-                    </Modal>
-                </Modal>
             </View>
         );
     }
@@ -365,7 +133,6 @@ const styles = StyleSheet.create({
 })
 
 const MapStateToProps = state => {
-    const { amount, address, loading, showSendForm } = state.ethTx; // To change
     const { balance, transactions } = state.ethCommon;
     const { gasPrice, currentEthPrice, historicEthPrice } = state.marketData
     return {
@@ -374,23 +141,12 @@ const MapStateToProps = state => {
         currentEthPrice,
         historicEthPrice,
         gasPrice,
-        // To change
-        amount,
-        address,
-        loading,
-        showSendForm,
     };
 }
 
 const mapDispatchToProps = dispatch => ({
     loadMarketData: () => dispatch(loadMarketData()),
     loadEthBalances: () => dispatch(loadEthBalances()),
-    // To change
-    setAmountInReduxState: amount => dispatch(setAmountInReduxState(amount)),
-    setAddressInReduxState: address => dispatch(setAddressInReduxState(address)),
-    setGasPrice: price => dispatch(setGasPrice(price)),
-    showForm: () => dispatch(showForm()),
-    initiateTxSend: () => dispatch(initiateTxSend())
 });
 
 export default connect(MapStateToProps, mapDispatchToProps)(withNavigationFocus(ethDashboard));

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { 
     View, 
     Text,
+    Modal,
     TouchableOpacity, 
     ImageBackground, 
     StyleSheet 
@@ -10,14 +11,10 @@ import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux';
 
-// Crypto imports
-import 'ethers/dist/shims.js'; 
-import { ethers } from 'ethers';
-import { config } from '../../../node_modules/config';
-
 // Components 
 import MattizButton from '../../components/common/MattizButton';
 import CustomCard from '../../components/common/CustomCard';
+import LoadingScreen from '../../components/LoadingScreen';
 
 // Actions.
 import { 
@@ -26,34 +23,22 @@ import {
     initiateTxSend
 } from '../../actions';
 
+// Styles.
+import GS from '../../styles';
 
 class SendForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            balance: 0,
-            wallet: null,
-            amount: null,
-            address: null
+            fee: 0,
+            amountElevated: false,
+            toElevated: false,
+            showModal: false,
         }
     }
 
     async componentWillMount() {
-        let wallet = ethers.Wallet.fromMnemonic(config.seed);
-        console.log('wallet: ', wallet)
-        
-        let wallet2 = new ethers.Wallet(wallet.privateKey, infuraProvider);
-        this.setState({ wallet: wallet2 })
-
-        this.getBalance(wallet2)
-    }
-
-    getBalance(wallet) {
-        let balancePromise = wallet.getBalance();
-        balancePromise.then((balance) => {
-            console.log(ethers.utils.formatEther(parseInt(balance._hex).toString()));
-            this.setState({balance: ethers.utils.formatEther(parseInt(balance._hex).toString())});
-        });
+        // 
     }
 
     async sendTx() {
@@ -72,61 +57,209 @@ class SendForm extends Component {
                 resizeMode='cover'
             >
 
-                <CustomCard 
-                    style={{ margin: 10, marginTop: 0, height: 300, borderRadius: 10 }}
-                    elevated={false}
-                    >
+                    <View style={{ flex: 1, marginTop: 100 }}>
+                        <View style={{ flex: 10, justifyContent: 'center', backgroundColor: '#FFF', borderRadius: 30 }}>
 
-                    <TouchableOpacity
-                        style={{ marginLeft: 15, marginTop: 10, alignSelf: 'flex-start' }}
-                        onPress={() => this.props.navigation.navigate('ethDashboard')} 
-                        >
-                        <Icon name='arrow-left' size={25} color={'#000'}/>
-                    </TouchableOpacity>
+                            <View style={{ flex: 1.5, flexDirection: 'row' }}>
+                                <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                    <TouchableOpacity
+                                        style={{ paddingBottom: 40 }} 
+                                        onPress={() => this.setState({ showModal: false })}>
+                                        <Icon name='x' size={30} color={'#040026'}/>
+                                    </TouchableOpacity>
+                                </View>
+                                <View style={{ flex: 3, flexDirection: 'column', justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={[ GS.bigLightTitle, { marginTop: 10, fontWeight: 'bold' }]}>
+                                        Send Ether
+                                    </Text>
+                                    <Text style={[ GS.smallLightNumber, { marginTop: 5 }]}>
+                                        { parseFloat(this.props.currentEthPrice * this.props.amount).toFixed(2) }$
+                                    </Text>
+                                </View>
+                                <View style={{ flex: 1, alignItems: 'center' }}>
+                                    <TouchableOpacity
+                                        style={{ paddingTop: 22 }} 
+                                        onPress={() => this.setState({ showModal: false })}>
+                                        <Icon name='maximize' size={30} color={'#040026'}/>
+                                    </TouchableOpacity>
+                                </View>
+                            </View>
 
-                    <Text style={[styles.textStyle, { fontSize: 32, marginTop: 75, marginBottom: 5 }]}>
-                        $ {  this.state.balance * 170}
-                    </Text>                    
-                    <Text style={styles.textStyle}> Your ETH Balance </Text>
+                            <CustomCard 
+                                style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
+                                elevated={this.state.amountElevated}
+                            >
+                                <View style={{ flex: 3 }}>
+                                    <Text style={[ GS.smallLightTitle, { marginLeft: 20 } ]}>
+                                        Amount: 
+                                    </Text>
+                                </View>
+                                <View style={{ flex: 1.5 }}>
+                                    <Input 
+                                        placeholder="0.000"
+                                        inputContainerStyle={{ borderBottomColor: 'transparent', marginRight: 45, marginTop: 5 }}
+                                        placeholderTextColor='#040026'
+                                        value={this.props.amount}
+                                        secureTextEntry={false}
+                                        onFocus={ () => this.setState({ amountElevated: true })}
+                                        onEndEditing={ () => this.setState({ amountElevated: false })}
+                                        onChangeText={ value => this.props.setAmountInReduxState(value)}
+                                    />
+                                </View>
+                            </CustomCard>
 
-                </CustomCard>
+                            <CustomCard 
+                                style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
+                                elevated={this.state.toElevated}>
+                                <View style={{ flex: 1 }}>
+                                    <Text style={[ GS.smallLightTitle, { marginLeft: 20 } ]}>
+                                        To: 
+                                    </Text>
+                                </View>
+                                <View style={{ flex: 4 }}>
+                                    <Input 
+                                        placeholder="0x ..."
+                                        inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
+                                        placeholderTextColor='#040026'
+                                        value={null}
+                                        secureTextEntry={false}
+                                        onFocus={ () => this.setState({ toElevated: true })}
+                                        onEndEditing={ () => this.setState({ toElevated: false })}
+                                        onChangeText={ value => this.props.setAddressInReduxState(value) }
+                                        style={ styles.input }
+                                    />
+                                </View>
+                                <View style={{ flex: 0.8 }}>
+                                </View>
+                            </CustomCard>
 
-                <CustomCard 
-                    style={{ margin: 10, marginTop: 10, height: 55, borderRadius: 10 }}
-                    elevated={true}
-                >
-                    <Input 
-                        placeholder="Amount"
-                        inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
-                        placeholderTextColor='gray'
-                        value={this.props.amount}
-                        secureTextEntry={false}
-                        onChangeText={ value => this.props.setAmountInReduxState(value) }
-                        style={ styles.input }
-                    />
-                </CustomCard>
+                            <View style={{ flex: 1, flexDirection: 'row',  alignItems: 'center' }}>
+                                <View style={{ flex: 4 }}>
+                                    <Text style={[ GS.smallLightTitle, { marginLeft: 20 } ]}>
+                                        Your Balance:  
+                                    </Text>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'column', marginRight:  28 }}>
+                                    <Text style={[ GS.extraSmallBoldNumber, {alignSelf: 'flex-start'}]}>
+                                        {   
+                                            parseFloat((this.props.balance * this.props.currentEthPrice) - (this.props.amount * this.props.currentEthPrice )).toFixed(2)
+                                        }$
+                                    </Text>
+                                </View>
+                            </View>
 
-                <CustomCard 
-                    style={{ margin: 10, marginTop: 20, height: 55, borderRadius: 10 }}
-                    elevated={true}
-                >
-                    <Input 
-                        placeholder="Address..."
-                        inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
-                        placeholderTextColor='gray'
-                        value={this.props.address}
-                        secureTextEntry={false}
-                        onChangeText={ value => this.props.setAddressInReduxState(value) }
-                        style={ styles.input }
-                    />
-                </CustomCard>
+                            <View style={{ flex: 1, flexDirection: 'row',  alignItems: 'center' }}>
+                                <View style={{ flex: 4 }}>
+                                    <Text style={[ GS.smallLightTitle, { marginLeft: 20 } ]}>
+                                        Fee:  
+                                    </Text>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'column' }}>
+                                    <View style={{ flex: 1 }}>
+                                        <Text style={[ GS.extraSmallBoldNumber, {alignSelf: 'flex-end', marginTop: 15 }]}>
+                                            {   
+                                                /** 
+                                                this.state.fee < 0.0001 ? 
+                                                '0.0000'
+                                                :
+                                                parseFloat(this.state.fee).toFixed(2)
+                                                */
+                                            }0.0000
+                                        </Text>
+                                    </View>
+                                    <View style={{ flex: 1, flexDirection: 'column' }}>
+                                        <Text style={[ GS.extraSmallLightNumber, {alignSelf: 'flex-end'}]}>
+                                            {   
+                                                parseFloat(this.props.gasPrice).toFixed(4)
+                                            }
+                                        </Text>
+                                    </View>
+                                </View>
 
+                                <View style={{ flex: 1, flexDirection: 'column' }}>
+                                    <View style={{ flex: 1 }}>
+                                        <Text style={[ GS.extraSmallBoldNumber, { marginTop: 15 } ]}>
+                                            $
+                                        </Text>
+                                    </View>
+                                    <View style={{ flex: 1, flexDirection: 'column' }}>
+                                        <Text style={ GS.extraSmallLightNumber}>
+                                            Eth
+                                        </Text>
+                                    </View>
+                                </View>
+                            </View>
 
-                <View style={ styles.viewStyle }>
-                    <MattizButton
-                        title={'Send'}
-                        onPress={() => this.sendTx()} 
-                    />
+                            <View style={{ flex: 1, flexDirection: 'row',  alignItems: 'center'  }}>
+                                <View style={{ flex: 4 }}>
+                                    <Text style={[ GS.smallLightTitle, { marginLeft: 20 } ]}>
+                                        Total:  
+                                    </Text>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'column' }}>
+                                    <View style={{ flex: 1 }}>
+                                        <Text style={[ GS.extraSmallBoldNumber, {alignSelf: 'flex-end', marginTop: 15 }]}>
+                                            {
+                                                parseFloat(this.props.amount * this.props.currentEthPrice).toFixed(2)
+                                            }
+                                        </Text>
+                                    </View>
+                                    <View style={{ flex: 1, flexDirection: 'column' }}>
+                                        <Text style={[ GS.extraSmallLightNumber, {alignSelf: 'flex-end'}]}>
+                                            {
+                                                parseFloat(this.props.amount + this.props.gasPrice).toFixed(4)
+                                            }
+                                        </Text>
+                                    </View>
+                                </View>
+
+                                <View style={{ flex: 1, flexDirection: 'column' }}>
+                                    <View style={{ flex: 1 }}>
+                                        <Text style={[ GS.extraSmallBoldNumber, { marginTop: 15 } ]}>
+                                            $
+                                        </Text>
+                                    </View>
+                                    <View style={{ flex: 1, flexDirection: 'column' }}>
+                                        <Text style={ GS.extraSmallLightNumber}>
+                                            Eth
+                                        </Text>
+                                    </View>
+                                </View>
+                            </View>
+
+                            <View style={{ flex: 2, flexDirection: 'column' }}>                                 
+                            </View>
+
+                            <View style={{ flex: 2, justifyContent: 'center'}}>
+                                <MattizButton
+                                    title={'Send'}
+                                    onPress={() => this.props.initiateTxSend() } 
+                                />
+                            </View>
+                        </View>
+                    <Modal
+                        animationType='slide'
+                        transparent={true}
+                        visible={false}
+                        onRequestClose={() => null}>
+
+                        <View style={{ flex: 1 }}>
+
+                            <View style={{ flex: 4 }}>
+                            </View>
+
+                            <View style={{ flex: 10, justifyContent: 'center', backgroundColor: '#FFF', borderRadius: 30 }}>
+                                <View style={{ marginTop: 10 }}>                  
+                                    <LoadingScreen>
+                                        {
+                                            // console.log('EP: ', this.props.historicEthPrice)
+                                        }
+                                        <Text> Sending Transaction.. </Text>
+                                    </LoadingScreen>
+                                </View>
+                            </View>
+                        </View>
+                    </Modal>
                 </View> 
             </ImageBackground>
         </View>
@@ -159,9 +292,14 @@ const styles = StyleSheet.create({
 
 const MapStateToProps = state => {
     const { amount, address } = state.ethTx;
+    const { balance } = state.ethCommon;
+    const { gasPrice, currentEthPrice } = state.marketData
     return {
         amount,
-        address
+        address,
+        balance,
+        gasPrice,
+        currentEthPrice,
     };
 }
 
