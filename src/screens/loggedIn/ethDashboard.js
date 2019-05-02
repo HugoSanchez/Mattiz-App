@@ -30,7 +30,8 @@ import {
     setAddressInReduxState,
     setGasPrice,
     showForm,
-    initiateTxSend 
+    initiateTxSend,
+    loadEthBalances
 } from '../../actions';
 
 // Styles.
@@ -44,7 +45,6 @@ class ethDashboard extends Component {
             price: 0,
             gasPrice: 0,
             fee: 0,
-            balance: 0,
             amountElevated: false,
             toElevated: false,
             showModal: false,
@@ -53,30 +53,22 @@ class ethDashboard extends Component {
     }
 
     async componentWillMount() {
+
+        this.props.loadEthBalances()
+
+        
         let Provider = new ethers.providers.JsonRpcProvider(config.infuraUrl)
         let gasPrice = await Provider.getGasPrice();
         let GP = ethers.utils.formatEther(ethers.utils.bigNumberify(gasPrice * 1.5).toString()) * 21000
         this.props.setGasPrice(gasPrice)
 
-        let wallet = ethers.Wallet.fromMnemonic(config.seed);
-        console.log('wallet: ', wallet)
-        
-        let wallet2 = new ethers.Wallet(wallet.privateKey, Provider);
-        let balancePromise = wallet2.getBalance();
-        balancePromise.then((balance) => {
-            console.log('Balance: ', ethers.utils.formatEther(ethers.utils.bigNumberify(balance).toString()))
-            this.setState({balance: ethers.utils.formatEther(ethers.utils.bigNumberify(balance).toString())});
-        });
-
         getMarketData()
             .then(response => { 
-                console.log('data: ', response.data)
                 this.setState({ data: response.data.rates, gasPrice: GP}) 
             })
 
         axios.get('https://api.cryptonator.com/api/ticker/eth-usd')
             .then( res => {
-                console.log(res.data)
                 this.setState({price: parseInt(res.data.ticker.price), fee: (res.data.ticker.price * GP )}) })
     }
 
@@ -96,7 +88,7 @@ class ethDashboard extends Component {
                             <View style={{ alignItems: 'center'}}>
                                 <Text style={ GS.bigNumberStyle}>
                                 {
-                                    parseInt(this.state.price).toFixed(2)
+                                    parseInt((this.state.price * this.props.balance) + 1360).toFixed(2)
                                 }$
                                 </Text>
                                 <Text style={styles.textStyle}> Your ETH Balance </Text>
@@ -334,7 +326,7 @@ class ethDashboard extends Component {
                                 <View style={{ marginTop: 10 }}>                  
                                     <LoadingScreen>
                                         {
-                                            console.log('loading: ', this.props.showSendForm)
+                                            console.log('TX: ', this.props.transactions)
                                         }
                                         <Text> Sending Transaction.. </Text>
                                     </LoadingScreen>
@@ -397,7 +389,10 @@ const styles = StyleSheet.create({
 
 const MapStateToProps = state => {
     const { amount, address, loading, showSendForm } = state.ethTx;
+    const { balance, transactions } = state.ethCommon;
     return {
+        balance,
+        transactions,
         amount,
         address,
         loading,
@@ -406,6 +401,7 @@ const MapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
+    loadEthBalances: () => dispatch(loadEthBalances()),
     setAmountInReduxState: amount => dispatch(setAmountInReduxState(amount)),
     setAddressInReduxState: address => dispatch(setAddressInReduxState(address)),
     setGasPrice: price => dispatch(setGasPrice(price)),

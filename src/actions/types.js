@@ -20,3 +20,9 @@ export const SET_LOADING = 'set_loading';
 export const SET_CONFIRMED = 'set_confirmed';
 export const GET_GAS_PRICE = 'get_gas_price';
 export const SHOW_FORM = 'show_form';
+
+    // COMMON ETH ACTIONS // 
+
+export const GET_ETH_BALANCES = 'get_eth_balances';
+export const SET_ETH_BALANCES = 'set_eth_balances';
+export const SET_ETH_TRANSACTIONS = 'set_eth_transactions';
