@@ -6,7 +6,7 @@ class SimpleLineChart extends React.PureComponent {
 
     render() {
 
-        const data = this.props.data.map(d => parseFloat(d))
+        const data = this.props.data.map(d => parseFloat(d)) 
         
         return (
             <LineChart

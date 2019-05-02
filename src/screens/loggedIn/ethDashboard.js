@@ -9,14 +9,7 @@ import { Input } from 'react-native-elements';
 import { withNavigationFocus } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux';
-import axios from 'axios';
 
-// Crypto imports
-import 'ethers/dist/shims.js'; 
-import { ethers } from 'ethers';
-import { config } from '../../../node_modules/config';
-
-import { getMarketData } from '../../api/auth';
 
 // Components.
 import MattizButton from '../../components/common/MattizButton';
@@ -51,19 +44,9 @@ class ethDashboard extends Component {
         }
     }
 
-    async componentWillMount() {
-
+    async componentDidMount() {
         this.props.loadEthBalances()
         this.props.loadMarketData()
-
-        getMarketData()
-            .then(response => { 
-                this.setState({ data: response.data.rates, gasPrice: GP}) 
-            })
-
-        axios.get('https://api.cryptonator.com/api/ticker/eth-usd')
-            .then( res => {
-                this.setState({price: parseInt(res.data.ticker.price), fee: (res.data.ticker.price * GP )}) })
     }
 
     render() {
@@ -78,17 +61,17 @@ class ethDashboard extends Component {
                     </TouchableOpacity>
                     <View style={{ alignSelf: 'stretch', alignItems: 'center', marginTop: 27 }}>              
                         
-                        <SimpleLineChart  data={this.state.data} price={this.state.price}>
+                        <SimpleLineChart  data={this.props.historicEthPrice} price={this.state.price}>
                             <View style={{ alignItems: 'center'}}>
                                 <Text style={ GS.bigNumberStyle}>
                                 {
-                                    parseInt((this.state.price * this.props.balance) + 1360).toFixed(2)
+                                    parseFloat((this.props.currentEthPrice * this.props.balance) + 1360).toFixed(2)
                                 }$
                                 </Text>
                                 <Text style={styles.textStyle}> Your ETH Balance </Text>
                                 <Text style={[ GS.extraSmallBoldNumber, { marginTop: 15 } ]}>
                                 {
-                                    parseInt(this.state.price).toFixed(2)
+                                    parseFloat(this.props.currentEthPrice).toFixed(2)
                                 }$ 
                                 </Text> 
                                 <Text style={styles.textStyle}>Current Eth Price</Text>
@@ -382,7 +365,7 @@ const styles = StyleSheet.create({
 })
 
 const MapStateToProps = state => {
-    const { amount, address, loading, showSendForm } = state.ethTx;
+    const { amount, address, loading, showSendForm } = state.ethTx; // To change
     const { balance, transactions } = state.ethCommon;
     const { gasPrice, currentEthPrice, historicEthPrice } = state.marketData
     return {
@@ -391,6 +374,7 @@ const MapStateToProps = state => {
         currentEthPrice,
         historicEthPrice,
         gasPrice,
+        // To change
         amount,
         address,
         loading,
@@ -401,6 +385,7 @@ const MapStateToProps = state => {
 const mapDispatchToProps = dispatch => ({
     loadMarketData: () => dispatch(loadMarketData()),
     loadEthBalances: () => dispatch(loadEthBalances()),
+    // To change
     setAmountInReduxState: amount => dispatch(setAmountInReduxState(amount)),
     setAddressInReduxState: address => dispatch(setAddressInReduxState(address)),
     setGasPrice: price => dispatch(setGasPrice(price)),

@@ -8,7 +8,7 @@ const INITIAL_STATE = {
     loading: false,
     gasPrice: 0,
     currentEthPrice: 0,
-    historicEthPrice: [],
+    historicEthPrice: [1, 1, 1, 1, 1, 1, 1, 1, 1, 1],
     error: null
 }
 
