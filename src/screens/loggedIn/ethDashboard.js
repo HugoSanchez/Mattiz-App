@@ -22,7 +22,6 @@ import { getMarketData } from '../../api/auth';
 import MattizButton from '../../components/common/MattizButton';
 import CustomCard  from '../../components/common/CustomCard';
 import SimpleLineChart from '../../components/charts/SimpleLineChart';
-import SimpleBarChart from '../../components/charts/SimpleBarChart';
 import LoadingScreen from '../../components/LoadingScreen';
 
 // Redux actions.
@@ -95,15 +94,13 @@ class ethDashboard extends Component {
                         
                         <SimpleLineChart  data={this.state.data} price={this.state.price}>
                             <View style={{ alignItems: 'center'}}>
-                                <Text style={ GS.bigBoldNumber}>
+                                <Text style={ GS.bigNumberStyle}>
                                 {
                                     parseInt(this.state.price).toFixed(2)
                                 }$
                                 </Text>
                                 <Text style={styles.textStyle}> Your ETH Balance </Text>
-                            </View>
-                            <View style={{ alignItems: 'center', marginBottom: 10}}>
-                                <Text style={[ GS.extraSmallBoldNumber ]}>
+                                <Text style={[ GS.extraSmallBoldNumber, { marginTop: 15 } ]}>
                                 {
                                     parseInt(this.state.price).toFixed(2)
                                 }$ 
@@ -114,37 +111,24 @@ class ethDashboard extends Component {
                     </View>
                 </CustomCard>
 
-                <View style={[styles.boxContainer, styles.splitBox ]}>
-                    <CustomCard style={styles.smalleBoxContainer} elevated={true}>
+                <View style={ styles.boxContainer }>
+                    <View style={[styles.smalleBoxContainer, { marginLeft: 20, borderLeftWidth: 0 }]}>
                         <TouchableOpacity
-                            onPress={() => this.props.showForm()} 
-                        >
-                            <Text style={[styles.textStyle, { fontSize: 18 }]}>
+                            onPress={() => this.props.showForm()} >
+                            <Text style={[styles.textStyle, { fontSize: 18, marginBottom: 10 }]}>
                                 Send 
                             </Text>
                         </TouchableOpacity>
-                    </CustomCard>
+                    </View>
 
-                    <CustomCard style={styles.smalleBoxContainer} elevated={true}>
-                        <Text style={[styles.textStyle, { fontSize: 18 }]}> 
+                    <View style={[styles.smalleBoxContainer, { marginRight: 20, borderRightWidth: 0 }]}>
+                        <Text style={[styles.textStyle, { fontSize: 18, marginBottom: 10  }]}> 
                             Receive 
                         </Text>
-                    </CustomCard>
+                    </View>
                 </View>
 
-                <View style={styles.boxContainer}>
-
-                </View>
-
-                <View style={styles.boxContainer}>
-
-                </View>
-
-                <View style={styles.boxContainer}>
-
-                </View>
-
-                <View style={styles.boxContainer}>
+                <View style={{ flex: 4 }}>
 
                 </View>
 
@@ -380,29 +364,23 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 0,
-        borderWidth: 1,
-        borderColor: '#E5F2D4',
+        borderWidth: 0.5,
+        borderColor: '#B3D980',
     },
     boxContainer: {
-        flex: 1,
+        flex: 0.7,
         flexDirection: 'row',
-        alignSelf: 'stretch',
         alignItems: 'center',
-        borderWidth: 0,
-        borderBottomWidth: 0,
-        borderRadius: 2,
-        borderColor: '#E5F2D4',
-    },
-    splitBox: {
-        flexDirection: 'row'
     },
     smalleBoxContainer: {
         flex: 1,
-        flexDirection: 'row',
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
-        borderRadius: 10
+        margin: 5,
+        borderWidth: 0.5,
+        borderTopWidth: 0,
+        borderColor: '#B3D980',
     },
     statusAvatar: {
         width: 20,
