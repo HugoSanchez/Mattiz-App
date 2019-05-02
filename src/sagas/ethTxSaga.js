@@ -1,6 +1,13 @@
-import { takeEvery, put, call, select } from 'redux-saga/effects';
+import { 
+    takeEvery, 
+    put, 
+    call, 
+    select 
+} from 'redux-saga/effects';
 
-import { SEND_TX } from '../actions/types';
+import { 
+    SEND_TX 
+} from '../actions/types';
 
 // Crypto imports
 import 'ethers/dist/shims.js'; 
@@ -14,7 +21,7 @@ import {
 } from '../actions';
 
 const getTxItems = state => state.ethTx;
-const delay = (ms) => new Promise(res => setTimeout(res, ms))
+const getMDItems = state => state.marketData;
 
 let Provider = new ethers.providers.JsonRpcProvider(config.infuraUrl)
 let wallet = ethers.Wallet.fromMnemonic(config.seed);
@@ -43,6 +50,7 @@ function* signTransaction(rawTx) {
 function* handleTransactionLoad() {
     console.log('3')
     let stateItems = yield select(getTxItems)
+    let mdStateItems = yield select(getMDItems)
     console.log('4')
     let nonce = yield connectedWallet.getTransactionCount()
     console.log('5')
