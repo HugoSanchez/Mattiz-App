@@ -74,6 +74,10 @@ export const getTransactions = async () => {
 
     // MARKET DATA FUNCTIONS // 
 
-export const getMarketData = async () => {
+export const getHistoricEthPrice = async () => {
     return await axios.get(URL + '/data/get_historical_data')
+}
+
+export const getEthPrice = async () => {
+    return await axios.get('https://api.cryptonator.com/api/ticker/eth-usd')
 }

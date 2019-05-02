@@ -3,7 +3,6 @@ import {
     SET_ADDRESS,
     SET_LOADING,
     SET_CONFIRMED,
-    GET_GAS_PRICE,
     RESET_STATE,
     SHOW_FORM,
     CLEAR_TX_FORM,
@@ -12,7 +11,6 @@ import {
 const INITIAL_STATE = {
     loading: false,
     confirmed: false,
-    gasPrice: null,
     amount: 0,
     address: null,
     showSendForm: false,
@@ -25,8 +23,6 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, amount: action.payload };
         case SET_ADDRESS:
             return { ...state, address: action.payload };
-        case GET_GAS_PRICE:
-            return { ...state, gasPrice: action.payload };
         case SET_LOADING:
             return { ...state, loading: true };
         case SHOW_FORM:

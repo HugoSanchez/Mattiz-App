@@ -33,18 +33,9 @@ export const resetIntitialState = ( ) => {
 };
 
 export const showForm = ( ) => {
-    console.log('hit')
     return {
         type: SHOW_FORM,
         payload: null
-    };
-};
-
-export const setGasPrice = ( price ) => {
-    console.log(price)
-    return {
-        type: GET_GAS_PRICE,
-        payload: price
     };
 };
 

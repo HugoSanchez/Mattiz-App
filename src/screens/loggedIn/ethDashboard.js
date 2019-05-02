@@ -31,7 +31,8 @@ import {
     setGasPrice,
     showForm,
     initiateTxSend,
-    loadEthBalances
+    loadEthBalances,
+    loadMarketData
 } from '../../actions';
 
 // Styles.
@@ -42,8 +43,6 @@ class ethDashboard extends Component {
         super(props);
         this.state = {
             data: [1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1],
-            price: 0,
-            gasPrice: 0,
             fee: 0,
             amountElevated: false,
             toElevated: false,
@@ -55,12 +54,7 @@ class ethDashboard extends Component {
     async componentWillMount() {
 
         this.props.loadEthBalances()
-
-        
-        let Provider = new ethers.providers.JsonRpcProvider(config.infuraUrl)
-        let gasPrice = await Provider.getGasPrice();
-        let GP = ethers.utils.formatEther(ethers.utils.bigNumberify(gasPrice * 1.5).toString()) * 21000
-        this.props.setGasPrice(gasPrice)
+        this.props.loadMarketData()
 
         getMarketData()
             .then(response => { 
@@ -326,7 +320,7 @@ class ethDashboard extends Component {
                                 <View style={{ marginTop: 10 }}>                  
                                     <LoadingScreen>
                                         {
-                                            console.log('TX: ', this.props.transactions)
+                                            // console.log('EP: ', this.props.historicEthPrice)
                                         }
                                         <Text> Sending Transaction.. </Text>
                                     </LoadingScreen>
@@ -390,9 +384,13 @@ const styles = StyleSheet.create({
 const MapStateToProps = state => {
     const { amount, address, loading, showSendForm } = state.ethTx;
     const { balance, transactions } = state.ethCommon;
+    const { gasPrice, currentEthPrice, historicEthPrice } = state.marketData
     return {
         balance,
         transactions,
+        currentEthPrice,
+        historicEthPrice,
+        gasPrice,
         amount,
         address,
         loading,
@@ -401,6 +399,7 @@ const MapStateToProps = state => {
 }
 
 const mapDispatchToProps = dispatch => ({
+    loadMarketData: () => dispatch(loadMarketData()),
     loadEthBalances: () => dispatch(loadEthBalances()),
     setAmountInReduxState: amount => dispatch(setAmountInReduxState(amount)),
     setAddressInReduxState: address => dispatch(setAddressInReduxState(address)),
