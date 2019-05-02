@@ -17,3 +17,4 @@ export const RESET_STATE = 'reset_state';
 export const CLEAR_TX_FORM = 'clear_tx_form';
 export const SEND_TX = 'send_tx';
 export const SET_LOADING = 'set_loading';
+export const SET_CONFIRMED = 'set_confirmed';

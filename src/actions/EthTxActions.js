@@ -3,12 +3,14 @@ import {
     SET_ADDRESS, 
     RESET_STATE,
     SET_LOADING,
+    SET_CONFIRMED,
     CLEAR_TX_FORM,
     SEND_TX 
 } from './types';
 
 
 export const setAmountInReduxState = (amount) => {
+    console.log('Amount: ', amount)
     return {
         type: SET_AMOUNT,
         payload: amount
@@ -46,6 +48,13 @@ export const initiateTxSend = ( ) => {
 export const setLoading = ( ) => {
     return {
         type: SET_LOADING,
+        payload: null
+    };
+};
+
+export const setConfirmed = ( ) => {
+    return {
+        type: SET_CONFIRMED,
         payload: null
     };
 };

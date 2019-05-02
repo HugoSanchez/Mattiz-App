@@ -143,7 +143,7 @@ const styles = StyleSheet.create({
     }
 })
 
-const mapDispatchtoProps = dispatch => ({
+const mapDispatchToProps = dispatch => ({
     loadPlaidInfo: () => dispatch(loadPlaidInfo()),
 });
 
@@ -156,4 +156,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchtoProps)(withNavigationFocus(Dashboard));
+export default connect(mapStateToProps, mapDispatchToProps)(withNavigationFocus(Dashboard));

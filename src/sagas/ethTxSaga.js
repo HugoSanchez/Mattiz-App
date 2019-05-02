@@ -1,4 +1,4 @@
-import { takeEvery, put, call, fork, select } from 'redux-saga/effects';
+import { takeEvery, put, call, select, delay } from 'redux-saga/effects';
 
 import { SEND_TX } from '../actions/types';
 
@@ -8,7 +8,9 @@ import { ethers } from 'ethers';
 import { config } from '../../node_modules/config';
 
 import { 
-    setLoading,  
+    setLoading,
+    setConfirmed,
+    resetIntitialState  
 } from '../actions';
 
 const getTxItems = state => state.ethTx;
@@ -20,21 +22,32 @@ let connectedWallet = new ethers.Wallet(wallet.privateKey, Provider);
 // 0xD38d889dD78AD08fE8A56Dcc3C8412f1E93C1D3F
 
 function* signTransaction(rawTx) {
+    console.log('9')
     // Sign Transaction.
     let signedTx = yield wallet.sign(rawTx)
 
     // Send SignedTx.
     //let sentTX = yield Provider.sendTransaction(signedTx)
+    console.log('10')
+    yield put(setConfirmed())
+    console.log('11')
 
+    yield delay(1000)
+    yield put(resetIntitialState())
     // Put final action.
     // to do. 
 }
 
 function* handleTransactionLoad() {
+    console.log('3')
     let stateItems = yield select(getTxItems)
+    console.log('4')
     let nonce = yield connectedWallet.getTransactionCount()
+    console.log('5')
     let gasPrice = yield Provider.getGasPrice()
+    console.log('5')
     let value = yield ethers.utils.parseEther(stateItems.amount)
+    console.log('6')
 
     let rawTx = {
         nonce: nonce,
@@ -45,13 +58,15 @@ function* handleTransactionLoad() {
         data: "0x",
         chainId: 1
     }
-    
+    console.log('7')
     yield* signTransaction(rawTx)
+    console.log('8')
 }
 
 function* handleTxSend() {
+    console.log('1')
     yield put(setLoading())
-    // PUT "Building & Signing Tx" message action
+    console.log('2')
     yield call(handleTransactionLoad)
 }
 

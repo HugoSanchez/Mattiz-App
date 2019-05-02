@@ -12,10 +12,12 @@ class SimpleLineChart extends React.PureComponent {
         return (
             <LineChart
                 style={{ height: 200, width: '100%' }}
-                data={ data.slice(-90, -1) }
+                data={ data.slice(-60, -1) }
                 svg={{ stroke: '#A3D164' }}
                 contentInset={{ top: 20, bottom: 20 }}
                 curve={ shape.curveNatural }
+                animate={true}
+                animationDuration={400}
             >
                 <View style={{ alignSelf: 'stretch', alignItems: 'center'}}>
                     <Text style={{ fontFamily: 'Raleway-Light', fontSize: 14, fontSize: 32, marginTop: 15, marginBottom: 5 }}>
