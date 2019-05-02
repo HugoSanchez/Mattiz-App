@@ -4,13 +4,14 @@ import {
     RESET_STATE,
     SET_LOADING,
     SET_CONFIRMED,
+    GET_GAS_PRICE,
     CLEAR_TX_FORM,
+    SHOW_FORM,
     SEND_TX 
 } from './types';
 
 
 export const setAmountInReduxState = (amount) => {
-    console.log('Amount: ', amount)
     return {
         type: SET_AMOUNT,
         payload: amount
@@ -28,6 +29,22 @@ export const resetIntitialState = ( ) => {
     return {
         type: RESET_STATE,
         payload: null
+    };
+};
+
+export const showForm = ( ) => {
+    console.log('hit')
+    return {
+        type: SHOW_FORM,
+        payload: null
+    };
+};
+
+export const setGasPrice = ( price ) => {
+    console.log(price)
+    return {
+        type: GET_GAS_PRICE,
+        payload: price
     };
 };
 

@@ -22,12 +22,15 @@ import { getMarketData } from '../../api/auth';
 import MattizButton from '../../components/common/MattizButton';
 import CustomCard  from '../../components/common/CustomCard';
 import SimpleLineChart from '../../components/charts/SimpleLineChart';
+import SimpleBarChart from '../../components/charts/SimpleBarChart';
 import LoadingScreen from '../../components/LoadingScreen';
 
 // Redux actions.
 import { 
     setAmountInReduxState, 
     setAddressInReduxState,
+    setGasPrice,
+    showForm,
     initiateTxSend 
 } from '../../actions';
 
@@ -42,6 +45,7 @@ class ethDashboard extends Component {
             price: 0,
             gasPrice: 0,
             fee: 0,
+            balance: 0,
             amountElevated: false,
             toElevated: false,
             showModal: false,
@@ -53,13 +57,27 @@ class ethDashboard extends Component {
         let Provider = new ethers.providers.JsonRpcProvider(config.infuraUrl)
         let gasPrice = await Provider.getGasPrice();
         let GP = ethers.utils.formatEther(ethers.utils.bigNumberify(gasPrice * 1.5).toString()) * 21000
+        this.props.setGasPrice(gasPrice)
+
+        let wallet = ethers.Wallet.fromMnemonic(config.seed);
+        console.log('wallet: ', wallet)
+        
+        let wallet2 = new ethers.Wallet(wallet.privateKey, Provider);
+        let balancePromise = wallet2.getBalance();
+        balancePromise.then((balance) => {
+            console.log('Balance: ', ethers.utils.formatEther(ethers.utils.bigNumberify(balance).toString()))
+            this.setState({balance: ethers.utils.formatEther(ethers.utils.bigNumberify(balance).toString())});
+        });
 
         getMarketData()
-            .then(response => { this.setState({ data: response.data.rates, gasPrice: GP}) })
+            .then(response => { 
+                console.log('data: ', response.data)
+                this.setState({ data: response.data.rates, gasPrice: GP}) 
+            })
 
         axios.get('https://api.cryptonator.com/api/ticker/eth-usd')
             .then( res => {
-                console.log('DKJL: ', (res.data.ticker.price * GP ))
+                console.log(res.data)
                 this.setState({price: parseInt(res.data.ticker.price), fee: (res.data.ticker.price * GP )}) })
     }
 
@@ -74,15 +92,32 @@ class ethDashboard extends Component {
                         <Icon name='arrow-left' size={25} color={'#000'}/>
                     </TouchableOpacity>
                     <View style={{ alignSelf: 'stretch', alignItems: 'center', marginTop: 27 }}>              
-                        <Text style={styles.textStyle}> Eth Price </Text>
-                        <SimpleLineChart  data={this.state.data} price={this.state.price}/>
+                        
+                        <SimpleLineChart  data={this.state.data} price={this.state.price}>
+                            <View style={{ alignItems: 'center'}}>
+                                <Text style={ GS.bigBoldNumber}>
+                                {
+                                    parseInt(this.state.price).toFixed(2)
+                                }$
+                                </Text>
+                                <Text style={styles.textStyle}> Your ETH Balance </Text>
+                            </View>
+                            <View style={{ alignItems: 'center', marginBottom: 10}}>
+                                <Text style={[ GS.extraSmallBoldNumber ]}>
+                                {
+                                    parseInt(this.state.price).toFixed(2)
+                                }$ 
+                                </Text> 
+                                <Text style={styles.textStyle}>Current Eth Price</Text>
+                            </View>
+                        </SimpleLineChart>
                     </View>
                 </CustomCard>
 
                 <View style={[styles.boxContainer, styles.splitBox ]}>
                     <CustomCard style={styles.smalleBoxContainer} elevated={true}>
                         <TouchableOpacity
-                            onPress={() => this.setState({ showModal: true })} 
+                            onPress={() => this.props.showForm()} 
                         >
                             <Text style={[styles.textStyle, { fontSize: 18 }]}>
                                 Send 
@@ -109,14 +144,18 @@ class ethDashboard extends Component {
 
                 </View>
 
+                <View style={styles.boxContainer}>
+
+                </View>
+
                 
                 <Modal
                     animationType='slide'
                     transparent={true}
-                    visible={this.state.showModal}
+                    visible={this.props.showSendForm}
                     onRequestClose={() => null}>
 
-                    <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.6)'}}>
+                    <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.4)'}}>
 
                         <View style={{ flex: 4 }}>
                         </View>
@@ -195,6 +234,21 @@ class ethDashboard extends Component {
                                 <View style={{ flex: 0.8 }}>
                                 </View>
                             </CustomCard>
+
+                            <View style={{ flex: 1, flexDirection: 'row',  alignItems: 'center' }}>
+                                <View style={{ flex: 4 }}>
+                                    <Text style={[ GS.smallLightTitle, { marginLeft: 20 } ]}>
+                                        Your Balance:  
+                                    </Text>
+                                </View>
+                                <View style={{ flex: 1, flexDirection: 'column', marginRight:  28 }}>
+                                    <Text style={[ GS.extraSmallBoldNumber, {alignSelf: 'flex-start'}]}>
+                                        {   
+                                            parseFloat((this.state.balance * this.state.price) - (this.props.amount * this.state.price + this.state.fee)).toFixed(2)
+                                        }$
+                                    </Text>
+                                </View>
+                            </View>
 
                             <View style={{ flex: 1, flexDirection: 'row',  alignItems: 'center' }}>
                                 <View style={{ flex: 4 }}>
@@ -287,23 +341,19 @@ class ethDashboard extends Component {
                         visible={this.props.loading}
                         onRequestClose={() => null}>
 
-                        <View style={{ flex: 1, backgroundColor: 'rgba(0, 0, 0, 0.6)'}}>
+                        <View style={{ flex: 1 }}>
 
                             <View style={{ flex: 4 }}>
                             </View>
 
                             <View style={{ flex: 10, justifyContent: 'center', backgroundColor: '#FFF', borderRadius: 30 }}>
-                                <View style={{ marginTop: 10 }}>
-                                    {
-                                        this.props.loading ?
-                                        <LoadingScreen>
-                                            <Text> Sending Transaction.. </Text>
-                                        </LoadingScreen>
-                                        :
-                                        <View>
-                                            <Text> Confirmed! </Text>
-                                        </View>
-                                    }
+                                <View style={{ marginTop: 10 }}>                  
+                                    <LoadingScreen>
+                                        {
+                                            console.log('loading: ', this.props.showSendForm)
+                                        }
+                                        <Text> Sending Transaction.. </Text>
+                                    </LoadingScreen>
                                 </View>
                             </View>
                         </View>
@@ -368,18 +418,20 @@ const styles = StyleSheet.create({
 })
 
 const MapStateToProps = state => {
-    const { amount, address, loading, confirmed } = state.ethTx;
+    const { amount, address, loading, showSendForm } = state.ethTx;
     return {
         amount,
         address,
         loading,
-        confirmed,
+        showSendForm,
     };
 }
 
 const mapDispatchToProps = dispatch => ({
     setAmountInReduxState: amount => dispatch(setAmountInReduxState(amount)),
     setAddressInReduxState: address => dispatch(setAddressInReduxState(address)),
+    setGasPrice: price => dispatch(setGasPrice(price)),
+    showForm: () => dispatch(showForm()),
     initiateTxSend: () => dispatch(initiateTxSend())
 });
 

@@ -37,7 +37,8 @@ export default {
         fontSize: 22,
         color: '#040026'
     },
-    // Numbers
+    // Numbers // 
+    // Regular
     bigNumberStyle: {
         fontFamily: 'NunitoSans-Regular',
         fontSize: 32,
@@ -53,6 +54,7 @@ export default {
         fontSize: 22,
         color: '#040026'
     },
+    // Light
     bigLightNumber: {
         fontFamily: 'NunitoSans-ExtraLight',
         fontSize: 36,
@@ -68,14 +70,25 @@ export default {
         fontSize: 24,
         color: '#040026'
     },
-    smallLightNumber: {
-        fontFamily: 'NunitoSans-ExtraLight',
-        fontSize: 24,
-        color: '#040026'
-    },
     extraSmallLightNumber: {
         fontFamily: 'NunitoSans-ExtraLight',
         fontSize: 16,
+        color: '#040026'
+    },
+    // Bold
+    bigBoldNumber: {
+        fontFamily: 'NunitoSans-SemiBold',
+        fontSize: 36,
+        color: '#040026'
+    },
+    mediumBoldNumber: {
+        fontFamily: 'NunitoSans-SemiBold',
+        fontSize: 28,
+        color: '#040026'
+    },
+    smallBoldNumber: {
+        fontFamily: 'NunitoSans-SemiBold',
+        fontSize: 24,
         color: '#040026'
     },
     extraSmallBoldNumber: {
