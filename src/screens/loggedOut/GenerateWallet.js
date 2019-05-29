@@ -30,11 +30,8 @@ class GenerateWallet extends Component {
         // Load plaid info.
         this.props.loadPlaidInfo();
 
-        // Create source of entropy
-        let randomBytes = crypto.randomBytes(16)
-
         // Generate a mnemonic seed phrase using Bitcoin bip39 standard.
-        let mnemonic = bip39.entropyToMnemonic(randomBytes.toString('hex'))
+        let mnemonic = await bip39.generateMnemonic()
 
         // Use the same mnemonic to generate a Ethereum Wallet.
         let wallet = ethers.Wallet.fromMnemonic(mnemonic);

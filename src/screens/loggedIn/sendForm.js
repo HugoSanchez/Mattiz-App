@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import { 
     View, 
     Text,
-    Modal,
     TouchableOpacity, 
     ImageBackground, 
     StyleSheet 
@@ -20,7 +19,8 @@ import LoadingScreen from '../../components/LoadingScreen';
 import { 
     setAmountInReduxState, 
     setAddressInReduxState,
-    initiateTxSend
+    initiateTxSend,
+    resetIntitialState
 } from '../../actions';
 
 // Styles.
@@ -30,10 +30,8 @@ class SendForm extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            fee: 0,
             amountElevated: false,
             toElevated: false,
-            showModal: false,
         }
     }
 
@@ -41,30 +39,65 @@ class SendForm extends Component {
         // 
     }
 
-    async sendTx() {
-        // Initiate sendTx logic. 
-        this.props.initiateTxSend();
-        // And navigate user to loading screen.
-        this.props.navigation.navigate('loadingTx')
-    }
-
     render() {
+
+        if (this.props.loading) {
+            return (
+                <View style={ styles.container }>
+                    <ImageBackground 
+                        source={require('../../assets/topLogo.png')} 
+                        style={{ width:'100%', height:'100%', flex: 1 }}
+                        resizeMode='cover'>
+                        <LoadingScreen>
+                            <Text style={styles.messageText}>
+                                Sending Transaction.. 
+                            </Text>
+                        </LoadingScreen>
+                    </ImageBackground>
+                </View>
+            );
+        }
+
+        if (this.props.confirmed) {
+            return (
+                <View style={ styles.container }>
+                    <ImageBackground 
+                        source={require('../../assets/topLogo.png')} 
+                        style={{ width:'100%', height:'100%', flex: 1 }}
+                        resizeMode='cover'>
+                        <TouchableOpacity
+                            style={{ marginTop: 50, marginLeft: 20 }} 
+                            onPress={() => this.props.navigation.navigate('ethDashboard')}>
+                            <Icon name='x' size={30} color={'#040026'}/>
+                        </TouchableOpacity>
+                        <View style={{ marginTop: 100, marginBottom: 150, flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Text style={styles.messageText}>
+                                Transaction 
+                            </Text>
+                            <Text style={styles.messageText}>
+                                CONFIRMED! 
+                            </Text>
+                        </View>
+                    </ImageBackground>
+                </View>
+            );
+        }
+        
         return (
             <View style={ styles.container }>
-            <ImageBackground 
-                source={require('../../assets/topLogo.png')} 
-                style={{ width:'100%', height:'100%', flex: 1 }}
-                resizeMode='cover'
-            >
+                <ImageBackground 
+                    source={require('../../assets/topLogo.png')} 
+                    style={{ width:'100%', height:'100%', flex: 1 }}
+                    resizeMode='cover'>
 
                     <View style={{ flex: 1, marginTop: 100 }}>
-                        <View style={{ flex: 10, justifyContent: 'center', backgroundColor: '#FFF', borderRadius: 30 }}>
 
+                        <View style={{ flex: 10, justifyContent: 'center', backgroundColor: '#FFF', borderRadius: 30 }}>
                             <View style={{ flex: 1.5, flexDirection: 'row' }}>
                                 <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
                                     <TouchableOpacity
                                         style={{ paddingBottom: 40 }} 
-                                        onPress={() => this.setState({ showModal: false })}>
+                                        onPress={() => this.props.navigation.navigate('ethDashboard')}>
                                         <Icon name='x' size={30} color={'#040026'}/>
                                     </TouchableOpacity>
                                 </View>
@@ -87,8 +120,7 @@ class SendForm extends Component {
 
                             <CustomCard 
                                 style={{ flex: 1, flexDirection: 'row', alignItems: 'center' }}
-                                elevated={this.state.amountElevated}
-                            >
+                                elevated={this.state.amountElevated}>
                                 <View style={{ flex: 3 }}>
                                     <Text style={[ GS.smallLightTitle, { marginLeft: 20 } ]}>
                                         Amount: 
@@ -129,8 +161,6 @@ class SendForm extends Component {
                                         style={ styles.input }
                                     />
                                 </View>
-                                <View style={{ flex: 0.8 }}>
-                                </View>
                             </CustomCard>
 
                             <View style={{ flex: 1, flexDirection: 'row',  alignItems: 'center' }}>
@@ -158,19 +188,17 @@ class SendForm extends Component {
                                     <View style={{ flex: 1 }}>
                                         <Text style={[ GS.extraSmallBoldNumber, {alignSelf: 'flex-end', marginTop: 15 }]}>
                                             {   
-                                                /** 
-                                                this.state.fee < 0.0001 ? 
-                                                '0.0000'
+                                                this.props.amount > 0 ?
+                                                parseFloat( this.props.gasPrice * this.props.currentEthPrice * 21000 ).toFixed(4)
                                                 :
-                                                parseFloat(this.state.fee).toFixed(2)
-                                                */
-                                            }0.0000
+                                                0.0000
+                                            }
                                         </Text>
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'column' }}>
                                         <Text style={[ GS.extraSmallLightNumber, {alignSelf: 'flex-end'}]}>
                                             {   
-                                                parseFloat(this.props.gasPrice).toFixed(4)
+                                                parseFloat( this.props.gasPrice * 21000 ).toFixed(4)
                                             }
                                         </Text>
                                     </View>
@@ -200,14 +228,18 @@ class SendForm extends Component {
                                     <View style={{ flex: 1 }}>
                                         <Text style={[ GS.extraSmallBoldNumber, {alignSelf: 'flex-end', marginTop: 15 }]}>
                                             {
-                                                parseFloat(this.props.amount * this.props.currentEthPrice).toFixed(2)
+                                                parseFloat((this.props.amount * this.props.currentEthPrice) 
+                                                + (this.props.gasPrice * this.props.currentEthPrice * 21000))
+                                                .toFixed(2)
                                             }
                                         </Text>
                                     </View>
                                     <View style={{ flex: 1, flexDirection: 'column' }}>
                                         <Text style={[ GS.extraSmallLightNumber, {alignSelf: 'flex-end'}]}>
                                             {
-                                                parseFloat(this.props.amount + this.props.gasPrice).toFixed(4)
+                                                parseFloat((this.props.amount + this.props.gasPrice)
+                                                + (this.props.gasPrice * 21000))
+                                                .toFixed(4)
                                             }
                                         </Text>
                                     </View>
@@ -237,29 +269,6 @@ class SendForm extends Component {
                                 />
                             </View>
                         </View>
-                    <Modal
-                        animationType='slide'
-                        transparent={true}
-                        visible={false}
-                        onRequestClose={() => null}>
-
-                        <View style={{ flex: 1 }}>
-
-                            <View style={{ flex: 4 }}>
-                            </View>
-
-                            <View style={{ flex: 10, justifyContent: 'center', backgroundColor: '#FFF', borderRadius: 30 }}>
-                                <View style={{ marginTop: 10 }}>                  
-                                    <LoadingScreen>
-                                        {
-                                            // console.log('EP: ', this.props.historicEthPrice)
-                                        }
-                                        <Text> Sending Transaction.. </Text>
-                                    </LoadingScreen>
-                                </View>
-                            </View>
-                        </View>
-                    </Modal>
                 </View> 
             </ImageBackground>
         </View>
@@ -288,15 +297,22 @@ const styles = StyleSheet.create({
         fontFamily: 'Raleway-Light',
         fontSize: 14
     },
+    messageText: {
+        color: '#A3D164', 
+        fontFamily: 'Raleway',
+        fontSize: 22,
+    }
 })
 
 const MapStateToProps = state => {
-    const { amount, address } = state.ethTx;
+    const { amount, address, loading, confirmed } = state.ethTx;
     const { balance } = state.ethCommon;
     const { gasPrice, currentEthPrice } = state.marketData
     return {
         amount,
         address,
+        loading,
+        confirmed,
         balance,
         gasPrice,
         currentEthPrice,
@@ -306,7 +322,8 @@ const MapStateToProps = state => {
 const mapDispatchtoProps = dispatch => ({
     setAmountInReduxState: amount => dispatch(setAmountInReduxState(amount)),
     setAddressInReduxState: address => dispatch(setAddressInReduxState(address)),
-    initiateTxSend: () => dispatch(initiateTxSend())
+    initiateTxSend: () => dispatch(initiateTxSend()),
+    resetIntitialState: () => dispatch(resetIntitialState())
 });
 
 export default connect(MapStateToProps, mapDispatchtoProps)(SendForm);

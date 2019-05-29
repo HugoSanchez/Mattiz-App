@@ -68,8 +68,8 @@ class LoginForm extends Component {
                     resizeMode={'cover'}
                 >
                     <Image 
-                        source={require('../../assets/MattizLogo.png')} 
-                        style={{ width: 250, height: 250, alignSelf: 'center', marginTop: 15 }}
+                        source={require('../../assets/MattizLogo2.png')} 
+                        style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                     />
                     <View style={{ alignItems: 'center'}}>
                         <CustomCard 

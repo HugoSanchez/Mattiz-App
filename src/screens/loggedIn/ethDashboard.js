@@ -3,13 +3,17 @@ import {
     View, 
     Text,
     TouchableOpacity, 
-    StyleSheet } from 'react-native';
+    ScrollView,
+    StyleSheet 
+} from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import Icon from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux';
 
+import { ethers } from 'ethers';
 
 // Components.
+import EthListItemTx from '../../components/EthListItemTx';
 import CustomCard  from '../../components/common/CustomCard';
 import SimpleLineChart from '../../components/charts/SimpleLineChart';
 
@@ -77,13 +81,25 @@ class ethDashboard extends Component {
                     </View>
                 </View>
 
-                <View style={{ flex: 4 }}>
-
+                <View style={{ flex: 4, alignSelf: 'stretch' }}>
+                    <ScrollView style={{ flex: 1, alignSelf: 'stretch' }}>
+                    {
+                        this.props.transactions.length > 0 ?
+                        this.props.transactions.map((tx, i) => (
+                            <EthListItemTx key={i} tx={ tx } />
+                        ))
+                        :
+                        null 
+                        
+                    }
+                    </ScrollView>
                 </View>
+
             </View>
         );
     }
 }
+
 
 const styles = StyleSheet.create({
     container: {

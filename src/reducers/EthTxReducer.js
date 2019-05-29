@@ -4,7 +4,6 @@ import {
     SET_LOADING,
     SET_CONFIRMED,
     RESET_STATE,
-    SHOW_FORM,
     CLEAR_TX_FORM,
 } from '../actions/types';
 
@@ -25,8 +24,6 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, address: action.payload };
         case SET_LOADING:
             return { ...state, loading: true };
-        case SHOW_FORM:
-            return { ...state, showSendForm: true };
         case SET_CONFIRMED:
             return { ...state, confirmed: true, loading: false };
         case CLEAR_TX_FORM:

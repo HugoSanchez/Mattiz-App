@@ -17,6 +17,6 @@ export const RootNavigator = () => createSwitchNavigator(
         }
     },
     {
-        initialRouteName: 'ethNavigator'
+        initialRouteName: 'LoggedOut'
     }
 );

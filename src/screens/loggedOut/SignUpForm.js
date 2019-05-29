@@ -68,8 +68,8 @@ class SignUpForm extends Component {
                         resizeMode='cover'
                     >
                         <Image 
-                            source={require('../../assets/MattizLogo.png')} 
-                            style={{ width: 250, height: 250, alignSelf: 'center', marginTop: 15 }}
+                            source={require('../../assets/MattizLogo2.png')} 
+                            style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                         />
                         <View style={{ marginTop: 440 }}>
                             <MattizButton 
@@ -94,8 +94,8 @@ class SignUpForm extends Component {
                         resizeMode='cover'
                     >
                         <Image 
-                            source={require('../../assets/MattizLogo.png')} 
-                            style={{ width: 250, height: 250, alignSelf: 'center', marginTop: 15 }}
+                            source={require('../../assets/MattizLogo2.png')} 
+                            style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                         />
                         <CustomCard 
                             style={ viewStyle }
@@ -135,8 +135,8 @@ class SignUpForm extends Component {
                         resizeMode='cover'
                     >
                         <Image 
-                            source={require('../../assets/MattizLogo.png')} 
-                            style={{ width: 250, height: 250, alignSelf: 'center', marginTop: 15 }}
+                            source={require('../../assets/MattizLogo2.png')} 
+                            style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                         />
                         <CustomCard 
                             style={ viewStyle }
@@ -177,8 +177,8 @@ class SignUpForm extends Component {
                         resizeMode='cover'
                     >
                         <Image 
-                            source={require('../../assets/MattizLogo.png')} 
-                            style={{ width: 250, height: 250, alignSelf: 'center', marginTop: 15 }}
+                            source={require('../../assets/MattizLogo2.png')} 
+                            style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                         />
                         <CustomCard 
                             style={ viewStyle }
@@ -226,7 +226,6 @@ const styles = StyleSheet.create({
     viewStyle: {
         marginTop: 0,
         margin: 12, 
-        backgroundColor: 'rgba(255, 255, 255, 0.8)', 
         height: 55, 
         borderRadius: 10, 
     }

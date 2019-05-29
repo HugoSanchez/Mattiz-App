@@ -12,10 +12,10 @@ export const loadMarketData = () => {
     }
 }
 
-export const setGasPriceInReduxState = price => {
+export const setGasPriceInReduxState = object => {
     return{
         type: SET_GAS_PRICE,
-        payload: price 
+        payload: object 
     }
 }
 

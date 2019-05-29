@@ -1,7 +1,7 @@
 import { 
     takeEvery, 
     put, 
-    call, 
+    call,
     select 
 } from 'redux-saga/effects';
 
@@ -9,16 +9,15 @@ import {
     SEND_TX 
 } from '../actions/types';
 
+import { 
+    setLoading,
+    setConfirmed, 
+} from '../actions';
+
 // Crypto imports
 import 'ethers/dist/shims.js'; 
 import { ethers } from 'ethers';
 import { config } from '../../node_modules/config';
-
-import { 
-    setLoading,
-    setConfirmed,
-    resetIntitialState  
-} from '../actions';
 
 const getTxItems = state => state.ethTx;
 const getMDItems = state => state.marketData;
@@ -27,38 +26,33 @@ let Provider = new ethers.providers.JsonRpcProvider(config.infuraUrl)
 let wallet = ethers.Wallet.fromMnemonic(config.seed);
 let connectedWallet = new ethers.Wallet(wallet.privateKey, Provider);
 
-// 0xD38d889dD78AD08fE8A56Dcc3C8412f1E93C1D3F
+// 0xCc74308838BbAcEEC226611A0C2b3fD5f4a7D8a2
+
+
 
 function* signTransaction(rawTx) {
-    console.log('10')
     // Sign Transaction.
     let signedTx = yield wallet.sign(rawTx)
-
-    // Send SignedTx.
-    //let sentTX = yield Provider.sendTransaction(signedTx)
-    console.log('11')
+    // Set Confirmed = true.
     yield put(setConfirmed())
-    console.log('12')
-
-    yield delay(3000)
-    yield put(resetIntitialState())
-    console.log('14')
-    // Put final action.
-    // to do. 
+    // Send SignedTx.
+    yield Provider.sendTransaction(signedTx)
+    
 }
 
 function* handleTransactionLoad() {
-    console.log('3')
+    // Get EthTxReducer items.
     let stateItems = yield select(getTxItems)
+    // Get MarketDataReducer items.
     let mdStateItems = yield select(getMDItems)
-    console.log('4')
+    // Get none. 
     let nonce = yield connectedWallet.getTransactionCount()
-    console.log('5')
-    let gasPrice = stateItems.gasPrice
-    console.log('6')
+    console.log('nonce: ', nonce)
+    // Set Gas Price. 
+    let gasPrice = mdStateItems.rawGasPrice
+    // Parse amount. 
     let value = yield ethers.utils.parseEther(stateItems.amount)
-    console.log('7')
-
+    // Build tx object.
     let rawTx = {
         nonce: nonce,
         gasLimit: 21000,
@@ -68,14 +62,14 @@ function* handleTransactionLoad() {
         data: "0x",
         chainId: 1
     }
-    console.log('8')
+    // Sign Transaction.
     yield* signTransaction(rawTx)
 }
 
 function* handleTxSend() {
-    console.log('1')
+    // Set Loading = true.
     yield put(setLoading())
-    console.log('2')
+    // Build transaction object.
     yield call(handleTransactionLoad)
 }
 

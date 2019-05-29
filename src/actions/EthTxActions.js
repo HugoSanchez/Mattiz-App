@@ -4,9 +4,7 @@ import {
     RESET_STATE,
     SET_LOADING,
     SET_CONFIRMED,
-    GET_GAS_PRICE,
     CLEAR_TX_FORM,
-    SHOW_FORM,
     SEND_TX 
 } from './types';
 
@@ -28,13 +26,6 @@ export const setAddressInReduxState = ( address ) => {
 export const resetIntitialState = ( ) => {
     return {
         type: RESET_STATE,
-        payload: null
-    };
-};
-
-export const showForm = ( ) => {
-    return {
-        type: SHOW_FORM,
         payload: null
     };
 };

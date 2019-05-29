@@ -48,8 +48,8 @@ function* handleMarketDataLoading() {
     let gasPrice = yield Provider.getGasPrice();
     // Parse gas price to ether.
     let formatedGasPrice = ethers.utils.formatEther(ethers.utils.bigNumberify(gasPrice * 1.5).toString())
-    // Set gas price in redux set, ether denominated.
-    yield put(setGasPriceInReduxState(formatedGasPrice))
+    // Set gas price in redux state.
+    yield put(setGasPriceInReduxState({ gasPrice: formatedGasPrice, rawGasPrice: gasPrice}))
     // Move to next function.
     yield* handleEthPriceLoad()
 }

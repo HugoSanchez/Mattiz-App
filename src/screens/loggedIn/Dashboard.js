@@ -18,7 +18,6 @@ class Dashboard extends Component {
     }
 
     componentWillMount() {
-
         // this.props.loadPlaidInfo();
     }
 
@@ -59,7 +58,7 @@ class Dashboard extends Component {
                 <View style={styles.boxContainer}>
                     <StatsCard
                         icon={"credit-card"}
-                        text={"April Spenditures: "}
+                        text={"May's Spenditures: "}
                         amount={'347,85'} 
                     />
                 </View>
@@ -67,7 +66,7 @@ class Dashboard extends Component {
                 <View style={styles.boxContainer}>
                     <StatsCard
                         icon={"arrow-right-circle"}
-                        text={"April Income: "}
+                        text={"May's Income: "}
                         amount={'3.323,85'} 
                     />
                 </View>
@@ -75,7 +74,7 @@ class Dashboard extends Component {
                 <View style={styles.boxContainer}>
                     <StatsCard
                         icon={"activity"}
-                        text={"April Interests Earned: "}
+                        text={"May's Interests Earned: "}
                         amount={'127,85'} 
                     />
                 </View>

@@ -6,7 +6,7 @@ export default class Root extends Component {
         super(props);
         console.disableYellowBox = true;
     }
-
+    
     render() {
         const Root = RootNavigator()
         return <Root />
