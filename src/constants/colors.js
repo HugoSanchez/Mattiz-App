@@ -1,3 +1,4 @@
 export default {
-    primaryBlue: '#040026'
+    primaryBlue: '#040026',
+    numbersGreen: '#6AB304'
 }

@@ -37,62 +37,67 @@ export default {
         fontSize: 22,
         color: '#040026'
     },
+    extraSmallLightTitle: {
+        fontFamily: 'Raleway-Light',
+        fontSize: 18,
+        color: '#040026'
+    },
     // Numbers // 
     // Regular
     bigNumberStyle: {
-        fontFamily: 'NunitoSans-Regular',
+        fontFamily: 'Aleo-Regular',
         fontSize: 32,
         color: '#040026'
     },
     mediumNumberStyle: {
-        fontFamily: 'NunitoSans-Regular',
+        fontFamily: 'Aleo-Regular',
         fontSize: 26,
         color: '#040026'
     },
     smallNumberStyle: {
-        fontFamily: 'NunitoSans-Regular',
+        fontFamily: 'Aleo-Regular',
         fontSize: 22,
         color: '#040026'
     },
     // Light
     bigLightNumber: {
-        fontFamily: 'NunitoSans-ExtraLight',
-        fontSize: 36,
+        fontFamily: 'Aleo-Light',
+        fontSize: 32,
         color: '#040026'
     },
     mediumLightNumber: {
-        fontFamily: 'NunitoSans-ExtraLight',
+        fontFamily: 'Aleo-Light',
         fontSize: 28,
         color: '#040026'
     },
     smallLightNumber: {
-        fontFamily: 'NunitoSans-ExtraLight',
+        fontFamily: 'Aleo-Light',
         fontSize: 24,
         color: '#040026'
     },
     extraSmallLightNumber: {
-        fontFamily: 'NunitoSans-ExtraLight',
+        fontFamily: 'Aleo-Light',
         fontSize: 16,
         color: '#040026'
     },
     // Bold
     bigBoldNumber: {
-        fontFamily: 'NunitoSans-SemiBold',
+        fontFamily: 'Aleo-Bold',
         fontSize: 36,
         color: '#040026'
     },
     mediumBoldNumber: {
-        fontFamily: 'NunitoSans-SemiBold',
+        fontFamily: 'Aleo-Bold',
         fontSize: 28,
         color: '#040026'
     },
     smallBoldNumber: {
-        fontFamily: 'NunitoSans-SemiBold',
+        fontFamily: 'Aleo-Bold',
         fontSize: 24,
         color: '#040026'
     },
     extraSmallBoldNumber: {
-        fontFamily: 'NunitoSans-SemiBold',
+        fontFamily: 'Aleo-Bold',
         fontSize: 16,
         color: '#040026'
     },

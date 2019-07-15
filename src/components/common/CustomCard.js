@@ -28,7 +28,6 @@ const CustomCard = props => {
 
 const styles = {
     container: {
-        margin: 5,
         alignSelf: 'stretch',
         alignItems: 'center',
         justifyContent: 'center',
