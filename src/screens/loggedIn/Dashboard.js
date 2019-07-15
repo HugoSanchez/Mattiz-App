@@ -4,6 +4,7 @@ import { withNavigationFocus } from 'react-navigation';
 import { connect } from 'react-redux';
 
 // Components.
+import Header from '../../components/common/Header';
 import CustomCard  from '../../components/common/CustomCard';
 import StatusDot from '../../components/common/StatusDot'
 import StackedAreaExample from '../../components/common/LineChart';
@@ -18,14 +19,15 @@ class Dashboard extends Component {
     }
 
     componentWillMount() {
-        // this.props.loadPlaidInfo();
+        this.props.loadPlaidInfo();
     }
 
     render() {
 
         return (
             <View style={styles.container}>
-                <CustomCard style={styles.balanceBoxContainer} elevated={true}>
+                <Header leftIcon='arrow-left'/>
+                <CustomCard style={styles.balanceBoxContainer} elevated={false}>
                     <View style={{ alignSelf: 'stretch', alignItems: 'center', marginTop: 27 }}>
                         <Text style={[styles.textStyle, { fontSize: 32, marginTop: 75, marginBottom: 5 }]}>
                             $ {  this.props.balance }
@@ -96,7 +98,7 @@ const styles = StyleSheet.create({
         flex: 1, 
         justifyContent: 'center',
         alignItems: 'center',
-        backgroundColor: '#fff'
+        backgroundColor: '#F7F6F6'
     },
     balanceBoxContainer: {
         flex: 4,
@@ -107,6 +109,11 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         borderRadius: 0,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 10 },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 7
     },
     boxContainer: {
         flex: 1,
@@ -155,4 +162,8 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(withNavigationFocus(Dashboard));
+export default connect(
+    mapStateToProps, 
+    mapDispatchToProps)
+    (withNavigationFocus(Dashboard)
+);
