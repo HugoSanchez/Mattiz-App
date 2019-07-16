@@ -8,7 +8,7 @@ import colors from '../../constants/colors'
 
 const Header = props => {
     return (
-        <View style={styles.container}>
+        <View style={ styles.container }>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 {
                     props.leftIcon ?
@@ -35,7 +35,12 @@ const styles = {
         width: '100%',
         height: '12%',
         backgroundColor: '#fff', 
-        flexDirection: 'row'
+        flexDirection: 'row',
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 5 },
+        shadowOpacity: 0.29,
+        shadowRadius: 4.65,
+        elevation: 2,
     }
 };
 

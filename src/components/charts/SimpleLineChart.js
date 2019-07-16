@@ -10,6 +10,7 @@ class SimpleLineChart extends React.PureComponent {
         const data = this.props.data.map(d => parseFloat(d)) 
         
         return (
+            
                 <LineChart
                     style={{ height: 200, width: '100%' }}
                     data={ data.slice(-60, -1) }
@@ -19,10 +20,13 @@ class SimpleLineChart extends React.PureComponent {
                     animate={true}
                     animationDuration={400}
                 >
+                    <View  animation='bounce' useNativeDriver>
                     {
                         this.props.children
                     }
+                    </View>
                 </LineChart>
+            
         )
     }
 }
