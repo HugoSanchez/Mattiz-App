@@ -32,7 +32,7 @@ export default class ListItemTx extends Component {
         } = styles;
 
         return (
-            <CustomCard style={{ height: 65 }} elevated={true}>
+            <CustomCard style={{ height: 70 }} elevated={true}>
                 <View style={ container }>
 
                     <View style={ iconBox }>
@@ -68,7 +68,7 @@ export default class ListItemTx extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row' 
+        flexDirection: 'row',
     }, 
     iconBox: { 
         flex: 1, 

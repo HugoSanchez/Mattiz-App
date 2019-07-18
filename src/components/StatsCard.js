@@ -93,3 +93,35 @@ const styles = StyleSheet.create({
         justifyContent: 'center' 
     } 
 })
+
+
+<View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
+                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#fffeea', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Image 
+                                        style={{ height: height * 0.04, width: height * 0.04, borderRadius: (height * 0.04) / 2 }}
+                                        source={{ uri: 'https://bit.ly/2GfU9CC'}}
+                                    />
+                                </View>
+                            </View>
+                            <View style={{ flex: 3, justifyContent: 'center' }}>
+                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
+                                    Maker 
+                                </Text>
+                            </View>
+                            <View style={{ flex: 2 }}>
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
+                                        {  numeral(317.83).format('0,0.00') } €
+                                    </Text> 
+                                </View>
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={[ 
+                                        GS.extraSmallBoldNumber, 
+                                        { color: colors.numbersGreen, fontSize: 12, marginBottom: '10%' } 
+                                        ]}>
+                                        + 2,49%
+                                    </Text> 
+                                </View>
+                            </View>
+                        </View>

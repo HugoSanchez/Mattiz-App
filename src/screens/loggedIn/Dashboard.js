@@ -10,11 +10,13 @@ import {
 } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import { connect } from 'react-redux';
+import Icon from 'react-native-vector-icons/Feather';
 
 // Components.
 import Header from '../../components/common/Header';
 import CustomCard  from '../../components/common/CustomCard';
 import SimpleLineChart from '../../components/charts/SimpleLineChart';
+import ArtSlider from '../../components/ArtSlider'
 
 // Redux actions.
 import { loadPlaidInfo } from '../../actions';
@@ -22,7 +24,6 @@ import { loadPlaidInfo } from '../../actions';
 //General Styles & Colors
 import GS from '../../styles'
 import colors from '../../constants/colors'
-import { monthResolver } from '../../utils/StyleUtils';
 
 // Number parser 
 const numeral = require('numeral');
@@ -30,10 +31,6 @@ const numeral = require('numeral');
 // Dims. 
 const width =  Dimensions.get('window').width
 const height = Dimensions.get('window').height
-
-// Month
-const date = new Date()
-const month = date.getMonth()
 
 class Dashboard extends Component {
     constructor(props) {
@@ -80,7 +77,7 @@ class Dashboard extends Component {
                         </View> 
                     </CustomCard>
 
-                <ScrollView style={{ flex: 1, alignSelf: 'stretch' }}>
+                <ScrollView style={{ flex: 1, alignSelf: 'stretch', borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <View style={ styles.boxContainer }>
                         <View style={{ flex: 4, flexDirection: 'row', paddingLeft: '2%', paddingRight: '2%' }}>
                             <View style={{ flex: 1 }}>
@@ -153,8 +150,11 @@ class Dashboard extends Component {
 
                         <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: 'lightgray'}}>
-
+                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFF'}}>
+                                    <Image 
+                                        style={{ height: height * 0.04, width: height * 0.04, borderRadius: (height * 0.04) / 2 }}
+                                        source={{ uri: 'https://bit.ly/2LsSE8u'}}
+                                    />
                                 </View>
                             </View>
                             <View style={{ flex: 3, justifyContent: 'center' }}>
@@ -181,8 +181,11 @@ class Dashboard extends Component {
 
                         <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: 'lightgray'}}>
-
+                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#F0F0F0', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Image 
+                                        style={{ height: height * 0.07, width: height * 0.07, borderRadius: (height * 0.07) / 2 }}
+                                        source={{ uri: 'https://bit.ly/2O1YGPw'}}
+                                    />
                                 </View>
                             </View>
                             <View style={{ flex: 3, justifyContent: 'center' }}>
@@ -209,8 +212,11 @@ class Dashboard extends Component {
 
                         <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: 'lightgray'}}>
-
+                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#F0F0F0', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Image 
+                                        style={{ height: height * 0.06, width: height * 0.06, borderRadius: (height * 0.06) / 2 }}
+                                        source={{ uri: 'https://bit.ly/2NXvIjE'}}
+                                    />
                                 </View>
                             </View>
                             <View style={{ flex: 3, justifyContent: 'center' }}>
@@ -221,7 +227,7 @@ class Dashboard extends Component {
                             <View style={{ flex: 2 }}>
                                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                     <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
-                                        {  numeral(1595.9783).format('0,0.0000') } €
+                                        {  numeral(1595.9783).format('0,0.0000') } $
                                     </Text> 
                                 </View>
                                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -237,8 +243,11 @@ class Dashboard extends Component {
 
                         <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: 'lightgray'}}>
-
+                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#F0F0F0', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Image 
+                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                                        source={{ uri: 'https://bit.ly/2XM7Gws'}}
+                                    />
                                 </View>
                             </View>
                             <View style={{ flex: 3, justifyContent: 'center' }}>
@@ -249,7 +258,7 @@ class Dashboard extends Component {
                             <View style={{ flex: 2 }}>
                                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
                                     <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
-                                        {  numeral(517.9566).format('0,0.0000') } €
+                                        {  numeral(517.9566).format('0,0.0000') } $
                                     </Text> 
                                 </View>
                                 <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -271,8 +280,11 @@ class Dashboard extends Component {
 
                         <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: 'lightgray'}}>
-
+                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#fffeea', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Image 
+                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                                        source={{ uri: 'https://bit.ly/2YhLjyI'}}
+                                    />
                                 </View>
                             </View>
                             <View style={{ flex: 3, justifyContent: 'center' }}>
@@ -299,8 +311,11 @@ class Dashboard extends Component {
 
                         <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: 'lightgray'}}>
-
+                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#fffeea', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Image 
+                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                                        source={{ uri: 'https://bit.ly/32v9wRc'}}
+                                    />
                                 </View>
                             </View>
                             <View style={{ flex: 3, justifyContent: 'center' }}>
@@ -327,8 +342,11 @@ class Dashboard extends Component {
 
                         <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: 'lightgray'}}>
-
+                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#fffeea', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Image 
+                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                                        source={{ uri: 'https://bit.ly/2Z0YNMm'}}
+                                    />
                                 </View>
                             </View>
                             <View style={{ flex: 3, justifyContent: 'center' }}>
@@ -355,13 +373,16 @@ class Dashboard extends Component {
 
                         <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: 'lightgray'}}>
-
+                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#fffeea', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Image 
+                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                                        source={{ uri: 'https://bit.ly/2YWd4cR'}}
+                                    />
                                 </View>
                             </View>
                             <View style={{ flex: 3, justifyContent: 'center' }}>
                                 <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
-                                    Capital Invested:  
+                                    Capital Commited:  
                                 </Text>
                             </View>
                             <View style={{ flex: 2 }}>
@@ -385,6 +406,117 @@ class Dashboard extends Component {
                             <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 20 }}> 
                                 Investments 
                             </Text>
+                        </View>
+
+                        <View style={{ height: height * 0.05, justifyContent: 'center', paddingLeft: '5%'}}>
+                            <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 18 }}> 
+                               // Tokens 
+                            </Text>
+                        </View>
+
+                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
+                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#E7F7DD', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Image 
+                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                                        source={require('../../assets/smallEtherIcon.png')}
+                                    />
+                                </View>
+                            </View>
+                            <View style={{ flex: 3, justifyContent: 'center' }}>
+                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
+                                    Ether 
+                                </Text>
+                            </View>
+                            <View style={{ flex: 2 }}>
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
+                                        {  numeral(3197.38).format('0,0.00') } €
+                                    </Text> 
+                                </View>
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={[ 
+                                        GS.extraSmallBoldNumber, 
+                                        { color: colors.numbersGreen, fontSize: 12, marginBottom: '10%' } 
+                                        ]}>
+                                        + 2,49%
+                                    </Text> 
+                                </View>
+                            </View>
+                        </View>
+
+                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
+                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#F7F4DD', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Image 
+                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                                        source={require('../../assets/smallBitcoinIcon.png')}
+                                    />
+                                </View>
+                            </View>
+                            <View style={{ flex: 3, justifyContent: 'center' }}>
+                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
+                                    Bitcoin 
+                                </Text>
+                            </View>
+                            <View style={{ flex: 2 }}>
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
+                                        {  numeral(1517.95).format('0,0.00') } €
+                                    </Text> 
+                                </View>
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={[ 
+                                        GS.extraSmallBoldNumber, 
+                                        { color: colors.numbersGreen, fontSize: 12, marginBottom: '10%' } 
+                                        ]}>
+                                        + 2,49%
+                                    </Text> 
+                                </View>
+                            </View>
+                        </View>
+
+                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
+                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' }}>
+                                    <Image 
+                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                                        source={{ uri: 'https://bit.ly/2LZrBRA'}}
+                                    />
+                                </View>
+                            </View>
+                            <View style={{ flex: 3, justifyContent: 'center' }}>
+                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
+                                    Numeraire 
+                                </Text>
+                            </View>
+                            <View style={{ flex: 2 }}>
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
+                                        {  numeral(127.63).format('0,0.00') } €
+                                    </Text> 
+                                </View>
+                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
+                                    <Text style={[ 
+                                        GS.extraSmallBoldNumber, 
+                                        { color: colors.numbersGreen, fontSize: 12, marginBottom: '10%' } 
+                                        ]}>
+                                        + 2,49%
+                                    </Text> 
+                                </View>
+                            </View>
+                        </View>
+                               
+                        <View style={{ height: height * 0.05, justifyContent: 'center', paddingLeft: '5%'}}>
+                            <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 18 }}> 
+                               // Arts 
+                            </Text>
+                        </View>
+
+                        <View style={{ height: height * 0.35, width: width * 0.9, justifyContent: 'center', alignItems: 'center', marginLeft: '2.5%' }}>
+                            <ScrollView horizontal={true}>
+                                <ArtSlider />
+                            </ScrollView>
                         </View>
 
                     </View>
