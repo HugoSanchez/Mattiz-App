@@ -68,15 +68,15 @@ class SignUpForm extends Component {
                         resizeMode='cover'
                     >
                         <Image 
-                            source={require('../../assets/MattizLogo2.png')} 
+                            source={require('../../assets/doubleLogo.png')} 
                             style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                         />
                         <View style={{ marginTop: 440 }}>
                             <MattizButton 
                                 title={'Set Sail !'}
-                                titleStyle={{ color: '#040026'}}
+                                titleStyle={{ color: 'white'}}
                                 onPress={ () => this.setState({ formStatus: 'username' })}
-                                linearColor={'rgba(214, 213, 213, 1)'}
+                                linearColor={'#040026'}
                             />
                         </View>
                     </ImageBackground>
@@ -94,7 +94,7 @@ class SignUpForm extends Component {
                         resizeMode='cover'
                     >
                         <Image 
-                            source={require('../../assets/MattizLogo2.png')} 
+                            source={require('../../assets/doubleLogo.png')} 
                             style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                         />
                         <CustomCard 
@@ -115,9 +115,9 @@ class SignUpForm extends Component {
                         <View style={{ marginTop: this.state.isFocused ? 10 : 380}}>
                             <MattizButton 
                                 title={'Next !'}
-                                titleStyle={{ color: '#040026'}}
+                                titleStyle={{ color: 'white'}}
                                 onPress={ () => this.setState({ formStatus: 'password' })}
-                                linearColor={'rgba(214, 213, 213, 1)'}
+                                linearColor={'#040026'}
                             />
                         </View>
                     </ImageBackground>
@@ -135,7 +135,7 @@ class SignUpForm extends Component {
                         resizeMode='cover'
                     >
                         <Image 
-                            source={require('../../assets/MattizLogo2.png')} 
+                            source={require('../../assets/doubleLogo.png')} 
                             style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                         />
                         <CustomCard 
@@ -157,9 +157,9 @@ class SignUpForm extends Component {
                         <View style={{ marginTop: this.state.isFocused ? 10 : 380}}>
                             <MattizButton 
                                 title={'Next !'}
-                                titleStyle={{ color: '#040026'}}
+                                titleStyle={{ color: 'white'}}
                                 onPress={ () => this.setState({ formStatus: 'confirm' })}
-                                linearColor={'rgba(214, 213, 213, 1)'}
+                                linearColor={'#040026'}
                             />
                         </View>
                     </ImageBackground>
@@ -177,7 +177,7 @@ class SignUpForm extends Component {
                         resizeMode='cover'
                     >
                         <Image 
-                            source={require('../../assets/MattizLogo2.png')} 
+                            source={require('../../assets/doubleLogo.png')} 
                             style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                         />
                         <CustomCard 
@@ -199,9 +199,9 @@ class SignUpForm extends Component {
                         <View style={{ marginTop: this.state.isFocused ? 10 : 380}}>
                             <MattizButton 
                                 title={'Sign Up !'}
-                                titleStyle={{ color: '#040026'}}
+                                titleStyle={{ color: 'white'}}
                                 onPress={ this.onButtonPress.bind(this) }
-                                linearColor={'rgba(214, 213, 213, 1)'}
+                                linearColor={'#040026'}
                             />
                         </View>
                     </ImageBackground>

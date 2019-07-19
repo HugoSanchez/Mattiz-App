@@ -1,7 +1,7 @@
 import { AsyncStorage } from 'react-native';
 import axios from 'axios';
 
-const URL = 'http://192.168.1.34:3000/api'
+const URL = 'http://192.168.100.17:3000/api'
 
     // ASYNCSTORAGE TOKEN FUNCTIONS // 
 
@@ -69,10 +69,14 @@ export const getTransactions = async () => {
 
     // MARKET DATA FUNCTIONS // 
 
-export const getHistoricEthPrice = async () => {
-    return await axios.get(URL + '/data/get_historical_data')
+export const getHistoricEthPrice = async (timeframe) => {
+    return await axios.post(URL + '/data/get_historical_data', { timeframe: timeframe})
 }
 
 export const getEthPrice = async () => {
-    return await axios.get('https://api.cryptonator.com/api/ticker/eth-usd')
+    return await axios.get('https://api.cryptonator.com/api/ticker/eth-eur')
+}
+
+export const getBtcPrice = async () => {
+    return await axios.get('https://api.cryptonator.com/api/ticker/btc-eur')
 }

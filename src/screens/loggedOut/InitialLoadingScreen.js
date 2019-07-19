@@ -38,20 +38,10 @@ class InitialLoadingScreen extends Component {
         return (
             <View style={ styles.container }>
                 <ImageBackground 
-                    source={require('../../assets/InitialLoading.png')} 
+                    source={require('../../assets/initialLoading.png')} 
                     style={{ width:'100%', height:'100%', flex: 1 }}
                     resizeMode='cover'
-                >
-                    <View style={ styles.viewStyle }>
-                        <Spinner 
-                            style={{ alignSelf: 'center' }} 
-                            isVisible={true} 
-                            size={123} 
-                            type='Arc' 
-                            color='#A3D164'
-                        />
-                    </View>
-                </ImageBackground>
+                />
             </View>
         )
     }
