@@ -57,6 +57,7 @@ class Dashboard extends Component {
     }
 
     componentWillMount() {
+        console.log('HIT')
         this.props.loadPlaidInfo();
         getEthPrice().then(res => this.setState({ price: res.data.ticker.price }))
         getBtcPrice().then(res => this.setState({ btcPrice: res.data.ticker.price }))

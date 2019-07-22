@@ -5,13 +5,15 @@ import { connect } from 'react-redux';
 
 // Components.
 import LoadingScreen from '../../components/LoadingScreen';
-import CustomCard from '../../components/common/CustomCard';
 import MattizButton from '../../components/common/MattizButton';
 
 // Auth & Actions.
 import { verifyUser } from '../../api/auth';
 import { loadPlaidInfo, setUserInReduxState } from '../../actions';
 
+///
+/// Pending: Better handling incorrect passwords! 
+/// 
 
 class LoginForm extends Component {
     constructor(props) {
@@ -37,12 +39,16 @@ class LoginForm extends Component {
         verifyUser(this.props.user._id, this.state.password).then(res => {
             // If succesful,
             if (res.data.auth) {
+                console.log('Verify: ', res.data)
                 // Fire Plaid API calls.
                 this.props.loadPlaidInfo();
+                console.log('1')
                 // Set user in Redux State.
                 this.props.setUserInReduxState(res.data.user)
+                console.log('2')
                 // Navigate user inside the app.
                 this.props.navigation.navigate('Dashboard')
+                console.log('3')
             } else {
                 // In not, re-render form and show error message.
                 this.setState({ loading: false, error: 'Invalid credentials, please try again.'})
@@ -68,17 +74,13 @@ class LoginForm extends Component {
                     resizeMode={'cover'}
                 >
                     <Image 
-                        source={require('../../assets/MattizLogo2.png')} 
+                        source={require('../../assets/doubleLogo.png')} 
                         style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                     />
-                    <View style={{ alignItems: 'center'}}>
-                        <CustomCard 
-                            style={{ margin: 10, marginTop: 0, height: 55, borderRadius: 10 }}
-                            elevated={ this.state.isFocused ? true : false }
-                        >
+                        <View style={ viewStyle }>
                             <Input 
-                                placeholder="Password ..."
-                                inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
+                                placeholder="Password "
+                                inputContainerStyle={{ borderBottomColor: '#040026', marginTop: 40 }}
                                 placeholderTextColor='gray'
                                 secureTextEntry={true}
                                 onChangeText={ value => this.setState({ password: value }) }
@@ -86,17 +88,16 @@ class LoginForm extends Component {
                                 onFocus={() => this.setState({ isFocused: true })}
                                 style={ input }
                             />
-                        </CustomCard>
-                        <View style={{ marginTop: this.state.isFocused ? 10 : 380, alignSelf: 'stretch' }}>
+                        </View>
+                        <View style={{ marginTop: this.state.isFocused ? 20 : 345, alignSelf: 'stretch' }}>
                             <MattizButton 
                                 title={'Log In! '}
-                                titleStyle={{ color: '#040026'}}
+                                titleStyle={{ color: 'white'}}
                                 buttonStyle={{ height: 55, borderRadius: 10 }}
                                 onPress={ () => this.onButtonPress()}
-                                linearColor={'rgba(214, 213, 213, 1)'}
+                                linearColor={'#040026'}
                             />
                         </View>
-                    </View>
                 </ImageBackground>
             </View>
         )
@@ -111,16 +112,15 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 50,
-        backgroundColor: '#ededed',
+        backgroundColor: 'transparent',
         margin: 5,
         padding: 20
     },
     viewStyle: {
-        backgroundColor: 'rgba(255, 255, 255, 0.8)', 
-        borderRadius: 2,
-        margin: 5, 
-        height: 50,
-    },
+        margin: '5%', 
+        height: 55, 
+        borderRadius: 10, 
+    }
 })
 
 const mapDispatchtoProps = dispatch => ({

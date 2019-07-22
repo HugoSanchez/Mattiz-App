@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import { View, ImageBackground, StyleSheet, } from 'react-native';
+import { View, ImageBackground, Image, StyleSheet, } from 'react-native';
+import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
  
 // Auth Actions & Functions
 import { getTokenFromMemory, identifyUser } from '../../api/auth';
 import { setUserInReduxState, setTokeninReduxState } from '../../actions';
 
-const Spinner = require('react-native-spinkit');
-
 class InitialLoadingScreen extends Component {
 
     async componentDidMount() {
          // This is just to test the interaction 
-         setTimeout(this.initiateFunction.bind(this), 3000)
+         setTimeout(this.initiateFunction.bind(this), 4000)
     }
 
     async initiateFunction() {
@@ -38,10 +37,22 @@ class InitialLoadingScreen extends Component {
         return (
             <View style={ styles.container }>
                 <ImageBackground 
-                    source={require('../../assets/initialLoading.png')} 
+                    source={require('../../assets/LoginForm.png')} 
                     style={{ width:'100%', height:'100%', flex: 1 }}
                     resizeMode='cover'
-                />
+                >
+                    <Animatable.View 
+                        animation="pulse" 
+                        easing="ease-out" 
+                        iterationCount="infinite"
+                        style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
+                    >
+                        <Image 
+                            source={require('../../assets/doubleLeaf.png')} 
+                            style={{ width: 120, height: 60, marginBottom: '10%' }}
+                        />
+                    </Animatable.View>
+                </ImageBackground>
             </View>
         )
     }

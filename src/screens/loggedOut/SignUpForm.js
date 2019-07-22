@@ -4,7 +4,6 @@ import { Input } from 'react-native-elements';
 
 // Custom Components.
 import MattizButton from '../../components/common/MattizButton';
-import CustomCard from '../../components/common/CustomCard';
 import LoadingScreen from '../../components/LoadingScreen';
 
 // Connect.
@@ -37,6 +36,7 @@ class SignUpForm extends Component {
             // If so, call the '/register' endpoint which returns token.
             authCreateUser(username, password).then(res => {
                 if (res.data.auth) {
+                    console.log('Data: ', res.data)
                     // If token, save it in memory
                     setTokenInMemory('token', res.data.token)
                     // And set user in redux state.
@@ -97,13 +97,10 @@ class SignUpForm extends Component {
                             source={require('../../assets/doubleLogo.png')} 
                             style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                         />
-                        <CustomCard 
-                            style={ viewStyle }
-                            elevated={ this.state.isFocused ? true : false }
-                        >
+                        <View style={ viewStyle }>
                             <Input 
                                 placeholder="What's your name?"
-                                inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
+                                inputContainerStyle={{ borderBottomColor: '#040026', marginTop: 40 }}
                                 placeholderTextColor='gray'
                                 value={this.state.username}
                                 onChangeText={ value => this.setState({ username: value }) }
@@ -111,8 +108,8 @@ class SignUpForm extends Component {
                                 onFocus={() => this.setState({ isFocused: true })}
                                 style={ input }
                             />
-                        </CustomCard>
-                        <View style={{ marginTop: this.state.isFocused ? 10 : 380}}>
+                        </View>
+                        <View style={{ marginTop: this.state.isFocused ? 20 : 345}}>
                             <MattizButton 
                                 title={'Next !'}
                                 titleStyle={{ color: 'white'}}
@@ -138,13 +135,10 @@ class SignUpForm extends Component {
                             source={require('../../assets/doubleLogo.png')} 
                             style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                         />
-                        <CustomCard 
-                            style={ viewStyle }
-                            elevated={ this.state.isFocused ? true : false }
-                        >
+                        <View style={ viewStyle }>
                             <Input 
                                 placeholder="Choose your Password"
-                                inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
+                                inputContainerStyle={{ borderBottomColor: '#040026', marginTop: 40 }}
                                 placeholderTextColor='gray'
                                 value={this.state.password}
                                 secureTextEntry={true}
@@ -153,8 +147,8 @@ class SignUpForm extends Component {
                                 onFocus={() => this.setState({ isFocused: true })}
                                 style={ input }
                             />
-                        </CustomCard>
-                        <View style={{ marginTop: this.state.isFocused ? 10 : 380}}>
+                        </View>
+                        <View style={{ marginTop: this.state.isFocused ? 20 : 345}}>
                             <MattizButton 
                                 title={'Next !'}
                                 titleStyle={{ color: 'white'}}
@@ -180,13 +174,10 @@ class SignUpForm extends Component {
                             source={require('../../assets/doubleLogo.png')} 
                             style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                         />
-                        <CustomCard 
-                            style={ viewStyle }
-                            elevated={ this.state.isFocused ? true : false }
-                        >
+                        <View style={ viewStyle }>
                             <Input 
                                 placeholder="Confirm your Password"
-                                inputContainerStyle={{ borderBottomColor: 'transparent', marginTop: 5 }}
+                                inputContainerStyle={{ borderBottomColor: '#040026', marginTop: 40 }}
                                 placeholderTextColor='gray'
                                 value={this.state.confirmPassword}
                                 secureTextEntry={true}
@@ -195,8 +186,8 @@ class SignUpForm extends Component {
                                 onFocus={() => this.setState({ isFocused: true })}
                                 style={ input }
                             />
-                        </CustomCard>
-                        <View style={{ marginTop: this.state.isFocused ? 10 : 380}}>
+                        </View>
+                        <View style={{ marginTop: this.state.isFocused ? 20 : 345}}>
                             <MattizButton 
                                 title={'Sign Up !'}
                                 titleStyle={{ color: 'white'}}
@@ -219,13 +210,10 @@ const styles = StyleSheet.create({
     },
     input: {
         height: 50,
-        backgroundColor: '#ededed',
-        margin: 30,
-        padding: 20
+        backgroundColor: 'transparent',
     },
     viewStyle: {
-        marginTop: 0,
-        margin: 12, 
+        margin: '5%', 
         height: 55, 
         borderRadius: 10, 
     }
