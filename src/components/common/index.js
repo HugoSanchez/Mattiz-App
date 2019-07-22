@@ -1,9 +1,5 @@
-import Header from './Header';
-import MattizButton from './MattizButton';
-import CustomCard from './CustomCard';
 
-export default {
-    Header,
-    MattizButton,
-    CustomCard
-};
+export * from './Header';
+export * from './MattizButton';
+export * from './CustomCard';
+export * from './DashboardItem';

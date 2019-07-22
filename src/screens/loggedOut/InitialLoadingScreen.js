@@ -49,7 +49,7 @@ class InitialLoadingScreen extends Component {
                     >
                         <Image 
                             source={require('../../assets/doubleLeaf.png')} 
-                            style={{ width: 120, height: 60, marginBottom: '10%' }}
+                            style={{ width: 110, height: 55, marginBottom: '10%' }}
                         />
                     </Animatable.View>
                 </ImageBackground>

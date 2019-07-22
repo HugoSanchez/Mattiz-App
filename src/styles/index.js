@@ -1,5 +1,6 @@
 // General Styles
 export default {
+    // Containers
     container: {
         flex: 1,
         backgroundColor: '#fff',

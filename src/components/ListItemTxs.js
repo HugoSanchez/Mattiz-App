@@ -32,7 +32,7 @@ export default class ListItemTx extends Component {
         } = styles;
 
         return (
-            <CustomCard style={{ height: 70 }} elevated={true}>
+            <CustomCard style={{ height: 65 }} elevated={true}>
                 <View style={ container }>
 
                     <View style={ iconBox }>
@@ -51,7 +51,9 @@ export default class ListItemTx extends Component {
 
                     <View style={ rightBox }>
                         <View style={ amountBox }>
-                            <Text style={ amountText }>{ isPositive(amountToDisplay(tx.amount)) } $</Text>
+                            <Text style={ amountText }>
+                                { isPositive(amountToDisplay(tx.amount)) } $
+                            </Text>
                         </View>
 
                         <View style={ dot }>
@@ -68,7 +70,7 @@ export default class ListItemTx extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1,
-        flexDirection: 'row',
+        flexDirection: 'row' 
     }, 
     iconBox: { 
         flex: 1, 
@@ -117,5 +119,6 @@ const styles = StyleSheet.create({
         flex: 1,
         marginLeft: 3,  
         justifyContent: 'center' 
-    } 
-})
+    }
+});
+ 

@@ -10,16 +10,20 @@ import {
 } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
 import { connect } from 'react-redux';
-import Icon from 'react-native-vector-icons/Feather';
 
 // Components.
 import Header from '../../components/common/Header';
 import CustomCard  from '../../components/common/CustomCard';
+import DashboardItem from '../../components/common/DashboardItem';
 import SimpleLineChart from '../../components/charts/SimpleLineChart';
 import ArtSlider from '../../components/ArtSlider'
 
 // Utils.
-import { getHistoricEthPrice, getEthPrice, getBtcPrice } from '../../api/auth'
+import { 
+    getHistoricEthPrice, 
+    getEthPrice, 
+    getBtcPrice 
+} from '../../api/auth'
 
 // Redux actions.
 import { loadPlaidInfo } from '../../actions';
@@ -57,7 +61,6 @@ class Dashboard extends Component {
     }
 
     componentWillMount() {
-        console.log('HIT')
         this.props.loadPlaidInfo();
         getEthPrice().then(res => this.setState({ price: res.data.ticker.price }))
         getBtcPrice().then(res => this.setState({ btcPrice: res.data.ticker.price }))
@@ -393,67 +396,22 @@ class Dashboard extends Component {
                             </Text>
                         </View>
 
-                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, alignItems: 'center', justifyContent: 'center', backgroundColor: '#FFF'}}>
-                                    <Image 
-                                        style={{ height: height * 0.04, width: height * 0.04, borderRadius: (height * 0.04) / 2 }}
-                                        source={{ uri: 'https://bit.ly/2LsSE8u'}}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ flex: 3, justifyContent: 'center' }}>
-                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
-                                    Bank of America 
-                                </Text>
-                            </View>
-                            <View style={{ flex: 2 }}>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
-                                        {  numeral(54595.98).format('0,0.00') } €
-                                    </Text> 
-                                </View>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ 
-                                        GS.extraSmallBoldNumber, 
-                                        { color: colors.numbersGreen, fontSize: 12, marginBottom: '10%' } 
-                                        ]}>
-                                        + 2,75%
-                                    </Text> 
-                                </View>
-                            </View>
-                        </View>
+                        <DashboardItem
+                            uri='https://bit.ly/2LsSE8u'
+                            title="Bank of America"
+                            amount={54595.98}
+                            percentage="+ 2,75%"
+                            positive={true}
+                        />
 
-                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#F0F0F0', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Image 
-                                        style={{ height: height * 0.07, width: height * 0.07, borderRadius: (height * 0.07) / 2 }}
-                                        source={{ uri: 'https://bit.ly/2O1YGPw'}}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ flex: 3, justifyContent: 'center' }}>
-                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
-                                    Chase Bank
-                                </Text>
-                            </View>
-                            <View style={{ flex: 2 }}>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
-                                        {  numeral(52415.21).format('0,0.00') } €
-                                    </Text> 
-                                </View>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ 
-                                        GS.extraSmallBoldNumber, 
-                                        { color: colors.numbersRed, fontSize: 12, marginBottom: '10%' } 
-                                        ]}>
-                                        - 5,75%
-                                    </Text> 
-                                </View>
-                            </View>
-                        </View>
+                        <DashboardItem
+                            uri='https://bit.ly/2O1YGPw'
+                            title="Chase Bank"
+                            amount={52415.21}
+                            percentage="- 5,75%"
+                            positive={false}
+                            imageStyle={{ height: height * 0.07, width: height * 0.07, borderRadius: (height * 0.07) / 2 }}
+                        />
 
                         <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>

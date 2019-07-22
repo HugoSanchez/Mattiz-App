@@ -2,14 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, StyleSheet } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
-import StatusDot from './common/StatusDot';
 import CustomCard from './common/CustomCard';
 
 import { ethers } from 'ethers';
-
-import { 
-    dotColor 
-} from '../utils/StyleUtils';
 
 export default class EthListItemTx extends Component {
 
@@ -56,7 +51,6 @@ export default class EthListItemTx extends Component {
                         </View>
 
                         <View style={ dot }>
-                            <StatusDot positive={dotColor(tx.amount)} size={14}/>
                         </View>
                     </View>
 
