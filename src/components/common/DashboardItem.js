@@ -1,36 +1,40 @@
 import React from 'react';
 import { View, Text, Image, Dimensions } from 'react-native';
 
-/// General Styles & Colors
+// General Styles & Colors
 import GS from '../../styles'
 import colors from '../../constants/colors'
 
-/// Number parser 
+// Number parser 
 const numeral = require('numeral');
 
-/// Dims. 
+// Dims. 
 const height = Dimensions.get('window').height
 
-/// Props:
-/// @containerHeight: object, optional; default: height * 0.08.
-/// @iconBox: object, optional.
-/// @imageStyle: object, optional.
-/// @uri: sting, required. 'https://bit.ly/2LsSE8u'
-/// @title: string, required.
-/// @amount: string, required.
-/// @percentage: string, required.
-
-/// -> Pending: Simplify imageStyle prop to just sizeRatio
+// Props:
+// @containerHeight: object, optional; 
+// @iconBox: object, optional.
+// @imageStyle: object, optional.
+// @image: component, optional.
+// @uri: sting, required. 
+// @title: string, required.
+// @amount: string, required.
+// @percentage: string, required.
 
 const DashboardItem = props => {
     return (
-        <View style={[ styles.container, props.containerHeight ?  props.containerHeight : null ]}>
-            <View style={GS.container}>
-                <View style={[ styles.iconBox, props.iconBox ? props.iconBox : null ]}>
-                    <Image 
-                        style={[ styles.imageStyle, props.imageStyle ? props.imageStyle : null ]}
-                        source={{ uri: props.uri }}
-                    />
+        <View style={[ styles.container, props.containerHeight ]}>
+            <View style={ GS.container }>
+                <View style={[ styles.iconBox, props.iconBox ]}>
+                    {
+                        props.image ?
+                        props.image
+                        :
+                        <Image 
+                            style={[ styles.imageStyle, props.imageStyle ]}
+                            source={{ uri: props.uri }}
+                        />
+                    }
                 </View>
             </View>
                             

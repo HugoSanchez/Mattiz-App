@@ -390,8 +390,8 @@ class Dashboard extends Component {
                     </View>
 
                     <View style={ styles.detailsContainer }>
-                        <View style={{ height: height * 0.05, justifyContent: 'center', paddingLeft: '5%'}}>
-                            <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 20 }}> 
+                        <View style={ styles.categoryBox }>
+                            <Text style={ styles.catgeoryTitle }> 
                                 Savings 
                             </Text>
                         </View>
@@ -413,310 +413,122 @@ class Dashboard extends Component {
                             imageStyle={{ height: height * 0.07, width: height * 0.07, borderRadius: (height * 0.07) / 2 }}
                         />
 
-                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#F0F0F0', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Image 
-                                        style={{ height: height * 0.06, width: height * 0.06, borderRadius: (height * 0.06) / 2 }}
-                                        source={{ uri: 'https://bit.ly/2NXvIjE'}}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ flex: 3, justifyContent: 'center' }}>
-                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
-                                    Compound USDC 
-                                </Text>
-                            </View>
-                            <View style={{ flex: 2 }}>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
-                                        {  numeral(1595.9783).format('0,0.0000') } $
-                                    </Text> 
-                                </View>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ 
-                                        GS.extraSmallBoldNumber, 
-                                        { color: colors.numbersGreen, fontSize: 12, marginBottom: '10%' } 
-                                        ]}>
-                                        + 2,64%
-                                    </Text> 
-                                </View>
-                            </View>
-                        </View>
+                        <DashboardItem
+                            uri='https://bit.ly/2NXvIjE'
+                            title="Compound USDC"
+                            amount={1595.9783}
+                            percentage="+ 2,64%"
+                            positive={true}
+                            imageStyle={{ height: height * 0.06, width: height * 0.06, borderRadius: (height * 0.06) / 2 }}
+                        />
 
-                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#F0F0F0', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Image 
-                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
-                                        source={{ uri: 'https://bit.ly/2XM7Gws'}}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ flex: 3, justifyContent: 'center' }}>
-                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
-                                    Compound DAI 
-                                </Text>
-                            </View>
-                            <View style={{ flex: 2 }}>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
-                                        {  numeral(517.9566).format('0,0.0000') } $
-                                    </Text> 
-                                </View>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ 
-                                        GS.extraSmallBoldNumber, 
-                                        { color: colors.numbersGreen, fontSize: 12, marginBottom: '10%' } 
-                                        ]}>
-                                        + 2,49%
-                                    </Text> 
-                                </View>
-                            </View>
-                        </View>
+                        <DashboardItem
+                            uri='https://bit.ly/2XM7Gws'
+                            title="Compound DAI"
+                            amount={517.9566}
+                            percentage="+ 2,49%"
+                            positive={true}
+                            imageStyle={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                        />
 
-                        <View style={{ height: height * 0.05, justifyContent: 'center', paddingLeft: '5%'}}>
-                            <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 20 }}> 
+                        <View style={ styles.categoryBox }>
+                            <Text style={ styles.catgeoryTitle }> 
                                 Stats 
                             </Text>
                         </View>
 
-                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#fffeea', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Image 
-                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
-                                        source={{ uri: 'https://bit.ly/2YhLjyI'}}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ flex: 3, justifyContent: 'center' }}>
-                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
-                                    Spenditures: 
-                                </Text>
-                            </View>
-                            <View style={{ flex: 2 }}>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
-                                        {  numeral(455.28).format('0,0.00') } €
-                                    </Text> 
-                                </View>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ 
-                                        GS.extraSmallBoldNumber, 
-                                        { color: colors.numbersRed, fontSize: 12, marginBottom: '10%' } 
-                                        ]}>
-                                        + 2,75%
-                                    </Text> 
-                                </View>
-                            </View>
-                        </View>
+                        <DashboardItem
+                            uri='https://bit.ly/2YhLjyI'
+                            title="Spenditures"
+                            amount={455.28}
+                            percentage="+ 2,75%"
+                            positive={true}
+                            imageStyle={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                        />
 
-                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#fffeea', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Image 
-                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
-                                        source={{ uri: 'https://bit.ly/32v9wRc'}}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ flex: 3, justifyContent: 'center' }}>
-                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
-                                    Income: 
-                                </Text>
-                            </View>
-                            <View style={{ flex: 2 }}>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
-                                        {  numeral(2635.83).format('0,0.00') } €
-                                    </Text> 
-                                </View>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ 
-                                        GS.extraSmallBoldNumber, 
-                                        { color: colors.numbersGreen, fontSize: 12, marginBottom: '10%' } 
-                                        ]}>
-                                        + 0,00%
-                                    </Text> 
-                                </View>
-                            </View>
-                        </View>
+                        <DashboardItem
+                            uri='https://bit.ly/32v9wRc'
+                            title="Income"
+                            amount={2635.83}
+                            percentage="+ 0,00%"
+                            positive={true}
+                            imageStyle={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                        />
 
-                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#fffeea', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Image 
-                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
-                                        source={{ uri: 'https://bit.ly/2Z0YNMm'}}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ flex: 3, justifyContent: 'center' }}>
-                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
-                                    Interests Earned:  
-                                </Text>
-                            </View>
-                            <View style={{ flex: 2 }}>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
-                                        {  numeral(126.72).format('0,0.00') } €
-                                    </Text> 
-                                </View>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ 
-                                        GS.extraSmallBoldNumber, 
-                                        { color: colors.numbersGreen, fontSize: 12, marginBottom: '10%' } 
-                                        ]}>
-                                        + 0,00%
-                                    </Text> 
-                                </View>
-                            </View>
-                        </View>
+                        <DashboardItem
+                            uri='https://bit.ly/2Z0YNMm'
+                            title="Interests Earned"
+                            amount={126.72}
+                            percentage="+ 0,00%"
+                            positive={true}
+                            imageStyle={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                        />
 
-                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#fffeea', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Image 
-                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
-                                        source={{ uri: 'https://bit.ly/2YWd4cR'}}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ flex: 3, justifyContent: 'center' }}>
-                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
-                                    Capital Commited:  
-                                </Text>
-                            </View>
-                            <View style={{ flex: 2 }}>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
-                                        {  numeral(18426.93).format('0,0.00') } €
-                                    </Text> 
-                                </View>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ 
-                                        GS.extraSmallBoldNumber, 
-                                        { color: colors.numbersGreen, fontSize: 12, marginBottom: '10%' } 
-                                        ]}>
-                                        + 0,00%
-                                    </Text> 
-                                </View>
-                            </View>
-                        </View>
+                        <DashboardItem
+                            uri='https://bit.ly/2YWd4cR'
+                            title="Capital Commited"
+                            amount={18426.93}
+                            percentage="+ 0,00%"
+                            positive={true}
+                            imageStyle={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                        />
 
-                        <View style={{ height: height * 0.05, justifyContent: 'center', paddingLeft: '5%'}}>
-                            <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 20 }}> 
+                        <View style={ styles.categoryBox }>
+                            <Text style={ styles.catgeoryTitle }> 
                                 Investments 
                             </Text>
                         </View>
 
-                        <View style={{ height: height * 0.05, justifyContent: 'center', paddingLeft: '5%'}}>
-                            <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 18 }}> 
+                        <View style={ styles.categoryBox }>
+                            <Text style={ styles.categorySubtitle }> 
                                // Tokens 
                             </Text>
                         </View>
 
-                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#E7F7DD', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Image 
-                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
-                                        source={require('../../assets/smallEtherIcon.png')}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ flex: 3, justifyContent: 'center' }}>
-                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
-                                    Ether 
-                                </Text>
-                            </View>
-                            <View style={{ flex: 2 }}>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
-                                        {  numeral(3197.38).format('0,0.00') } €
-                                    </Text> 
-                                </View>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ 
-                                        GS.extraSmallBoldNumber, 
-                                        { color: colors.numbersGreen, fontSize: 12, marginBottom: '10%' } 
-                                        ]}>
-                                        + 2,49%
-                                    </Text> 
-                                </View>
-                            </View>
-                        </View>
+                        <DashboardItem
+                            image={
+                                <Image 
+                                    style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                                    source={require('../../assets/smallEtherIcon.png')}
+                                />
+                            }
+                            iconBox={{ backgroundColor: '#E7F7DD' }}
+                            title="Ether"
+                            amount={3197.38}
+                            percentage="+ 2,49%"
+                            positive={true}
+                        />
 
-                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#F7F4DD', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Image 
-                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
-                                        source={require('../../assets/smallBitcoinIcon.png')}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ flex: 3, justifyContent: 'center' }}>
-                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
-                                    Bitcoin 
-                                </Text>
-                            </View>
-                            <View style={{ flex: 2 }}>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
-                                        {  numeral(1517.95).format('0,0.00') } €
-                                    </Text> 
-                                </View>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ 
-                                        GS.extraSmallBoldNumber, 
-                                        { color: colors.numbersGreen, fontSize: 12, marginBottom: '10%' } 
-                                        ]}>
-                                        + 2,49%
-                                    </Text> 
-                                </View>
-                            </View>
-                        </View>
+                        <DashboardItem
+                            image={
+                                <Image 
+                                    style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                                    source={require('../../assets/smallBitcoinIcon.png')}
+                                />
+                            }
+                            iconBox={{ backgroundColor: '#F7F4DD' }}
+                            title="Bitcoin"
+                            amount={1517.95}
+                            percentage="+ 2,49%"
+                            positive={true}
+                        />
 
-                        <View style={{ height: height * 0.08, flexDirection: 'row', paddingLeft: '2%'  }}>
-                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <View style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2, backgroundColor: '#FFF', alignItems: 'center', justifyContent: 'center' }}>
-                                    <Image 
-                                        style={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
-                                        source={{ uri: 'https://bit.ly/2LZrBRA'}}
-                                    />
-                                </View>
-                            </View>
-                            <View style={{ flex: 3, justifyContent: 'center' }}>
-                                <Text style={{ fontFamily: 'Raleway-Regular', fontSize: 18 }}> 
-                                    Numeraire 
-                                </Text>
-                            </View>
-                            <View style={{ flex: 2 }}>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ GS.extraSmallLightNumber, { marginTop: '15%'} ]}>
-                                        {  numeral(127.63).format('0,0.00') } €
-                                    </Text> 
-                                </View>
-                                <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-                                    <Text style={[ 
-                                        GS.extraSmallBoldNumber, 
-                                        { color: colors.numbersGreen, fontSize: 12, marginBottom: '10%' } 
-                                        ]}>
-                                        + 2,49%
-                                    </Text> 
-                                </View>
-                            </View>
-                        </View>
+                        <DashboardItem
+                            uri='https://bit.ly/2LZrBRA'
+                            title="Numeraire"
+                            amount={127.63}
+                            percentage="+ 2,49%"
+                            positive={true}
+                            imageStyle={{ height: height * 0.05, width: height * 0.05, borderRadius: (height * 0.05) / 2 }}
+                        />
                                
-                        <View style={{ height: height * 0.05, justifyContent: 'center', paddingLeft: '5%'}}>
-                            <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 18 }}> 
+                        <View style={ styles.categoryBox }>
+                            <Text style={ styles.categorySubtitle }> 
                                // Arts 
                             </Text>
                         </View>
 
-                        <View style={{ height: height * 0.35, width: width * 0.9, justifyContent: 'center', alignItems: 'center', marginLeft: '2.5%' }}>
+                        <View style={ styles.sliderContainer }>
                             <ScrollView horizontal={true}>
                                 <ArtSlider />
                             </ScrollView>
@@ -732,7 +544,7 @@ class Dashboard extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        backgroundColor: '#F0EFEF',
+        backgroundColor: '#FFF',
     },
     balanceBoxContainer: {
         height: height * 0.35,
@@ -777,12 +589,25 @@ const styles = StyleSheet.create({
         shadowRadius: 4.65,
         elevation: 4,
     },
-    statusAvatar: {
-        width: 20,
-        height: 20, 
-        borderRadius: 10,
-        backgroundColor: '#E5F2D4',
-        marginLeft: 16
+    categoryBox: { 
+        height: height * 0.05, 
+        justifyContent: 'center', 
+        paddingLeft: '5%'
+    },
+    catgeoryTitle: { 
+        fontFamily: 'Raleway-SemiBold', 
+        fontSize: 20 
+    },
+    categorySubtitle: { 
+        fontFamily: 'Raleway-SemiBold', 
+        fontSize: 18 
+    },
+    sliderContainer: { 
+        height: height * 0.35, 
+        width: width * 0.9, 
+        justifyContent: 'center', 
+        alignItems: 'center', 
+        marginLeft: '2.5%' 
     },
     balanceStyle: {
         fontFamily: 'Aleo-Light',
@@ -793,11 +618,6 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: colors.primaryBlue
     },
-    buttonsText: {
-        fontFamily: 'Raleway-Regular',
-        fontSize: 14,
-        color: colors.primaryBlue
-    }
 })
 
 const mapDispatchToProps = dispatch => ({
