@@ -4,20 +4,14 @@ import {
     Text,
     TouchableOpacity, 
 } from 'react-native';
-
-//General Styles & Colors
+import { connect } from 'react-redux';
 import GS from '../../styles'
 
 // Props:
-// @onPress: - Required. Function to execute. 
-// @textStyle: -Required. Changes fontFamily when timeframe selected. 
-/**
- * 
- *  this.state.timeframe == 'week' ?
-    { fontFamily: 'Raleway-SemiBold'}
-    :
-    null
- */
+// @onWeekPress: - Required. Function to execute. 
+// @onMonthPress: - Required. Function to execute. 
+// @onQuarterPress: - Required. Function to execute. 
+// @onYearPress: - Required. Function to execute. 
 
 const TimeframeSelector = props => {
 
@@ -26,27 +20,38 @@ const TimeframeSelector = props => {
     return (
         <View style={ container }>
             
-            <TouchableOpacity onPress={ props.onPress } style={ textBox }>
-                <Text style={[ GS.extraSmallLightTitle, props.textStyle ]}> 
+            <TouchableOpacity onPress={ props.onWeekPress } style={ textBox }>
+                <Text style={[ 
+                    GS.extraSmallLightTitle,
+                    props.timeframe == 'week' ? { fontFamily: 'Raleway-SemiBold'} : null
+                    ]}> 
                     Week 
                 </Text>
             </TouchableOpacity>
             
-            <TouchableOpacity onPress={ props.onPress } style={ textBox }>
-                <Text style={[ GS.extraSmallLightTitle, props.textStyle ]}> 
+            <TouchableOpacity onPress={ props.onMonthPress } style={ textBox }>
+                <Text style={[ 
+                    GS.extraSmallLightTitle,
+                    props.timeframe == 'month' ? { fontFamily: 'Raleway-SemiBold'} : null
+                    ]}> 
                     Month 
                 </Text>
             </TouchableOpacity>
             
-            <TouchableOpacity onPress={ props.onPress } style={ textBox }>
-                <Text style={[ GS.extraSmallLightTitle, props.textStyle ]}> 
+            <TouchableOpacity onPress={ props.onQuarterPress } style={ textBox }>
+                <Text style={[ 
+                    GS.extraSmallLightTitle,
+                    props.timeframe == 'quarter' ? { fontFamily: 'Raleway-SemiBold'} : null
+                    ]}> 
                    Quarter 
                 </Text>
             </TouchableOpacity>
 
-            <TouchableOpacity onPress={ props.onPress } style={ textBox }>
-                <Text style={[ GS.extraSmallLightTitle, props.textStyle ]}> 
-
+            <TouchableOpacity onPress={ props.onYearPress } style={ textBox }>
+                <Text style={[ 
+                    GS.extraSmallLightTitle,
+                    props.timeframe == 'year' ? { fontFamily: 'Raleway-SemiBold'} : null
+                    ]}> 
                     Year 
                 </Text>
             </TouchableOpacity>
@@ -71,4 +76,9 @@ const styles = {
     }
 }
 
-export default TimeframeSelector;
+const mapStateToProps = state => {
+    const { timeframe } = state.timeframe;
+    return { timeframe }
+}
+
+export default connect(mapStateToProps, {})(TimeframeSelector);

@@ -5,7 +5,6 @@ import {
     Image, 
     ScrollView,
     Dimensions,
-    TouchableOpacity, 
     StyleSheet 
 } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
@@ -15,6 +14,7 @@ import { connect } from 'react-redux';
 import Header from '../../components/common/Header';
 import CustomCard  from '../../components/common/CustomCard';
 import DashboardItem from '../../components/common/DashboardItem';
+import TimeframeSelector from '../../components/common/TimeframeSelector'
 import SimpleLineChart from '../../components/charts/SimpleLineChart';
 import ArtSlider from '../../components/ArtSlider'
 
@@ -26,11 +26,16 @@ import {
 } from '../../api/auth'
 
 // Redux actions.
-import { loadPlaidInfo } from '../../actions';
+import { 
+    loadPlaidInfo, 
+    setTimeframeinReduxState,
+    setDashboardInReduxState
+} from '../../actions';
 
 //General Styles & Colors
 import GS from '../../styles'
 import colors from '../../constants/colors'
+import DashboardSelector from '../../components/DashboardSelector';
 
 // Number parser 
 const numeral = require('numeral');
@@ -48,7 +53,6 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            timeframe: 'month',
             boxItem: 'total',
             data: monthData,
             percentage: '+ 0.92%',
@@ -184,210 +188,50 @@ class Dashboard extends Component {
                             </SimpleLineChart>
                         </View>
 
-                        <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch', alignItems: 'center', marginRight: '8%', marginLeft: '8%', marginTop: '15%' }}>
-                            <TouchableOpacity
-                                onPress={() => {
-                                    this.setState({ timeframe: 'week' }) 
-                                    this.reloadData('week')
-                                }} 
-                                style={{ flex: 1, alignSelf: 'stretch', alignItems: 'center' }}>
-                                <Text style={[
-                                    GS.extraSmallLightTitle,
-                                    this.state.timeframe == 'week' ?
-                                    { fontFamily: 'Raleway-SemiBold'}
-                                    :
-                                    null 
-                                    ]}> 
-                                        Week 
-                                    </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => {
-                                    this.setState({ timeframe: 'month' }) 
-                                    this.reloadData('month')
-                                }} 
-                                style={{ flex: 1, alignSelf: 'stretch', alignItems: 'center' }}>
-                                <Text style={[
-                                    GS.extraSmallLightTitle,
-                                    this.state.timeframe == 'month' ?
-                                    { fontFamily: 'Raleway-SemiBold'}
-                                    :
-                                    null 
-                                    ]}> 
-                                        Month 
-                                    </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => {
-                                    this.setState({ timeframe: 'quarter' }) 
-                                    this.reloadData('quarter')
-                                }}  
-                                style={{ flex: 1, alignSelf: 'stretch', alignItems: 'center' }}>
-                                <Text style={[
-                                    GS.extraSmallLightTitle,
-                                    this.state.timeframe == 'quarter' ?
-                                    { fontFamily: 'Raleway-SemiBold'}
-                                    :
-                                    null 
-                                    ]}> 
-                                        Quarter 
-                                    </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity
-                                onPress={() => {
-                                    this.setState({ timeframe: 'year' }) 
-                                    this.reloadData('year')
-                                }}  
-                                style={{ flex: 1, alignSelf: 'stretch', alignItems: 'center' }}>
-                                <Text style={[
-                                    GS.extraSmallLightTitle,
-                                    this.state.timeframe == 'year' ?
-                                    { fontFamily: 'Raleway-SemiBold'}
-                                    :
-                                    null 
-                                    ]}> 
-                                        Year 
-                                    </Text>
-                            </TouchableOpacity>
-                        </View> 
+                       <TimeframeSelector
+                            onWeekPress={() => {
+                                this.props.setTimeframeinReduxState('week')
+                                this.reloadData('week')
+                            }}
+                            onMonthPress={() => {
+                                this.props.setTimeframeinReduxState('month')
+                                this.reloadData('month')
+                            }}
+                            onQuarterPress={() => {
+                                this.props.setTimeframeinReduxState('quarter')
+                                this.reloadData('quarter')
+                            }}
+                            onYearPress={() => {
+                                this.props.setTimeframeinReduxState('year')
+                                this.reloadData('year')
+                            }}
+                       />
                     </CustomCard>
 
                 <ScrollView style={{ flex: 1, alignSelf: 'stretch', borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
-                    <View style={ styles.boxContainer }>
-                        <View style={{ flex: 4, flexDirection: 'row', paddingLeft: '2%', paddingRight: '2%' }}>
-                            <View style={{ flex: 1 }}>
-                                <TouchableOpacity 
-                                    onPress={ () => {
-                                        this.setState({ boxItem: 'total' })
-                                        this.reloadData(this.state.timeframe)
-                                    }} 
-                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#F7DDDD', borderRadius: 10 }}>
-                                    <Image 
-                                        style={{ height: 45, width: 45 }}
-                                        source={require('../../assets/totalBag.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <TouchableOpacity 
-                                    onPress={ () => {
-                                        this.setState({ boxItem: 'savings', balance: '107011.19', percentage: '+ 1.25%'})
-                                        this.reloadData(this.state.timeframe)
-                                    }} 
-                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#DDEDF7', borderRadius: 10 }}>
-                                    <Image 
-                                        style={{ height: 45, width: 45 }}
-                                        source={require('../../assets/savingsIcon.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <TouchableOpacity 
-                                    onPress={ () => {
-                                        this.loadEthData()
-                                        this.setState({ boxItem: 'ether'})
-                                    }} 
-                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#E7F7DD', borderRadius: 10 }}>
-                                    <Image 
-                                        style={{ height: 45, width: 45 }}
-                                        source={require('../../assets/smallEtherIcon.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <TouchableOpacity 
-                                    onPress={ () => {
-                                        this.setState({ boxItem: 'bitcoin'})
-                                    }}  
-                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#F7F4DD', borderRadius: 10 }}>
-                                    <Image 
-                                        style={{ height: 45, width: 45 }}
-                                        source={require('../../assets/smallBitcoinIcon.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <TouchableOpacity 
-                                    onPress={ () => {
-                                        this.setState({ boxItem: 'others'})
-                                    }} 
-                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#DDF7F6', borderRadius: 10 }}>
-                                    <Image 
-                                        style={{ height: 45, width: 45 }}
-                                        source={require('../../assets/plusSign.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                        </View>
-                        
-                        <View style={{ flex: 1, flexDirection: 'row', paddingLeft: '2%', paddingRight: '2%', marginBottom: '2%'}}>
-                            <TouchableOpacity 
-                                onPress={ () => {
-                                    this.setState({ boxItem: 'total'})
-                                }}
-                                style={{ flex: 1, alignItems: 'center' }}>
-                                <Text style={[
-                                    styles.buttonsText, 
-                                    this.state.boxItem == 'total'?
-                                    { fontFamily: 'Raleway-SemiBold'}
-                                    :
-                                    null
-                                    ]}> Total </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity 
-                                onPress={ () => {
-                                    this.setState({ boxItem: 'savings'})
-                                }}
-                                style={{ flex: 1, alignItems: 'center' }}>
-                                <Text style={[
-                                    styles.buttonsText, 
-                                    this.state.boxItem == 'savings'?
-                                    { fontFamily: 'Raleway-SemiBold'}
-                                    :
-                                    null
-                                    ]}> Savings </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity 
-                                onPress={ () => {
-                                    this.setState({ boxItem: 'ether'})
-                                }}
-                                style={{ flex: 1, alignItems: 'center' }}>
-                                <Text style={[
-                                    styles.buttonsText, 
-                                    this.state.boxItem == 'ether'?
-                                    { fontFamily: 'Raleway-SemiBold'}
-                                    :
-                                    null
-                                    ]}> Ether </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity 
-                                onPress={ () => {
-                                    this.setState({ boxItem: 'bitcoin'})
-                                }}
-                                style={{ flex: 1, alignItems: 'center' }}>
-                                <Text style={[
-                                    styles.buttonsText, 
-                                    this.state.boxItem == 'bitcoin'?
-                                    { fontFamily: 'Raleway-SemiBold'}
-                                    :
-                                    null
-                                    ]}> Bitcoin </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity 
-                                onPress={ () => {
-                                    this.setState({ boxItem: 'others'})
-                                }}
-                                style={{ flex: 1, alignItems: 'center' }}>
-                                <Text style={[
-                                    styles.buttonsText, 
-                                    this.state.boxItem == 'others'?
-                                    { fontFamily: 'Raleway-SemiBold'}
-                                    :
-                                    null
-                                    ]}> Others </Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+                    <DashboardSelector
+                        onTotalPress={() => {
+                            this.setState({ boxItem: 'total' })
+                            this.props.setDashboardInReduxState('total')
+                            this.reloadData(this.state.timeframe)
+                        }}
+                        onSavingsPress={() => {
+                            this.setState({ boxItem: 'savings', balance: '107011.19', percentage: '+ 1.25%'})
+                            this.props.setDashboardInReduxState('savings')
+                        }}
+                        onEtherPress={() => {
+                            this.loadEthData()
+                            this.props.setDashboardInReduxState('ether')
+                        }}
+                        onBitcoinPress={() => {
+                            this.loadEthData()
+                            this.props.setDashboardInReduxState('bitcoin')
+                        }}
+                        onOthersPress={() => {
+                            this.loadEthData()
+                            this.props.setDashboardInReduxState('others')
+                        }}
+                    />
 
                     <View style={ styles.detailsContainer }>
                         <View style={ styles.categoryBox }>
@@ -564,19 +408,6 @@ const styles = StyleSheet.create({
         shadowRadius: 4.65,
         elevation: 2
     },
-    boxContainer: {
-        height: height * 0.10,
-        width: width * 0.95,
-        backgroundColor: '#FFF',
-        margin: 5,
-        marginLeft: '2.5%',
-        borderRadius: 15,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 5 },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-        elevation: 2,
-    },
     detailsContainer: {
         height: height * 1.5,
         width: width * 0.95,
@@ -618,15 +449,22 @@ const styles = StyleSheet.create({
         fontSize: 14,
         color: colors.primaryBlue
     },
+    buttonsText: {
+        fontFamily: 'Raleway-Regular'
+    }
 })
 
 const mapDispatchToProps = dispatch => ({
     loadPlaidInfo: () => dispatch(loadPlaidInfo()),
+    setTimeframeinReduxState: timeframe => dispatch(setTimeframeinReduxState(timeframe)),
+    setDashboardInReduxState: dashboard => dispatch(setDashboardInReduxState(dashboard))
 });
 
 const mapStateToProps = state => {
     const { balance, transactions, loading } = state.plaid;
+    const { dashboard } = state.dashboard;
     return {
+        dashboard,
         balance,
         transactions,
         loading

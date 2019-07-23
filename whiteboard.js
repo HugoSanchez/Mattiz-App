@@ -28,53 +28,138 @@
      */
 
 
-<View style={styles.boxContainer}>
-                    <StatsCard
-                        icon={"credit-card"}
-                        text={"May's Spenditures: "}
-                        amount={'347,85'} 
-                    />
-                </View>
-
-                <View style={styles.boxContainer}>
-                    <StatsCard
-                        icon={"arrow-right-circle"}
-                        text={"May's Income: "}
-                        amount={'3.323,85'} 
-                    />
-                </View>
-
-                <View style={styles.boxContainer}>
-                    <StatsCard
-                        icon={"activity"}
-                        text={"May's Interests Earned: "}
-                        amount={'127,85'} 
-                    />
-                </View>
-
-                <View style={styles.boxContainer}>
-                    <StatsCard
-                        icon={"trending-up"}
-                        text={"Total Investment Value: "}
-                        amount={'4.810,00'} 
-                    />
-                </View>
-
-
-<CustomCard style={styles.smalleBoxContainer} elevated={true}>
-<TouchableOpacity onPress={() => this.props.navigation.navigate('ethDashboard')} >
-    <StatusDot positive={true} size={10}/>
-    <Text style={[styles.textStyle, { fontSize: 22, marginLeft: 5 }]}>
-        $1,365 <Text style={[styles.textStyle, { fontSize: 12 }]}> ETH </Text>
-    </Text>
-</TouchableOpacity > 
-</CustomCard>
-
-<CustomCard style={styles.smalleBoxContainer} elevated={true}>
-<TouchableOpacity onPress={() => null} >
-    <StatusDot positive={false} size={10}/>
-    <Text style={[styles.textStyle, { fontSize: 22, marginLeft: 5 }]}>
-        $3,445 <Text style={[styles.textStyle, { fontSize: 12 }]}> BTC</Text>
-    </Text> 
-</TouchableOpacity > 
-</CustomCard>
+<View style={ styles.boxContainer }>
+                        <View style={{ flex: 4, flexDirection: 'row', paddingLeft: '2%', paddingRight: '2%' }}>
+                            <View style={{ flex: 1 }}>
+                                <TouchableOpacity 
+                                    onPress={ () => {
+                                        this.setState({ boxItem: 'total' })
+                                        this.reloadData(this.state.timeframe)
+                                    }} 
+                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#F7DDDD', borderRadius: 10 }}>
+                                    <Image 
+                                        style={{ height: 45, width: 45 }}
+                                        source={require('../../assets/totalBag.png')}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ flex: 1 }}>
+                                <TouchableOpacity 
+                                    onPress={ () => {
+                                        this.setState({ boxItem: 'savings', balance: '107011.19', percentage: '+ 1.25%'})
+                                        this.reloadData(this.state.timeframe)
+                                    }} 
+                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#DDEDF7', borderRadius: 10 }}>
+                                    <Image 
+                                        style={{ height: 45, width: 45 }}
+                                        source={require('../../assets/savingsIcon.png')}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ flex: 1 }}>
+                                <TouchableOpacity 
+                                    onPress={ () => {
+                                        this.loadEthData()
+                                        this.setState({ boxItem: 'ether'})
+                                    }} 
+                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#E7F7DD', borderRadius: 10 }}>
+                                    <Image 
+                                        style={{ height: 45, width: 45 }}
+                                        source={require('../../assets/smallEtherIcon.png')}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ flex: 1 }}>
+                                <TouchableOpacity 
+                                    onPress={ () => {
+                                        this.setState({ boxItem: 'bitcoin'})
+                                    }}  
+                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#F7F4DD', borderRadius: 10 }}>
+                                    <Image 
+                                        style={{ height: 45, width: 45 }}
+                                        source={require('../../assets/smallBitcoinIcon.png')}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                            <View style={{ flex: 1 }}>
+                                <TouchableOpacity 
+                                    onPress={ () => {
+                                        this.setState({ boxItem: 'others'})
+                                    }} 
+                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#DDF7F6', borderRadius: 10 }}>
+                                    <Image 
+                                        style={{ height: 45, width: 45 }}
+                                        source={require('../../assets/plusSign.png')}
+                                    />
+                                </TouchableOpacity>
+                            </View>
+                        </View>
+                        
+                        <View style={{ flex: 1, flexDirection: 'row', paddingLeft: '2%', paddingRight: '2%', marginBottom: '2%'}}>
+                            <TouchableOpacity 
+                                onPress={ () => {
+                                    this.setState({ boxItem: 'total'})
+                                }}
+                                style={{ flex: 1, alignItems: 'center' }}>
+                                <Text style={[
+                                    styles.buttonsText, 
+                                    this.state.boxItem == 'total'?
+                                    { fontFamily: 'Raleway-Bold'}
+                                    :
+                                    null
+                                    ]}> Total </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity 
+                                onPress={ () => {
+                                    this.setState({ boxItem: 'savings'})
+                                }}
+                                style={{ flex: 1, alignItems: 'center' }}>
+                                <Text style={[
+                                    styles.buttonsText, 
+                                    this.state.boxItem == 'savings'?
+                                    { fontFamily: 'Raleway-Bold'}
+                                    :
+                                    null
+                                    ]}> Savings </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity 
+                                onPress={ () => {
+                                    this.setState({ boxItem: 'ether'})
+                                }}
+                                style={{ flex: 1, alignItems: 'center' }}>
+                                <Text style={[
+                                    styles.buttonsText, 
+                                    this.state.boxItem == 'ether'?
+                                    { fontFamily: 'Raleway-Bold'}
+                                    :
+                                    null
+                                    ]}> Ether </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity 
+                                onPress={ () => {
+                                    this.setState({ boxItem: 'bitcoin'})
+                                }}
+                                style={{ flex: 1, alignItems: 'center' }}>
+                                <Text style={[
+                                    styles.buttonsText, 
+                                    this.state.boxItem == 'bitcoin'?
+                                    { fontFamily: 'Raleway-Bold'}
+                                    :
+                                    null
+                                    ]}> Bitcoin </Text>
+                            </TouchableOpacity>
+                            <TouchableOpacity 
+                                onPress={ () => {
+                                    this.setState({ boxItem: 'others'})
+                                }}
+                                style={{ flex: 1, alignItems: 'center' }}>
+                                <Text style={[
+                                    styles.buttonsText, 
+                                    this.state.boxItem == 'others'?
+                                    { fontFamily: 'Raleway-Bold'}
+                                    :
+                                    null
+                                    ]}> Others </Text>
+                            </TouchableOpacity>
+                        </View>
+                    </View>
