@@ -1,49 +1,73 @@
 import React from 'react';
-import { View } from 'react-native';
-import { Button } from 'react-native-elements';
-import LinearGradient from 'react-native-linear-gradient';
+import { 
+    View, 
+    Text,
+    TouchableOpacity, 
+} from 'react-native';
+
+//General Styles & Colors
+import GS from '../../styles'
 
 // Props:
-
+// @onPress: - Required. Function to execute. 
+// @textStyle: -Required. Changes fontFamily when timeframe selected. 
+/**
+ * 
+ *  this.state.timeframe == 'week' ?
+    { fontFamily: 'Raleway-SemiBold'}
+    :
+    null
+ */
 
 const TimeframeSelector = props => {
-    const { container, titleStyle, buttonStyle } = styles;
+
+    const { container, textBox } = styles;
+
     return (
-        <View style={[ container, props.containerStyles ]}>
-            <Button 
-                title={props.title}
-                titleStyle={[ titleStyle, props.titleStyle ]}
-                buttonStyle={[ buttonStyle, props.buttonStyle ]}
-                onPress={ props.onPress }
-                ViewComponent={ LinearGradient }
-                linearGradientProps={{
-                    colors: ['rgba(163, 209, 100, 1)', props.linearColor || 'rgba(4, 0, 38, 1)'],
-                    start: { x: 0, y: 0.5 },
-                    end: { x: 1, y: 0.5 },
-                }}
-            /> 
-        </View>
+        <View style={ container }>
+            
+            <TouchableOpacity onPress={ props.onPress } style={ textBox }>
+                <Text style={[ GS.extraSmallLightTitle, props.textStyle ]}> 
+                    Week 
+                </Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity onPress={ props.onPress } style={ textBox }>
+                <Text style={[ GS.extraSmallLightTitle, props.textStyle ]}> 
+                    Month 
+                </Text>
+            </TouchableOpacity>
+            
+            <TouchableOpacity onPress={ props.onPress } style={ textBox }>
+                <Text style={[ GS.extraSmallLightTitle, props.textStyle ]}> 
+                   Quarter 
+                </Text>
+            </TouchableOpacity>
+
+            <TouchableOpacity onPress={ props.onPress } style={ textBox }>
+                <Text style={[ GS.extraSmallLightTitle, props.textStyle ]}> 
+
+                    Year 
+                </Text>
+            </TouchableOpacity>
+        </View> 
     );
 }
 
 const styles = {
-    container: {
-        margin: 10, 
-        borderRadius: 12,
-        backgroundColor: '#FDFFFE',
-        shadowColor: '#000',
-        shadowOffset: { width: 2, height: 10 },
-        shadowOpacity: 0.29,
-        shadowRadius: 12.65,
-        elevation: 22,
+    container: { 
+        flex: 1, 
+        flexDirection: 'row', 
+        alignSelf: 'stretch', 
+        alignItems: 'center', 
+        marginRight: '8%', 
+        marginLeft: '8%',
+        marginTop: '15%' 
     },
-    titleStyle: {
-        color: 'white', 
-        fontFamily: 'Raleway-Regular'
-    },
-    buttonStyle: {
-        height: 60, 
-        borderRadius: 10,
+    textBox: { 
+        flex: 1, 
+        alignSelf: 'stretch', 
+        alignItems: 'center' 
     }
 }
 
