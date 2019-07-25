@@ -1,5 +1,6 @@
 import { 
-    takeEvery, 
+    takeLatest,
+    select,
     put
 } from 'redux-saga/effects';
 
@@ -10,7 +11,8 @@ import {
 import { 
     setGasPriceInReduxState,
     setCurrentEthPriceInReduxState,
-    setEthPriceHistoryInReduxState 
+    setEthPriceHistoryInReduxState,
+    setEthPercentageInReduxState
 } from '../actions';
 
 import {
@@ -25,11 +27,22 @@ import { config } from '../../node_modules/config';
 
 const Provider = new ethers.providers.JsonRpcProvider(config.infuraUrl)
 
+const timeframeState = state => state.timeframe;
+
 function* handleHistoricLoad() {
+    let time = yield select(timeframeState)
     // Call Nomics API.
-    let historicEthPrice = yield getHistoricEthPrice()
+    let historicEthPrice = yield getHistoricEthPrice(time.timeframe)
+    // Get the actual price rates from the response.
+    let rates = historicEthPrice.data.rates
+    // Calculate percentage variation.
+    let percentage = (rates[rates.length -1] - rates[0]) / rates[0] * 100
     // Set price array in state.
-    yield put(setEthPriceHistoryInReduxState(historicEthPrice.data.rates))
+    yield put(setEthPriceHistoryInReduxState(rates))
+    // Set percentage variation in state.
+    yield put(setEthPercentageInReduxState(percentage.toFixed(2)))
+    // Move to next function.
+    yield* handleEthPriceLoad()
 }
 
 function* handleEthPriceLoad() {
@@ -40,7 +53,7 @@ function* handleEthPriceLoad() {
     // Set result in redux state.
     yield put(setCurrentEthPriceInReduxState(ethPrice))
     // Move to next function.
-    yield* handleHistoricLoad()
+    yield* handleMarketDataLoading()
 }
 
 function* handleMarketDataLoading() {
@@ -50,11 +63,10 @@ function* handleMarketDataLoading() {
     let formatedGasPrice = ethers.utils.formatEther(ethers.utils.bigNumberify(gasPrice * 1.5).toString())
     // Set gas price in redux state.
     yield put(setGasPriceInReduxState({ gasPrice: formatedGasPrice, rawGasPrice: gasPrice}))
-    // Move to next function.
-    yield* handleEthPriceLoad()
 }
 
 export default function* watchGetMarketData() {
-    yield takeEvery(GET_MARKET_DATA, handleMarketDataLoading)
+    // Take 'loadMarketData' action.
+    yield takeLatest(GET_MARKET_DATA, handleHistoricLoad);
 }
 

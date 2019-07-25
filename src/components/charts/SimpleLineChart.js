@@ -6,6 +6,8 @@ import * as shape from 'd3-shape'
 class SimpleLineChart extends React.PureComponent {
 
     render() {
+
+        console.log(this.props.data)
         
         const data = this.props.data.map(d => parseFloat(d)) 
         
@@ -14,8 +16,8 @@ class SimpleLineChart extends React.PureComponent {
                 <LineChart
                     style={{ height: 200, width: '100%' }}
                     data={ data.slice(-60, -1) }
-                    svg={{ stroke: '#A3D164', strokeWidth: 3 }}
-                    contentInset={{ top: 20, bottom: 20 }}
+                    svg={{ stroke: '#A3D164', strokeWidth: 2 }}
+                    contentInset={{ top: 30, bottom: 30 }}
                     curve={ shape.curveNatural }
                     animate={true}
                     animationDuration={400}

@@ -25,141 +25,78 @@
 
     // Set state with the mnemonic seed and address we just generated. 
     this.setState({ mnemonic, address: decrypted.address})
-     */
+    */
 
 
-<View style={ styles.boxContainer }>
-                        <View style={{ flex: 4, flexDirection: 'row', paddingLeft: '2%', paddingRight: '2%' }}>
-                            <View style={{ flex: 1 }}>
-                                <TouchableOpacity 
-                                    onPress={ () => {
-                                        this.setState({ boxItem: 'total' })
-                                        this.reloadData(this.state.timeframe)
-                                    }} 
-                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#F7DDDD', borderRadius: 10 }}>
-                                    <Image 
-                                        style={{ height: 45, width: 45 }}
-                                        source={require('../../assets/totalBag.png')}
-                                    />
-                                </TouchableOpacity>
+<CustomCard style={styles.balanceBoxContainer} elevated={false}>
+                        <View style={{ flex: 6, alignSelf: 'stretch', alignItems: 'center', boderWidth: 1, borderColor: '#000' }}>
+                            <SimpleLineChart data={this.state.data}>
+                            <View style={{ alignSelf: 'stretch', alignItems: 'center', paddingTop: '5%' }}>
+                                <Text style={[ GS.extraSmallBoldNumber, { color: colors.numbersGreen } ]}>
+                                    { this.state.percentage }
+                                </Text> 
+                                {
+                                    this.state.boxItem == 'total' ?
+                                    <View style={{ alignSelf: 'stretch', alignItems: 'center' }}>
+                                        <Text style={ GS.bigLightNumber }>
+                                            {  numeral(this.props.balance).format('0,0.00') } €
+                                        </Text>                    
+                                        <Text style={styles.textStyle}> Aggregated Balance </Text>
+                                    </View>
+                                    :
+                                    null
+                                }
+                                {
+                                    this.state.boxItem == 'savings' ?
+                                    <View style={{ alignSelf: 'stretch', alignItems: 'center' }}>
+                                        <Text style={ GS.bigLightNumber }>
+                                            {  numeral(this.state.balance).format('0,0.00') } €
+                                        </Text>                    
+                                        <Text style={styles.textStyle}> Current Accounts Balance </Text>
+                                    </View>
+                                    :
+                                    null
+                                }
+                                {
+                                    this.state.boxItem == 'ether' 
+                                    ? <EthDashboard />
+                                    : null
+                                }
+                                {
+                                    this.state.boxItem == 'bitcoin' ?
+                                    <View style={{ alignSelf: 'stretch', alignItems: 'center' }}>
+                                        <Text style={ GS.bigLightNumber }>
+                                            {  numeral(this.state.btcBalance).format('0,0.00') } €
+                                        </Text>                    
+                                        <Text style={styles.textStyle}> BTC Balance </Text>
+                                        <Text style={[ GS.smallLightNumber, { marginTop: '2%'} ]}>
+                                            {  numeral(this.state.btcPrice).format('0,0.00') } €
+                                        </Text>                    
+                                        <Text style={styles.textStyle}> BTC Price </Text>
+                                    </View>
+                                    :
+                                    null
+                                }
                             </View>
-                            <View style={{ flex: 1 }}>
-                                <TouchableOpacity 
-                                    onPress={ () => {
-                                        this.setState({ boxItem: 'savings', balance: '107011.19', percentage: '+ 1.25%'})
-                                        this.reloadData(this.state.timeframe)
-                                    }} 
-                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#DDEDF7', borderRadius: 10 }}>
-                                    <Image 
-                                        style={{ height: 45, width: 45 }}
-                                        source={require('../../assets/savingsIcon.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <TouchableOpacity 
-                                    onPress={ () => {
-                                        this.loadEthData()
-                                        this.setState({ boxItem: 'ether'})
-                                    }} 
-                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#E7F7DD', borderRadius: 10 }}>
-                                    <Image 
-                                        style={{ height: 45, width: 45 }}
-                                        source={require('../../assets/smallEtherIcon.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <TouchableOpacity 
-                                    onPress={ () => {
-                                        this.setState({ boxItem: 'bitcoin'})
-                                    }}  
-                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#F7F4DD', borderRadius: 10 }}>
-                                    <Image 
-                                        style={{ height: 45, width: 45 }}
-                                        source={require('../../assets/smallBitcoinIcon.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
-                            <View style={{ flex: 1 }}>
-                                <TouchableOpacity 
-                                    onPress={ () => {
-                                        this.setState({ boxItem: 'others'})
-                                    }} 
-                                    style={{ flex: 1, justifyContent: 'center', alignItems: 'center', margin: '10%', backgroundColor: '#DDF7F6', borderRadius: 10 }}>
-                                    <Image 
-                                        style={{ height: 45, width: 45 }}
-                                        source={require('../../assets/plusSign.png')}
-                                    />
-                                </TouchableOpacity>
-                            </View>
+                            </SimpleLineChart>
                         </View>
-                        
-                        <View style={{ flex: 1, flexDirection: 'row', paddingLeft: '2%', paddingRight: '2%', marginBottom: '2%'}}>
-                            <TouchableOpacity 
-                                onPress={ () => {
-                                    this.setState({ boxItem: 'total'})
-                                }}
-                                style={{ flex: 1, alignItems: 'center' }}>
-                                <Text style={[
-                                    styles.buttonsText, 
-                                    this.state.boxItem == 'total'?
-                                    { fontFamily: 'Raleway-Bold'}
-                                    :
-                                    null
-                                    ]}> Total </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity 
-                                onPress={ () => {
-                                    this.setState({ boxItem: 'savings'})
-                                }}
-                                style={{ flex: 1, alignItems: 'center' }}>
-                                <Text style={[
-                                    styles.buttonsText, 
-                                    this.state.boxItem == 'savings'?
-                                    { fontFamily: 'Raleway-Bold'}
-                                    :
-                                    null
-                                    ]}> Savings </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity 
-                                onPress={ () => {
-                                    this.setState({ boxItem: 'ether'})
-                                }}
-                                style={{ flex: 1, alignItems: 'center' }}>
-                                <Text style={[
-                                    styles.buttonsText, 
-                                    this.state.boxItem == 'ether'?
-                                    { fontFamily: 'Raleway-Bold'}
-                                    :
-                                    null
-                                    ]}> Ether </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity 
-                                onPress={ () => {
-                                    this.setState({ boxItem: 'bitcoin'})
-                                }}
-                                style={{ flex: 1, alignItems: 'center' }}>
-                                <Text style={[
-                                    styles.buttonsText, 
-                                    this.state.boxItem == 'bitcoin'?
-                                    { fontFamily: 'Raleway-Bold'}
-                                    :
-                                    null
-                                    ]}> Bitcoin </Text>
-                            </TouchableOpacity>
-                            <TouchableOpacity 
-                                onPress={ () => {
-                                    this.setState({ boxItem: 'others'})
-                                }}
-                                style={{ flex: 1, alignItems: 'center' }}>
-                                <Text style={[
-                                    styles.buttonsText, 
-                                    this.state.boxItem == 'others'?
-                                    { fontFamily: 'Raleway-Bold'}
-                                    :
-                                    null
-                                    ]}> Others </Text>
-                            </TouchableOpacity>
-                        </View>
-                    </View>
+
+                       <TimeframeSelector
+                            onWeekPress={() => {
+                                this.props.setTimeframeinReduxState('week')
+                                this.reloadData('week')
+                            }}
+                            onMonthPress={() => {
+                                this.props.setTimeframeinReduxState('month')
+                                this.reloadData('month')
+                            }}
+                            onQuarterPress={() => {
+                                this.props.setTimeframeinReduxState('quarter')
+                                this.reloadData('quarter')
+                            }}
+                            onYearPress={() => {
+                                this.props.setTimeframeinReduxState('year')
+                                this.reloadData('year')
+                            }}
+                       />
+                    </CustomCard>

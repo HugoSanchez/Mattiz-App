@@ -81,6 +81,27 @@ export default {
         fontSize: 16,
         color: '#040026'
     },
+    // Regular
+    bigRegularNumber: {
+        fontFamily: 'Aleo-Regular',
+        fontSize: 36,
+        color: '#040026'
+    },
+    mediumRegularNumber: {
+        fontFamily: 'Aleo-Regular',
+        fontSize: 28,
+        color: '#040026'
+    },
+    smallRegularNumber: {
+        fontFamily: 'Aleo-Regular',
+        fontSize: 24,
+        color: '#040026'
+    },
+    extraSmallRegularNumber: {
+        fontFamily: 'Aleo-Regular',
+        fontSize: 16,
+        color: '#040026'
+    },
     // Bold
     bigBoldNumber: {
         fontFamily: 'Aleo-Bold',

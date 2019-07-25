@@ -49,7 +49,7 @@ export default class ArtSlider extends Component {
                     </View>
 
                     <View style={{ flex: 1, justifyContent: 'flex-end', alignItems: 'flex-end', paddingRight: '1%' }}>
-                        <Text style={[GS.extraSmallLightNumber, {margintTop: 20}]}>
+                        <Text style={[GS.extraSmallLightNumber, {marginTop: 20}]}>
                             { item.title }
                         </Text>
                         <Text style={[GS.extraSmallBoldNumber, {color: colors.numbersGreen, fontSize: 14 }]} >

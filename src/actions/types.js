@@ -28,6 +28,7 @@ export const GET_MARKET_DATA = 'get_market_data';
 export const SET_GAS_PRICE = 'set_gas_price';
 export const SET_CURRENT_ETH_PRICE = 'set_current_gas_price';
 export const SET_ETH_PRICE_HISTORY = 'set_eth_price_history';
+export const SET_ETH_PERCENTAGE = 'set_eth_percentage';
 
     // TIMEFRAME ACTIONS //
 export const SET_TIMEFRAME = 'set_timeframe';
