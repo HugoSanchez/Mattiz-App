@@ -12,19 +12,11 @@ import { connect } from 'react-redux';
 
 // Components.
 import Header from '../../components/common/Header';
-import CustomCard  from '../../components/common/CustomCard';
 import DashboardItem from '../../components/common/DashboardItem';
-import TimeframeSelector from '../../components/common/TimeframeSelector'
-import SimpleLineChart from '../../components/charts/SimpleLineChart';
+import FloatingButton from '../../components/common/FloatingButton'
 import DashboardSelector from '../../components/DashboardSelector';
-import ArtSlider from '../../components/ArtSlider'
-
-// Utils.
-import { 
-    getHistoricEthPrice, 
-    getEthPrice, 
-    getBtcPrice 
-} from '../../api/auth'
+import SendFormModal from '../../components/SendFormModal';
+import ArtSlider from '../../components/ArtSlider';
 
 // Redux actions.
 import { 
@@ -54,20 +46,23 @@ class Dashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            boxItem: 'total',
-            data: monthData,
-            percentage: '+ 0.92%',
-            balance: '1.22',
-            price: '0.00',
-            btcPrice: '0.00',
-            ethBalance: '3,197.38',
-            btcBalance: '1517.95'
+            renderButton: true,
+            modalVisible: false
         }
     }
 
     componentWillMount() {
         this.props.loadPlaidInfo();
-    }
+    };
+
+    renderFloatingButton = bool => {
+        this.setState({ renderButton: bool })
+    };
+
+    showModal(bool){
+        this.setState({ modalVisible: bool })
+    };
+    
 
     render() {
 
@@ -75,7 +70,11 @@ class Dashboard extends Component {
             <View style={styles.container}>
                 <Header />
                 <EthDashboard />
-                <ScrollView style={{ flex: 1, alignSelf: 'stretch', borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
+                
+                <ScrollView 
+                    onTouchStart={() => this.renderFloatingButton(false) }
+                    onTouchEnd={() => this.renderFloatingButton(true) }
+                    style={{ flex: 1, alignSelf: 'stretch', borderTopLeftRadius: 20, borderTopRightRadius: 20 }}>
                     <DashboardSelector
                         onTotalPress={() => {
                             this.setState({ boxItem: 'total' })
@@ -237,6 +236,19 @@ class Dashboard extends Component {
 
                     </View>
                 </ScrollView>
+                { 
+                    this.state.renderButton ? 
+                    <FloatingButton 
+                        iconName='paper-plane' 
+                        onPress={() => this.showModal(true)} 
+                    />
+                    : 
+                    null
+                }
+                <SendFormModal 
+                    modalVisible={this.state.modalVisible}
+                    onPress={() => this.setState({ modalVisible: false })}
+                />
             </View>
         );
     }

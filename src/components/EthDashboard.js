@@ -77,7 +77,7 @@ class EthDashboard extends Component {
 
                     <View style={ balanceContainer }>
                         <Text style={ GS.bigLightNumber }>
-                            {  numeral('3,197.38').format('0,0.00') } €
+                            {  numeral('3,197.38').format('0,0.00') +'€' + ' ' }
                         </Text>                                   
                     </View>
                     <Text style={ textStyle }> ETH Balance </Text> 
@@ -125,9 +125,9 @@ const styles = {
     titleContainer: {
         flex: 1, 
         alignSelf: 'stretch', 
-        alignItems: 'center', 
-        paddingTop: '5%',
-        paddingBottom: '5%' 
+        alignItems: 'center',
+        marginTop: '2%',
+        marginBottom: '2%',
     },
     balanceContainer: {
         marginTop: '0.5%',

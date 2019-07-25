@@ -20,7 +20,7 @@ const LoggedInNavigator = createBottomTabNavigator({
         navigationOptions: {
             tabBarIcon: ({ tintColor }) => (
                 <Icon 
-                    name='wallet' 
+                    name='home' 
                     size={22} 
                     style={{ paddingTop: 12 }} 
                     color={tintColor}
@@ -33,9 +33,9 @@ const LoggedInNavigator = createBottomTabNavigator({
         navigationOptions: {
             tabBarIcon: ({ tintColor }) => (
                 <Icon 
-                    name='list' 
-                    size={25} 
-                    style={{ paddingTop: 12 }} 
+                    name='equalizer' 
+                    size={20} 
+                    style={{ marginTop: 13, transform: [{ rotate: '90deg'}] }} 
                     color={tintColor}
                 />
             )

@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import colors from '../../constants/colors'
@@ -13,7 +13,11 @@ const Header = props => {
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 {
                     props.leftIcon ?
-                    <Icon name={props.leftIcon} size={20} color={colors.primaryBlue} style={{ marginTop: '35%' }}/> 
+                    <Icon 
+                        name={ props.leftIcon } 
+                        size={20} 
+                        color={colors.primaryBlue} 
+                        style={{ marginTop: '35%' }}/> 
                     :
                     null
                 }
@@ -25,7 +29,11 @@ const Header = props => {
                 />
             </View>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                <Icon name={'bell'} size={20} color={colors.primaryBlue} style={{ marginTop: '40%' }}/> 
+                <Icon 
+                    name={'bell'} 
+                    size={20} 
+                    color={colors.primaryBlue} 
+                    style={{ marginTop: '40%' }}/> 
             </View>
             </View>
             {
