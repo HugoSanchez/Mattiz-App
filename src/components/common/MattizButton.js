@@ -22,7 +22,7 @@ const MattizButton = props => {
                 onPress={ props.onPress }
                 ViewComponent={ LinearGradient }
                 linearGradientProps={{
-                    colors: ['rgba(163, 209, 100, 1)', props.linearColor || 'rgba(4, 0, 38, 1)'],
+                    colors: ['rgba(4, 0, 38, 0.1)', props.linearColor || 'rgba(4, 0, 38, 0.1)'],
                     start: { x: 0, y: 0.5 },
                     end: { x: 1, y: 0.5 },
                 }}

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, ImageBackground, Image, StyleSheet, } from 'react-native';
+import { View, Image, StyleSheet, } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
  

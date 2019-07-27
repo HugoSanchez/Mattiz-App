@@ -68,7 +68,7 @@ class Dashboard extends Component {
 
         return (
             <View style={styles.container}>
-                <Header />
+                <Header showBell={true} elevated={true}/>
                 <EthDashboard />
                 
                 <ScrollView 

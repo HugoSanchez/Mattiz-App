@@ -3,7 +3,6 @@ import { View, Text, Dimensions, ImageBackground, Image, StyleSheet } from 'reac
 import { Input } from 'react-native-elements';
 
 // Custom Components.
-import MattizButton from '../../components/common/MattizButton';
 import PalmButton from '../../components/common/PalmButton';
 import LoadingScreen from '../../components/LoadingScreen';
 
@@ -54,7 +53,15 @@ class SignUpForm extends Component {
     }
 
     render() {
-        const { container, input, viewStyle, textInput, placeholder } = styles;
+
+        const { 
+            container, 
+            input, 
+            viewStyle, 
+            textInput, 
+            placeholder,
+            imageStyle
+        } = styles;
 
         if ( this.state.loading ) {
             return (
@@ -74,7 +81,7 @@ class SignUpForm extends Component {
                     >
                         <Image 
                             source={require('../../assets/Palm-Logo-Self.png')} 
-                            style={{ width: 200, height: 120, alignSelf: 'center', marginTop: '20%' }}
+                            style={ imageStyle }
                         />
                         <View style={{ marginTop: 500 }}>
                             <PalmButton 
@@ -99,7 +106,7 @@ class SignUpForm extends Component {
                     >
                         <Image 
                             source={require('../../assets/Palm-Logo-Self.png')} 
-                            style={{ width: 200, height: 120, alignSelf: 'center', marginTop: '20%' }}
+                            style={ imageStyle }
                         />
                         <View style={ viewStyle }>
                             <Input 
@@ -108,7 +115,7 @@ class SignUpForm extends Component {
                                 placeholderTextColor='#464646'
                                 value={this.state.username}
                                 onChangeText={ value => this.setState({ username: value }) }
-                                fontStyle={ !this.state.password ? 'normal' :  'italic' }
+                                fontStyle={ 'italic' }
                                 onFocus={() => this.setState({ isFocused: true })}
                                 inputStyle={ this.state.username ? textInput : placeholder }
                                 style={ input }
@@ -137,18 +144,18 @@ class SignUpForm extends Component {
                     >
                         <Image 
                             source={require('../../assets/Palm-Logo-Self.png')} 
-                            style={{ width: 200, height: 120, alignSelf: 'center', marginTop: '20%' }}
+                            style={ imageStyle }
                         />
                         <View style={ viewStyle }>
                             <Input 
-                                placeholder="Choose your Password"
+                                placeholder="Choose your password"
                                 inputContainerStyle={{ borderBottomWidth: 0, marginTop: 20 }}
                                 placeholderTextColor='#464646'
                                 value={this.state.password}
                                 secureTextEntry={true}
                                 onChangeText={ value => this.setState({ password: value }) }
-                                fontStyle={ !this.state.password ? 'normal' :  'italic' }
-                                inputStyle={ this.state.username ? textInput : placeholder }
+                                fontStyle={ 'italic' }
+                                inputStyle={ this.state.password ? textInput : placeholder }
                                 onFocus={() => this.setState({ isFocused: true })}
                                 style={ input }
                             />
@@ -176,7 +183,7 @@ class SignUpForm extends Component {
                     >
                         <Image 
                             source={require('../../assets/Palm-Logo-Self.png')} 
-                            style={{ width: 200, height: 120, alignSelf: 'center', marginTop: '20%' }}
+                            style={ imageStyle }
                         />
                         <View style={ viewStyle }>
                             <Input 
@@ -186,8 +193,8 @@ class SignUpForm extends Component {
                                 value={this.state.confirmPassword}
                                 secureTextEntry={true}
                                 onChangeText={ value => this.setState({ confirmPassword: value }) }
-                                fontStyle={ !this.state.password ? 'normal' :  'italic' }
-                                inputStyle={ this.state.username ? textInput : placeholder }
+                                fontStyle={ 'italic' }
+                                inputStyle={ this.state.confirm ? textInput : placeholder }
                                 onFocus={() => this.setState({ isFocused: true })}
                                 style={ input }
                             />
@@ -227,10 +234,15 @@ const styles = StyleSheet.create({
         fontSize: 18 
     },
     textInput: { 
-        fontFamily: 'Raleway-Light', 
+        fontFamily: 'Raleway-LightItalic', 
         fontSize: 18, 
         color: colors.primaryBlue 
-    }
+    },
+    imageStyle: { 
+        width: 200, 
+        height: 120, 
+        alignSelf: 'center', 
+        marginTop: '20%' }
 })
 
 const mapDispatchtoProps = dispatch => ({
