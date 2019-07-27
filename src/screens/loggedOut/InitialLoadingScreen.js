@@ -35,12 +35,7 @@ class InitialLoadingScreen extends Component {
 
     render() {
         return (
-            <View style={ styles.container }>
-                <ImageBackground 
-                    source={require('../../assets/LoginForm.png')} 
-                    style={{ width:'100%', height:'100%', flex: 1 }}
-                    resizeMode='cover'
-                >
+            <View style={ styles.container }>          
                     <Animatable.View 
                         animation="pulse" 
                         easing="ease-out" 
@@ -48,11 +43,10 @@ class InitialLoadingScreen extends Component {
                         style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
                     >
                         <Image 
-                            source={require('../../assets/doubleLeaf.png')} 
+                            source={require('../../assets/Palm-Leaf-Logo.png')} 
                             style={{ width: 110, height: 55, marginBottom: '10%' }}
                         />
                     </Animatable.View>
-                </ImageBackground>
             </View>
         )
     }
@@ -70,6 +64,7 @@ const MapStateToProps = state => {
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
+        backgroundColor: '#FFF',
         justifyContent: 'center',
         alignItems: 'center'
     },
