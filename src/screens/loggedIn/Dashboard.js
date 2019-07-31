@@ -17,32 +17,23 @@ import FloatingButton from '../../components/common/FloatingButton'
 import DashboardSelector from '../../components/DashboardSelector';
 import SendFormModal from '../../components/SendFormModal';
 import ArtSlider from '../../components/ArtSlider';
+import EthDashboard from '../../components/EthDashboard';
+import BtcDashboard from '../../components/BtcDashboard';
+import TotalDashboard from '../../components/TotalDashboard';
+import SavingsDashboard from '../../components/SavingsDashboard';
 
 // Redux actions.
 import { 
-    loadPlaidInfo, 
     setTimeframeinReduxState,
     setDashboardInReduxState
 } from '../../actions';
 
 //General Styles & Colors
-import GS from '../../styles'
-import colors from '../../constants/colors'
-import EthDashboard from '../../components/EthDashboard';
-import BtcDashboard from '../../components/BtcDashboard';
-
-// Number parser 
-const numeral = require('numeral');
+import colors from '../../constants/colors';
 
 // Dims. 
 const width =  Dimensions.get('window').width
 const height = Dimensions.get('window').height
-
-const weekData = [ 5, 6, 10, 12, 10 ]
-const monthData = [ 4, 5, 4, 6, 7, 4, 5, 6, 10, 12, 10 ]
-const quarterData = [ 6, 7, 5, 6, 8, 4, 5, 4, 6, 7, 4, 5, 6, 10, 12, 10 ]
-const yearData = [ 4, 6, 7, 4, 5, 6, 5, 6, 6, 7, 5, 6, 8, 4, 5, 4, 6, 7, 4, 5, 6, 10, 12, 10 ]
-
 class Dashboard extends Component {
     constructor(props) {
         super(props);
@@ -53,7 +44,7 @@ class Dashboard extends Component {
     }
 
     componentWillMount() {
-        this.props.loadPlaidInfo();
+        // Nothing at the moment
     };
 
     renderFloatingButton = bool => {
@@ -70,7 +61,11 @@ class Dashboard extends Component {
         return (
             <View style={styles.container}>
                 <Header showBell={true} elevated={true}/>
-                <BtcDashboard />
+                { this.props.dashboard == 'total'    ? <TotalDashboard /> : null } 
+                { this.props.dashboard == 'savings'  ? <SavingsDashboard /> : null }
+                { this.props.dashboard == 'ether'    ? <EthDashboard /> : null }
+                { this.props.dashboard == 'bitcoin'  ? <BtcDashboard /> : null }
+                { this.props.dashboard == 'others'  ? <TotalDashboard /> : null }
                 
                 <ScrollView 
                     onTouchStart={() => this.renderFloatingButton(false) }
@@ -313,14 +308,8 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => {
-    const { balance, transactions, loading } = state.plaid;
     const { dashboard } = state.dashboard;
-    return {
-        dashboard,
-        balance,
-        transactions,
-        loading
-    }
+    return { dashboard }
 }
 
 export default connect(
