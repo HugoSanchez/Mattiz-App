@@ -12,7 +12,7 @@ import CustomCard from '../components/common/CustomCard';
 import TimeframeSelector from '../components/common/TimeframeSelector';
 
 import { 
-    loadMarketDataETH,
+    loadMarketDataBTC,
     setTimeframeinReduxState 
 } from '../actions';
 
@@ -27,19 +27,19 @@ const numeral = require('numeral');
 const width =  Dimensions.get('window').width
 const height = Dimensions.get('window').height
 
-class EthDashboard extends Component {
+class BtcDashboard extends Component {
     constructor(props) {
         super(props);
         this.state = {}
     }
 
     componentWillMount() {
-        this.props.loadMarketDataETH(this.props.timeframe)
+        this.props.loadMarketDataBTC(this.props.timeframe)
     }
 
-    reloadMarketDataETH(timeframe) {
+    reloadMarketDataBTC(timeframe) {
         this.props.setTimeframeinReduxState(timeframe)
-        this.props.loadMarketDataETH(timeframe)
+        this.props.loadMarketDataBTC(timeframe)
     }
 
     render() {
@@ -52,9 +52,9 @@ class EthDashboard extends Component {
         } = styles;
 
         const {
-            currentPriceETH,
-            historicPriceETH,
-            percentageChangeETH
+            currentPriceBTC,
+            historicPriceBTC,
+            percentageChangeBTC
         } = this.props;
 
 
@@ -62,36 +62,36 @@ class EthDashboard extends Component {
             <CustomCard style={ container }>
                 <View style={ titleContainer }>          
                     <Text style={ GS.extraSmallLightNumber }>
-                        {  numeral(currentPriceETH).format('0,0.00') }$
+                        {  numeral(currentPriceBTC).format('0,0.00') }$
                             <Text style={[ GS.extraSmallLightNumber,
-                                percentageChangeETH < 0 
+                                percentageChangeBTC < 0 
                                 ? { color: colors.numbersRed }
                                 : { color: colors.numbersGreen }]}>
                             {   
-                                percentageChangeETH < 0 
-                                ?'  ' + percentageChangeETH
-                                :'  +' + percentageChangeETH 
+                                percentageChangeBTC < 0 
+                                ?'  ' + percentageChangeBTC
+                                :'  +' + percentageChangeBTC 
                             }%
                         </Text>
                     </Text> 
 
                     <View style={ balanceContainer }>
                         <Text style={ GS.bigLightNumber }>
-                            {  numeral('3,197.38').format('0,0.00') +'€' + ' ' }
+                            {  numeral('1,132.96').format('0,0.00') +'€' + ' ' }
                         </Text>                                   
                     </View>
-                    <Text style={ textStyle }> ETH Balance </Text> 
+                    <Text style={ textStyle }> BTC Balance </Text> 
                 </View>
 
                 <View style={ chartContainer }>
-                    <SimpleLineChart data={ historicPriceETH } />
+                    <SimpleLineChart data={ historicPriceBTC } />
                 </View>
 
                 <TimeframeSelector
-                    onWeekPress={() => this.reloadMarketDataETH('week')}
-                    onMonthPress={() => this.reloadMarketDataETH('month')}
-                    onQuarterPress={() => this.reloadMarketDataETH('quarter')}
-                    onYearPress={() => this.reloadMarketDataETH('year')}
+                    onWeekPress={() => this.reloadMarketDataBTC('week')}
+                    onMonthPress={() => this.reloadMarketDataBTC('month')}
+                    onQuarterPress={() => this.reloadMarketDataBTC('quarter')}
+                    onYearPress={() => this.reloadMarketDataBTC('year')}
                 />
             </CustomCard>
         );
@@ -142,30 +142,30 @@ const styles = {
 }
 
 const mapDispatchToProps = dispatch => ({
-    loadMarketDataETH: timeframe => {
-        dispatch(loadMarketDataETH(timeframe))},
+    loadMarketDataBTC: timeframe => {
+        dispatch(loadMarketDataBTC(timeframe))},
     setTimeframeinReduxState: timeframe => {
         dispatch(setTimeframeinReduxState(timeframe))},
 });
 
 const mapStateToProps = state => {
     const { 
-        currentPriceETH, 
-        historicPriceETH,
-        percentageChangeETH, 
+        currentPriceBTC, 
+        historicPriceBTC,
+        percentageChangeBTC, 
     } = state.marketData;
 
     const { timeframe } = state.timeframe;
 
     return { 
         timeframe,
-        currentPriceETH,
-        historicPriceETH,
-        percentageChangeETH
+        currentPriceBTC,
+        historicPriceBTC,
+        percentageChangeBTC
     }
 }
 
 export default connect(
     mapStateToProps, 
     mapDispatchToProps)
-    (EthDashboard);
+    (BtcDashboard);

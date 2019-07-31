@@ -2,7 +2,6 @@ import { createSwitchNavigator } from 'react-navigation';
 
 import LoggedOutNavigator from './loggedOut';
 import LoggedInNavigator from './loggedIn';
-import ethNavigator from './loggedIn/ethNavigator';
 
 export const RootNavigator = () => createSwitchNavigator(
     {
@@ -11,12 +10,9 @@ export const RootNavigator = () => createSwitchNavigator(
         },
         LoggedIn: {
             screen: LoggedInNavigator
-        },
-        ethNavigator: {
-            screen: ethNavigator
         }
     },
     {
-        initialRouteName: 'LoggedOut'
+        initialRouteName: 'LoggedIn'
     }
 );

@@ -8,9 +8,6 @@ import Settings from '../../screens/loggedIn/Settings';
 import Transactions from '../../screens/loggedIn/Transactions';
 import Products from '../../screens/loggedIn/Products';
 
-// Nested Navigators
-import ethNavigator from './ethNavigator';
-
 // Icons
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 

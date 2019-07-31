@@ -5,7 +5,7 @@ import {
 } from 'redux-saga/effects';
 
 import { 
-    GET_MARKET_DATA 
+    GET_ETH_MARKET_DATA 
 } from '../actions/types';
 
 import { 
@@ -17,13 +17,13 @@ import {
 
 import {
     getEthPrice,
-    getHistoricEthPrice
+    getHistoricPrices
 } from '../api/auth';
 
 // Crypto imports
 import 'ethers/dist/shims.js'; 
 import { ethers } from 'ethers';
-import { config } from '../../node_modules/config';
+import { config } from 'config';
 
 const Provider = new ethers.providers.JsonRpcProvider(config.infuraUrl)
 
@@ -32,7 +32,7 @@ const timeframeState = state => state.timeframe;
 function* handleHistoricLoad() {
     let time = yield select(timeframeState)
     // Call Nomics API.
-    let historicEthPrice = yield getHistoricEthPrice(time.timeframe)
+    let historicEthPrice = yield getHistoricPrices(time.timeframe, 'ETH')
     // Get the actual price rates from the response.
     let rates = historicEthPrice.data.rates
     // Calculate percentage variation.
@@ -66,7 +66,7 @@ function* handleMarketDataLoading() {
 }
 
 export default function* watchGetMarketData() {
-    // Take 'loadMarketData' action.
-    yield takeLatest(GET_MARKET_DATA, handleHistoricLoad);
+    // Take 'loadMarketDataETH' action.
+    yield takeLatest(GET_ETH_MARKET_DATA, handleHistoricLoad);
 }
 

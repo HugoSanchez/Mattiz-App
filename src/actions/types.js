@@ -24,11 +24,17 @@ export const SET_ETH_BALANCES = 'set_eth_balances';
 export const SET_ETH_TRANSACTIONS = 'set_eth_transactions';
 
     // MARKET DATA ACTIONS // 
-export const GET_MARKET_DATA = 'get_market_data';
+export const GET_ETH_MARKET_DATA = 'get_eth_market_data';
+export const GET_BTC_MARKET_DATA = 'get_btc_market_data';
+
 export const SET_GAS_PRICE = 'set_gas_price';
-export const SET_CURRENT_ETH_PRICE = 'set_current_gas_price';
+export const SET_CURRENT_ETH_PRICE = 'set_current_eth_price';
 export const SET_ETH_PRICE_HISTORY = 'set_eth_price_history';
-export const SET_ETH_PERCENTAGE = 'set_eth_percentage';
+export const SET_ETH_PERCENTAGE = 'set_eth_percentage'
+;
+export const SET_CURRENT_BTC_PRICE = 'set_current_btc_price';
+export const SET_BTC_PRICE_HISTORY = 'set_btc_price_history';
+export const SET_BTC_PERCENTAGE = 'set_btc_percentage';
 
     // TIMEFRAME ACTIONS //
 export const SET_TIMEFRAME = 'set_timeframe';

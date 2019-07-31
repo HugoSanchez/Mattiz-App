@@ -29,6 +29,7 @@ import {
 import GS from '../../styles'
 import colors from '../../constants/colors'
 import EthDashboard from '../../components/EthDashboard';
+import BtcDashboard from '../../components/BtcDashboard';
 
 // Number parser 
 const numeral = require('numeral');
@@ -69,7 +70,7 @@ class Dashboard extends Component {
         return (
             <View style={styles.container}>
                 <Header showBell={true} elevated={true}/>
-                <EthDashboard />
+                <BtcDashboard />
                 
                 <ScrollView 
                     onTouchStart={() => this.renderFloatingButton(false) }
