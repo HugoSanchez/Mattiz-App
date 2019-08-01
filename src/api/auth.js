@@ -1,12 +1,12 @@
 import { AsyncStorage } from 'react-native';
 import axios from 'axios';
 
-const URL = 'http://192.168.1.40:3000/api'
+const URL = 'http://192.168.100.20:3000/api'
 
     // ASYNCSTORAGE TOKEN FUNCTIONS // 
 
 /**
- * Keys used so far:
+ *  Keys used so far:
  *  @ 'token' - unique user token returned from the auth backend.
  *  @ 'plaid-tokens' - array of plaid access_tokens.  
  *  @ 'wallet' - ethers encrypted wallet.

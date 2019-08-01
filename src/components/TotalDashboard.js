@@ -117,6 +117,7 @@ const styles = {
         alignSelf: 'stretch',
         justifyContent: 'center',
         alignItems: 'center',
+        margin: 0,
         marginBottom: '2%',
         backgroundColor: '#FFF',
         borderTopRightRadius: 0,
@@ -125,9 +126,9 @@ const styles = {
         borderBottomRightRadius: 25,
         shadowColor: '#000',
         shadowOffset: { width: 0, height: 10 },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-        elevation: 2 
+        shadowOpacity: 0.10,
+        shadowRadius: 2.65,
+        elevation: 1 
     }, 
     chartContainer: { 
         flex: 6, 

@@ -17,7 +17,7 @@ const PalmButton = props => {
             onPress={ props.onPress } 
             style={[ container, props.containerStyles ]}>
             <Text 
-                style={ titleStyle }> 
+                style={[ titleStyle, props.titleStyle ]}> 
                 {
                     props.title
                 } 

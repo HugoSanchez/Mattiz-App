@@ -23,6 +23,31 @@ export default {
         fontSize: 22,
         color: '#040026'
     },
+    extraSmallTitle: {
+        fontFamily: 'Raleway',
+        fontSize: 18,
+        color: '#040026'
+    },
+    bigMediumTitle: {
+        fontFamily: 'Raleway-Medium',
+        fontSize: 32,
+        color: '#040026'
+    },
+    mediumMediumTitle: {
+        fontFamily: 'Raleway-Medium',
+        fontSize: 26,
+        color: '#040026'
+    },
+    smallMediumTitle: {
+        fontFamily: 'Raleway-Medium',
+        fontSize: 22,
+        color: '#040026'
+    },
+    extraSmallMediumTitle: {
+        fontFamily: 'Raleway-Medium',
+        fontSize: 18,
+        color: '#040026'
+    },
     bigLightTitle: {
         fontFamily: 'Raleway-Light',
         fontSize: 32,

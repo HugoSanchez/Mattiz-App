@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, TouchableOpacity } from 'react-native';
+import { View, TouchableOpacity, ImageBackground } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import colors from '../../constants/colors'
@@ -15,12 +15,16 @@ const FloatingButton = props => {
                 activeOpacity={0.7}
                 onPress={ props.onPress }
                 style={styles.buttonStyle}>
-                <Icon 
-                    name={ props.iconName } 
-                    size={27} 
-                    color={'#E7F7DD'} 
-                    style={styles.iconStyle}
-                /> 
+                    <ImageBackground 
+                        source={require('../../assets/FloatingButton-Leaf.png')} 
+                        imageStyle={{borderRadius: 25}}
+                        style={{width: '100%', height: '100%', resizeMode: 'cover', alignItems: 'center', justifyContent: 'center' }}>
+                            <Icon 
+                                name={ props.iconName } 
+                                size={27} 
+                                color={'#E7F7DD'} 
+                                style={styles.iconStyle} /> 
+                </ImageBackground>
             </TouchableOpacity>
         </View>
     );

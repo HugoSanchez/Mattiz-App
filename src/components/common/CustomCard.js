@@ -32,7 +32,8 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'center',
         borderRadius: 15,
-        backgroundColor: '#FDFFFE'
+        backgroundColor: '#FDFFFE',
+        margin: 5
     }
 };
 

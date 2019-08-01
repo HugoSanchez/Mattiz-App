@@ -41,7 +41,6 @@ class GenerateWallet extends Component {
         console.log('password: ', this.props.user.password)
         // Set wallet in memory.
         await setTokenInMemory('wallet', encrypted)
-
         // Stop loading, set mnemonic and encrypted wallet.
         this.setState({ loading: false, encryptedKeys: encrypted, mnemonic: mnemonic.split(' ')})
     }

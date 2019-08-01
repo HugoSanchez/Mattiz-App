@@ -23,7 +23,10 @@ import TotalDashboard from '../../components/TotalDashboard';
 import SavingsDashboard from '../../components/SavingsDashboard';
 
 // Redux actions.
-import { 
+import {
+    loadPlaidInfo,
+    loadMarketDataETH,
+    loadMarketDataBTC,
     setTimeframeinReduxState,
     setDashboardInReduxState
 } from '../../actions';
@@ -44,7 +47,9 @@ class Dashboard extends Component {
     }
 
     componentWillMount() {
-        // Nothing at the moment
+        this.props.loadPlaidInfo()
+        this.props.loadMarketDataETH(this.props.timeframe)
+        this.props.loadMarketDataBTC(this.props.timeframe)
     };
 
     renderFloatingButton = bool => {
@@ -65,7 +70,7 @@ class Dashboard extends Component {
                 { this.props.dashboard == 'savings'  ? <SavingsDashboard /> : null }
                 { this.props.dashboard == 'ether'    ? <EthDashboard /> : null }
                 { this.props.dashboard == 'bitcoin'  ? <BtcDashboard /> : null }
-                { this.props.dashboard == 'others'  ? <TotalDashboard /> : null }
+                { this.props.dashboard == 'others'   ? <TotalDashboard /> : null }
                 
                 <ScrollView 
                     onTouchStart={() => this.renderFloatingButton(false) }
@@ -243,7 +248,7 @@ class Dashboard extends Component {
                 }
                 <SendFormModal 
                     modalVisible={this.state.modalVisible}
-                    onPress={() => this.setState({ modalVisible: false })}
+                    onSlideClose={() => this.setState({ modalVisible: false })}
                 />
             </View>
         );
@@ -302,14 +307,22 @@ const styles = StyleSheet.create({
 })
 
 const mapDispatchToProps = dispatch => ({
-    loadPlaidInfo: () => dispatch(loadPlaidInfo()),
-    setTimeframeinReduxState: timeframe => dispatch(setTimeframeinReduxState(timeframe)),
-    setDashboardInReduxState: dashboard => dispatch(setDashboardInReduxState(dashboard))
+    loadPlaidInfo: () => {
+        dispatch(loadPlaidInfo())},
+    loadMarketDataETH: timeframe => {
+        dispatch(loadMarketDataETH(timeframe))},
+    loadMarketDataBTC: timeframe => {
+        dispatch(loadMarketDataBTC(timeframe))},
+    setTimeframeinReduxState: timeframe => {
+        dispatch(setTimeframeinReduxState(timeframe))},
+    setDashboardInReduxState: dashboard => {
+        dispatch(setDashboardInReduxState(dashboard))}
 });
 
 const mapStateToProps = state => {
     const { dashboard } = state.dashboard;
-    return { dashboard }
+    const { timeframe } = state.timeframe;
+    return { dashboard, timeframe }
 }
 
 export default connect(

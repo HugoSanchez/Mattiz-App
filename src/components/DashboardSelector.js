@@ -145,10 +145,10 @@ const styles = {
         marginLeft: '2.5%',
         borderRadius: 15,
         shadowColor: '#000',
-        shadowOffset: { width: 0, height: 5 },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-        elevation: 2, 
+        shadowOffset: { width: 0, height: 3 },
+        shadowOpacity: 0.20,
+        shadowRadius: 3.65,
+        elevation: 2  
     }, 
     iconsContainer: { 
         flex: 4, 

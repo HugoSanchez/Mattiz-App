@@ -27,6 +27,7 @@ function* handleEthBalances() {
     let balance = yield connectedWallet.getBalance()
     // Parse Balance.
     let parsedBalance = ethers.utils.formatEther(ethers.utils.bigNumberify(balance).toString())
+    console.log('Balance: ', parsedBalance)
     // Dispatch action to set balance in state.
     yield put(setEthBalanceInReduxState(parsedBalance))
     // Get Wallet Transaction History.
