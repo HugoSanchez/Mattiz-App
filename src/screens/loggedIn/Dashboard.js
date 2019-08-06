@@ -17,7 +17,7 @@ import Header from '../../components/common/Header';
 import DashboardItem from '../../components/common/DashboardItem';
 import FloatingButton from '../../components/common/FloatingButton'
 import DashboardSelector from '../../components/DashboardSelector';
-import SendFormModal from '../../components/SendFormModal';
+import SendModal from '../../components/SendModal';
 import ArtSlider from '../../components/ArtSlider';
 import EthDashboard from '../../components/EthDashboard';
 import BtcDashboard from '../../components/BtcDashboard';
@@ -45,7 +45,6 @@ class Dashboard extends Component {
         super(props);
         this.state = {
             renderButton: true,
-            modalVisible: false
         }
     }
 
@@ -65,9 +64,6 @@ class Dashboard extends Component {
     
 
     render() {
-
-        console.log('Send: ', this.props.showSendForm )
-
         return (
             <View style={styles.container}>
                 <Header showBell={true} elevated={true}/>
@@ -252,30 +248,10 @@ class Dashboard extends Component {
                     : 
                     null
                 }
-
-                <Modal animationType="slide" transparent={true} visible={this.props.showSendForm}>
-                    <View style={ styles.modalContainer }>
-                        <View style={ styles.topContainer }>
-                        </View>
-
-                        <View style={ styles.formContainer }>
-                            <View style={ styles.closeContainer }>
-                                <TouchableOpacity 
-                                    onPress={() => this.props.setEthRenderForm(false)}
-                                    style={ styles.closeSlider }>
-                                </TouchableOpacity>
-                            </View>
-
-                            <View style={{ flex: 6 }}>
-                                <SendFormModal
-                                    onModalClose={() => this.props.setEthRenderForm(false)} 
-                                />
-                            </View>
-
-                        </View>
-                    </View>
-                </Modal>
+               
+                <SendModal isVisible={this.props.showSendForm} />
             </View>
+
         );
     }
 }
@@ -329,50 +305,24 @@ const styles = StyleSheet.create({
     buttonsText: {
         fontFamily: 'Raleway-Regular'
     },
-    // Modal Styles.
-    modalContainer: {
-        flex: 1,
-        backgroundColor: 'rgba(0, 0, 0, 0.05)',
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25
-    },
-    topContainer: {
-        height: height * 0.59,
-        width: width,
-        backgroundColor: 'transparent',
-        borderTopLeftRadius: 25,
-        borderTopRightRadius: 25
-    },
-    formContainer: {
-        height: height * 0.41,
-        width: width, 
-        backgroundColor: '#FFF', 
-        borderRadius: 25
-    },
-    closeContainer: { 
-        flex: 0.5, 
-        alignItems: 'center', 
-        justifyContent: 'center' 
-    },
-    closeSlider: { 
-        width: width * 0.10, 
-        borderRadius: 25,
-        borderWidth: 2, 
-        borderColor: 'lightgray'
-    },
 })
 
 const mapDispatchToProps = dispatch => ({
     loadPlaidInfo: () => {
         dispatch(loadPlaidInfo())},
+
     setEthRenderForm: bool => {
         dispatch(setEthRenderForm(bool))},
+
     loadMarketDataETH: timeframe => {
         dispatch(loadMarketDataETH(timeframe))},
+
     loadMarketDataBTC: timeframe => {
         dispatch(loadMarketDataBTC(timeframe))},
+
     setTimeframeinReduxState: timeframe => {
         dispatch(setTimeframeinReduxState(timeframe))},
+        
     setDashboardInReduxState: dashboard => {
         dispatch(setDashboardInReduxState(dashboard))}
 });
