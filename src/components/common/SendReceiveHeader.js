@@ -12,8 +12,8 @@ import colors from '../../constants/colors';
 const SendReceiveHeader = props => {
 
     const {
-        extraSmallMediumTitle,
-        extraSmallLightTitle
+        smallMediumTitle,
+        smallLightTitle
     } = styles;
 
     const { 
@@ -31,7 +31,7 @@ const SendReceiveHeader = props => {
                 <TouchableOpacity
                     style={ isSendSelected ? selectedStyle : null} 
                     onPress={ props.onSendPress }> 
-                    <Text style={ isSendSelected ? extraSmallMediumTitle : extraSmallLightTitle }> 
+                    <Text style={ isSendSelected ? smallMediumTitle : smallLightTitle }> 
                         Send 
                     </Text>
                 </TouchableOpacity>
@@ -40,7 +40,7 @@ const SendReceiveHeader = props => {
                 <TouchableOpacity 
                     style={ !isSendSelected ? selectedStyle : null}
                     onPress={ props.onReceivePress }>
-                    <Text style={ !isSendSelected ? extraSmallMediumTitle : extraSmallLightTitle }>
+                    <Text style={ !isSendSelected ? smallMediumTitle : smallLightTitle }>
                         Receive 
                     </Text>
                 </TouchableOpacity>

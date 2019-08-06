@@ -23,6 +23,7 @@ export const SET_ETH_ADDRESS = 'set_eth_address';
 export const GET_ETH_BALANCES = 'get_eth_balances';
 export const SET_ETH_BALANCES = 'set_eth_balances';
 export const SET_ETH_TRANSACTIONS = 'set_eth_transactions';
+export const SET_ETH_BALANCES_IN_DOLLARS = 'set_eth_balance_in_dollars';
 
     // MARKET DATA ACTIONS // 
 export const GET_ETH_MARKET_DATA = 'get_eth_market_data';

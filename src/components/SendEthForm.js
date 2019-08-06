@@ -52,56 +52,135 @@ class SendEthForm extends Component {
         const {
             amount,
             address,
+            balance,
+            gasPrice,
+            transactionFee,
+            currentPriceETH,
+            ethBallanceInDollars,
             setAmountInReduxState,
             setAddressInReduxState
         } = this.props;
 
         return (
-            <View style={container}>
+            <View style={[container ]}>
                 <View style={cardContainer}>
-                    <CustomCard style={cardStyle} elevated={amountElevated}>
-                        <View style={{ flex: 3 }}>
+                    <View style={cardStyle} elevated={amountElevated}>
+                        <View style={{ flex: 1, justifyContent: 'flex-end'}}>
                             <Text style={ titleContainer }>
-                                Amount: 
+                                USD 
                             </Text>
                         </View>
-                        <View style={{ flex: 1.5 }}>
-                            <Input 
-                                placeholder="0.000"
-                                inputContainerStyle={amountInputContainer}
-                                placeholderTextColor='#040026'
-                                value={ amount } 
-                                secureTextEntry={false}
-                                onFocus={ () => this.setState({ amountElevated: true })}
-                                onEndEditing={ () => this.setState({ amountElevated: false })}
-                                onChangeText={ value => setAmountInReduxState(value)}
-                                inputStyle={ amount > 0 ? textInput : placeholder }
-                            />
+                        <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
+                            <View style={{ flex: 1 }}>
+                            </View>
+
+                            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                                <Input 
+                                    placeholder="0"
+                                    inputContainerStyle={amountInputContainer}
+                                    placeholderTextColor='#040026'
+                                    value={ amount } 
+                                    secureTextEntry={false}
+                                    onFocus={ () => this.setState({ amountElevated: true })}
+                                    onEndEditing={ () => this.setState({ amountElevated: false })}
+                                    onChangeText={ value => setAmountInReduxState(value)}
+                                    inputStyle={{ fontFamily: 'Aleo-Regular', fontSize: 42, color: colors.primaryBlue }}
+                                />
+                            </View>
+                        
+                            <View style={{ flex: 1 }}>
+                            </View>
                         </View>
-                    </CustomCard>
+                    </View>
                 </View>
 
                 <View style={cardContainer}>
-                    <CustomCard style={cardStyle} elevated={toElevated}>
-                        <View style={{ flex: 1 }}>
+                    <View style={cardStyle} elevated={toElevated}>
+                        <View style={{ flex: 1.5}}>
                             <Text style={ titleContainer }>
                                 Address: 
                             </Text>
                         </View>
-                        <View style={{ flex: 1 }}>
-                            <Input 
-                                placeholder="0x ..."
-                                inputContainerStyle={ addressInputContainer }
-                                placeholderTextColor='#040026'
-                                value={ address }
-                                secureTextEntry={false}
-                                onFocus={ () => this.setState({ toElevated: true })}
-                                onEndEditing={ () => this.setState({ toElevated: false })}
-                                onChangeText={ value => setAddressInReduxState(value) }
-                                inputStyle={ address > 0 ? textInput : placeholder  }
-                            />
+                        <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
+                            <View style={{ flex: 1 }}>
+                            </View>
+
+                            <View style={{ flex: 1, paddingRight: '20%' }}>
+                                <Input 
+                                    placeholder="0x ..."
+                                    inputContainerStyle={ addressInputContainer }
+                                    placeholderTextColor='#040026'
+                                    value={ address }
+                                    secureTextEntry={false}
+                                    onFocus={ () => this.setState({ toElevated: true })}
+                                    onEndEditing={ () => this.setState({ toElevated: false })}
+                                    onChangeText={ value => setAddressInReduxState(value) }
+                                    inputStyle={ address > 0 ? textInput : placeholder  }
+                                />
+                            </View>
+                        
+                            <View style={{ flex: 1 }}>
+                            </View>
                         </View>
-                    </CustomCard>
+                    </View>
+                </View>
+
+                <View style={{ flex: 16, alignSelf: 'stretch', margin: '5%'}}>
+
+                    <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Text style={ styles.smallNumberStyle }>1</Text>
+                        </View>
+
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={ styles.smallNumberStyle }>2</Text>
+                        </View>
+                                
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Text style={ styles.smallNumberStyle }>3</Text>
+                        </View>
+                    </View>
+
+                    <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Text style={ styles.smallNumberStyle }>4</Text>
+                        </View>
+
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={ styles.smallNumberStyle }>5</Text>
+                        </View>
+                    
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Text style={ styles.smallNumberStyle }>6</Text>
+                        </View>
+                    </View>
+
+                    <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Text style={ styles.smallNumberStyle }>7</Text>
+                        </View>
+
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={ styles.smallNumberStyle }>8</Text>
+                        </View>
+                    
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Text style={ styles.smallNumberStyle }>9</Text>
+                        </View>
+                    </View>
+
+                    <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                        </View>
+
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+                            <Text style={ styles.smallNumberStyle }>0</Text>
+                        </View>
+                    
+                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                        </View>
+                    </View>
+
                 </View>
 
                 <View style={ feeAndBalanceContainer }>
@@ -109,13 +188,7 @@ class SendEthForm extends Component {
                         <Text style={ titleContainer }>
                             Fee:  
                                 <Text style={ feeAndBalanceNumbers }>
-                                    {   
-                                        amount > 0 ?
-                                        '   $' +
-                                        parseFloat( this.props.gasPrice * this.props.currentPriceETH * 21000 ).toFixed(3)
-                                        :
-                                        '   ' + 0.0000
-                                    }
+                                    { amount > 0 ? '   $' + transactionFee : '   $' + 0.000 }
                                 </Text>
                         </Text>
                     </View>
@@ -125,12 +198,17 @@ class SendEthForm extends Component {
                             Balance:  
                                 <Text style={ feeAndBalanceNumbers }>
                                 {   
+                                    // This is ugly AF, but don't know better so far.
+                                    amount > 0 ?
                                     '   $' 
                                     + 
-                                    parseFloat((this.props.balance * this.props.currentPriceETH) 
-                                    - ((this.props.amount * this.props.currentPriceETH ) 
-                                    + this.props.gasPrice * this.props.currentPriceETH * 21000))
+                                    parseFloat((balance * currentPriceETH) 
+                                    - ((amount * currentPriceETH ) 
+                                    + gasPrice * currentPriceETH * 21000))
                                     .toFixed(2) 
+                                    :
+                                    '   $' 
+                                    + parseFloat(balance * currentPriceETH).toFixed(2)
                                 }
                             </Text>
                         </Text>
@@ -152,28 +230,27 @@ class SendEthForm extends Component {
 
 const compStyles = {
     container: { 
-        flex: 6, 
+        flex: 10, 
         alignSelf: 'stretch' 
     },
     cardContainer: { 
-        flex: 2, 
+        flex: 6, 
         alignItems: 'center', 
         justifyContent: 'center' 
     },
     cardStyle: { 
         flex: 1, 
-        flexDirection: 'row', 
+        alignSelf: 'stretch',
         alignItems: 'center' 
     },
     titleContainer: [ 
         styles.extraSmallLightTitle, {
-            marginLeft: 20 
+            marginLeft: 0
         } 
     ],
-    amountInputContainer: { 
-        borderBottomColor: 'transparent', 
-        marginRight: 45, 
-        marginTop: 5 
+    amountInputContainer: {
+        borderBottomColor: 'transparent',
+        marginLeft: '35%', 
     },
     addressInputContainer: { 
         borderBottomColor: 'transparent', 
@@ -201,7 +278,6 @@ const compStyles = {
     ],
     feeAndBalanceNumbers: [ 
         styles.extraSmallRegularNumber, { 
-            marginLeft: 20 
         } 
     ],
     placeholder: {
@@ -222,12 +298,14 @@ const compStyles = {
 
 const MapStateToProps = state => {
     const { amount, address } = state.ethTx;
-    const { balance } = state.ethCommon;
-    const { gasPrice, currentPriceETH } = state.marketData
+    const { balance, ethBallanceInDollars } = state.ethCommon;
+    const { gasPrice, transactionFee, currentPriceETH } = state.marketData
     return {
         amount,
         address,
         balance,
+        ethBallanceInDollars,
+        transactionFee,
         gasPrice,
         currentPriceETH,
     };

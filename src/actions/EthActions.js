@@ -2,7 +2,8 @@ import {
     SET_ETH_ADDRESS,
     GET_ETH_BALANCES,
     SET_ETH_BALANCES,
-    SET_ETH_TRANSACTIONS
+    SET_ETH_TRANSACTIONS,
+    SET_ETH_BALANCES_IN_DOLLARS
 } from './types';
 
 export const loadEthBalances = () => {
@@ -22,6 +23,13 @@ export const setEthAddress = address => {
 export const setEthBalanceInReduxState = balance => {
     return{
         type: SET_ETH_BALANCES,
+        payload: balance 
+    }
+}
+
+export const setEthBalanceInDollars = balance => {
+    return{
+        type: SET_ETH_BALANCES_IN_DOLLARS,
         payload: balance 
     }
 }

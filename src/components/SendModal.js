@@ -45,8 +45,6 @@ class SendModal extends Component {
                 visible={isVisible}
             >
                 <View style={ modalContainer }>
-                    <View style={ topContainer }>
-                    </View>
 
                     <View style={ formContainer }>
                         <View style={ closeContainer }>
@@ -56,7 +54,7 @@ class SendModal extends Component {
                             </TouchableOpacity>
                         </View>
 
-                        <View style={{ flex: 6 }}>
+                        <View style={{ flex: 8 }}>
                             <SendAndReceiveEth
                                 onModalClose={() => setEthRenderForm(false)} 
                             />
@@ -77,14 +75,14 @@ const compStyles = {
         borderTopRightRadius: 25
     },
     topContainer: {
-        height: height * 0.59,
+        height: height,
         width: width,
         backgroundColor: 'transparent',
         borderTopLeftRadius: 25,
         borderTopRightRadius: 25
     },
     formContainer: {
-        height: height * 0.41,
+        height: height,
         width: width, 
         backgroundColor: '#FFF', 
         borderRadius: 25
