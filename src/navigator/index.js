@@ -13,6 +13,6 @@ export const RootNavigator = () => createSwitchNavigator(
         }
     },
     {
-        initialRouteName: 'LoggedIn'
+        initialRouteName: 'LoggedOut'
     }
 );

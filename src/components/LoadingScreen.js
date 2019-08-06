@@ -1,6 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 
+import colors from '../constants/colors';
+
 const Spinner = require('react-native-spinkit');
 
 // Props:
@@ -13,8 +15,8 @@ const LoadingScreen = props => {
                 style={{ alignSelf: 'center' }} 
                 isVisible={true} 
                 size={ props.size || 75} 
-                type='Arc' 
-                color='#A3D164'
+                type='Pulse' 
+                color={ colors.primaryBlue }
             />
             {
                 props.children

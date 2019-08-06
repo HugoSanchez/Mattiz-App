@@ -6,8 +6,6 @@ import * as shape from 'd3-shape'
 class SimpleLineChart extends React.PureComponent {
 
     render() {
-
-        console.log(this.props.data)
         
         const data = this.props.data.map(d => parseFloat(d)) 
         

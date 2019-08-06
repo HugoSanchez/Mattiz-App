@@ -1,6 +1,7 @@
 import { 
     takeEvery, 
-    put 
+    put,
+    delay
 } from 'redux-saga/effects';
 
 import { 
@@ -12,7 +13,8 @@ import 'ethers/dist/shims.js';
 import { ethers } from 'ethers';
 import { config } from '../../node_modules/config';
 
-import { 
+import {
+    setEthAddress,
     setEthBalanceInReduxState,
     setEthTransactionsInReduxState 
 } from '../actions';
@@ -22,21 +24,32 @@ let etherscanProvider = new ethers.providers.EtherscanProvider();
 let wallet = ethers.Wallet.fromMnemonic(config.seed);
 let connectedWallet = new ethers.Wallet(wallet.privateKey, Provider);
 
+function* setAddress() {
+    // Set address in redux state
+    yield put(setEthAddress(wallet.address))
+    // Move to next function
+    yield* handleEthBalances()
+}
+
 function* handleEthBalances() {
-    // Get Wallet Balance.
-    let balance = yield connectedWallet.getBalance()
-    // Parse Balance.
-    let parsedBalance = ethers.utils.formatEther(ethers.utils.bigNumberify(balance).toString())
-    console.log('Balance: ', parsedBalance)
-    // Dispatch action to set balance in state.
-    yield put(setEthBalanceInReduxState(parsedBalance))
-    // Get Wallet Transaction History.
-    let txs = yield etherscanProvider.getHistory(wallet.address)
-    // Dispatch action to set transactions in state.
-    yield put(setEthTransactionsInReduxState(txs))
+    while (true) {
+        // Get Wallet Balance.
+        let balance = yield connectedWallet.getBalance()
+        // Parse Balance.
+        let parsedBalance = ethers.utils.formatEther(ethers.utils.bigNumberify(balance).toString())
+        // Dispatch action to set balance in state.
+        yield put(setEthBalanceInReduxState(parsedBalance))
+        yield console.log('Balance: ', parsedBalance)
+
+        // Get Wallet Transaction History.
+        //// let txs = yield etherscanProvider.getHistory(wallet.address)
+        // Dispatch action to set transactions in state.
+        //// yield put(setEthTransactionsInReduxState(txs))
+        yield delay(5000)
+    }
 }
 
 export default function* watchGetMarketData() {
-    yield takeEvery(GET_ETH_BALANCES, handleEthBalances)
+    yield takeEvery(GET_ETH_BALANCES, setAddress)
 }
 

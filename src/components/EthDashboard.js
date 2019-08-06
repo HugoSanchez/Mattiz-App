@@ -77,7 +77,10 @@ class EthDashboard extends Component {
 
                     <View style={ balanceContainer }>
                         <Text style={ GS.bigLightNumber }>
-                            {  numeral('3,197.38').format('0,0.00') +'€' + ' ' }
+                            {   numeral(3197.38 
+                                + parseFloat((this.props.balance * this.props.currentPriceETH) 
+                                .toFixed(2))).format('0,0.00') +'€' + ' ' 
+                            }
                         </Text>                                   
                     </View>
                     <Text style={ textStyle }> ETH Balance </Text> 
@@ -156,9 +159,12 @@ const mapStateToProps = state => {
         percentageChangeETH, 
     } = state.marketData;
 
+    const { balance } = state.ethCommon;
+
     const { timeframe } = state.timeframe;
 
     return { 
+        balance,
         timeframe,
         currentPriceETH,
         historicPriceETH,
@@ -166,7 +172,4 @@ const mapStateToProps = state => {
     }
 }
 
-export default connect(
-    mapStateToProps, 
-    mapDispatchToProps)
-    (EthDashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(EthDashboard);

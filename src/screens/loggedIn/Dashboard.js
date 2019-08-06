@@ -3,6 +3,8 @@ import {
     View, 
     Text, 
     Image, 
+    Modal,
+    TouchableOpacity,
     ScrollView,
     Dimensions,
     StyleSheet 
@@ -28,7 +30,8 @@ import {
     loadMarketDataETH,
     loadMarketDataBTC,
     setTimeframeinReduxState,
-    setDashboardInReduxState
+    setDashboardInReduxState,
+    setEthRenderForm
 } from '../../actions';
 
 //General Styles & Colors
@@ -63,14 +66,16 @@ class Dashboard extends Component {
 
     render() {
 
+        console.log('Send: ', this.props.showSendForm )
+
         return (
             <View style={styles.container}>
                 <Header showBell={true} elevated={true}/>
-                { this.props.dashboard == 'total'    ? <TotalDashboard /> : null } 
+                { this.props.dashboard == 'total'    ? <TotalDashboard />   : null } 
                 { this.props.dashboard == 'savings'  ? <SavingsDashboard /> : null }
-                { this.props.dashboard == 'ether'    ? <EthDashboard /> : null }
-                { this.props.dashboard == 'bitcoin'  ? <BtcDashboard /> : null }
-                { this.props.dashboard == 'others'   ? <TotalDashboard /> : null }
+                { this.props.dashboard == 'ether'    ? <EthDashboard />     : null }
+                { this.props.dashboard == 'bitcoin'  ? <BtcDashboard />     : null }
+                { this.props.dashboard == 'others'   ? <TotalDashboard />   : null }
                 
                 <ScrollView 
                     onTouchStart={() => this.renderFloatingButton(false) }
@@ -237,19 +242,39 @@ class Dashboard extends Component {
 
                     </View>
                 </ScrollView>
+                
                 { 
                     this.state.renderButton ? 
                     <FloatingButton 
                         iconName='paper-plane' 
-                        onPress={() => this.showModal(true)} 
+                        onPress={() => this.props.setEthRenderForm(true)} 
                     />
                     : 
                     null
                 }
-                <SendFormModal 
-                    modalVisible={this.state.modalVisible}
-                    onSlideClose={() => this.setState({ modalVisible: false })}
-                />
+
+                <Modal animationType="slide" transparent={true} visible={this.props.showSendForm}>
+                    <View style={ styles.modalContainer }>
+                        <View style={ styles.topContainer }>
+                        </View>
+
+                        <View style={ styles.formContainer }>
+                            <View style={ styles.closeContainer }>
+                                <TouchableOpacity 
+                                    onPress={() => this.props.setEthRenderForm(false)}
+                                    style={ styles.closeSlider }>
+                                </TouchableOpacity>
+                            </View>
+
+                            <View style={{ flex: 6 }}>
+                                <SendFormModal
+                                    onModalClose={() => this.props.setEthRenderForm(false)} 
+                                />
+                            </View>
+
+                        </View>
+                    </View>
+                </Modal>
             </View>
         );
     }
@@ -303,12 +328,45 @@ const styles = StyleSheet.create({
     },
     buttonsText: {
         fontFamily: 'Raleway-Regular'
-    }
+    },
+    // Modal Styles.
+    modalContainer: {
+        flex: 1,
+        backgroundColor: 'rgba(0, 0, 0, 0.05)',
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25
+    },
+    topContainer: {
+        height: height * 0.59,
+        width: width,
+        backgroundColor: 'transparent',
+        borderTopLeftRadius: 25,
+        borderTopRightRadius: 25
+    },
+    formContainer: {
+        height: height * 0.41,
+        width: width, 
+        backgroundColor: '#FFF', 
+        borderRadius: 25
+    },
+    closeContainer: { 
+        flex: 0.5, 
+        alignItems: 'center', 
+        justifyContent: 'center' 
+    },
+    closeSlider: { 
+        width: width * 0.10, 
+        borderRadius: 25,
+        borderWidth: 2, 
+        borderColor: 'lightgray'
+    },
 })
 
 const mapDispatchToProps = dispatch => ({
     loadPlaidInfo: () => {
         dispatch(loadPlaidInfo())},
+    setEthRenderForm: bool => {
+        dispatch(setEthRenderForm(bool))},
     loadMarketDataETH: timeframe => {
         dispatch(loadMarketDataETH(timeframe))},
     loadMarketDataBTC: timeframe => {
@@ -320,9 +378,10 @@ const mapDispatchToProps = dispatch => ({
 });
 
 const mapStateToProps = state => {
+    const { showSendForm } = state.ethTx;
     const { dashboard } = state.dashboard;
     const { timeframe } = state.timeframe;
-    return { dashboard, timeframe }
+    return { dashboard, timeframe, showSendForm }
 }
 
 export default connect(

@@ -3,8 +3,8 @@ import {
     SET_ADDRESS,
     SET_LOADING,
     SET_CONFIRMED,
-    RESET_STATE,
-    CLEAR_TX_FORM,
+    SET_ETH_RENDER_FORM,
+    RESET_ETH_TX_STATE,
 } from '../actions/types';
 
 const INITIAL_STATE = {
@@ -26,10 +26,17 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, loading: true };
         case SET_CONFIRMED:
             return { ...state, confirmed: true, loading: false };
-        case CLEAR_TX_FORM:
-            return { ...state, address: null, amount: 0 };
-        case RESET_STATE:
-            return { ...state, INITIAL_STATE};
+        case SET_ETH_RENDER_FORM:
+            return { ...state, showSendForm: action.payload };
+        case RESET_ETH_TX_STATE:
+            return { 
+                ...state, 
+                loading: false, 
+                confirmed: false, 
+                amount: 0, 
+                address: null,
+                showSendForm: false 
+            };
         default:
             return state;
     }

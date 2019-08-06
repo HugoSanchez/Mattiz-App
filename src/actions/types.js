@@ -12,13 +12,14 @@ export const SET_TRANSACTIONS = 'set_transactions';
     // ETH TX ACTIONS // 
 export const SET_AMOUNT = 'set_amount';
 export const SET_ADDRESS = 'set_address';
-export const RESET_STATE = 'reset_state';
-export const CLEAR_TX_FORM = 'clear_tx_form';
+export const RESET_ETH_TX_STATE = 'reset_state';
+export const SET_ETH_RENDER_FORM = 'set_eth_render_form';
 export const SEND_TX = 'send_tx';
 export const SET_LOADING = 'set_loading';
 export const SET_CONFIRMED = 'set_confirmed';
 
     // COMMON ETH ACTIONS // 
+export const SET_ETH_ADDRESS = 'set_eth_address';
 export const GET_ETH_BALANCES = 'get_eth_balances';
 export const SET_ETH_BALANCES = 'set_eth_balances';
 export const SET_ETH_TRANSACTIONS = 'set_eth_transactions';

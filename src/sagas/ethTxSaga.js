@@ -2,7 +2,8 @@ import {
     takeEvery, 
     put, 
     call,
-    select 
+    select,
+    delay
 } from 'redux-saga/effects';
 
 import { 
@@ -12,6 +13,7 @@ import {
 import { 
     setLoading,
     setConfirmed, 
+    resetEthTxIntitialState
 } from '../actions';
 
 // Crypto imports
@@ -28,16 +30,17 @@ let connectedWallet = new ethers.Wallet(wallet.privateKey, Provider);
 
 // 0xCc74308838BbAcEEC226611A0C2b3fD5f4a7D8a2
 
-
-
 function* signTransaction(rawTx) {
     // Sign Transaction.
     let signedTx = yield wallet.sign(rawTx)
-    // Set Confirmed = true.
-    yield put(setConfirmed())
     // Send SignedTx.
     yield Provider.sendTransaction(signedTx)
-    
+    // Set Confirmed = true.
+    yield put(setConfirmed())
+    // Delay to display confirmation message
+    yield delay(3000)
+    // Reset original state in EthTxReducer.
+    yield put(resetEthTxIntitialState())
 }
 
 function* handleTransactionLoad() {
@@ -47,7 +50,6 @@ function* handleTransactionLoad() {
     let mdStateItems = yield select(getMDItems)
     // Get none. 
     let nonce = yield connectedWallet.getTransactionCount()
-    console.log('nonce: ', nonce)
     // Set Gas Price. 
     let gasPrice = mdStateItems.rawGasPrice
     // Parse amount. 
@@ -76,4 +78,3 @@ function* handleTxSend() {
 export default function* watchTxSend() {
     yield takeEvery(SEND_TX, handleTxSend)
 }
-

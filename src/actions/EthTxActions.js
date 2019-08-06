@@ -1,10 +1,10 @@
 import { 
     SET_AMOUNT, 
     SET_ADDRESS, 
-    RESET_STATE,
+    RESET_ETH_TX_STATE,
     SET_LOADING,
     SET_CONFIRMED,
-    CLEAR_TX_FORM,
+    SET_ETH_RENDER_FORM,
     SEND_TX 
 } from './types';
 
@@ -23,17 +23,17 @@ export const setAddressInReduxState = ( address ) => {
     };
 };
 
-export const resetIntitialState = ( ) => {
+export const resetEthTxIntitialState = ( ) => {
     return {
-        type: RESET_STATE,
+        type: RESET_ETH_TX_STATE,
         payload: null
     };
 };
 
-export const clearTxForm = ( ) => {
+export const setEthRenderForm = bool => {
     return {
-        type: CLEAR_TX_FORM,
-        payload: null
+        type: SET_ETH_RENDER_FORM,
+        payload: bool
     };
 };
 

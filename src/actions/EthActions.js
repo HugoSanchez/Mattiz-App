@@ -1,4 +1,5 @@
 import { 
+    SET_ETH_ADDRESS,
     GET_ETH_BALANCES,
     SET_ETH_BALANCES,
     SET_ETH_TRANSACTIONS
@@ -8,6 +9,13 @@ export const loadEthBalances = () => {
     return {
         type: GET_ETH_BALANCES,
         payload: null 
+    }
+}
+
+export const setEthAddress = address => {
+    return {
+        type: SET_ETH_ADDRESS,
+        payload: address 
     }
 }
 
