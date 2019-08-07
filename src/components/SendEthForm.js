@@ -15,6 +15,7 @@ import {
 
 import colors from '../constants/colors';
 import styles from '../styles';
+import NumbersKeyboard from './common/NumbersKeyboard';
 
 // Dims. 
 const width =  Dimensions.get('window').width
@@ -25,17 +26,25 @@ const numeral = require('numeral');
 
 class SendEthForm extends Component {
 
-    state = {
-        amountElevated: null,
-        toElevated: null
+    onNumberPress(number) {
+        if (this.props.amount > 0) {
+            let amount = this.props.amount.toString().concat(number)
+            this.props.setAmountInReduxState(amount)
+        } else {
+            this.props.setAmountInReduxState(number)
+        } 
+    }
+
+    onDeletePress() {
+        if (this.props.amount > 1) {
+            let amount = this.props.amount.toString().slice(0, -1)
+            this.props.setAmountInReduxState(parseFloat(amount))
+        } else {
+            this.props.setAmountInReduxState(parseFloat(0))
+        }      
     }
 
     render() {
-
-        const { 
-            amountElevated,
-            toElevated 
-        } = this.state
 
         const {
             container,
@@ -62,14 +71,13 @@ class SendEthForm extends Component {
             transactionFee,
             currentPriceETH,
             ethBallanceInDollars,
-            setAmountInReduxState,
             setAddressInReduxState
         } = this.props;
 
         return (
             <View style={[container ]}>
                 <View style={cardContainer}>
-                    <View style={cardStyle} elevated={amountElevated}>
+                    <View style={cardStyle}>
                         <View style={{ flex: 1, justifyContent: 'flex-end'}}>
                             <Text style={[ titleContainer, { marginBottom: '2%'} ]}>
                                 USD 
@@ -83,8 +91,12 @@ class SendEthForm extends Component {
                             </View>
 
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <Text style={{ fontFamily: 'Aleo-Regular', fontSize: 46, color: colors.primaryBlue }}>
-                                    0
+                                <Text style={{ 
+                                    fontFamily: 'Aleo-Regular',
+                                    alignSelf: 'center', 
+                                    fontSize: amount.length > 5 ? 38 : 46, 
+                                    color: colors.primaryBlue }}>
+                                    { amount }
                                 </Text>
                             </View>
                         
@@ -103,7 +115,7 @@ class SendEthForm extends Component {
                 </View>
 
                 <View style={{ flex: 8, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center' }}>
-                    <View style={cardStyle} elevated={toElevated}>
+                    <View style={cardStyle}>
                         <View style={{ flex: 1, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'flex-start', marginTop: '2%' }}>
                             <Text style={ styles.extraSmallLightNumber }>0.004 Eth</Text>
                         </View>
@@ -118,8 +130,6 @@ class SendEthForm extends Component {
                                     placeholderTextColor='#040026'
                                     value={ address }
                                     secureTextEntry={false}
-                                    onFocus={ () => this.setState({ toElevated: true })}
-                                    onEndEditing={ () => this.setState({ toElevated: false })}
                                     onChangeText={ value => setAddressInReduxState(value) }
                                     inputStyle={ address > 0 ? textInput : placeholder  }
                                 />
@@ -128,69 +138,21 @@ class SendEthForm extends Component {
                     </View>    
                 </View>
 
-                <View style={{ flex: 20, alignSelf: 'stretch', margin: '5%'}}>
-
-                    <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                            <Text style={ styles.smallNumberStyle }>1</Text>
-                        </View>
-
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={ styles.smallNumberStyle }>2</Text>
-                        </View>
-                                
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                            <Text style={ styles.smallNumberStyle }>3</Text>
-                        </View>
-                    </View>
-
-                    <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                            <Text style={ styles.smallNumberStyle }>4</Text>
-                        </View>
-
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={ styles.smallNumberStyle }>5</Text>
-                        </View>
-                    
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                            <Text style={ styles.smallNumberStyle }>6</Text>
-                        </View>
-                    </View>
-
-                    <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                            <Text style={ styles.smallNumberStyle }>7</Text>
-                        </View>
-
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={ styles.smallNumberStyle }>8</Text>
-                        </View>
-                    
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                            <Text style={ styles.smallNumberStyle }>9</Text>
-                        </View>
-                    </View>
-
-                    <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                        <Text style={ styles.smallNumberStyle }>,</Text>
-                        </View>
-
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                            <Text style={ styles.smallNumberStyle }>0</Text>
-                        </View>
-                    
-                        <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-                            <Icon 
-                                name={'delete'}
-                                size={20} 
-                                color={colors.primaryBlue}
-                            />
-                        </View>
-                    </View>
-
-                </View>
+                <NumbersKeyboard 
+                    flex={20}
+                    onPressOne=    {() => this.onNumberPress('1')}
+                    onPressTwo=    {() => this.onNumberPress('2')}
+                    onPressThree=  {() => this.onNumberPress('3')}
+                    onPressFour=   {() => this.onNumberPress('4')}
+                    onPressFive=   {() => this.onNumberPress('5')}
+                    onPressSix=    {() => this.onNumberPress('6')}
+                    onPressSeven=  {() => this.onNumberPress('7')}
+                    onPressEight=  {() => this.onNumberPress('8')}
+                    onPressNine=   {() => this.onNumberPress('9')}
+                    onPressZero=   {() => this.onNumberPress('0')}
+                    onPressComa=   {() => this.onNumberPress('.')}
+                    onPressDelete= {() => this.onDeletePress()}
+                />
 
                 <View style={ feeAndBalanceContainer }>
                     <View style={ feeBox }>
@@ -211,13 +173,13 @@ class SendEthForm extends Component {
                                     amount > 0 ?
                                     '   $' 
                                     + 
-                                    parseFloat((balance * currentPriceETH) 
+                                    numeral((balance * currentPriceETH) 
                                     - ((amount * currentPriceETH ) 
                                     + gasPrice * currentPriceETH * 21000))
-                                    .toFixed(2) 
+                                    .format('0,0.00') 
                                     :
                                     '   $' 
-                                    + parseFloat(balance * currentPriceETH).toFixed(2)
+                                    + numeral(balance * currentPriceETH).format('0,0.00') 
                                 }
                             </Text>
                         </Text>
@@ -234,7 +196,9 @@ class SendEthForm extends Component {
                         titleStyle={{ fontFamily: 'Raleway-Regular'}}
                     />
                     :
-                    null
+                    <View style={{ flex: 1, alignSelf: 'stretch', borderWidth: 1, borderColor: 'black'}}>
+
+                    </View>
                     }
                 </View>
             </View>
@@ -307,7 +271,7 @@ const compStyles = {
         color: colors.primaryBlue 
     },
     buttonContainer: { 
-        flex: 2, 
+        flex: 8, 
         alignItems: 'center', 
         justifyContent: 'center' 
     }

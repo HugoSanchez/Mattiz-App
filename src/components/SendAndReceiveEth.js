@@ -109,7 +109,7 @@ class SendAndReceiveEth extends Component {
         }
 
         return (
-            <View style={[ styles.container, { paddingBottom: '15%'} ]}>
+            <View style={ styles.container }>
                 <SendReceiveHeader
                     isSendSelected={ isSendSelected }
                     onRequestClose={ this.props.onRequestClose }

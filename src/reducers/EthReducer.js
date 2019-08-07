@@ -21,11 +21,10 @@ export default (state = INITIAL_STATE, action) => {
         case SET_ETH_BALANCES:
             return { ...state, balance: action.payload };
         case SET_ETH_BALANCES_IN_DOLLARS:
-            console.log('Reducer: ', action.payload)
             return { ...state, ethBallanceInDollars: action.payload };
         case SET_ETH_TRANSACTIONS:
             return { ...state, transactions: action.payload };
         default:
-            return state;
+           return state;
     }
 }

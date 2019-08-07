@@ -53,7 +53,7 @@ function* handleTransactionLoad() {
     // Set Gas Price. 
     let gasPrice = mdStateItems.rawGasPrice
     // Parse amount. 
-    let value = yield ethers.utils.parseEther(stateItems.amount)
+    let value = yield ethers.utils.parseEther(parseFloat(stateItems.amount))
     // Build tx object.
     let rawTx = {
         nonce: nonce,
