@@ -249,7 +249,10 @@ class Dashboard extends Component {
                     null
                 }
                
-                <SendModal isVisible={this.props.showSendForm} />
+                <SendModal 
+                    isVisible={this.props.showSendForm} 
+                    onRequestClose={() => this.props.setEthRenderForm(false)}
+                />
             </View>
 
         );

@@ -87,6 +87,7 @@ class SendAndReceiveEth extends Component {
                 <View style={[ styles.container, { paddingBottom: '15%'} ]}>
                     <SendReceiveHeader
                         isSendSelected={ isSendSelected }
+                        onRequestClose={ this.props.onRequestClose }
                         onSendPress={ () => this.setState({ isSendSelected: true })} 
                         onReceivePress={ () => this.setState({ isSendSelected: false })}
                     />
@@ -111,6 +112,7 @@ class SendAndReceiveEth extends Component {
             <View style={[ styles.container, { paddingBottom: '15%'} ]}>
                 <SendReceiveHeader
                     isSendSelected={ isSendSelected }
+                    onRequestClose={ this.props.onRequestClose }
                     onSendPress={ () => this.setState({ isSendSelected: true })} 
                     onReceivePress={ () => this.setState({ isSendSelected: false })}
                 />

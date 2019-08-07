@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
-import {  View, Text } from 'react-native';
+import {  View, Text, Dimensions } from 'react-native';
 import { Input } from 'react-native-elements';
+import Icon from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux';
 
 import CustomCard from './common/CustomCard';
@@ -14,6 +15,10 @@ import {
 
 import colors from '../constants/colors';
 import styles from '../styles';
+
+// Dims. 
+const width =  Dimensions.get('window').width
+const height = Dimensions.get('window').height
 
 // Number parser 
 const numeral = require('numeral');
@@ -66,46 +71,47 @@ class SendEthForm extends Component {
                 <View style={cardContainer}>
                     <View style={cardStyle} elevated={amountElevated}>
                         <View style={{ flex: 1, justifyContent: 'flex-end'}}>
-                            <Text style={ titleContainer }>
+                            <Text style={[ titleContainer, { marginBottom: '2%'} ]}>
                                 USD 
                             </Text>
                         </View>
                         <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
-                            <View style={{ flex: 1 }}>
+                            <View style={{ flex: 1, alignItems: 'flex-end', justifyContent: 'center' }}>
+                                <View style={{ height: width * 0.1, width: width * 0.14, alignItems: 'center', justifyContent: 'center', marginRight: '15%', backgroundColor: '#DDEDF7', borderRadius: 10 }}>
+                                    <Text style={ styles.extraSmallTitle }>max</Text>
+                                </View>
                             </View>
 
                             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-                                <Input 
-                                    placeholder="0"
-                                    inputContainerStyle={amountInputContainer}
-                                    placeholderTextColor='#040026'
-                                    value={ amount } 
-                                    secureTextEntry={false}
-                                    onFocus={ () => this.setState({ amountElevated: true })}
-                                    onEndEditing={ () => this.setState({ amountElevated: false })}
-                                    onChangeText={ value => setAmountInReduxState(value)}
-                                    inputStyle={{ fontFamily: 'Aleo-Regular', fontSize: 42, color: colors.primaryBlue }}
-                                />
+                                <Text style={{ fontFamily: 'Aleo-Regular', fontSize: 46, color: colors.primaryBlue }}>
+                                    0
+                                </Text>
                             </View>
                         
-                            <View style={{ flex: 1 }}>
+                            <View style={{ flex: 1, alignItems: 'flex-start', justifyContent: 'center' }}>
+                                <View style={{ height: width * 0.1, width: width * 0.14, alignItems: 'center', justifyContent: 'center', marginLeft: '15%', backgroundColor: '#DDEDF7', borderRadius: 10 }}>
+                                    <Icon 
+                                        name='refresh-cw' 
+                                        size={20} 
+                                        style={{ transform: [{ rotate: '90deg'}] }} 
+                                        color={colors.primaryBlue}
+                                    />
+                                </View>
                             </View>
                         </View>
                     </View>
                 </View>
 
-                <View style={cardContainer}>
+                <View style={{ flex: 8, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center' }}>
                     <View style={cardStyle} elevated={toElevated}>
-                        <View style={{ flex: 1.5}}>
-                            <Text style={ titleContainer }>
-                                Address: 
-                            </Text>
+                        <View style={{ flex: 1, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'flex-start', marginTop: '2%' }}>
+                            <Text style={ styles.extraSmallLightNumber }>0.004 Eth</Text>
                         </View>
-                        <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
-                            <View style={{ flex: 1 }}>
-                            </View>
-
-                            <View style={{ flex: 1, paddingRight: '20%' }}>
+                        
+                        <View style={{ flex: 1, alignSelf: 'stretch', alignItems: 'center' }}>
+                            <CustomCard 
+                                elevated={true}
+                                style={{ width: width * 0.7, height: '100%', alignSelf: 'center', borderRadius: 10 }}>
                                 <Input 
                                     placeholder="0x ..."
                                     inputContainerStyle={ addressInputContainer }
@@ -117,15 +123,12 @@ class SendEthForm extends Component {
                                     onChangeText={ value => setAddressInReduxState(value) }
                                     inputStyle={ address > 0 ? textInput : placeholder  }
                                 />
-                            </View>
-                        
-                            <View style={{ flex: 1 }}>
-                            </View>
+                            </CustomCard>
                         </View>
-                    </View>
+                    </View>    
                 </View>
 
-                <View style={{ flex: 16, alignSelf: 'stretch', margin: '5%'}}>
+                <View style={{ flex: 20, alignSelf: 'stretch', margin: '5%'}}>
 
                     <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
@@ -171,6 +174,7 @@ class SendEthForm extends Component {
 
                     <View style={{ flex: 1, flexDirection: 'row', alignSelf: 'stretch' }}>
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                        <Text style={ styles.smallNumberStyle }>,</Text>
                         </View>
 
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
@@ -178,6 +182,11 @@ class SendEthForm extends Component {
                         </View>
                     
                         <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+                            <Icon 
+                                name={'delete'}
+                                size={20} 
+                                color={colors.primaryBlue}
+                            />
                         </View>
                     </View>
 
@@ -216,12 +225,17 @@ class SendEthForm extends Component {
                 </View>
 
                 <View style={ buttonContainer }>
+                    {
+                    false ?
                     <PalmButton 
                         iconName={'check-circle'}
                         onPress={() => this.props.initiateTxSend()}
                         title={'Send Transaction!'}
                         titleStyle={{ fontFamily: 'Raleway-Regular'}}
                     />
+                    :
+                    null
+                    }
                 </View>
             </View>
         )
@@ -259,21 +273,24 @@ const compStyles = {
     feeAndBalanceContainer: { 
         flex: 2, 
         flexDirection: 'row', 
-        margin: '2%' 
+        marginLeft: '7%',
+        marginRight: '7%'
     },
     feeBox: { 
         flex: 1, 
         flexDirection: 'row',  
-        alignItems: 'center' 
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     balanceBox: { 
         flex: 1.5, 
         flexDirection: 'row',  
-        alignItems: 'center' 
+        alignItems: 'center',
+        justifyContent: 'center'
     },
     balanceTitle: [ 
         styles.extraSmallLightTitle, { 
-            marginLeft: 35 
+            marginLeft: 25 
         } 
     ],
     feeAndBalanceNumbers: [ 

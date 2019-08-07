@@ -28,75 +28,14 @@
     */
 
 
-<CustomCard style={styles.balanceBoxContainer} elevated={false}>
-                        <View style={{ flex: 6, alignSelf: 'stretch', alignItems: 'center', boderWidth: 1, borderColor: '#000' }}>
-                            <SimpleLineChart data={this.state.data}>
-                            <View style={{ alignSelf: 'stretch', alignItems: 'center', paddingTop: '5%' }}>
-                                <Text style={[ GS.extraSmallBoldNumber, { color: colors.numbersGreen } ]}>
-                                    { this.state.percentage }
-                                </Text> 
-                                {
-                                    this.state.boxItem == 'total' ?
-                                    <View style={{ alignSelf: 'stretch', alignItems: 'center' }}>
-                                        <Text style={ GS.bigLightNumber }>
-                                            {  numeral(this.props.balance).format('0,0.00') } €
-                                        </Text>                    
-                                        <Text style={styles.textStyle}> Aggregated Balance </Text>
-                                    </View>
-                                    :
-                                    null
-                                }
-                                {
-                                    this.state.boxItem == 'savings' ?
-                                    <View style={{ alignSelf: 'stretch', alignItems: 'center' }}>
-                                        <Text style={ GS.bigLightNumber }>
-                                            {  numeral(this.state.balance).format('0,0.00') } €
-                                        </Text>                    
-                                        <Text style={styles.textStyle}> Current Accounts Balance </Text>
-                                    </View>
-                                    :
-                                    null
-                                }
-                                {
-                                    this.state.boxItem == 'ether' 
-                                    ? <EthDashboard />
-                                    : null
-                                }
-                                {
-                                    this.state.boxItem == 'bitcoin' ?
-                                    <View style={{ alignSelf: 'stretch', alignItems: 'center' }}>
-                                        <Text style={ GS.bigLightNumber }>
-                                            {  numeral(this.state.btcBalance).format('0,0.00') } €
-                                        </Text>                    
-                                        <Text style={styles.textStyle}> BTC Balance </Text>
-                                        <Text style={[ GS.smallLightNumber, { marginTop: '2%'} ]}>
-                                            {  numeral(this.state.btcPrice).format('0,0.00') } €
-                                        </Text>                    
-                                        <Text style={styles.textStyle}> BTC Price </Text>
-                                    </View>
-                                    :
-                                    null
-                                }
-                            </View>
-                            </SimpleLineChart>
-                        </View>
-
-                       <TimeframeSelector
-                            onWeekPress={() => {
-                                this.props.setTimeframeinReduxState('week')
-                                this.reloadData('week')
-                            }}
-                            onMonthPress={() => {
-                                this.props.setTimeframeinReduxState('month')
-                                this.reloadData('month')
-                            }}
-                            onQuarterPress={() => {
-                                this.props.setTimeframeinReduxState('quarter')
-                                this.reloadData('quarter')
-                            }}
-                            onYearPress={() => {
-                                this.props.setTimeframeinReduxState('year')
-                                this.reloadData('year')
-                            }}
-                       />
-                    </CustomCard>
+<Input 
+    placeholder="0"
+    inputContainerStyle={amountInputContainer}
+    placeholderTextColor='#040026'
+    value={ amount } 
+    secureTextEntry={false}
+    onFocus={ () => this.setState({ amountElevated: true })}
+    onEndEditing={ () => this.setState({ amountElevated: false })}
+    onChangeText={ value => setAmountInReduxState(value)}
+    inputStyle={{ fontFamily: 'Aleo-Regular', fontSize: 46, color: colors.primaryBlue }}
+/>
