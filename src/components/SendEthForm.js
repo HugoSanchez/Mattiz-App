@@ -8,9 +8,11 @@ import CustomCard from './common/CustomCard';
 import PalmButton from './common/PalmButton';
 
 import {
+    initiateTxSend,
     setAmountInReduxState,
     setAddressInReduxState,
-    initiateTxSend,
+    setAmountInDollarsInReduxState,
+    initiateSetAmountInReduxState,
 } from '../actions'
 
 import colors from '../constants/colors';
@@ -26,26 +28,7 @@ const numeral = require('numeral');
 
 class SendEthForm extends Component {
 
-    onNumberPress(number) {
-        if (this.props.amount > 0) {
-            let amount = this.props.amount.toString().concat(number)
-            this.props.setAmountInReduxState(amount)
-        } else {
-            this.props.setAmountInReduxState(number)
-        } 
-    }
-
-    onDeletePress() {
-        if (this.props.amount > 1) {
-            let amount = this.props.amount.toString().slice(0, -1)
-            this.props.setAmountInReduxState(parseFloat(amount))
-        } else {
-            this.props.setAmountInReduxState(parseFloat(0))
-        }      
-    }
-
     render() {
-
         const {
             container,
             cardContainer,
@@ -70,9 +53,14 @@ class SendEthForm extends Component {
             gasPrice,
             transactionFee,
             currentPriceETH,
+            amountInDollars,
             ethBallanceInDollars,
             setAddressInReduxState
         } = this.props;
+
+        let amountInEth = numeral(amountInDollars / currentPriceETH ).format('0.0,000')
+        let currentBalance = numeral(balance * currentPriceETH).format('0,0.00') 
+        let remainingBalance = numeral(currentBalance - (amountInDollars + transactionFee)).format('0,0.00') 
 
         return (
             <View style={[container ]}>
@@ -94,9 +82,9 @@ class SendEthForm extends Component {
                                 <Text style={{ 
                                     fontFamily: 'Aleo-Regular',
                                     alignSelf: 'center', 
-                                    fontSize: amount.length > 5 ? 38 : 46, 
+                                    fontSize: amountInDollars.length > 5 ? 38 : 46, 
                                     color: colors.primaryBlue }}>
-                                    { amount }
+                                    { amountInDollars }
                                 </Text>
                             </View>
                         
@@ -117,7 +105,9 @@ class SendEthForm extends Component {
                 <View style={{ flex: 8, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'center' }}>
                     <View style={cardStyle}>
                         <View style={{ flex: 1, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'flex-start', marginTop: '2%' }}>
-                            <Text style={ styles.extraSmallLightNumber }>0.004 Eth</Text>
+                            <Text style={ styles.extraSmallLightNumber }>
+                                { amount + ' Eth'} 
+                            </Text>
                         </View>
                         
                         <View style={{ flex: 1, alignSelf: 'stretch', alignItems: 'center' }}>
@@ -140,18 +130,18 @@ class SendEthForm extends Component {
 
                 <NumbersKeyboard 
                     flex={20}
-                    onPressOne=    {() => this.onNumberPress('1')}
-                    onPressTwo=    {() => this.onNumberPress('2')}
-                    onPressThree=  {() => this.onNumberPress('3')}
-                    onPressFour=   {() => this.onNumberPress('4')}
-                    onPressFive=   {() => this.onNumberPress('5')}
-                    onPressSix=    {() => this.onNumberPress('6')}
-                    onPressSeven=  {() => this.onNumberPress('7')}
-                    onPressEight=  {() => this.onNumberPress('8')}
-                    onPressNine=   {() => this.onNumberPress('9')}
-                    onPressZero=   {() => this.onNumberPress('0')}
-                    onPressComa=   {() => this.onNumberPress('.')}
-                    onPressDelete= {() => this.onDeletePress()}
+                    onPressOne=    {() => this.props.initiateSetAmountInReduxState('1')}
+                    onPressTwo=    {() => this.props.initiateSetAmountInReduxState('2')}
+                    onPressThree=  {() => this.props.initiateSetAmountInReduxState('3')}
+                    onPressFour=   {() => this.props.initiateSetAmountInReduxState('4')}
+                    onPressFive=   {() => this.props.initiateSetAmountInReduxState('5')}
+                    onPressSix=    {() => this.props.initiateSetAmountInReduxState('6')}
+                    onPressSeven=  {() => this.props.initiateSetAmountInReduxState('7')}
+                    onPressEight=  {() => this.props.initiateSetAmountInReduxState('8')}
+                    onPressNine=   {() => this.props.initiateSetAmountInReduxState('9')}
+                    onPressZero=   {() => this.props.initiateSetAmountInReduxState('0')}
+                    onPressComa=   {() => this.props.initiateSetAmountInReduxState('.')}
+                    onPressDelete= {() => this.props.initiateSetAmountInReduxState('delete')}
                 />
 
                 <View style={ feeAndBalanceContainer }>
@@ -159,7 +149,7 @@ class SendEthForm extends Component {
                         <Text style={ titleContainer }>
                             Fee:  
                                 <Text style={ feeAndBalanceNumbers }>
-                                    { amount > 0 ? '   $' + transactionFee : '   $' + 0.000 }
+                                    { amountInEth > 0 ? '   $' + transactionFee : '   $' + 0.000 }
                                 </Text>
                         </Text>
                     </View>
@@ -169,17 +159,9 @@ class SendEthForm extends Component {
                             Balance:  
                                 <Text style={ feeAndBalanceNumbers }>
                                 {   
-                                    // This is ugly AF, but don't know better so far.
-                                    amount > 0 ?
-                                    '   $' 
-                                    + 
-                                    numeral((balance * currentPriceETH) 
-                                    - ((amount * currentPriceETH ) 
-                                    + gasPrice * currentPriceETH * 21000))
-                                    .format('0,0.00') 
-                                    :
-                                    '   $' 
-                                    + numeral(balance * currentPriceETH).format('0,0.00') 
+                                    amountInDollars > 0 
+                                    ? '   $' + remainingBalance 
+                                    : '   $'  + currentBalance 
                                 }
                             </Text>
                         </Text>
@@ -278,13 +260,14 @@ const compStyles = {
 };
 
 const MapStateToProps = state => {
-    const { amount, address } = state.ethTx;
+    const { amount, amountInDollars, address } = state.ethTx;
     const { balance, ethBallanceInDollars } = state.ethCommon;
     const { gasPrice, transactionFee, currentPriceETH } = state.marketData
     return {
         amount,
         address,
         balance,
+        amountInDollars,
         ethBallanceInDollars,
         transactionFee,
         gasPrice,
@@ -301,6 +284,18 @@ const mapDispatchtoProps = dispatch => ({
 
     setAddressInReduxState: address => {
         dispatch(setAddressInReduxState(address))},
+
+    setAmountInDollarsInReduxState: amount => {
+        dispatch(setAmountInDollarsInReduxState(amount))
+    },
+
+    setAmountInDollarsInReduxState: amount => {
+        dispatch(setAmountInDollarsInReduxState(amount))
+    },
+
+    initiateSetAmountInReduxState: amount => {
+        dispatch(initiateSetAmountInReduxState(amount))
+    }
 });
 
 export default connect(MapStateToProps, mapDispatchtoProps)(SendEthForm);

@@ -39,3 +39,5 @@
     onChangeText={ value => setAmountInReduxState(value)}
     inputStyle={{ fontFamily: 'Aleo-Regular', fontSize: 46, color: colors.primaryBlue }}
 />
+
+{ numeral(amountInDollars / currentPriceETH ).format('0.0,00') + ' Eth'} 

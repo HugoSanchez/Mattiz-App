@@ -17,6 +17,8 @@ export const SET_ETH_RENDER_FORM = 'set_eth_render_form';
 export const SEND_TX = 'send_tx';
 export const SET_LOADING = 'set_loading';
 export const SET_CONFIRMED = 'set_confirmed';
+export const SET_AMOUNT_IN_DOLLARS = 'set_amount_in_dollars';
+export const INITIATE_SET_AMOUNT = 'initiate_set_amount';
 
     // COMMON ETH ACTIONS // 
 export const SET_ETH_ADDRESS = 'set_eth_address';
