@@ -23,7 +23,7 @@ const INITIAL_STATE = {
 export default (state = INITIAL_STATE, action) => {
     switch (action.type) {
         case SET_AMOUNT:
-            return { ...state, amount: action.payload };
+            return { ...state, amountInEth: action.payload };
         case SET_ADDRESS:
             return { ...state, address: action.payload };
         case SET_LOADING:

@@ -1,31 +1,25 @@
 import React, { Component } from 'react';
-import {  View, Text, Dimensions } from 'react-native';
+import { View, Text, Dimensions } from 'react-native';
 import { Input } from 'react-native-elements';
 import Icon from 'react-native-vector-icons/Feather';
 import { connect } from 'react-redux';
 
 import CustomCard from './common/CustomCard';
 import PalmButton from './common/PalmButton';
+import FeeAndBalanceCard from './common/FeeAndBalanceCard';
+import NumbersKeyboard from './common/NumbersKeyboard';
 
 import {
     initiateTxSend,
-    setAmountInReduxState,
     setAddressInReduxState,
-    setAmountInDollarsInReduxState,
     initiateSetAmountInReduxState,
 } from '../actions'
 
 import colors from '../constants/colors';
 import styles from '../styles';
-import NumbersKeyboard from './common/NumbersKeyboard';
 
 // Dims. 
 const width =  Dimensions.get('window').width
-const height = Dimensions.get('window').height
-
-// Number parser 
-const numeral = require('numeral');
-
 class SendEthForm extends Component {
 
     render() {
@@ -37,11 +31,6 @@ class SendEthForm extends Component {
             textInput,
             placeholder,
             addressInputContainer,
-            feeAndBalanceContainer,
-            feeAndBalanceNumbers,
-            feeBox,
-            balanceBox,
-            balanceTitle,
             buttonContainer,
         } = compStyles;
 
@@ -139,29 +128,10 @@ class SendEthForm extends Component {
                     onPressDelete= {() => this.props.initiateSetAmountInReduxState('delete')}
                 />
 
-                <View style={ feeAndBalanceContainer }>
-                    <View style={ feeBox }>
-                        <Text style={ titleContainer }>
-                            Fee:  
-                                <Text style={ feeAndBalanceNumbers }>
-                                    { amountInEth > 0 ? '   $' + transactionFee : '   $' + 0.000 }
-                                </Text>
-                        </Text>
-                    </View>
-
-                    <View style={ balanceBox }>
-                        <Text style={ balanceTitle }>
-                            Balance:  
-                                <Text style={ feeAndBalanceNumbers }>
-                                {   
-                                    amountInDollars > 0 
-                                    ? '   $' + remainingBalanceAfterFees
-                                    : '   $' + ethBallanceInDollars 
-                                }
-                            </Text>
-                        </Text>
-                    </View>
-                </View>
+                <FeeAndBalanceCard
+                    fee={ amountInEth > 0 ? transactionFee : 0.000 }
+                    balance={ amountInDollars > 0 ? remainingBalanceAfterFees : ethBallanceInDollars }
+                />
 
                 <View style={ buttonContainer }>
                     {
@@ -173,7 +143,7 @@ class SendEthForm extends Component {
                         titleStyle={{ fontFamily: 'Raleway-Regular'}}
                     />
                     :
-                    <View style={{ flex: 1, alignSelf: 'stretch', borderWidth: 1, borderColor: 'black'}}>
+                    <View style={{ flex: 1, alignSelf: 'stretch' }}>
 
                     </View>
                     }
@@ -207,33 +177,6 @@ const compStyles = {
         borderBottomColor: 'transparent', 
         marginTop: 5 
     },
-    feeAndBalanceContainer: { 
-        flex: 2, 
-        flexDirection: 'row', 
-        marginLeft: '7%',
-        marginRight: '7%'
-    },
-    feeBox: { 
-        flex: 1, 
-        flexDirection: 'row',  
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    balanceBox: { 
-        flex: 1.5, 
-        flexDirection: 'row',  
-        alignItems: 'center',
-        justifyContent: 'center'
-    },
-    balanceTitle: [ 
-        styles.extraSmallLightTitle, { 
-            marginLeft: 25 
-        } 
-    ],
-    feeAndBalanceNumbers: [ 
-        styles.extraSmallRegularNumber, { 
-        } 
-    ],
     placeholder: {
         fontFamily: 'Aleo-Light', 
         fontSize: 18 
@@ -251,9 +194,10 @@ const compStyles = {
 };
 
 const MapStateToProps = state => {
-    const { amountInEth, amountInDollars, address, remainingBalance } = state.ethTx;
+    const { transactionFee } = state.marketData;
     const { ethBallanceInDollars } = state.ethCommon;
-    const { transactionFee } = state.marketData
+    const { amountInEth, amountInDollars, address, remainingBalance } = state.ethTx;
+    
     return {
         address,
         amountInEth,

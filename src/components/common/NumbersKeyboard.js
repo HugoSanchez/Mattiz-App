@@ -132,7 +132,9 @@ const compStyles = {
     container: { 
         flex: 20, 
         alignSelf: 'stretch',
-        margin: '5%'
+        marginTop: '5%',
+        marginLeft: '5%',
+        marginRight: '5%',
     },
     rowStyle: { 
         flex: 1, 
