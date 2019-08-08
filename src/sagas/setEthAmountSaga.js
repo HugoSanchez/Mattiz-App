@@ -11,12 +11,18 @@ import {
 import { 
     setEthAmount,
     setEthAmountInDollars,
+    setEthRemainingBalance
 } from '../actions';
 
-const getTxItems = state => state.ethTx;
-const getMDItems = state => state.marketData;
+const getTxItems  = state => state.ethTx;
+const getMDItems  = state => state.marketData;
+const getEthItems = state => state.ethCommon
 
 function* handleScenarioFork({ payload }) {
+    // Get EthReducer state items.
+    let ethStateItems = yield select(getEthItems)
+    // Get current ETH price from state.
+    let currentBalance = ethStateItems.balance
     // Get MarketDataReducer state items.
     let mdStateItems = yield select(getMDItems)
     // Get current ETH price from state.
@@ -26,18 +32,22 @@ function* handleScenarioFork({ payload }) {
     // Get current amount in dollars.
     let amountInDollars = stateItems.amountInDollars.toString()
 
-    if (payload === 'delete') { yield* handleDelete(amountInDollars, currentPriceETH) } 
-    else { yield* handleNumbers(amountInDollars, currentPriceETH, payload) }
+    if (payload === 'delete') { 
+        yield* handleDelete(amountInDollars, currentPriceETH, currentBalance) } 
+    else { 
+        yield* handleNumbers(amountInDollars, currentPriceETH, currentBalance, payload) }
     
 }
 
-function* handleDelete(amountInDollars, currentPriceETH) {
+function* handleDelete(amountInDollars, currentPriceETH, currentBalance) {
     // If amount length === 1, then deleting sets both amounts, back to O.
     if (amountInDollars.length === 1) { 
         // First, set the dollar amount,
         yield put(setEthAmountInDollars('0')) 
-        // and the Eth amount.
+        // set the Eth amount,
         yield put(setEthAmount(0))
+        // and set remaining Eth Balance in Dollars.
+        yield put(setEthRemainingBalance(currentBalance * currentPriceETH))
     }
     // Otherwise,
     else {
@@ -47,12 +57,14 @@ function* handleDelete(amountInDollars, currentPriceETH) {
         yield put(setEthAmountInDollars(newAmountInDollars))
         // Also, calculate and parse the new corresponding ETH amount,
         let newEthAmount = parseFloat((newAmountInDollars) / currentPriceETH).toFixed(1)
-        // And set the resulting amount into redux.
+        // set the resulting amount into redux.
         yield put(setEthAmount(newEthAmount))
+        // and set remaining Eth Balance in Dollars.
+        yield put(setEthRemainingBalance(currentBalance * currentPriceETH - newAmountInDollars))
     }      
 }
 
-function* handleNumbers(amountInDollars, currentPriceETH, payload) {
+function* handleNumbers(amountInDollars, currentPriceETH, currentBalance, payload) {
     // In case an amount has already been set, 
     // and its lenght is greater than one:
     if (amountInDollars > 0 || amountInDollars.length > 1) {
@@ -67,8 +79,10 @@ function* handleNumbers(amountInDollars, currentPriceETH, payload) {
             yield put(setEthAmountInDollars(newAmountInDollars)) 
             // Also, calculate and parse the new corresponding ETH amount,
             let newEthAmount = parseFloat((newAmountInDollars) / currentPriceETH).toFixed(4)
-            // And set the resulting amount into redux.
+            // set the resulting amount into redux,
             yield put(setEthAmount(newEthAmount))
+            // and set remaining Eth Balance in Dollars.
+            yield put(setEthRemainingBalance(currentBalance * currentPriceETH - newAmountInDollars))
         }
     // Else, if the payload is a dot,
     } else if ( payload == '.') {
@@ -78,17 +92,20 @@ function* handleNumbers(amountInDollars, currentPriceETH, payload) {
         yield put(setEthAmountInDollars('0.'))
         // Also, calculate and parse the new corresponding ETH amount,
         let newEthAmount = parseFloat((0) / currentPriceETH).toFixed(0)
-        // And set the resulting amount into redux.
+        // and set the resulting amount into redux.
         yield put(setEthAmount(newEthAmount))
     // Otherwise, amount is == 0, 
     } else {
-        // so you just set the amount to be the payload.
-        yield put(setEthAmountInDollars(payload)) 
+        // so you just set the amount to be the payload,
+        yield put(setEthAmountInDollars(payload))
+        // set condicional decimals,
         let decimals = payload == 0 ? 0 : 4;
         // Also, calculate and parse the new corresponding ETH amount,
         let newEthAmount = parseFloat((payload) / currentPriceETH).toFixed(decimals)
-        // And set the resulting amount into redux.
+        // And set the resulting amount into redux,
         yield put(setEthAmount(newEthAmount))
+        // and set remaining Eth Balance in Dollars.
+        yield put(setEthRemainingBalance(currentBalance * currentPriceETH - payload))
 
     }   
 }

@@ -4,6 +4,7 @@ import {
     SET_ADDRESS, 
     SET_LOADING,
     SET_CONFIRMED,
+    SET_REMAINING_BALANCE,
     SET_AMOUNT_IN_DOLLARS,
     SET_ETH_RENDER_FORM,
     RESET_ETH_TX_STATE,
@@ -27,6 +28,13 @@ export const setEthAmount = amount => {
 export const setEthAmountInDollars = amount => {
     return {
         type: SET_AMOUNT_IN_DOLLARS,
+        payload: amount
+    };
+};
+
+export const setEthRemainingBalance = amount => {
+    return {
+        type: SET_REMAINING_BALANCE,
         payload: amount
     };
 };

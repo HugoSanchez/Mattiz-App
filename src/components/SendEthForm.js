@@ -36,7 +36,6 @@ class SendEthForm extends Component {
             titleContainer,
             textInput,
             placeholder,
-            amountInputContainer,
             addressInputContainer,
             feeAndBalanceContainer,
             feeAndBalanceNumbers,
@@ -47,23 +46,19 @@ class SendEthForm extends Component {
         } = compStyles;
 
         const {
-            amount,
             address,
-            balance,
-            gasPrice,
-            transactionFee,
-            currentPriceETH,
+            amountInEth,
             amountInDollars,
+            transactionFee,
+            remainingBalance,
             ethBallanceInDollars,
             setAddressInReduxState
         } = this.props;
 
-        let amountInEth = numeral(amountInDollars / currentPriceETH ).format('0.0,000')
-        let currentBalance = numeral(balance * currentPriceETH).format('0,0.00') 
-        let remainingBalance = numeral(currentBalance - (amountInDollars + transactionFee)).format('0,0.00') 
+        const remainingBalanceAfterFees = parseFloat(remainingBalance - transactionFee).toFixed(2)
 
         return (
-            <View style={[container ]}>
+            <View style={ container }>
                 <View style={cardContainer}>
                     <View style={cardStyle}>
                         <View style={{ flex: 1, justifyContent: 'flex-end'}}>
@@ -106,7 +101,7 @@ class SendEthForm extends Component {
                     <View style={cardStyle}>
                         <View style={{ flex: 1, alignSelf: 'stretch', alignItems: 'center', justifyContent: 'flex-start', marginTop: '2%' }}>
                             <Text style={ styles.extraSmallLightNumber }>
-                                { amount + ' Eth'} 
+                                { amountInEth + ' Eth'} 
                             </Text>
                         </View>
                         
@@ -160,8 +155,8 @@ class SendEthForm extends Component {
                                 <Text style={ feeAndBalanceNumbers }>
                                 {   
                                     amountInDollars > 0 
-                                    ? '   $' + remainingBalance 
-                                    : '   $'  + currentBalance 
+                                    ? '   $' + remainingBalanceAfterFees
+                                    : '   $' + ethBallanceInDollars 
                                 }
                             </Text>
                         </Text>
@@ -208,10 +203,6 @@ const compStyles = {
             marginLeft: 0
         } 
     ],
-    amountInputContainer: {
-        borderBottomColor: 'transparent',
-        marginLeft: '35%', 
-    },
     addressInputContainer: { 
         borderBottomColor: 'transparent', 
         marginTop: 5 
@@ -260,18 +251,16 @@ const compStyles = {
 };
 
 const MapStateToProps = state => {
-    const { amount, amountInDollars, address } = state.ethTx;
-    const { balance, ethBallanceInDollars } = state.ethCommon;
-    const { gasPrice, transactionFee, currentPriceETH } = state.marketData
+    const { amountInEth, amountInDollars, address, remainingBalance } = state.ethTx;
+    const { ethBallanceInDollars } = state.ethCommon;
+    const { transactionFee } = state.marketData
     return {
-        amount,
         address,
-        balance,
+        amountInEth,
         amountInDollars,
         ethBallanceInDollars,
-        transactionFee,
-        gasPrice,
-        currentPriceETH,
+        remainingBalance,
+        transactionFee
     };
 }
 
@@ -279,19 +268,8 @@ const mapDispatchtoProps = dispatch => ({
     initiateTxSend: () => {
         dispatch(initiateTxSend())},
 
-    setAmountInReduxState: amount => {
-        dispatch(setAmountInReduxState(amount))},
-
     setAddressInReduxState: address => {
         dispatch(setAddressInReduxState(address))},
-
-    setAmountInDollarsInReduxState: amount => {
-        dispatch(setAmountInDollarsInReduxState(amount))
-    },
-
-    setAmountInDollarsInReduxState: amount => {
-        dispatch(setAmountInDollarsInReduxState(amount))
-    },
 
     initiateSetAmountInReduxState: amount => {
         dispatch(initiateSetAmountInReduxState(amount))
