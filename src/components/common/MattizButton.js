@@ -3,6 +3,8 @@ import { View } from 'react-native';
 import { Button } from 'react-native-elements';
 import LinearGradient from 'react-native-linear-gradient';
 
+import colors from '../../constants/colors';
+
 // Props:
 // @containerStyles: -Optional- Wrapping container styles.
 // @title: -Required- Text to be displayed.
@@ -22,7 +24,7 @@ const MattizButton = props => {
                 onPress={ props.onPress }
                 ViewComponent={ LinearGradient }
                 linearGradientProps={{
-                    colors: ['rgba(4, 0, 38, 0.1)', props.linearColor || 'rgba(4, 0, 38, 0.1)'],
+                    colors: ['#DDEDF7', props.linearColor || '#DDEDF7'],
                     start: { x: 0, y: 0.5 },
                     end: { x: 1, y: 0.5 },
                 }}
@@ -33,9 +35,10 @@ const MattizButton = props => {
 
 const styles = {
     container: {
+        alignSelf: 'stretch',
         margin: 10, 
         borderRadius: 12,
-        backgroundColor: '#FDFFFE',
+        backgroundColor: '#FFFF',
         shadowColor: '#000',
         shadowOffset: { width: 2, height: 10 },
         shadowOpacity: 0.29,
@@ -43,7 +46,7 @@ const styles = {
         elevation: 22,
     },
     titleStyle: {
-        color: 'white', 
+        color: colors.primaryBlue, 
         fontFamily: 'Raleway-Regular'
     },
     buttonStyle: {

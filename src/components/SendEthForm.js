@@ -3,6 +3,7 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 import PalmButton from './common/PalmButton';
+import MattizButton from './common/MattizButton';
 import AddressInput from './common/AddressInput';
 import FeeAndBalanceCard from './common/FeeAndBalanceCard';
 import NumbersKeyboard from './common/NumbersKeyboard';
@@ -83,9 +84,10 @@ class SendEthForm extends Component {
                         titleStyle={{ fontFamily: 'Raleway-Regular'}}
                     />
                     :
-                    <View style={{ flex: 1, alignSelf: 'stretch' }}>
-
-                    </View>
+                    <MattizButton
+                        title={'Scann QR Code'}
+                        onPress={() => console.log('Hello')}
+                    />
                     }
                 </View>
             </View>
@@ -100,8 +102,7 @@ const compStyles = {
     },
     buttonContainer: { 
         flex: 8, 
-        alignItems: 'center', 
-        justifyContent: 'center' 
+        justifyContent: 'flex-start',
     }
 };
 

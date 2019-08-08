@@ -15,16 +15,11 @@ const FloatingButton = props => {
                 activeOpacity={0.7}
                 onPress={ props.onPress }
                 style={styles.buttonStyle}>
-                    <ImageBackground 
-                        source={require('../../assets/FloatingButton-Leaf.png')} 
-                        imageStyle={{borderRadius: 25}}
-                        style={{width: '100%', height: '100%', resizeMode: 'cover', alignItems: 'center', justifyContent: 'center' }}>
-                            <Icon 
-                                name={ props.iconName } 
-                                size={27} 
-                                color={'#E7F7DD'} 
-                                style={styles.iconStyle} /> 
-                </ImageBackground>
+                    <Icon 
+                        name={ props.iconName } 
+                        size={27} 
+                        color={'#DDEDF7'} 
+                        style={styles.iconStyle} /> 
             </TouchableOpacity>
         </View>
     );
