@@ -40,4 +40,10 @@
     inputStyle={{ fontFamily: 'Aleo-Regular', fontSize: 46, color: colors.primaryBlue }}
 />
 
-{ numeral(amountInDollars / currentPriceETH ).format('0.0,00') + ' Eth'} 
+<SendModalAmountHeader
+                    mainCurrency={'USD'}
+                    onPressMax={() => null} // To do. 
+                    amount={amountInDollars}
+                    subCurrencyAmount={amountInEth}
+                    subCurrencyDenomination={' Eth'}
+                />
