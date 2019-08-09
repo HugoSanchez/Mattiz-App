@@ -37,6 +37,7 @@ import {
 //General Styles & Colors
 import colors from '../../constants/colors';
 
+
 // Dims. 
 const width =  Dimensions.get('window').width
 const height = Dimensions.get('window').height
@@ -64,6 +65,7 @@ class Dashboard extends Component {
     
 
     render() {
+        console.log( this.props )
         return (
             <View style={styles.container}>
                 <Header showBell={true} elevated={true}/>
@@ -243,7 +245,7 @@ class Dashboard extends Component {
                     this.state.renderButton ? 
                     <FloatingButton 
                         iconName='paper-plane' 
-                        onPress={() => this.props.setEthRenderForm(true)} 
+                        onPress={() => this.props.navigation.navigate('QrCodeScanner')} // this.props.setEthRenderForm(true)
                     />
                     : 
                     null

@@ -27,23 +27,3 @@
     this.setState({ mnemonic, address: decrypted.address})
     */
 
-
-<Input 
-    placeholder="0"
-    inputContainerStyle={amountInputContainer}
-    placeholderTextColor='#040026'
-    value={ amount } 
-    secureTextEntry={false}
-    onFocus={ () => this.setState({ amountElevated: true })}
-    onEndEditing={ () => this.setState({ amountElevated: false })}
-    onChangeText={ value => setAmountInReduxState(value)}
-    inputStyle={{ fontFamily: 'Aleo-Regular', fontSize: 46, color: colors.primaryBlue }}
-/>
-
-<SendModalAmountHeader
-                    mainCurrency={'USD'}
-                    onPressMax={() => null} // To do. 
-                    amount={amountInDollars}
-                    subCurrencyAmount={amountInEth}
-                    subCurrencyDenomination={' Eth'}
-                />

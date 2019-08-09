@@ -18,6 +18,7 @@ import {
 class SendEthForm extends Component {
 
     render() {
+
         const {
             container,
             buttonContainer,
@@ -86,7 +87,7 @@ class SendEthForm extends Component {
                     :
                     <MattizButton
                         title={'Scann QR Code'}
-                        onPress={() => console.log('Hello')}
+                        onPress={() => this.props.navigation.navigate('QrCodeScanner')}
                     />
                     }
                 </View>

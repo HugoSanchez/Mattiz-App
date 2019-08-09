@@ -21,10 +21,6 @@ const FeeAndBalanceCard = props => {
         extraSmallRegularNumber
     } = styles;
 
-
-    console.log(props.fee)
-    console.log(props.balance)
-    
     return (
         <View style={ container }>
             <View style={ feeBox }>
