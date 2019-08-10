@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import { View, Image, StyleSheet, } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
+
+import colors from '../../constants/colors';
  
 // Auth Actions & Functions
 import { getTokenFromMemory, identifyUser } from '../../api/auth';
@@ -43,8 +45,8 @@ class InitialLoadingScreen extends Component {
                         style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
                     >
                         <Image 
-                            source={require('../../assets/Palm-Leaf-Logo.png')} 
-                            style={{ width: 110, height: 55, marginBottom: '10%' }}
+                            source={require('../../assets/Mattiz-Didot-Blue-Nacked.png')} 
+                            style={{ width: 165, height: 55, marginBottom: '10%' }}
                         />
                     </Animatable.View>
             </View>
@@ -64,7 +66,7 @@ const MapStateToProps = state => {
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        backgroundColor: '#FFF',
+        backgroundColor: colors.paletteWhite,
         justifyContent: 'center',
         alignItems: 'center'
     },

@@ -56,6 +56,7 @@ class SignUpForm extends Component {
 
         const { 
             container, 
+            logoContainer,
             input, 
             viewStyle, 
             textInput, 
@@ -75,21 +76,24 @@ class SignUpForm extends Component {
             return (
                 <View style={ container }>
                     <ImageBackground 
-                        source={require('../../assets/LoginForm.png')} 
-                        style={{ width:'100%', height:'100%', flex: 1 }}
-                        resizeMode='cover'
+                        source={require('../../assets/Background.png')} 
+                        style={{ width: '100%', height: '100%', flex: 1 }}
+                        resizeMode={'cover'}
                     >
+                    <View style={ logoContainer }>
                         <Image 
-                            source={require('../../assets/Palm-Logo-Self.png')} 
+                            source={require('../../assets/Mattiz-Didot-Blue-Full.png')} 
                             style={ imageStyle }
                         />
-                        <View style={{ marginTop: 500 }}>
-                            <PalmButton 
-                                iconName={'log-in'}
-                                onPress={() => this.setState({ formStatus: 'username' })}
-                                title={'Get on board!'}
-                            />
-                        </View>
+                    </View>
+                    
+                    <View style={{ position: 'absolute', bottom: '2%', width: '95%', alignSelf: 'center' }}>
+                        <PalmButton 
+                            backgroundColor={colors.paletteWhite}
+                            onPress={() => this.setState({ formStatus: 'username' })}
+                            title={'Sign Up'}
+                        />
+                    </View>
                     </ImageBackground>
                 </View>
             );
@@ -100,19 +104,20 @@ class SignUpForm extends Component {
             return (
                 <View style={ container }>
                     <ImageBackground 
-                        source={require('../../assets/LoginForm.png')} 
-                        style={{ width:'100%', height:'100%' }}
-                        resizeMode='cover'
+                        source={require('../../assets/Background.png')} 
+                        style={{ width: '100%', height: '100%', flex: 1 }}
+                        resizeMode={'cover'}
                     >
-                        <Image 
-                            source={require('../../assets/Palm-Logo-Self.png')} 
-                            style={ imageStyle }
-                        />
+                        <View style={ logoContainer }>
+                            <Image 
+                                source={require('../../assets/Mattiz-Didot-Blue-Full.png')} 
+                                style={ imageStyle }
+                            />
+                        </View>
                         <View style={ viewStyle }>
                             <Input 
                                 placeholder="What's your name?"
-                                inputContainerStyle={{ borderBottomWidth: 0, marginTop: 20 }}
-                                placeholderTextColor='#464646'
+                                placeholderTextColor={colors.darkGray}
                                 value={this.state.username}
                                 onChangeText={ value => this.setState({ username: value }) }
                                 fontStyle={ 'italic' }
@@ -121,7 +126,7 @@ class SignUpForm extends Component {
                                 style={ input }
                             />
                         </View>
-                        <View style={{ marginTop: this.state.isFocused ? 0 : 320}}>
+                        <View style={{ alignSelf: 'center', position: 'absolute', top: this.state.isFocused ? '50%' : '90%'}}>
                             <PalmButton 
                                 iconName={'arrow-right'}
                                 onPress={() => this.setState({ formStatus: 'password' })}
@@ -138,18 +143,19 @@ class SignUpForm extends Component {
             return (
                 <View style={ container }>
                     <ImageBackground 
-                        source={require('../../assets/LoginForm.png')} 
-                        style={{ width:'100%', height:'100%', flex: 1 }}
-                        resizeMode='cover'
+                        source={require('../../assets/Background.png')} 
+                        style={{ width: '100%', height: '100%', flex: 1 }}
+                        resizeMode={'cover'}
                     >
-                        <Image 
-                            source={require('../../assets/Palm-Logo-Self.png')} 
-                            style={ imageStyle }
-                        />
+                        <View style={ logoContainer }>
+                            <Image 
+                                source={require('../../assets/Mattiz-Didot-Blue-Full.png')} 
+                                style={ imageStyle }
+                            />
+                        </View>
                         <View style={ viewStyle }>
                             <Input 
                                 placeholder="Choose your password"
-                                inputContainerStyle={{ borderBottomWidth: 0, marginTop: 20 }}
                                 placeholderTextColor='#464646'
                                 value={this.state.password}
                                 secureTextEntry={true}
@@ -160,7 +166,7 @@ class SignUpForm extends Component {
                                 style={ input }
                             />
                         </View>
-                        <View style={{ marginTop: this.state.isFocused ? 0 : 320}}>
+                        <View style={{ alignSelf: 'center', position: 'absolute', top: this.state.isFocused ? '50%' : '90%'}}>
                             <PalmButton 
                                 iconName={'arrow-right'}
                                 onPress={() => this.setState({ formStatus: 'confirm' })}
@@ -177,18 +183,19 @@ class SignUpForm extends Component {
             return (
                 <View style={ container }>
                     <ImageBackground 
-                        source={require('../../assets/LoginForm.png')} 
-                        style={{ width:'100%', height:'100%', flex: 1 }}
-                        resizeMode='cover'
+                        source={require('../../assets/Background.png')} 
+                        style={{ width: '100%', height: '100%', flex: 1 }}
+                        resizeMode={'cover'}
                     >
-                        <Image 
-                            source={require('../../assets/Palm-Logo-Self.png')} 
-                            style={ imageStyle }
-                        />
+                        <View style={ logoContainer }>
+                            <Image 
+                                source={require('../../assets/Mattiz-Didot-Blue-Full.png')} 
+                                style={ imageStyle }
+                            />
+                        </View>
                         <View style={ viewStyle }>
                             <Input 
                                 placeholder="Confirm password"
-                                inputContainerStyle={{ borderBottomWidth: 0, marginTop: 20 }}
                                 placeholderTextColor='#464646'
                                 value={this.state.confirmPassword}
                                 secureTextEntry={true}
@@ -199,7 +206,7 @@ class SignUpForm extends Component {
                                 style={ input }
                             />
                         </View>
-                        <View style={{ marginTop: this.state.isFocused ? 0 : 320}}>
+                        <View style={{ alignSelf: 'center', position: 'absolute', top: this.state.isFocused ? '50%' : '90%'}}>
                             <PalmButton 
                                 iconName={'check-circle'}
                                 onPress={() => this.onButtonPress()}
@@ -219,30 +226,36 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: '#FFF'
     },
+    logoContainer: { 
+        position: 'absolute', 
+        top: '10%', 
+        width: '95%', 
+        alignSelf: 'center' 
+    },
     viewStyle: {
+        position: 'absolute',
+        top: '40%',
         flexDirection: 'row',
         marginLeft: '10%',
         marginRight: '10%',
-        marginTop: '35%', 
-        marginBottom: '2%',
         height: '5%',
         borderBottomWidth: 1, 
         borderBottomColor: 'gray',
     },
     placeholder: {
-        fontFamily: 'Raleway-Light', 
+        fontFamily: 'Rajdhani-Light', 
         fontSize: 18 
     },
     textInput: { 
-        fontFamily: 'Raleway-LightItalic', 
-        fontSize: 18, 
+        fontFamily: 'Rajdhani-Regular', 
+        fontSize: 20, 
         color: colors.primaryBlue 
     },
     imageStyle: { 
-        width: 200, 
-        height: 120, 
-        alignSelf: 'center', 
-        marginTop: '20%' }
+        width: 210, 
+        height: 180, 
+        alignSelf: 'center',     
+    }
 })
 
 const mapDispatchtoProps = dispatch => ({

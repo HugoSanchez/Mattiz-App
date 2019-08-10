@@ -71,6 +71,9 @@ const LoggedInNavigator = createBottomTabNavigator({
         inactiveTintColor: '#5E5E5E',
         showIcon: true, 
         showLabel: false,
+        style: {
+            backgroundColor: '#FFF',
+        }
     }
 });
 

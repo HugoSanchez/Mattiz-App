@@ -35,8 +35,8 @@ const Header = props => {
             </View>
             <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center'}}>
                 <Image 
-                    style={{ height: 45, width: 90, marginTop: '20%'}}
-                    source={require('../../assets/Palm-Leaf-Logo.png')}
+                    style={{ height: 40, width: 80, marginTop: '20%'}}
+                    source={require('../../assets/Rombos.png')}
                 />
             </View>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>

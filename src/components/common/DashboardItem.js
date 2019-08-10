@@ -95,8 +95,9 @@ const styles = {
         justifyContent: 'center' 
     },
     textStyle: { 
-        fontFamily: 'Raleway-Regular', 
-        fontSize: 18 
+        fontFamily: 'Rajdhani-Regular', 
+        fontSize: 18,
+        color: colors.darkGray
     },
     numbersBox: { 
         flex: 2 

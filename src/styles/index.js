@@ -1,3 +1,5 @@
+import colors from '../constants/colors';
+
 // General Styles
 export default {
     // Containers
@@ -11,141 +13,141 @@ export default {
     bigTitle: {
         fontFamily: 'Raleway',
         fontSize: 32,
-        color: '#040026'
+        color: colors.darkGray
     },
     mediumTitle: {
         fontFamily: 'Raleway',
         fontSize: 26,
-        color: '#040026'
+        color: colors.darkGray
     },
     smallTitle: {
         fontFamily: 'Raleway',
         fontSize: 22,
-        color: '#040026'
+        color: colors.darkGray
     },
     extraSmallTitle: {
         fontFamily: 'Raleway',
         fontSize: 18,
-        color: '#040026'
+        color: colors.darkGray
     },
     bigMediumTitle: {
         fontFamily: 'Raleway-Medium',
         fontSize: 32,
-        color: '#040026'
+        color: colors.darkGray
     },
     mediumMediumTitle: {
         fontFamily: 'Raleway-Medium',
         fontSize: 26,
-        color: '#040026'
+        color: colors.darkGray
     },
     smallMediumTitle: {
         fontFamily: 'Raleway-Medium',
         fontSize: 22,
-        color: '#040026'
+        color: colors.darkGray
     },
     extraSmallMediumTitle: {
         fontFamily: 'Raleway-Medium',
         fontSize: 18,
-        color: '#040026'
+        color: colors.darkGray
     },
     bigLightTitle: {
         fontFamily: 'Raleway-Light',
         fontSize: 32,
-        color: '#040026'
+        color: colors.darkGray
     },
     mediumLightTitle: {
         fontFamily: 'Raleway-Light',
         fontSize: 26,
-        color: '#040026'
+        color: colors.darkGray
     },
     smallLightTitle: {
         fontFamily: 'Raleway-Light',
         fontSize: 22,
-        color: '#040026'
+        color: colors.darkGray
     },
     extraSmallLightTitle: {
-        fontFamily: 'Raleway-Light',
+        fontFamily: 'Rajdhani-Light',
         fontSize: 18,
-        color: '#040026'
+        color: colors.darkGray
     },
     // Numbers // 
     // Regular
     bigNumberStyle: {
-        fontFamily: 'Aleo-Regular',
+        fontFamily: 'Rajdhani-Regular',
         fontSize: 32,
-        color: '#040026'
+        color: colors.paletteBlue
     },
     mediumNumberStyle: {
-        fontFamily: 'Aleo-Regular',
+        fontFamily: 'Rajdhani-Regular',
         fontSize: 26,
-        color: '#040026'
+        color: colors.paletteBlue
     },
     smallNumberStyle: {
-        fontFamily: 'Aleo-Regular',
+        fontFamily: 'Rajdhani-Regular',
         fontSize: 22,
-        color: '#040026'
+        color: colors.paletteBlue
     },
     // Light
     bigLightNumber: {
-        fontFamily: 'Aleo-Light',
+        fontFamily: 'Rajdhani-Light',
         fontSize: 32,
-        color: '#040026'
+        color: colors.paletteBlue
     },
     mediumLightNumber: {
-        fontFamily: 'Aleo-Light',
+        fontFamily: 'Rajdhani-Light',
         fontSize: 28,
-        color: '#040026'
+        color: colors.paletteBlue
     },
     smallLightNumber: {
-        fontFamily: 'Aleo-Light',
+        fontFamily: 'Rajdhani-Light',
         fontSize: 24,
-        color: '#040026'
+        color: colors.paletteBlue
     },
     extraSmallLightNumber: {
-        fontFamily: 'Aleo-Light',
+        fontFamily: 'Rajdhani-Light',
         fontSize: 16,
-        color: '#040026'
+        color: colors.paletteBlue
     },
     // Regular
     bigRegularNumber: {
-        fontFamily: 'Aleo-Regular',
+        fontFamily: 'Rajdhani-Regular',
         fontSize: 36,
-        color: '#040026'
+        color: colors.paletteBlue
     },
     mediumRegularNumber: {
-        fontFamily: 'Aleo-Regular',
+        fontFamily: 'Rajdhani-Regular',
         fontSize: 28,
-        color: '#040026'
+        color: colors.paletteBlue
     },
     smallRegularNumber: {
-        fontFamily: 'Aleo-Regular',
+        fontFamily: 'Rajdhani-Regular',
         fontSize: 24,
-        color: '#040026'
+        color: colors.paletteBlue
     },
     extraSmallRegularNumber: {
-        fontFamily: 'Aleo-Regular',
+        fontFamily: 'Rajdhani-Regular',
         fontSize: 16,
-        color: '#040026'
+        color: colors.paletteBlue
     },
     // Bold
     bigBoldNumber: {
-        fontFamily: 'Aleo-Bold',
+        fontFamily: 'Rajdhani-Bold',
         fontSize: 36,
-        color: '#040026'
+        color: colors.darkGray
     },
     mediumBoldNumber: {
-        fontFamily: 'Aleo-Bold',
+        fontFamily: 'Rajdhani-Bold',
         fontSize: 28,
-        color: '#040026'
+        color: colors.darkGray
     },
     smallBoldNumber: {
-        fontFamily: 'Aleo-Bold',
+        fontFamily: 'Rajdhani-Bold',
         fontSize: 24,
-        color: '#040026'
+        color: colors.darkGray
     },
     extraSmallBoldNumber: {
-        fontFamily: 'Aleo-Bold',
+        fontFamily: 'Rajdhani-Bold',
         fontSize: 16,
-        color: '#040026'
+        color: colors.darkGray
     },
 }

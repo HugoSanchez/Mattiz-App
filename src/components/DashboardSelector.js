@@ -8,6 +8,8 @@ import {
 } from 'react-native';
 import { connect } from 'react-redux';
 
+import colors from '../constants/colors';
+
 const width =  Dimensions.get('window').width
 const height = Dimensions.get('window').height
 
@@ -104,28 +106,28 @@ class DashboardSelector extends Component {
                     </View>
                     <View style={ textBox }>
                         <Text style={[ buttonsText, dashboard == 'savings' ?
-                            { fontFamily: 'Raleway-Bold'}
+                            { fontFamily: 'Rajdhani-Bold'}
                             :
                             null
                             ]}> Savings </Text>
                     </View>
                     <View style={ textBox }>
                         <Text style={[ buttonsText, dashboard == 'ether' ?
-                            { fontFamily: 'Raleway-Bold'}
+                            { fontFamily: 'Rajdhani-Bold'}
                             :
                             null
                             ]}> Ether </Text>
                     </View>
                     <View style={ textBox }>
                         <Text style={[ buttonsText, dashboard == 'bitcoin' ?
-                            { fontFamily: 'Raleway-Bold'}
+                            { fontFamily: 'Rajdhani-Bold'}
                             :
                             null
                             ]}> Bitcoin </Text>
                     </View>
                     <View style={ textBox }>
                         <Text style={[ buttonsText, dashboard == 'others' ?
-                            { fontFamily: 'Raleway-Bold'}
+                            { fontFamily: 'Rajdhani-Bold'}
                             :
                             null
                             ]}> Others </Text>
@@ -175,7 +177,8 @@ const styles = {
         alignItems: 'center' 
     },
     buttonsText: {
-        fontFamily: 'Raleway-Regular'
+        fontFamily: 'Rajdhani-Regular',
+        color: colors.darkGray
     } 
 }
 

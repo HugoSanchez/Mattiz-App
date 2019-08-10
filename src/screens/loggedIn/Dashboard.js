@@ -69,6 +69,7 @@ class Dashboard extends Component {
         return (
             <View style={styles.container}>
                 <Header showBell={true} elevated={true}/>
+
                 { this.props.dashboard == 'total'    ? <TotalDashboard />   : null } 
                 { this.props.dashboard == 'savings'  ? <SavingsDashboard /> : null }
                 { this.props.dashboard == 'ether'    ? <EthDashboard />     : null }
@@ -245,7 +246,7 @@ class Dashboard extends Component {
                     this.state.renderButton ? 
                     <FloatingButton 
                         iconName='paper-plane' 
-                        onPress={() => this.props.navigation.navigate('QrCodeScanner')} // this.props.setEthRenderForm(true)
+                        onPress={() => this.props.setEthRenderForm(true)} // this.props.setEthRenderForm(true) this.props.navigation.navigate('QrCodeScanner')
                     />
                     : 
                     null
@@ -284,12 +285,15 @@ const styles = StyleSheet.create({
         paddingLeft: '5%'
     },
     catgeoryTitle: { 
-        fontFamily: 'Raleway-SemiBold', 
-        fontSize: 20 
+        fontFamily: 'Rajdhani-SemiBold', 
+        fontSize: 20,
+        color: colors.lightGray,
+        marginTop: '5%'
     },
     categorySubtitle: { 
-        fontFamily: 'Raleway-SemiBold', 
-        fontSize: 18 
+        fontFamily: 'Rajdhani-SemiBold', 
+        fontSize: 18,
+        color: colors.darkGray, 
     },
     sliderContainer: { 
         height: height * 0.35, 

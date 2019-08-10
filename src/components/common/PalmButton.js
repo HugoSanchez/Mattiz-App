@@ -5,7 +5,7 @@ import Icon from 'react-native-vector-icons/Feather';
 import colors from '../../constants/colors';
 
 // Props:
-// @containerStyles: -Optional- Wrapping container styles.
+// @backgroundColor: -Optional- Wrapping container color.
 // @iconName:        -Required- Icon to dislplay, if any.
 // @onPress:         -Required- Function to be executed on press. 
 // @title:           -Required- Text to be displayed. 
@@ -15,7 +15,7 @@ const PalmButton = props => {
     return (
         <TouchableOpacity
             onPress={ props.onPress } 
-            style={[ container, props.containerStyles ]}>
+            style={[ container, props.backgroundColor ? { backgroundColor: props.backgroundColor} : null ]}>
             <Text 
                 style={[ titleStyle, props.titleStyle ]}> 
                 {
@@ -27,7 +27,7 @@ const PalmButton = props => {
                 <Icon 
                     name={ props.iconName } 
                     size={ 27 } 
-                    color={ colors.primaryBlue }
+                    color={ colors.paletteLightBlue }
                     style={{ marginLeft: 5 }} 
                 />
                 :
@@ -39,9 +39,9 @@ const PalmButton = props => {
 
 const styles = {
     container: {
-        height: 60,
+        height: 55,
         margin: 10, 
-        borderRadius: 10,
+        borderRadius: 2,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
@@ -53,9 +53,9 @@ const styles = {
         elevation: 12,
     },
     titleStyle: { 
-        fontFamily: 'Raleway-Light', 
+        fontFamily: 'Rajdhani-Regular', 
         fontSize: 22, 
-        color: colors.primaryBlue 
+        color: colors.paletteBlue
     }
 }
 

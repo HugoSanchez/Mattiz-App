@@ -17,9 +17,6 @@ import {
 import colors from '../constants/colors';
 import styles from '../styles';
 
-// Number parser 
-const numeral = require('numeral');
-
 // Props:
 // @ modalVisible: - Required. Boolean.
 // @ onSlideClose: - Required. Function.

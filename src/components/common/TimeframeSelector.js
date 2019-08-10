@@ -23,7 +23,7 @@ const TimeframeSelector = props => {
             <TouchableOpacity onPress={ props.onWeekPress } style={ textBox }>
                 <Text style={[ 
                     GS.extraSmallLightTitle,
-                    props.timeframe == 'week' ? { fontFamily: 'Raleway-SemiBold'} : null
+                    props.timeframe == 'week' ? { fontFamily: 'Rajdhani-SemiBold'} : null
                     ]}> 
                     Week 
                 </Text>
@@ -32,7 +32,7 @@ const TimeframeSelector = props => {
             <TouchableOpacity onPress={ props.onMonthPress } style={ textBox }>
                 <Text style={[ 
                     GS.extraSmallLightTitle,
-                    props.timeframe == 'month' ? { fontFamily: 'Raleway-SemiBold'} : null
+                    props.timeframe == 'month' ? { fontFamily: 'Rajdhani-SemiBold'} : null
                     ]}> 
                     Month 
                 </Text>
@@ -41,7 +41,7 @@ const TimeframeSelector = props => {
             <TouchableOpacity onPress={ props.onQuarterPress } style={ textBox }>
                 <Text style={[ 
                     GS.extraSmallLightTitle,
-                    props.timeframe == 'quarter' ? { fontFamily: 'Raleway-SemiBold'} : null
+                    props.timeframe == 'quarter' ? { fontFamily: 'Rajdhani-SemiBold'} : null
                     ]}> 
                    Quarter 
                 </Text>
@@ -50,7 +50,7 @@ const TimeframeSelector = props => {
             <TouchableOpacity onPress={ props.onYearPress } style={ textBox }>
                 <Text style={[ 
                     GS.extraSmallLightTitle,
-                    props.timeframe == 'year' ? { fontFamily: 'Raleway-SemiBold'} : null
+                    props.timeframe == 'year' ? { fontFamily: 'Rajdhani-SemiBold'} : null
                     ]}> 
                     Year 
                 </Text>
