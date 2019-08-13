@@ -11,6 +11,9 @@ import Products from '../../screens/loggedIn/Products';
 // Icons
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
+// Colors
+import colors from '../../constants/colors'
+
 const LoggedInNavigator = createBottomTabNavigator({
     Dashboard: {
         screen: Dashboard,
@@ -67,7 +70,7 @@ const LoggedInNavigator = createBottomTabNavigator({
 },
 {
     tabBarOptions: {
-        activeTintColor: '#A3D164',
+        activeTintColor: colors.paletteOrange,
         inactiveTintColor: '#5E5E5E',
         showIcon: true, 
         showLabel: false,

@@ -15,14 +15,12 @@ rm -rf node_modules && npm install
 react-native link
 ```
 
-4. Reset Metro Bundler Cache:
+4. Reset React Native Caches:
 ```
-rm -rf tmp/metro-bundler-cache-*
-```
-
-5. Remove Haste Cache:
-```
-rm -rf tmp/haste-map-react-native-packager-*
+watchman watch-del-all
+rm -rf $TMPDIR/react-*
+rm -rf $TMPDIR/metro-*
+rm -rf $TMPDIR/haste-*
 ```
 
 6. Run rn-nodeify hack again:

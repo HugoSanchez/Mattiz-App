@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Image } from 'react-native';
+import { View, Text, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import colors from '../../constants/colors'
@@ -33,11 +33,8 @@ const Header = props => {
                     null
                 }
             </View>
-            <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center'}}>
-                <Image 
-                    style={{ height: 40, width: 80, marginTop: '20%'}}
-                    source={require('../../assets/Rombos.png')}
-                />
+            <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center', marginTop: '7%'}}>
+                <Text style={{ fontFamily: 'Didot', fontSize: 22, color: colors.paletteBlue }}>MATTIZ</Text>
             </View>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 {   

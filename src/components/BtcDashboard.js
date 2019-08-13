@@ -76,7 +76,7 @@ class BtcDashboard extends Component {
                     </Text> 
 
                     <View style={ balanceContainer }>
-                        <Text style={ GS.bigLightNumber }>
+                        <Text style={[ GS.bigRegularNumber ]}>
                             {  numeral('1,132.96').format('0,0.00') +'€' + ' ' }
                         </Text>                                   
                     </View>
@@ -131,14 +131,12 @@ const styles = {
         marginBottom: '2%',
     },
     balanceContainer: {
-        marginTop: '0.5%',
-        marginBottom: '0.5%', 
         alignItems: 'center' 
     },
     textStyle: {
         fontFamily: 'Raleway-Light',
         fontSize: 14,
-        color: colors.primaryBlue
+        color: colors.primaryBlue,
     }
 }
 

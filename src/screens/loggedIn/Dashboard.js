@@ -287,7 +287,7 @@ const styles = StyleSheet.create({
     catgeoryTitle: { 
         fontFamily: 'Rajdhani-SemiBold', 
         fontSize: 20,
-        color: colors.lightGray,
+        color: colors.darkGray,
         marginTop: '5%'
     },
     categorySubtitle: { 

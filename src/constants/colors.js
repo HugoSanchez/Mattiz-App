@@ -9,6 +9,6 @@ export default {
     lightGray: '#BCBCC3',
     darkGray: '#5C5C6F',
     // NUMBERS
-    numbersGreen: '#6AB304',
-    numbersRed: '#D8F8ED'
+    numbersGreen: '#C4E19C',
+    numbersRed: '#C88383'
 }
