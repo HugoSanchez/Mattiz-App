@@ -82,14 +82,14 @@ class SignUpForm extends Component {
                     >
                     <View style={ logoContainer }>
                         <Image 
-                            source={require('../../assets/Mattiz-Didot-Blue-Full.png')} 
+                            source={require('../../assets/Mattiz-Didot-Simple-Squared-Green.png')} 
                             style={ imageStyle }
                         />
                     </View>
                     
                     <View style={{ position: 'absolute', bottom: '2%', width: '95%', alignSelf: 'center' }}>
                         <PalmButton 
-                            backgroundColor={colors.paletteWhite}
+                            backgroundColor={colors.palleteLightGreen}
                             onPress={() => this.setState({ formStatus: 'username' })}
                             title={'Sign Up'}
                         />
@@ -110,7 +110,7 @@ class SignUpForm extends Component {
                     >
                         <View style={ logoContainer }>
                             <Image 
-                                source={require('../../assets/Mattiz-Didot-Blue-Full.png')} 
+                                source={require('../../assets/Mattiz-Didot-Simple-Squared-Green.png')} 
                                 style={ imageStyle }
                             />
                         </View>
@@ -126,7 +126,7 @@ class SignUpForm extends Component {
                                 style={ input }
                             />
                         </View>
-                        <View style={{ alignSelf: 'center', position: 'absolute', top: this.state.isFocused ? '50%' : '90%'}}>
+                        <View style={{ alignSelf: 'center', position: 'absolute', top: this.state.isFocused ? '45%' : '90%'}}>
                             <PalmButton 
                                 iconName={'arrow-right'}
                                 onPress={() => this.setState({ formStatus: 'password' })}
@@ -149,7 +149,7 @@ class SignUpForm extends Component {
                     >
                         <View style={ logoContainer }>
                             <Image 
-                                source={require('../../assets/Mattiz-Didot-Blue-Full.png')} 
+                                source={require('../../assets/Mattiz-Didot-Simple-Squared-Green.png')} 
                                 style={ imageStyle }
                             />
                         </View>
@@ -166,7 +166,7 @@ class SignUpForm extends Component {
                                 style={ input }
                             />
                         </View>
-                        <View style={{ alignSelf: 'center', position: 'absolute', top: this.state.isFocused ? '50%' : '90%'}}>
+                        <View style={{ alignSelf: 'center', position: 'absolute', top: this.state.isFocused ? '45%' : '90%'}}>
                             <PalmButton 
                                 iconName={'arrow-right'}
                                 onPress={() => this.setState({ formStatus: 'confirm' })}
@@ -189,7 +189,7 @@ class SignUpForm extends Component {
                     >
                         <View style={ logoContainer }>
                             <Image 
-                                source={require('../../assets/Mattiz-Didot-Blue-Full.png')} 
+                                source={require('../../assets/Mattiz-Didot-Simple-Squared-Green.png')} 
                                 style={ imageStyle }
                             />
                         </View>
@@ -206,7 +206,7 @@ class SignUpForm extends Component {
                                 style={ input }
                             />
                         </View>
-                        <View style={{ alignSelf: 'center', position: 'absolute', top: this.state.isFocused ? '50%' : '90%'}}>
+                        <View style={{ alignSelf: 'center', position: 'absolute', top: this.state.isFocused ? '45%' : '90%'}}>
                             <PalmButton 
                                 iconName={'check-circle'}
                                 onPress={() => this.onButtonPress()}
@@ -252,8 +252,8 @@ const styles = StyleSheet.create({
         color: colors.primaryBlue 
     },
     imageStyle: { 
-        width: 210, 
-        height: 180, 
+        width: 180, 
+        height: 140, 
         alignSelf: 'center',     
     }
 })

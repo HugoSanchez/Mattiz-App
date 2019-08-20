@@ -15,7 +15,7 @@ class SimpleLineChart extends React.PureComponent {
                 <LineChart
                     style={{ height: 200, width: '100%' }}
                     data={ data.slice(-60, -1) }
-                    svg={{ stroke: colors.paletteBlue, strokeWidth: 1 }}
+                    svg={{ stroke: colors.palleteDarkGreen, strokeWidth: 1.5 }}
                     contentInset={{ top: 30, bottom: 30 }}
                     curve={ shape.curveNatural }
                     animate={true}

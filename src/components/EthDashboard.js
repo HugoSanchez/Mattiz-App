@@ -61,9 +61,9 @@ class EthDashboard extends Component {
         return (
             <CustomCard style={ container }>
                 <View style={ titleContainer }>          
-                    <Text style={ GS.extraSmallLightNumber }>
+                    <Text style={ GS.extraSmallRegularNumber }>
                         {  numeral(currentPriceETH).format('0,0.00') }$
-                            <Text style={[ GS.extraSmallLightNumber,
+                            <Text style={[ GS.extraSmallRegularNumber,
                                 percentageChangeETH < 0 
                                 ? { color: colors.numbersRed }
                                 : { color: colors.numbersGreen }]}>
@@ -76,7 +76,7 @@ class EthDashboard extends Component {
                     </Text> 
 
                     <View style={ balanceContainer }>
-                        <Text style={ GS.bigLightNumber }>
+                        <Text style={ GS.bigRegularNumber }>
                             {   numeral(3197.38 
                                 + parseFloat((this.props.balance * this.props.currentPriceETH) 
                                 .toFixed(2))).format('0,0.00') +'€' + ' ' 
@@ -134,14 +134,14 @@ const styles = {
         marginBottom: '2%',
     },
     balanceContainer: {
-        marginTop: '0.5%',
-        marginBottom: '0.5%', 
-        alignItems: 'center' 
+        height: height * 0.05,
+        alignItems: 'center', 
     },
     textStyle: {
         fontFamily: 'Raleway-Light',
         fontSize: 14,
-        color: colors.primaryBlue
+        color: colors.palleteDarkGreen,
+        marginTop: '2%'
     }
 }
 

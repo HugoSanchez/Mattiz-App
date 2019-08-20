@@ -56,7 +56,7 @@ const SendModalAmountHeader = props => {
                             fontFamily: 'Aleo-Regular',
                             alignSelf: 'center', 
                             fontSize: props.amount.length > 5 ? 38 : 46, 
-                            color: colors.primaryBlue }}>
+                            color: colors.palleteDarkGreen }}>
                             { 
                                 props.amount 
                             }
@@ -69,7 +69,7 @@ const SendModalAmountHeader = props => {
                                 name='refresh-cw' 
                                 size={20} 
                                 style={{ transform: [{ rotate: '90deg'}] }} 
-                                color={colors.primaryBlue}
+                                color={colors.palleteDarkGreen}
                             />
                         </View>
                     </View>
@@ -96,7 +96,7 @@ const compStyles = {
         alignItems: 'center' 
     },
     titleContainer: [ 
-        styles.extraSmallLightTitle, { 
+        styles.extraSmallTitle, { 
             marginBottom: '2%'
         }
     ],
@@ -130,7 +130,7 @@ const compStyles = {
         alignItems: 'center', 
         justifyContent: 'center', 
         marginRight: '15%', 
-        backgroundColor: '#DDEDF7', 
+        backgroundColor: colors.palleteLightGreen, 
         borderRadius: 10 
     },
     rightButton: { 
@@ -139,7 +139,7 @@ const compStyles = {
         alignItems: 'center', 
         justifyContent: 'center', 
         marginLeft: '15%', 
-        backgroundColor: '#DDEDF7', 
+        backgroundColor: colors.palleteLightGreen, 
         borderRadius: 10 
     },
     subCurrencyContainer: { 

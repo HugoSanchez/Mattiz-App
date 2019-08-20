@@ -95,23 +95,30 @@ const styles = {
         justifyContent: 'center' 
     },
     textStyle: { 
-        fontFamily: 'Rajdhani-Regular', 
+        fontFamily: 'Rajdhani-Medium', 
         fontSize: 18,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     numbersBox: { 
         flex: 2 
     },
     amountStyle: [ 
-        GS.extraSmallLightNumber, 
-        { marginTop: '15%'} 
+        GS.extraSmallRegularNumber, 
+        { 
+            alignSelf: 'flex-end',
+            marginRight: '15%',
+            marginTop: '15%', 
+            color: '#000', 
+        } 
     ],
     percentageStyles: [ 
         GS.extraSmallBoldNumber, 
         { 
             color: colors.numbersGreen, 
-            fontSize: 12, 
-            marginBottom: '10%' 
+            fontSize: 14, 
+            marginBottom: '10%',
+            alignSelf: 'flex-end',
+            marginRight: '20%',
         } 
     ]
 };

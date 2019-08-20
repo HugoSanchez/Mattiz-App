@@ -1,9 +1,8 @@
 import React from 'react';
 import { View, ImageBackground, StyleSheet } from 'react-native';
-import * as Animatable from 'react-native-animatable';
 
 import PalmButton from '../../components/common/PalmButton';
-import Header from '../../components/common/Header';
+import colors from '../../constants/colors';
 
 const NewUserWelcomeScreen = props => {
     const { navigation } = props;
@@ -14,20 +13,17 @@ const NewUserWelcomeScreen = props => {
                 style={{ width:'100%', height:'100%', flex: 1 }}
                 resizeMode='cover'
             >
-                <Header />
-                <View style={{ marginTop: 600 }}>
-                    <Animatable.View 
-                        animation="pulse" 
-                        easing="ease-out" 
-                        iterationCount="infinite"
-                        style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
-                    >
-                        <PalmButton 
-                            iconName={'arrow-right'}
-                            onPress={() => navigation.navigate('PlaidLink')}
-                            title={'Continue'}        
-                        />
-                    </Animatable.View>
+                <View style={{ position: 'absolute', top: 0, height: '15%', width: '100%', backgroundColor: '#FFF'}}>
+                    {/* This is just to cover old logo */}
+                </View>
+
+                <View style={{alignSelf: 'center', position: 'absolute', top: '85%', width: '95%'}}>
+                    <PalmButton 
+                        backgroundColor={colors.palleteLightGreen}
+                        iconName={'arrow-right'}
+                        onPress={() => navigation.navigate('PlaidLink')}
+                        title={'Continue'}        
+                    />
                 </View>
             </ImageBackground>
         </View>

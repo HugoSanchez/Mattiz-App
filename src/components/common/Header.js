@@ -34,7 +34,7 @@ const Header = props => {
                 }
             </View>
             <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center', marginTop: '7%'}}>
-                <Text style={{ fontFamily: 'Didot', fontSize: 22, color: colors.paletteBlue }}>MATTIZ</Text>
+                <Text style={{ fontFamily: 'Didot-Bold', fontSize: 18, color: colors.palleteDarkGreen }}>MATTIZ!</Text>
             </View>
             <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
                 {   

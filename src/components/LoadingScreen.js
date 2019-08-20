@@ -16,7 +16,7 @@ const LoadingScreen = props => {
                 isVisible={true} 
                 size={ props.size || 75} 
                 type='Pulse' 
-                color={ colors.primaryBlue }
+                color={ colors.palleteDarkGreen }
             />
             {
                 props.children

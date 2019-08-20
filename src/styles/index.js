@@ -13,141 +13,141 @@ export default {
     bigTitle: {
         fontFamily: 'Raleway',
         fontSize: 32,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     mediumTitle: {
         fontFamily: 'Raleway',
         fontSize: 26,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     smallTitle: {
         fontFamily: 'Raleway',
         fontSize: 22,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     extraSmallTitle: {
         fontFamily: 'Raleway',
         fontSize: 18,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     bigMediumTitle: {
         fontFamily: 'Raleway-Medium',
         fontSize: 32,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     mediumMediumTitle: {
         fontFamily: 'Raleway-Medium',
         fontSize: 26,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     smallMediumTitle: {
         fontFamily: 'Raleway-Medium',
         fontSize: 22,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     extraSmallMediumTitle: {
         fontFamily: 'Raleway-Medium',
         fontSize: 18,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     bigLightTitle: {
         fontFamily: 'Raleway-Light',
         fontSize: 32,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     mediumLightTitle: {
         fontFamily: 'Raleway-Light',
         fontSize: 26,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     smallLightTitle: {
         fontFamily: 'Raleway-Light',
         fontSize: 22,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     extraSmallLightTitle: {
         fontFamily: 'Rajdhani-Light',
         fontSize: 18,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     // Numbers // 
     // Regular
     bigNumberStyle: {
         fontFamily: 'Rajdhani-Regular',
         fontSize: 32,
-        color: colors.paletteBlue
+        color: colors.palleteDarkGreen
     },
     mediumNumberStyle: {
         fontFamily: 'Rajdhani-Regular',
         fontSize: 26,
-        color: colors.paletteBlue
+        color: colors.palleteDarkGreen
     },
     smallNumberStyle: {
         fontFamily: 'Rajdhani-Regular',
         fontSize: 22,
-        color: colors.paletteBlue
+        color: colors.palleteDarkGreen
     },
     // Light
     bigLightNumber: {
         fontFamily: 'Rajdhani-Light',
         fontSize: 32,
-        color: colors.paletteBlue
+        color: colors.palleteDarkGreen
     },
     mediumLightNumber: {
         fontFamily: 'Rajdhani-Light',
         fontSize: 28,
-        color: colors.paletteBlue
+        color: colors.palleteDarkGreen
     },
     smallLightNumber: {
         fontFamily: 'Rajdhani-Light',
         fontSize: 24,
-        color: colors.paletteBlue
+        color: colors.palleteDarkGreen
     },
     extraSmallLightNumber: {
         fontFamily: 'Rajdhani-Light',
         fontSize: 16,
-        color: colors.paletteBlue
+        color: colors.palleteDarkGreen
     },
     // Regular
     bigRegularNumber: {
         fontFamily: 'Rajdhani-Regular',
         fontSize: 36,
-        color: colors.paletteBlue
+        color: colors.palleteDarkGreen
     },
     mediumRegularNumber: {
         fontFamily: 'Rajdhani-Regular',
         fontSize: 28,
-        color: colors.paletteBlue
+        color: colors.palleteDarkGreen
     },
     smallRegularNumber: {
         fontFamily: 'Rajdhani-Regular',
         fontSize: 24,
-        color: colors.paletteBlue
+        color: colors.palleteDarkGreen
     },
     extraSmallRegularNumber: {
         fontFamily: 'Rajdhani-Regular',
         fontSize: 16,
-        color: colors.paletteBlue
+        color: colors.palleteDarkGreen
     },
     // Bold
     bigBoldNumber: {
         fontFamily: 'Rajdhani-Bold',
         fontSize: 36,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     mediumBoldNumber: {
         fontFamily: 'Rajdhani-Bold',
         fontSize: 28,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     smallBoldNumber: {
         fontFamily: 'Rajdhani-Bold',
         fontSize: 24,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
     extraSmallBoldNumber: {
         fontFamily: 'Rajdhani-Bold',
         fontSize: 16,
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     },
 }

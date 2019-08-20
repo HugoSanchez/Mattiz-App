@@ -45,8 +45,8 @@ class InitialLoadingScreen extends Component {
                         style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}
                     >
                         <Image 
-                            source={require('../../assets/Mattiz-Didot-Blue-Nacked.png')} 
-                            style={{ width: 165, height: 55, marginBottom: '10%' }}
+                            source={require('../../assets/Mattiz-Didot-Simple-Squared-Green.png')} 
+                            style={{ width: 240, height: 110, marginBottom: '10%' }}
                         />
                     </Animatable.View>
             </View>
@@ -66,7 +66,7 @@ const MapStateToProps = state => {
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        backgroundColor: colors.paletteWhite,
+        backgroundColor: '#FFF',
         justifyContent: 'center',
         alignItems: 'center'
     },

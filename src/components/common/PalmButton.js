@@ -27,7 +27,7 @@ const PalmButton = props => {
                 <Icon 
                     name={ props.iconName } 
                     size={ 27 } 
-                    color={ colors.paletteLightBlue }
+                    color={ colors.paletteDarkBlue }
                     style={{ marginLeft: 5 }} 
                 />
                 :
@@ -41,7 +41,7 @@ const styles = {
     container: {
         height: 55,
         margin: 10, 
-        borderRadius: 2,
+        borderRadius: 5,
         alignItems: 'center',
         justifyContent: 'center',
         flexDirection: 'row',
@@ -55,7 +55,7 @@ const styles = {
     titleStyle: { 
         fontFamily: 'Rajdhani-Regular', 
         fontSize: 22, 
-        color: colors.paletteBlue
+        color: colors.palleteDarkGreen
     }
 }
 

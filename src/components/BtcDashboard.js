@@ -61,9 +61,9 @@ class BtcDashboard extends Component {
         return (
             <CustomCard style={ container }>
                 <View style={ titleContainer }>          
-                    <Text style={ GS.extraSmallLightNumber }>
+                    <Text style={ GS.extraSmallRegularNumber }>
                         {  numeral(currentPriceBTC).format('0,0.00') }$
-                            <Text style={[ GS.extraSmallLightNumber,
+                            <Text style={[ GS.extraSmallRegularNumber,
                                 percentageChangeBTC < 0 
                                 ? { color: colors.numbersRed }
                                 : { color: colors.numbersGreen }]}>
@@ -131,12 +131,14 @@ const styles = {
         marginBottom: '2%',
     },
     balanceContainer: {
-        alignItems: 'center' 
+        height: height * 0.05,
+        alignItems: 'center', 
     },
     textStyle: {
         fontFamily: 'Raleway-Light',
         fontSize: 14,
-        color: colors.primaryBlue,
+        color: colors.palleteDarkGreen,
+        marginTop: '2%'
     }
 }
 

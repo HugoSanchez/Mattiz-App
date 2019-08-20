@@ -287,13 +287,13 @@ const styles = StyleSheet.create({
     catgeoryTitle: { 
         fontFamily: 'Rajdhani-SemiBold', 
         fontSize: 20,
-        color: colors.darkGray,
+        color: '#000',
         marginTop: '5%'
     },
     categorySubtitle: { 
         fontFamily: 'Rajdhani-SemiBold', 
         fontSize: 18,
-        color: colors.darkGray, 
+        color: '#000', 
     },
     sliderContainer: { 
         height: height * 0.35, 

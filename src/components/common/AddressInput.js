@@ -59,7 +59,7 @@ const styles = {
     textInput: { 
         fontFamily: 'Aleo-Regular', 
         fontSize: 18, 
-        color: colors.primaryBlue 
+        color: colors.palleteDarkGreen 
     },
 };
 

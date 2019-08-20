@@ -88,7 +88,7 @@ class TotalDashboard extends Component {
                         { this.state.percentage }
                     </Text> 
                     <View style={ balanceContainer }>
-                        <Text style={ GS.bigLightNumber }>
+                        <Text style={ GS.bigRegularNumber }>
                             {  numeral(this.props.balance).format('0,0.00') } €
                         </Text>                    
                         <Text style={ textStyle }> Aggregated Balance </Text>
@@ -150,7 +150,7 @@ const styles = {
     textStyle: {
         fontFamily: 'Raleway-Light',
         fontSize: 14,
-        color: colors.primaryBlue
+        color: colors.palleteDarkGreen
     }
 }
 

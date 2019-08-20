@@ -1,11 +1,10 @@
 import React from 'react';
 import { View, Text, ImageBackground, Image, StyleSheet } from 'react-native';
 
-import MattizButton from '../../components/common/MattizButton';
 import PalmButton from '../../components/common/PalmButton';
-import Header from '../../components/common/Header';
 
 import gstyles from '../../styles';
+import colors from '../../constants/colors';
 
 const OnboardingTransition = props => {
 
@@ -19,18 +18,12 @@ const OnboardingTransition = props => {
 
     return (
         <View style={ container }>
-            <ImageBackground 
-                source={require('../../assets/topLogo.png')} 
-                style={{ width:'100%', height:'100%', flex: 1 }}
-                resizeMode='cover'
-            >   
-                <Header />
-                <View style={{ marginTop: '8%' }}>
-                    <View style={ textBox }>
+                <View style={{ alignItems: 'center', 
+        alignSelf: 'stretch',
+        marginTop: '15%'}}>
                         <Text style={[ gstyles.bigLightTitle ]}>
                             Hurray!
                         </Text>
-                    </View>
                     <View style={ textBox }>
                         <Text style={[ gstyles.extraSmallLightTitle, textStyle ]}>
                             You have succesfully linked your bank account. 
@@ -39,10 +32,7 @@ const OnboardingTransition = props => {
                         </Text>
                     </View>
                 </View>
-                <Image 
-                    source={require('../../assets/marginalia.png')} 
-                    style={{ width: 300, height: 300, alignSelf: 'center' }}
-                />
+
                 <View style={ viewStyle }>
                 <PalmButton
                     title={'Continue'}
@@ -50,13 +40,12 @@ const OnboardingTransition = props => {
                     onPress={() => navigation.navigate('GenerateWallet')} 
                 />
 
-                <MattizButton
+                <PalmButton
+                    backgroundColor={colors.palleteLightGreen}
                     title={'Link more Accounts'}
-                    linearColor={'#040026'}
                     onPress={() => navigation.navigate('PlaidLink')} 
                 />
                 </View> 
-            </ImageBackground>
         </View>
     );
 }
@@ -64,12 +53,12 @@ const OnboardingTransition = props => {
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        justifyContent: 'center',
-        alignItems: 'center'
+        backgroundColor: '#FFF',
     },
     textBox: { 
         alignItems: 'center', 
-        alignSelf: 'stretch'  
+        alignSelf: 'stretch',
+        marginTop: '45%'
     },
     textStyle: { 
         margin: '7%', 
@@ -78,8 +67,8 @@ const styles = StyleSheet.create({
         color: '#464646' 
     },
     viewStyle: {
-        marginTop: 20,
-        marginBottom: 40,
+        alignSelf: 'stretch',
+        marginTop: '65%'
     },
 });
 

@@ -69,12 +69,12 @@ class LoginForm extends Component {
         return (
             <View style={ container }>
                 <ImageBackground 
-                    source={require('../../assets/LoginForm.png')} 
+                    source={require('../../assets/Background.png')} 
                     style={{ width: '100%', height: '100%', flex: 1 }}
                     resizeMode={'cover'}
                 >
                     <Image 
-                        source={require('../../assets/doubleLogo.png')} 
+                        source={require('../../assets/Mattiz-Didot-Simple-Squared-Green.png')} 
                         style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
                     />
                         <View style={ viewStyle }>

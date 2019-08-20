@@ -27,8 +27,8 @@ export default class Products extends Component {
                 <Header />
                 <ScrollView style={{ flex: 1, alignSelf: 'stretch' }}>
                     <View style={[ styles.subHeader, { alignItems: 'flex-start', marginLeft: '5%' } ]}>
-                        <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 18 }}> 
-                            // Savings 
+                        <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 20 }}> 
+                            Savings 
                         </Text>
                     </View>
 
@@ -93,8 +93,8 @@ export default class Products extends Component {
                     </View>
 
                     <View style={[ styles.subHeader, { alignItems: 'flex-start', marginLeft: '5%' } ]}>
-                        <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 18 }}> 
-                            // Crypto 
+                        <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 20 }}> 
+                            Crypto 
                         </Text>
                     </View>
 
@@ -167,8 +167,8 @@ export default class Products extends Component {
                     </View>
 
                     <View style={[ styles.subHeader, { alignItems: 'flex-start', marginLeft: '5%' } ]}>
-                        <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 18 }}> 
-                            // Arts 
+                        <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 20 }}> 
+                            Arts 
                         </Text>
                     </View>
 
@@ -257,8 +257,8 @@ export default class Products extends Component {
                     </View>
 
                     <View style={[ styles.subHeader, { alignItems: 'flex-start', marginLeft: '5%' } ]}>
-                        <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 18 }}> 
-                            // Real Estate 
+                        <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 20 }}> 
+                            Real Estate 
                         </Text>
                     </View>
 
@@ -299,7 +299,7 @@ export default class Products extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        backgroundColor: '#F5F5F5',
+        backgroundColor: '#FFF',
     },
     subHeader: { 
         height: height * 0.05, 

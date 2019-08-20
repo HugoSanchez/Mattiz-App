@@ -3,7 +3,6 @@ import { View } from 'react-native';
 import { connect } from 'react-redux';
 
 import PalmButton from './common/PalmButton';
-import MattizButton from './common/MattizButton';
 import AddressInput from './common/AddressInput';
 import FeeAndBalanceCard from './common/FeeAndBalanceCard';
 import NumbersKeyboard from './common/NumbersKeyboard';
@@ -14,6 +13,7 @@ import {
     setAddressInReduxState,
     initiateSetAmountInReduxState,
 } from '../actions'
+import colors from '../constants/colors';
 
 class SendEthForm extends Component {
 
@@ -78,16 +78,18 @@ class SendEthForm extends Component {
                 <View style={ buttonContainer }>
                     {
                     false ?
-                    <PalmButton 
+                    <PalmButton
+                        backgroundColor={colors.palleteLightGreen}
                         iconName={'check-circle'}
                         onPress={() => this.props.initiateTxSend()}
                         title={'Send Transaction!'}
                         titleStyle={{ fontFamily: 'Raleway-Regular'}}
                     />
                     :
-                    <MattizButton
-                        title={'Scann QR Code'}
+                    <PalmButton
+                        backgroundColor={colors.palleteLightGreen}
                         onPress={() => this.props.navigation.navigate('QrCodeScanner')}
+                        title={'Scann QR Code'}
                     />
                     }
                 </View>

@@ -70,8 +70,8 @@ const LoggedInNavigator = createBottomTabNavigator({
 },
 {
     tabBarOptions: {
-        activeTintColor: colors.paletteOrange,
-        inactiveTintColor: '#5E5E5E',
+        activeTintColor: colors.palleteDarkGreen,
+        inactiveTintColor: colors.paletteGray,
         showIcon: true, 
         showLabel: false,
         style: {

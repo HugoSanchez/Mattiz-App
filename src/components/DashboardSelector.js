@@ -178,7 +178,7 @@ const styles = {
     },
     buttonsText: {
         fontFamily: 'Rajdhani-Regular',
-        color: colors.darkGray
+        color: colors.palleteDarkGreen
     } 
 }
 

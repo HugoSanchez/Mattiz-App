@@ -17,8 +17,8 @@ const FloatingButton = props => {
                 style={styles.buttonStyle}>
                     <Icon 
                         name={ props.iconName } 
-                        size={27} 
-                        color={colors.lightGray} 
+                        size={25} 
+                        color={colors.palleteLightGreen} 
                         style={styles.iconStyle} /> 
             </TouchableOpacity>
         </View>
@@ -35,7 +35,7 @@ const styles = {
         borderRadius: 25,
         right: 25,
         bottom: 15,
-        backgroundColor: colors.paletteLightBlue,
+        backgroundColor: colors.palleteDarkGreen,
         shadowColor: '#000',
         shadowOffset: { width: 5, height: 5 },
         shadowOpacity: 0.29,

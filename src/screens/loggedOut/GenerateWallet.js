@@ -13,9 +13,12 @@ import 'ethers/dist/shims.js'; // Required 'Shim' for ethers.js to work in React
 import { ethers } from 'ethers';
 
 // Custom components
-import MattizButton from '../../components/common/MattizButton';
+import PalmButton from '../../components/common/PalmButton';
 import LoadingScreen from '../../components/LoadingScreen';
 import MnemonicDisplay from '../../components/MnemonicDisplay';
+
+// Colors.
+import colors from '../../constants/colors';
 
 
 class GenerateWallet extends Component {
@@ -38,7 +41,6 @@ class GenerateWallet extends Component {
 
         // Encrypt wallet using password.
         let encrypted = await wallet.encrypt(this.props.user.password, this.encryptionProgress)
-        console.log('password: ', this.props.user.password)
         // Set wallet in memory.
         await setTokenInMemory('wallet', encrypted)
         // Stop loading, set mnemonic and encrypted wallet.
@@ -80,8 +82,12 @@ class GenerateWallet extends Component {
                     source={require('../../assets/topLogo.png')} 
                     style={{ width:'100%', height:'100%', flex: 1 }}
                     resizeMode='cover'
-                >
+                >   
                     <View>
+                        <View style={{ position: 'absolute', top: 0, height: '15%', width: '100%', backgroundColor: '#FFF'}}>
+                            {/* This is just to cover old logo */}
+                        </View>
+
                         <View style={ titleContainer }>
                             <Text style={ titleStyle }> Awesome! </Text>
                         </View>
@@ -100,9 +106,11 @@ class GenerateWallet extends Component {
                         </View>
 
                         <View style={{ marginTop: 15 }}>
-                            <MattizButton 
-                                title={"Ready !"}
+                            <PalmButton 
+                                backgroundColor={colors.palleteLightGreen}
+                                iconName={'arrow-right'}
                                 onPress={ () => navigation.navigate('Dashboard')}
+                                title={'Ready !'}        
                             />
                         </View>
                     </View>
@@ -120,7 +128,7 @@ const styles = StyleSheet.create({
         alignItems: 'center'
     },
     messageText: {
-        color: '#A3D164', 
+        color: colors.palleteDarkGreen, 
         fontFamily: 'Raleway',
         fontSize: 22,
         marginTop: 50,
