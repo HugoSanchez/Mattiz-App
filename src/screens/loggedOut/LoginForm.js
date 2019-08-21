@@ -5,11 +5,13 @@ import { connect } from 'react-redux';
 
 // Components.
 import LoadingScreen from '../../components/LoadingScreen';
-import MattizButton from '../../components/common/MattizButton';
+import PalmButton from '../../components/common/PalmButton';
 
 // Auth & Actions.
 import { verifyUser } from '../../api/auth';
 import { loadPlaidInfo, setUserInReduxState } from '../../actions';
+
+import colors from '../../constants/colors';
 
 ///
 /// Pending: Better handling incorrect passwords! 
@@ -57,7 +59,13 @@ class LoginForm extends Component {
     }
 
     render() {
-        const { container, input, viewStyle } = styles;
+        const { 
+            container, 
+            input, 
+            viewStyle,
+            logoContainer,
+            imageStyle
+        } = styles;
 
         if ( this.state.loading ) {
             return (
@@ -73,31 +81,31 @@ class LoginForm extends Component {
                     style={{ width: '100%', height: '100%', flex: 1 }}
                     resizeMode={'cover'}
                 >
-                    <Image 
-                        source={require('../../assets/Mattiz-Didot-Simple-Squared-Green.png')} 
-                        style={{ width: 200, height: 200, alignSelf: 'center', marginTop: 55 }}
-                    />
-                        <View style={ viewStyle }>
-                            <Input 
-                                placeholder="Password "
-                                inputContainerStyle={{ borderBottomColor: '#040026', marginTop: 40 }}
-                                placeholderTextColor='gray'
-                                secureTextEntry={true}
-                                onChangeText={ value => this.setState({ password: value }) }
-                                fontStyle={ this.state.password? 'italic' : 'normal' }
-                                onFocus={() => this.setState({ isFocused: true })}
-                                style={ input }
-                            />
-                        </View>
-                        <View style={{ marginTop: this.state.isFocused ? 20 : 345, alignSelf: 'stretch' }}>
-                            <MattizButton 
-                                title={'Log In! '}
-                                titleStyle={{ color: 'white'}}
-                                buttonStyle={{ height: 55, borderRadius: 10 }}
-                                onPress={ () => this.onButtonPress()}
-                                linearColor={'#040026'}
-                            />
-                        </View>
+                    <View style={ logoContainer }>
+                        <Image 
+                            source={require('../../assets/Mattiz-Didot-Simple-Squared-Green.png')} 
+                            style={ imageStyle }
+                        />
+                    </View>
+                    <View style={ viewStyle }>
+                        <Input 
+                            placeholder="Password "
+                            inputContainerStyle={{ borderBottomColor: colors.darkGray, marginTop: 320}}
+                            placeholderTextColor='gray'
+                            secureTextEntry={true}
+                            onChangeText={ value => this.setState({ password: value }) }
+                            fontStyle={ this.state.password? 'italic' : 'normal' }
+                            onFocus={() => this.setState({ isFocused: true })}
+                            style={ input }
+                        />
+                    </View>
+                    <View style={{ marginTop: this.state.isFocused ? 310 : 600, alignSelf: 'stretch' }}>
+                        <PalmButton 
+                            title={'Log In! '}
+                            backgroundColor={colors.palleteLightGreen}
+                            onPress={ () => this.onButtonPress()}
+                        />
+                    </View>
                 </ImageBackground>
             </View>
         )
@@ -120,6 +128,17 @@ const styles = StyleSheet.create({
         margin: '5%', 
         height: 55, 
         borderRadius: 10, 
+    },
+    logoContainer: { 
+        position: 'absolute', 
+        top: '10%', 
+        width: '95%', 
+        alignSelf: 'center' 
+    },
+    imageStyle: { 
+        width: 180, 
+        height: 140, 
+        alignSelf: 'center',     
     }
 })
 
