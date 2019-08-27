@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View } from 'react-native';
+import { View, Vibration } from 'react-native';
 import { RNCamera } from 'react-native-camera';
 import { connect } from 'react-redux';
 
@@ -18,6 +18,7 @@ class QrCodeScanner extends Component {
     }
 
     onBarCodeRead = data => {
+        Vibration.vibrate(500) // Android needs to configure permissions.
         // Set address.
         this.props.setAddressInReduxState(data)
         // Navigate back to Dashboard.
