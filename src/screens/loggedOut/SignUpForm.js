@@ -2,6 +2,9 @@ import React, { Component } from 'react';
 import { View, Text, Dimensions, ImageBackground, Image, StyleSheet } from 'react-native';
 import { Input } from 'react-native-elements';
 
+// Universal Login. TBD.
+import UniversalLoginSDK from '@universal-login/sdk';
+
 // Custom Components.
 import PalmButton from '../../components/common/PalmButton';
 import LoadingScreen from '../../components/LoadingScreen';
@@ -31,6 +34,17 @@ class SignUpForm extends Component {
         }
     }
 
+    async componentWillMount() {
+        /**
+        const sdk = new UniversalLoginSDK('http://192.168.1.35:3311', "http://192.168.1.35:18545");
+        console.log('Hello')
+
+        const [privateKey, contractAddress] = await sdk.create('pepito.mylogin.eth');
+        console.log('Private Key: ', privateKey)
+        console.log('Contract Address: ', contractAddress) 
+         */     
+    }
+
     onButtonPress() {
         // Deconstruct state.
         const { username, password, confirmPassword } = this.state;
@@ -41,6 +55,7 @@ class SignUpForm extends Component {
             // If so, call the '/register' endpoint which returns token.
             authCreateUser(username, password).then(res => {
                 if (res.data.auth) {
+                    console.log('Res: ', res.data)
                     // If token, save it in memory
                     setTokenInMemory('token', res.data.token)
                     // And set user in redux state.

@@ -10,6 +10,7 @@ import {
     StyleSheet 
 } from 'react-native';
 import { withNavigationFocus } from 'react-navigation';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 import { connect } from 'react-redux';
 
 // Components.
@@ -49,6 +50,17 @@ class Dashboard extends Component {
         }
     }
 
+    static navigationOptions = {
+        title: 'Dashboard',
+        drawerIcon: ({ focused }) => (
+            <Icon 
+                name={'home'} 
+                size={20} 
+                color={ focused ? colors.palleteDarkGreen : colors.paletteGray} 
+            /> 
+        )
+    }
+
     componentWillMount() {
         this.props.loadPlaidInfo()
         this.props.loadMarketDataETH(this.props.timeframe)
@@ -65,10 +77,9 @@ class Dashboard extends Component {
     
 
     render() {
-        console.log( this.props )
         return (
             <View style={styles.container}>
-                <Header showBell={true} elevated={true}/>
+                <Header showBell={true} elevated={true} navigation={this.props.navigation}/>
 
                 { this.props.dashboard == 'total'    ? <TotalDashboard />   : null } 
                 { this.props.dashboard == 'savings'  ? <SavingsDashboard /> : null }
@@ -265,19 +276,16 @@ class Dashboard extends Component {
 const styles = StyleSheet.create({
     container: {
         flex: 1, 
-        backgroundColor: '#FFF',
+        backgroundColor: colors.paletteWhite,
     },
     detailsContainer: {
         height: height * 1.5,
         width: width * 0.95,
-        marginLeft: '2.5%',
+        marginTop: '2.5%',
+        marginLeft: '2%',
         backgroundColor: '#FFF',
         borderRadius: 15,
-        shadowColor: '#000',
-        shadowOffset: { width: 0, height: 2 },
-        shadowOpacity: 0.29,
-        shadowRadius: 4.65,
-        elevation: 4,
+ 
     },
     categoryBox: { 
         height: height * 0.05, 

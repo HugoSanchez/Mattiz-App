@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, Image } from 'react-native';
+import { View, Text, TouchableOpacity, Image } from 'react-native';
 import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 import colors from '../../constants/colors'
@@ -21,33 +21,24 @@ const Header = props => {
                     null
                 ]}>
             <View style={{ flexDirection: 'row'}}>
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                {
-                    props.leftIcon ?
-                    <Icon 
-                        name={ props.leftIcon } 
-                        size={20} 
-                        color={colors.primaryBlue} 
-                        style={{ marginTop: '35%' }}/> 
-                    :
-                    null
-                }
-            </View>
+            <TouchableOpacity 
+                onPress={() => props.navigation.openDrawer()}
+                style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: '1%'}}>
+                <Image 
+                    source={require('../../assets/menu.png')}
+                    style={{ alignSelf: 'flex-start', height: 30, width: 30, marginTop: '35%', marginLeft: '20%' }}
+                /> 
+            </TouchableOpacity>
             <View style={{ flex: 2, justifyContent: 'center', alignItems: 'center', marginTop: '7%'}}>
                 <Text style={{ fontFamily: 'Didot-Bold', fontSize: 18, color: colors.palleteDarkGreen }}>MATTIZ!</Text>
             </View>
-            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center'}}>
-                {   
-                    props.showBell ?
-                    <Icon 
-                        name={'bell'} 
-                        size={20} 
-                        color={colors.primaryBlue} 
-                        style={{ marginTop: '40%' }}
-                    /> 
-                    :
-                    null
-                }
+            <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', marginTop: '1%'}}>
+                <Icon 
+                    name={'bell'} 
+                    size={20} 
+                    color={colors.palleteDarkGreen} 
+                    style={{ alignSelf: 'flex-end', marginTop: '40%', marginRight: '20%' }}
+                /> 
             </View>
             </View>
             {
@@ -64,6 +55,7 @@ const styles = {
     container: {
         width: '100%',
         height: '12%',
+        paddingTop: '3%',
         backgroundColor: '#fff', 
     }
 };

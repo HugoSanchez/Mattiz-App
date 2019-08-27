@@ -8,6 +8,7 @@ import {
     Dimensions, 
     StyleSheet 
 } from 'react-native';
+import Icon from 'react-native-vector-icons/SimpleLineIcons';
 
 // Components 
 import Header from '../../components/common/Header';
@@ -21,10 +22,22 @@ const width =  Dimensions.get('window').width
 const height = Dimensions.get('window').height
 
 export default class Products extends Component {
+
+    static navigationOptions = {
+        title: 'Products',
+        drawerIcon: ({ focused }) => (
+            <Icon 
+                name={'layers'} 
+                size={20} 
+                color={ focused ? colors.palleteDarkGreen : colors.paletteGray} 
+            /> 
+        )
+    }
+
     render() {
         return (
             <View style={ styles.container }>
-                <Header />
+                <Header navigation={this.props.navigation}/>
                 <ScrollView style={{ flex: 1, alignSelf: 'stretch' }}>
                     <View style={[ styles.subHeader, { alignItems: 'flex-start', marginLeft: '5%' } ]}>
                         <Text style={{ fontFamily: 'Raleway-SemiBold', fontSize: 20 }}> 

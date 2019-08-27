@@ -1,6 +1,7 @@
 import React from 'react';
+import { Dimensions } from 'react-native';
 
-import { createBottomTabNavigator } from 'react-navigation';
+import { createDrawerNavigator } from 'react-navigation';
 
 // Components 
 import Dashboard from '../../screens/loggedIn/Dashboard';
@@ -14,70 +15,37 @@ import Icon from 'react-native-vector-icons/SimpleLineIcons';
 // Colors
 import colors from '../../constants/colors'
 
-const LoggedInNavigator = createBottomTabNavigator({
-    Dashboard: {
-        screen: Dashboard,
-        navigationOptions: {
-            tabBarIcon: ({ tintColor }) => (
-                <Icon 
-                    name='home' 
-                    size={22} 
-                    style={{ paddingTop: 12 }} 
-                    color={tintColor}
-                />
-            )
-        }
-    },
-    Transactions: {
-        screen: Transactions,
-        navigationOptions: {
-            tabBarIcon: ({ tintColor }) => (
-                <Icon 
-                    name='equalizer' 
-                    size={20} 
-                    style={{ marginTop: 13, transform: [{ rotate: '90deg'}] }} 
-                    color={tintColor}
-                />
-            )
-        }
-    },
-    Products: {
-        screen: Products,
-        navigationOptions: {
-            tabBarIcon: ({ tintColor }) => (
-                <Icon 
-                    name='layers' 
-                    size={22} 
-                    style={{ paddingTop: 12 }}
-                    color={tintColor}
-                />
-            )
-        }
-    },
-    Settings: {
-        screen: Settings,
-        navigationOptions: {
-            tabBarIcon: ({ tintColor }) => (
-                <Icon 
-                    name='options' 
-                    size={20} 
-                    style={{ paddingTop: 12 }}
-                    color={tintColor}
-                />
-            )
-        }
-    }
+// Dims. 
+const width =  Dimensions.get('window').width
+
+const LoggedInNavigator = createDrawerNavigator({
+    Dashboard: Dashboard,
+    Stats: Transactions,
+    Products: Products,
+    Settings: Settings,
 },
-{
-    tabBarOptions: {
+{   
+    hideStatusBar: true,
+    drawerType: 'back',
+    drawerWidth: width * 0.80,
+    drawerBackgroundColor: 'rgba(255,255,255,.9)',
+    overlayColor: '#6b52ae',
+    contentOptions: {
         activeTintColor: colors.palleteDarkGreen,
         inactiveTintColor: colors.paletteGray,
-        showIcon: true, 
-        showLabel: false,
-        style: {
-            backgroundColor: '#FFF',
+        labelStyle: {
+            fontFamily: 'Didot',
+            fontSize: 20
         }
-    }
+    },
+    
+    /*drawerType: 'slide',
+    drawerPosition: 'left',
+    drawerWidth: '85%',
+    drawerBackgroundColor: '#FFF',
+    activeTintColor: colors.palleteDarkGreen,
+    inactiveTintColor: colors.paletteGray,
+    */
 });
 
 export default LoggedInNavigator;

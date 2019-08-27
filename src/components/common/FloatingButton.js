@@ -34,7 +34,7 @@ const styles = {
         height: 50,
         borderRadius: 25,
         right: 25,
-        bottom: 15,
+        bottom: 25,
         backgroundColor: colors.palleteDarkGreen,
         shadowColor: '#000',
         shadowOffset: { width: 5, height: 5 },
