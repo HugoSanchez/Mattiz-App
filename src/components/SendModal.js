@@ -56,6 +56,7 @@ class SendModal extends Component {
 
                         <View style={{ flex: 8 }}>
                             <SendAndReceiveEth
+                                navigation={this.props.navigation}
                                 onRequestClose={ this.props.onRequestClose }
                                 onModalClose={() => setEthRenderForm(false)} 
                             />

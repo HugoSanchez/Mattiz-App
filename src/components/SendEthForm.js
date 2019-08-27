@@ -105,7 +105,7 @@ const compStyles = {
     },
     buttonContainer: { 
         flex: 8, 
-        justifyContent: 'flex-start',
+        justifyContent: 'center',
     }
 };
 

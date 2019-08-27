@@ -113,7 +113,7 @@ class SendAndReceiveEth extends Component {
                     onSendPress={ () => this.setState({ isSendSelected: true })} 
                     onReceivePress={ () => this.setState({ isSendSelected: false })}
                 />
-                <SendEthForm />
+                <SendEthForm navigation={this.props.navigation}/>
             </View>
         )
     }

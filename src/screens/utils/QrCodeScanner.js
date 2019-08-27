@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
+import { RNCamera } from 'react-native-camera';
 import { connect } from 'react-redux';
 
-import MattizButton from '../../components/common/MattizButton';
+import PalmButton from '../../components/common/PalmButton';
 
-import { RNCamera } from 'react-native-camera';
+import { setAddressInReduxState } from '../../actions'
 
+import colors from '../../constants/colors';
 class QrCodeScanner extends Component {
     constructor(props){
         super(props);
@@ -16,6 +18,7 @@ class QrCodeScanner extends Component {
     }
 
     onBarCodeRead = data => {
+        // Set address.
         this.props.setAddressInReduxState(data)
         // Navigate back to Dashboard.
         this.props.navigation.navigate('Dashboard')
@@ -32,26 +35,23 @@ class QrCodeScanner extends Component {
 
                 <RNCamera 
                     ref={ref => {this.camera = ref;}}
-                    onBarCodeRead={data => console.log('Data: ', data)}
+                    onBarCodeRead={data => this.onBarCodeRead(data.data)}
                     style={{ flex: 1 }}
                 >
-                    <View style={ styles.top }>
+                    <View style={ styles.top }   />
 
-                    </View>
+                    <View style={ styles.right } />
 
-                    <View style={ styles.right }>
-
-                    </View>
-
-                    <View style={ styles.left }>
-
-                    </View>
+                    <View style={ styles.left }  />
 
                     <View style={ styles.bottom }>
-                        <MattizButton 
-                            title={'Back'}
-                            onPress={ () => navigation.navigate('Dashboard')}
-                        />
+                        <View style={{ position: 'absolute', bottom: '10%', width: '100%'}}>
+                            <PalmButton 
+                                title={'Back'}
+                                backgroundColor={colors.palleteLightGreen}
+                                onPress={ () => navigation.navigate('Dashboard')}
+                            />
+                        </View>
                     </View>
 
                 </RNCamera>
@@ -71,7 +71,7 @@ const styles = {
         top: 0, 
         width: '100%', 
         height: '20%', 
-        backgroundColor: 'rgba(255,255,255, 0.1)'
+        backgroundColor: 'rgba(0,0,0, 0.7)'
     },
     right: { 
         position: 'absolute', 
@@ -79,7 +79,7 @@ const styles = {
         right: 0, 
         width: '5%', 
         height: '80%', 
-        backgroundColor: 'rgba(255,255,255, 0.1)'
+        backgroundColor: 'rgba(0,0,0, 0.7)'
     },
     left: { 
         position: 'absolute', 
@@ -87,7 +87,7 @@ const styles = {
         left: 0, 
         width: '5%', 
         height: '80%', 
-        backgroundColor: 'rgba(255,255,255, 0.1)'
+        backgroundColor: 'rgba(0,0,0, 0.7)'
     }, 
     bottom: { 
         position: 'absolute', 
@@ -95,11 +95,19 @@ const styles = {
         right: '5%', 
         left: '5%', 
         width: '90%', 
-        height: '20%', 
-        backgroundColor: 'rgba(255,255,255, 0.1)', 
-        justifyContent: 'center'
+        height: '40%', 
+        backgroundColor: 'rgba(0,0,0, 0.7)', 
     }
-
 }
 
-export default QrCodeScanner;
+const mapDispatchToProps = dispatch => ({
+    setAddressInReduxState: address => {
+        dispatch(setAddressInReduxState(address))},
+});
+
+const mapStateToProps = state => {
+    return {};
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(QrCodeScanner);
