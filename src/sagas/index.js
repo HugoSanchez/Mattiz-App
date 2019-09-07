@@ -5,6 +5,7 @@ import ethSaga from './ethSaga';
 import ethMarketDataSaga from './ethMarketDataSaga';
 import btcMarketDataSaga from './btcMaketDataSaga';
 import setEthAmountSaga from './setEthAmountSaga';
+import setMaxEth from './setMaxEthSaga';
 
 export default function* rootSaga() {
     yield all([
@@ -13,7 +14,8 @@ export default function* rootSaga() {
         ethTxSaga(),
         ethMarketDataSaga(),
         btcMarketDataSaga(),
-        setEthAmountSaga()
+        setEthAmountSaga(),
+        setMaxEth()
         // other sagas to come...
     ])
 }

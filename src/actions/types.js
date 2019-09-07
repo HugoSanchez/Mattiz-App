@@ -20,6 +20,7 @@ export const SET_ETH_RENDER_FORM            = 'set_eth_render_form';
 export const SET_REMAINING_BALANCE          = 'set_remaining_balance';
 export const SET_AMOUNT_IN_DOLLARS          = 'set_amount_in_dollars';
 export const INITIATE_SET_AMOUNT            = 'initiate_set_amount';
+export const SET_ETH_MAX                    = 'set_eth_max';
 
     // COMMON ETH ACTIONS // 
 export const SET_ETH_ADDRESS                = 'set_eth_address';

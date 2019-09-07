@@ -3,6 +3,7 @@ import {
     SET_AMOUNT, 
     SET_ADDRESS, 
     SET_LOADING,
+    SET_ETH_MAX,
     SET_CONFIRMED,
     SET_REMAINING_BALANCE,
     SET_AMOUNT_IN_DOLLARS,
@@ -15,6 +16,13 @@ export const initiateSetAmountInReduxState = amount => {
     return {
         type: INITIATE_SET_AMOUNT,
         payload: amount
+    };
+};
+
+export const initiateSetMaxEthInReduxState = () => {
+    return {
+        type: SET_ETH_MAX,
+        payload: null
     };
 };
 

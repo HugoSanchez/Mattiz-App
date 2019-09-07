@@ -12,6 +12,7 @@ import {
     initiateTxSend,
     setAddressInReduxState,
     initiateSetAmountInReduxState,
+    initiateSetMaxEthInReduxState,
 } from '../actions'
 import colors from '../constants/colors';
 
@@ -41,7 +42,7 @@ class SendEthForm extends Component {
 
                 <SendModalAmountHeader
                     mainCurrency={'USD'}
-                    onPressMax={() => null} // To do. 
+                    onPressMax={() => this.props.initiateSetMaxEthInReduxState() } // To do. 
                     amount={amountInDollars}
                     subCurrencyAmount={amountInEth}
                     subDenomination={' Eth'}
@@ -133,6 +134,9 @@ const mapDispatchtoProps = dispatch => ({
 
     initiateSetAmountInReduxState: amount => {
         dispatch(initiateSetAmountInReduxState(amount))
+    },
+    initiateSetMaxEthInReduxState: () => {
+        dispatch(initiateSetMaxEthInReduxState())
     }
 });
 
