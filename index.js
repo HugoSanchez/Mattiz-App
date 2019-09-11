@@ -1,6 +1,5 @@
 /**
  * @format
- * @lint-ignore-every XPLATJSCOPYRIGHT1
  */
 
 
