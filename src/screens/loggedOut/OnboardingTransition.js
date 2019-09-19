@@ -18,34 +18,37 @@ const OnboardingTransition = props => {
 
     return (
         <View style={ container }>
-                <View style={{ alignItems: 'center', 
-        alignSelf: 'stretch',
-        marginTop: '15%'}}>
-                        <Text style={[ gstyles.bigLightTitle ]}>
-                            Hurray!
-                        </Text>
-                    <View style={ textBox }>
-                        <Text style={[ gstyles.extraSmallLightTitle, textStyle ]}>
-                            You have succesfully linked your bank account. 
-                            Now, continue linking more accounts, or 
-                            proceed to the next stage.
-                        </Text>
-                    </View>
+            {
+                console.log('transition!')
+            }
+            <View style={{ alignItems: 'center', 
+                            alignSelf: 'stretch',
+                            marginTop: '15%'}}>
+                    <Text style={[ gstyles.bigLightTitle ]}>
+                        Hurray!
+                    </Text>
+                <View style={ textBox }>
+                    <Text style={[ gstyles.extraSmallLightTitle, textStyle ]}>
+                        You have succesfully linked your bank account. 
+                        Now, continue linking more accounts, or 
+                        proceed to the next stage.
+                    </Text>
                 </View>
+            </View>
 
-                <View style={ viewStyle }>
-                <PalmButton
-                    title={'Continue'}
-                    iconName={'arrow-right'}
-                    onPress={() => navigation.navigate('GenerateWallet')} 
-                />
+            <View style={ viewStyle }>
+            <PalmButton
+                title={'Continue'}
+                iconName={'arrow-right'}
+                onPress={() => navigation.navigate('GenerateWallet')} 
+            />
 
-                <PalmButton
-                    backgroundColor={colors.palleteLightGreen}
-                    title={'Link more Accounts'}
-                    onPress={() => navigation.navigate('PlaidLink')} 
-                />
-                </View> 
+            <PalmButton
+                backgroundColor={colors.palleteLightGreen}
+                title={'Link more Accounts'}
+                onPress={() => navigation.navigate('PlaidLink')} 
+            />
+            </View> 
         </View>
     );
 }
