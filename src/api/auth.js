@@ -1,7 +1,9 @@
 import { AsyncStorage } from 'react-native';
 import axios from 'axios';
+// const crypto = require('crypto')
+import crypto from 'crypto'
 
-const URL = 'http://192.168.100.26:3000/api'
+const URL = 'http://localhost:3000/api'
 
     // ASYNCSTORAGE TOKEN FUNCTIONS // 
 
@@ -37,7 +39,7 @@ export const removeTokenFromMemory = async (key) => {
 
 // CALL "/register" ENDPOINT.
 export const authCreateUser = (name, password) => {
-    return axios.post(URL + '/auth/register', {name, password})
+    return axios.post(URL + '/auth/register', encryptData({name, password}, "password"))
 }
 
 // CALL "/identify" ENDPOINT, RETURNS NAME & ID.
@@ -80,4 +82,58 @@ export const getEthPrice = async () => {
 
 export const getBtcPrice = async () => {
     return await axios.get('https://api.cryptonator.com/api/ticker/btc-usd')
+}
+
+// ENCRYPTION HELPER METHODS
+
+const generateKey = (password) => {
+  return crypto.createHash('sha256')
+          .update(password)
+          .digest()
+}
+
+const generateIv = (ivString) => {
+  const iv16Bytes = Buffer.allocUnsafe(16)
+  const iv32Bytes = crypto.createHash('sha256')
+                    .update(ivString)
+                    .digest()
+
+  iv32Bytes.copy(iv16Bytes)
+
+  return iv16Bytes
+}
+
+const generateCipher = (password, ivString) => {
+  return crypto.createCipheriv(
+    'aes256', 
+    generateKey(password),
+    generateIv(ivString)
+  )
+}
+
+const generateDecipher = (password, ivString) => {
+  return crypto.createDecipheriv(
+    'aes256', 
+    generateKey(password),
+    generateIv(ivString)
+  )
+}
+
+const encryptData = (data, password) => {
+  const plainText = JSON.stringify(data)
+  const cipher = generateCipher(password, "IVString")
+
+  let encrypted = cipher.update(plainText, 'binary', 'hex')
+  encrypted += cipher.final('hex')
+
+  return { data: encrypted }
+}
+
+const decryptData = (cipherText, password) => {
+  const decipher = generateDecipher(password, "IVString")
+
+  let decrypted = decipher.update(cipherText, 'hex', 'binary')
+  decrypted += decipher.final('binary')
+
+  return JSON.parse(decrypted)
 }
