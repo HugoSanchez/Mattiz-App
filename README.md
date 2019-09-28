@@ -22,10 +22,31 @@
 3. Link dependencies again:
 ```react-native link```
 4. Reset React Native Caches:
-watchman watch-del-all
+```watchman watch-del-all```
 ```rm -rf $TMPDIR/react-*```
 ```rm -rf $TMPDIR/metro-*```
 ```rm -rf $TMPDIR/haste-*```
 6. Run rn-nodeify hack again:
 ```./node_modules/.bin/rn-nodeify --hack --install```
 7. Erase hardware and restart emulator
+
+
+## SETUP 60 for IOS
+
+
+1. Install CocoaPods globally 
+```gem install cocoapods```
+
+2. ```brew install watchman```
+
+
+3. In project directory run 
+```npm install``
+
+4. Run rn-nodeify hack again:
+```./node_modules/.bin/rn-nodeify --hack --install```
+
+5. CD into ios directory in project and install pods
+```cd ios && pod install```
+
+
