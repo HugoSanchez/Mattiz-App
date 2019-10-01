@@ -1,0 +1,43 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`SignUpForm component 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#FFF",
+      "flex": 1,
+      "justifyContent": "center",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "alignSelf": "stretch",
+        "backgroundColor": "white",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+    testID="LoadingScreen"
+  >
+    <RNSpinkit
+      color={4279582803}
+      size={75}
+      style={
+        Array [
+          Object {
+            "height": 75,
+            "width": 75,
+          },
+          Object {
+            "alignSelf": "center",
+          },
+        ]
+      }
+      type="Pulse"
+    />
+  </View>
+</View>
+`;
