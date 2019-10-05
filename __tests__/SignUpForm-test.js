@@ -23,8 +23,7 @@ test('SignUpForm component', () => {
 	)
 
 	fireEvent.press(queryByText('Sign Up'))
-	const userNameInput = queryByPlaceholderText("What's your name?")
-
+	const userNameInput = queryByTestId('SignUpFormNameInput')
 	expect(userNameInput).toBeTruthy()
 	expect(queryByText('Sign Up')).toBeNull()
 
