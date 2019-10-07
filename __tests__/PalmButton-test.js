@@ -5,10 +5,7 @@ import {render, fireEvent} from '@testing-library/react-native'
 
 test('calls onPress callback when clicked', () => {
 	const palmButtonCallback = jest.fn()
-
-	const {container} = render(
-		<PalmButton onPress={palmButtonCallback}></PalmButton>,
-	)
+	const {container} = render(<PalmButton onPress={palmButtonCallback} />)
 
 	fireEvent.press(container.children[0])
 
@@ -17,6 +14,6 @@ test('calls onPress callback when clicked', () => {
 })
 
 test('Renders with title', () => {
-	const {container} = render(<PalmButton title="Button"></PalmButton>)
+	const {container} = render(<PalmButton title="Button" />)
 	expect(container.children[0]).toMatchSnapshot()
 })
