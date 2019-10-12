@@ -25,6 +25,7 @@ function* handleHistoricLoad() {
     let time = yield select(timeframeState)
     // Call Nomics API.
     let historicBtcPrice = yield getHistoricPrices(time.timeframe, 'BTC')
+    console.log("HistoricBtcPrices: ", historicBtcPrice)
     // Get the actual price rates from the response.
     let rates = historicBtcPrice.data.rates
     // Calculate percentage variation.

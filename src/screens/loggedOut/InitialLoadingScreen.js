@@ -4,6 +4,7 @@ import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
 
 import colors from '../../constants/colors';
+import { requestSecConn, establishSecConn } from '../../api/auth'
  
 // Auth Actions & Functions
 import { getTokenFromMemory, identifyUser } from '../../api/auth';
@@ -14,6 +15,15 @@ class InitialLoadingScreen extends Component {
     async componentDidMount() {
          // This is just to test the interaction 
          setTimeout(this.initiateFunction.bind(this), 4000)
+
+        const { data } = await requestSecConn()
+        console.log("Requested SC: ", data)
+        establishSecConn(data)
+        .then(resp => {
+            console.log("resp: ", resp)
+        }, (err) => {
+            console.log("REJECTED: ", err)
+        })
     }
 
     async initiateFunction() {

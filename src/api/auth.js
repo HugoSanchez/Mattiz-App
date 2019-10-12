@@ -1,7 +1,8 @@
 import { AsyncStorage } from 'react-native';
 import axios from 'axios';
+
+import { establishDH, encryptData } from './helper'
 // const crypto = require('crypto')
-import crypto from 'crypto'
 
 const URL = 'http://localhost:3000/api'
 
@@ -12,6 +13,7 @@ const URL = 'http://localhost:3000/api'
  *  @ 'token' - unique user token returned from the auth backend.
  *  @ 'plaid-tokens' - array of plaid access_tokens.  
  *  @ 'wallet' - ethers encrypted wallet.
+ *  @ 'secret' - secure connection secret
  */
 
 // CHECK IF TOKEN EXISTS, RETURNS BOOLEAN.
@@ -38,18 +40,18 @@ export const removeTokenFromMemory = async (key) => {
     // AUTH API FUNCTIONS //
 
 // CALL "/register" ENDPOINT.
-export const authCreateUser = (name, password) => {
-    return axios.post(URL + '/auth/register', encryptData({name, password}, "password"))
+export const authCreateUser = async (name, password) => {
+    return axios.post(URL + '/auth/register', await encryptData({name, password}))
 }
 
 // CALL "/identify" ENDPOINT, RETURNS NAME & ID.
-export const identifyUser = (token) => {
-    return axios.post(URL + '/auth/identify', {token})
+export const identifyUser = async (token) => {
+    return axios.post(URL + '/auth/identify', await encryptData({token}))
 }
 
 // CALL "/login" ENDPOINT, RETURNS OBJECT { auth: bool, token: token }
-export const verifyUser = (userID, password) => {
-    return axios.post(URL + '/auth/login', { _id: userID, password })
+export const verifyUser = async (userID, password) => {
+    return axios.post(URL + '/auth/login', await encryptData({ _id: userID, password }))
 }
 
     // PLAID API FUNCTIONS //
@@ -57,23 +59,23 @@ export const verifyUser = (userID, password) => {
 // CALL "/get_acess_token" ENDPOINT.
 export const getAccessToken = async (publicToken) => {
     console.log(' hit! ', URL + "/plaid/get_access_token")
-    return await axios.post(URL + '/plaid/get_access_token', { public_token: publicToken })
+    return await axios.post(URL + '/plaid/get_access_token', await encryptData({ public_token: publicToken }))
 }
 
 export const getBalance = async () => {
     const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
-    return await axios.post(URL + '/plaid/accounts', { accessTokenArray: tokens.tokenArray })
+    return await axios.post(URL + '/plaid/accounts', await encryptData({ accessTokenArray: tokens.tokenArray }))
 }
 
 export const getTransactions = async () => {
     const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
-    return await axios.post(URL + '/plaid/last_90_days_transactions', { accessTokenArray: tokens.tokenArray })
+    return await axios.post(URL + '/plaid/last_90_days_transactions', await encryptData({ accessTokenArray: tokens.tokenArray }))
 } 
 
     // MARKET DATA FUNCTIONS // 
 
 export const getHistoricPrices = async (timeframe, currency) => {
-    return await axios.post(URL + '/data/get_historical_data', { timeframe, currency })
+    return await axios.post(URL + '/data/get_historical_data', await encryptData({ timeframe, currency }))
 }
 
 export const getEthPrice = async () => {
@@ -84,56 +86,20 @@ export const getBtcPrice = async () => {
     return await axios.get('https://api.cryptonator.com/api/ticker/btc-usd')
 }
 
-// ENCRYPTION HELPER METHODS
+// ESTABLISH SC
 
-const generateKey = (password) => {
-  return crypto.createHash('sha256')
-          .update(password)
-          .digest()
+const secConnURL = 'http://localhost:3000'
+
+export const requestSecConn = async () => {
+    return await axios.get(secConnURL + '/esc')
 }
 
-const generateIv = (ivString) => {
-  const iv16Bytes = Buffer.allocUnsafe(16)
-  const iv32Bytes = crypto.createHash('sha256')
-                    .update(ivString)
-                    .digest()
-
-  iv32Bytes.copy(iv16Bytes)
-
-  return iv16Bytes
-}
-
-const generateCipher = (password, ivString) => {
-  return crypto.createCipheriv(
-    'aes256', 
-    generateKey(password),
-    generateIv(ivString)
-  )
-}
-
-const generateDecipher = (password, ivString) => {
-  return crypto.createDecipheriv(
-    'aes256', 
-    generateKey(password),
-    generateIv(ivString)
-  )
-}
-
-const encryptData = (data, password) => {
-  const plainText = JSON.stringify(data)
-  const cipher = generateCipher(password, "IVString")
-
-  let encrypted = cipher.update(plainText, 'binary', 'hex')
-  encrypted += cipher.final('hex')
-
-  return { data: encrypted }
-}
-
-const decryptData = (cipherText, password) => {
-  const decipher = generateDecipher(password, "IVString")
-
-  let decrypted = decipher.update(cipherText, 'hex', 'binary')
-  decrypted += decipher.final('binary')
-
-  return JSON.parse(decrypted)
+export const establishSecConn = async ({key, prime, generator, sessionId}) => {
+    const { cKey, secret } = establishDH(key, prime, generator)
+    // globalSecret = secret.toString('hex')
+    AsyncStorage.setItem('secret', secret.toString('hex'))
+    AsyncStorage.setItem('sessionId', sessionId)
+    console.log("cKey: ", cKey)
+    console.log("sessionId: ", sessionId)
+    return await axios.post(secConnURL + '/esc', { cKey, sessionId })
 }
