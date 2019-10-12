@@ -1,0 +1,112 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders with title 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "backgroundColor": "#fff",
+        "height": "12%",
+        "paddingTop": "3%",
+        "width": "100%",
+      },
+      null,
+      null,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "flexDirection": "row",
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "marginTop": "1%",
+        }
+      }
+    >
+      <Image
+        source={
+          Object {
+            "testUri": "../../../src/assets/menu.png",
+          }
+        }
+        style={
+          Object {
+            "alignSelf": "flex-start",
+            "height": 30,
+            "marginLeft": "20%",
+            "marginTop": "35%",
+            "width": 30,
+          }
+        }
+      />
+    </TouchableOpacity>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 2,
+          "justifyContent": "center",
+          "marginTop": "7%",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Didot-Bold",
+            "fontSize": 18,
+          }
+        }
+      >
+        MATTIZ!
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "flex": 1,
+          "justifyContent": "center",
+          "marginTop": "1%",
+        }
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": "#154053",
+              "fontSize": 20,
+            },
+            Object {
+              "alignSelf": "flex-end",
+              "marginRight": "20%",
+              "marginTop": "40%",
+            },
+            Object {
+              "fontFamily": "simple-line-icons",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </View>
+  </View>
+</View>
+`;

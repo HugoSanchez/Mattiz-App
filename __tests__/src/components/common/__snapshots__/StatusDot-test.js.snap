@@ -1,0 +1,14 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders with title 1`] = `
+<View
+  style={
+    Object {
+      "backgroundColor": "#C88383",
+      "borderRadius": NaN,
+      "height": undefined,
+      "width": undefined,
+    }
+  }
+/>
+`;

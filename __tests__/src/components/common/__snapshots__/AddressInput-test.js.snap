@@ -1,0 +1,97 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders with title 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "alignSelf": "stretch",
+        "flex": 3,
+        "justifyContent": "center",
+      },
+      Object {
+        "flex": undefined,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Array [
+        Object {
+          "alignItems": "center",
+          "alignSelf": "stretch",
+          "backgroundColor": "#FDFFFE",
+          "borderRadius": 15,
+          "justifyContent": "center",
+          "margin": 5,
+        },
+        Object {
+          "alignSelf": "center",
+          "borderRadius": 10,
+          "height": "100%",
+          "width": 525,
+        },
+        Object {
+          "elevation": 7,
+          "shadowColor": "#000",
+          "shadowOffset": Object {
+            "height": 3,
+            "width": 0,
+          },
+          "shadowOpacity": 0.29,
+          "shadowRadius": 4.65,
+        },
+      ]
+    }
+  >
+    <View
+      style={
+        Object {
+          "paddingHorizontal": 10,
+          "width": "100%",
+        }
+      }
+    >
+      <View
+        style={
+          Object {
+            "alignItems": "center",
+            "borderBottomColor": "transparent",
+            "borderBottomWidth": 1,
+            "borderColor": "#86939e",
+            "flexDirection": "row",
+            "marginTop": 5,
+            "transform": Array [
+              Object {
+                "translateX": 0,
+              },
+            ],
+          }
+        }
+      >
+        <TextInput
+          allowFontScaling={true}
+          editable={true}
+          placeholderTextColor="#040026"
+          rejectResponderTermination={true}
+          secureTextEntry={false}
+          style={
+            Object {
+              "alignSelf": "center",
+              "color": "black",
+              "flex": 1,
+              "fontFamily": "Aleo-Light",
+              "fontSize": 18,
+              "minHeight": 40,
+            }
+          }
+          testID="RNE__Input__text-input"
+          underlineColorAndroid="transparent"
+        />
+      </View>
+    </View>
+  </View>
+</View>
+`;

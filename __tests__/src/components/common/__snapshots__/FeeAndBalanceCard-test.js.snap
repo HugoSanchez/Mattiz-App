@@ -1,0 +1,87 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders with title 1`] = `
+<View
+  style={
+    Object {
+      "flex": 2,
+      "flexDirection": "row",
+      "marginLeft": "7%",
+      "marginRight": "7%",
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1,
+        "flexDirection": "row",
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#154053",
+          "fontFamily": "Rajdhani-Light",
+          "fontSize": 18,
+        }
+      }
+    >
+      Fee:
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Regular",
+            "fontSize": 16,
+          }
+        }
+      >
+           $undefined
+      </Text>
+    </Text>
+  </View>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "flex": 1.5,
+        "flexDirection": "row",
+        "justifyContent": "center",
+        "marginRight": "4%",
+      }
+    }
+  >
+    <Text
+      style={
+        Array [
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Light",
+            "fontSize": 18,
+          },
+          Object {
+            "marginLeft": 25,
+          },
+        ]
+      }
+    >
+      Balance:
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Regular",
+            "fontSize": 16,
+          }
+        }
+      >
+           $undefined
+      </Text>
+    </Text>
+  </View>
+</View>
+`;

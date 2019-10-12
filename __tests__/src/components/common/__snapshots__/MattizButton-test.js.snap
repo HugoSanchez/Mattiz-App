@@ -1,0 +1,73 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders with title 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignSelf": "stretch",
+        "backgroundColor": "#FFFF",
+        "borderRadius": 12,
+        "elevation": 22,
+        "margin": 10,
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 10,
+          "width": 2,
+        },
+        "shadowOpacity": 0.29,
+        "shadowRadius": 12.65,
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "borderRadius": 3,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.3}
+      disabled={false}
+    >
+      <BVLinearGradient
+        colors={
+          Array [
+            4292734455,
+            4292734455,
+          ]
+        }
+        endPoint={
+          Object {
+            "x": 1,
+            "y": 0.5,
+          }
+        }
+        locations={null}
+        startPoint={
+          Object {
+            "x": 0,
+            "y": 0.5,
+          }
+        }
+        style={
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#2089dc",
+            "borderColor": "#2089dc",
+            "borderRadius": 10,
+            "borderWidth": 0,
+            "flexDirection": "row",
+            "height": 60,
+            "justifyContent": "center",
+            "padding": 8,
+          }
+        }
+      />
+    </TouchableOpacity>
+  </View>
+</View>
+`;

@@ -1,0 +1,54 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders with title 1`] = `
+<View>
+  <TouchableOpacity
+    activeOpacity={0.7}
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#154053",
+        "borderRadius": 25,
+        "bottom": 25,
+        "elevation": 2,
+        "height": 50,
+        "justifyContent": "center",
+        "position": "absolute",
+        "right": 25,
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 5,
+          "width": 5,
+        },
+        "shadowOpacity": 0.29,
+        "shadowRadius": 2.65,
+        "width": 50,
+      }
+    }
+  >
+    <Text
+      allowFontScaling={false}
+      style={
+        Array [
+          Object {
+            "color": "#D9F7EE",
+            "fontSize": 25,
+          },
+          Object {
+            "marginRight": 3,
+            "marginTop": 3,
+          },
+          Object {
+            "fontFamily": "simple-line-icons",
+            "fontStyle": "normal",
+            "fontWeight": "normal",
+          },
+          Object {},
+        ]
+      }
+    >
+      
+    </Text>
+  </TouchableOpacity>
+</View>
+`;

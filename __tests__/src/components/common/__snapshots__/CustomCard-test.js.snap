@@ -1,0 +1,20 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders with title 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "alignSelf": "stretch",
+        "backgroundColor": "#FDFFFE",
+        "borderRadius": 15,
+        "justifyContent": "center",
+        "margin": 5,
+      },
+      undefined,
+      null,
+    ]
+  }
+/>
+`;

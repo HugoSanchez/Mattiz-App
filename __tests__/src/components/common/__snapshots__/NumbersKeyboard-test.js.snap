@@ -1,0 +1,346 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders with title 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "alignSelf": "stretch",
+        "flex": 20,
+        "marginLeft": "5%",
+        "marginRight": "5%",
+        "marginTop": "5%",
+      },
+      Object {
+        "flex": undefined,
+      },
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignSelf": "stretch",
+        "flex": 1,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Regular",
+            "fontSize": 22,
+          }
+        }
+      >
+        1
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Regular",
+            "fontSize": 22,
+          }
+        }
+      >
+        2
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Regular",
+            "fontSize": 22,
+          }
+        }
+      >
+        3
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View
+    style={
+      Object {
+        "alignSelf": "stretch",
+        "flex": 1,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Regular",
+            "fontSize": 22,
+          }
+        }
+      >
+        4
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Regular",
+            "fontSize": 22,
+          }
+        }
+      >
+        5
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Regular",
+            "fontSize": 22,
+          }
+        }
+      >
+        6
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View
+    style={
+      Object {
+        "alignSelf": "stretch",
+        "flex": 1,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Regular",
+            "fontSize": 22,
+          }
+        }
+      >
+        7
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Regular",
+            "fontSize": 22,
+          }
+        }
+      >
+        8
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Regular",
+            "fontSize": 22,
+          }
+        }
+      >
+        9
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View
+    style={
+      Object {
+        "alignSelf": "stretch",
+        "flex": 1,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Regular",
+            "fontSize": 22,
+          }
+        }
+      >
+        ,
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Object {
+            "color": "#154053",
+            "fontFamily": "Rajdhani-Regular",
+            "fontSize": 22,
+          }
+        }
+      >
+        0
+      </Text>
+    </TouchableOpacity>
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontSize": 20,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Feather",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </TouchableOpacity>
+  </View>
+</View>
+`;

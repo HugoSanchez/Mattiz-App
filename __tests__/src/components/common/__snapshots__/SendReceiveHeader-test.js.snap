@@ -1,0 +1,121 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders with title 1`] = `
+<View
+  style={
+    Object {
+      "alignSelf": "stretch",
+      "flex": 2,
+    }
+  }
+>
+  <View
+    style={
+      Object {
+        "flex": 0.5,
+      }
+    }
+  >
+    <TouchableOpacity
+      activeOpacity={0.2}
+      style={
+        Object {
+          "alignItems": "center",
+          "justifyContent": "center",
+          "marginLeft": "4%",
+          "width": "10%",
+        }
+      }
+    >
+      <Text
+        allowFontScaling={false}
+        style={
+          Array [
+            Object {
+              "color": undefined,
+              "fontSize": 25,
+            },
+            undefined,
+            Object {
+              "fontFamily": "Feather",
+              "fontStyle": "normal",
+              "fontWeight": "normal",
+            },
+            Object {},
+          ]
+        }
+      >
+        
+      </Text>
+    </TouchableOpacity>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 2,
+        "flexDirection": "row",
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <TouchableOpacity
+        activeOpacity={0.2}
+        style={null}
+      >
+        <Text
+          style={
+            Object {
+              "color": "#154053",
+              "fontFamily": "Rajdhani-Light",
+              "fontSize": 18,
+            }
+          }
+        >
+          Send
+        </Text>
+      </TouchableOpacity>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <TouchableOpacity
+        activeOpacity={0.2}
+        style={
+          Object {
+            "borderBottomWidth": 1,
+            "borderColor": undefined,
+          }
+        }
+      >
+        <Text
+          style={
+            Object {
+              "color": "#154053",
+              "fontFamily": "Raleway-Medium",
+              "fontSize": 18,
+            }
+          }
+        >
+          Receive
+        </Text>
+      </TouchableOpacity>
+    </View>
+  </View>
+</View>
+`;

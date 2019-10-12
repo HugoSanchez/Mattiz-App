@@ -1,0 +1,85 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders with title 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "borderRadius": 5,
+        "elevation": 12,
+        "flexDirection": "row",
+        "height": 55,
+        "justifyContent": "center",
+        "margin": 10,
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 5,
+          "width": 2,
+        },
+        "shadowOpacity": 0.29,
+        "shadowRadius": 4.65,
+      },
+      null,
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#154053",
+          "fontFamily": "Rajdhani-Regular",
+          "fontSize": 22,
+        },
+        undefined,
+      ]
+    }
+  >
+    Button
+  </Text>
+</TouchableOpacity>
+`;
+
+exports[`calls onPress callback when clicked 1`] = `
+<TouchableOpacity
+  activeOpacity={0.2}
+  style={
+    Array [
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "transparent",
+        "borderRadius": 5,
+        "elevation": 12,
+        "flexDirection": "row",
+        "height": 55,
+        "justifyContent": "center",
+        "margin": 10,
+        "shadowColor": "#000",
+        "shadowOffset": Object {
+          "height": 5,
+          "width": 2,
+        },
+        "shadowOpacity": 0.29,
+        "shadowRadius": 4.65,
+      },
+      null,
+    ]
+  }
+>
+  <Text
+    style={
+      Array [
+        Object {
+          "color": "#154053",
+          "fontFamily": "Rajdhani-Regular",
+          "fontSize": 22,
+        },
+        undefined,
+      ]
+    }
+  />
+</TouchableOpacity>
+`;

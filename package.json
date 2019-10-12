@@ -53,6 +53,7 @@
     "react-redux": "^6.0.1",
     "readable-stream": "^1.0.33",
     "redux": "^4.0.4",
+    "redux-mock-store": "^1.5.3",
     "redux-saga": "^1.1.1",
     "stream-browserify": "^1.0.0",
     "string_decoder": "^0.10.31",
@@ -66,6 +67,7 @@
     "@babel/core": "^7.5.0",
     "@babel/runtime": "^7.5.0",
     "@react-native-community/eslint-config": "^0.0.3",
+    "@testing-library/react-native": "^4.0.12",
     "babel-jest": "^24.1.0",
     "jest": "^24.1.0",
     "metro-react-native-babel-preset": "0.54.1",
@@ -73,7 +75,7 @@
     "rn-nodeify": "^10.1.0"
   },
   "jest": {
-    "preset": "react-native"
+    "preset": "@testing-library/react-native"
   },
   "react-native": {
     "zlib": "browserify-zlib",

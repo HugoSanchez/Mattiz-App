@@ -1,0 +1,152 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Renders with title 1`] = `
+<View
+  style={
+    Array [
+      Object {
+        "flexDirection": "row",
+        "height": 106.72,
+        "paddingLeft": "2%",
+      },
+      undefined,
+    ]
+  }
+>
+  <View
+    style={
+      Object {
+        "alignItems": "center",
+        "backgroundColor": "#fff",
+        "flex": 1,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <View
+      style={
+        Array [
+          Object {
+            "alignItems": "center",
+            "backgroundColor": "#FFF",
+            "borderRadius": 33.35,
+            "height": 66.7,
+            "justifyContent": "center",
+            "width": 66.7,
+          },
+          undefined,
+        ]
+      }
+    >
+      <Image
+        source={
+          Object {
+            "uri": undefined,
+          }
+        }
+        style={
+          Array [
+            Object {
+              "borderRadius": 26.68,
+              "height": 53.36,
+              "width": 53.36,
+            },
+            undefined,
+          ]
+        }
+      />
+    </View>
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 3,
+        "justifyContent": "center",
+      }
+    }
+  >
+    <Text
+      style={
+        Object {
+          "color": "#154053",
+          "fontFamily": "Rajdhani-Medium",
+          "fontSize": 18,
+        }
+      }
+    />
+  </View>
+  <View
+    style={
+      Object {
+        "flex": 2,
+      }
+    }
+  >
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Object {
+              "color": "#154053",
+              "fontFamily": "Rajdhani-Regular",
+              "fontSize": 16,
+            },
+            Object {
+              "alignSelf": "flex-end",
+              "color": "#000",
+              "marginRight": "15%",
+              "marginTop": "15%",
+            },
+          ]
+        }
+      >
+        0.00
+         €
+      </Text>
+    </View>
+    <View
+      style={
+        Object {
+          "alignItems": "center",
+          "backgroundColor": "#fff",
+          "flex": 1,
+          "justifyContent": "center",
+        }
+      }
+    >
+      <Text
+        style={
+          Array [
+            Array [
+              Object {
+                "color": "#154053",
+                "fontFamily": "Rajdhani-Bold",
+                "fontSize": 16,
+              },
+              Object {
+                "alignSelf": "flex-end",
+                "color": "#C4E19C",
+                "fontSize": 14,
+                "marginBottom": "10%",
+                "marginRight": "20%",
+              },
+            ],
+            Object {
+              "color": "#C88383",
+            },
+          ]
+        }
+      />
+    </View>
+  </View>
+</View>
+`;
