@@ -18,6 +18,6 @@ export const RootNavigator = () =>
 			},
 		},
 		{
-			initialRouteName: 'LoggedIn',
+			initialRouteName: 'LoggedOut',
 		},
 	)
