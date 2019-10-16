@@ -14,7 +14,7 @@ const env = 'sandbox'
 const product = 'auth,transactions'
 const clientName = 'Mattiz.'
 const selectAccount = false
-const countryCodes = ['GB,ES,FR']
+const countryCodes = ['US,GB,ES,FR']
 
 const uri = `https://cdn.plaid.com/link/v2/stable/link.html?key=${publicKey}&countryCodes=${countryCodes}&apiVersion=v2&env=${env}&product=${product}&clientName=${clientName}&isWebView=true&isMobile=true&selectAccount=${selectAccount}`
 class PlaidLink extends Component {
