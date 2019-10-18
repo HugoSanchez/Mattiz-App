@@ -1,5 +1,5 @@
 import React from 'react'
-import {View, Text, TouchableOpacity, Image} from 'react-native'
+import {View, Text, TouchableOpacity} from 'react-native'
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
 
 import colors from '../../constants/colors'
@@ -24,13 +24,28 @@ const Header = props => {
 			]}>
 			<View style={{flexDirection: 'row'}}>
 				<TouchableOpacity
+					onPress={props.onPressBack}
 					style={{
 						flex: 1,
 						justifyContent: 'center',
 						alignItems: 'center',
 						marginTop: '1%',
 					}}
-				/>
+				>
+					{
+						props.goBack ?
+						<Icon
+							name={'arrow-left'}
+							size={15}
+							color={colors.palleteDarkGreen}
+							style={{
+								alignSelf: 'flex-start',
+								marginTop: '40%',
+								marginLeft: '20%',
+							}}
+						/>
+						: null}
+				</TouchableOpacity>
 				<View
 					style={{
 						flex: 2,

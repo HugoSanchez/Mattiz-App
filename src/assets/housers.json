@@ -1,0 +1,38 @@
+[
+    {
+        "name": "Espacio Chamberí I",
+        "city": "Madrid",
+        "type": "Development Loan",
+        "amount": "417,500 €",
+        "amount-raised": "204,265 €",
+        "investors": "564",
+        "yield": "8.25 %",
+        "term": "12 months",
+        "url": "https://www.housers.com/en/opportunities/400/espacio-chamberi-i",
+        "image": "https://docs.housers.com/2c05ea8e-bd1e-456f-97f1-bdd093100695/c9542e62-250d-48be-8fc5-c1c5e77ae008/portadas-6-1-.png"
+    },
+    {
+        "name": "Milan Metropolitan",
+        "city": "Milan",
+        "type": "Development Loan",
+        "amount": "200,000 €",
+        "amount-raised": "171,209 €",
+        "investors": "361",
+        "yield": "9.00 %",
+        "term": "12 months",
+        "url": "https://www.housers.com/en/opportunities/421/milan-metropolitan",
+        "image": "https://docs.housers.com/3a2de5a7-c090-450c-9068-842221c515c3/b693f3d5-c80d-4784-a794-a4a23b4c8ca9/portadas-1-.png"
+    },
+    {
+        "name": "Madeira Villas II",
+        "city": "Madeira",
+        "type": "Development Loan",
+        "amount": "225,000 €",
+        "amount-raised": "37,397 €",
+        "investors": "156",
+        "yield": "8.50 %",
+        "term": "12 months",
+        "url": "https://www.housers.com/en/opportunities/428/madeira-villasii",
+        "image": "https://docs.housers.com/883d0bc2-809f-47aa-87fe-ea872d007c73/577a923c-be30-4ee6-a757-84843f303073/portadas-1-.png"
+    }
+]

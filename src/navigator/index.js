@@ -1,7 +1,7 @@
 import {createSwitchNavigator} from 'react-navigation'
 
 import LoggedOutNavigator from './loggedOut'
-import LoggedInNavigator from './loggedIn/BottomTab'
+import LoggedInNavigator from './loggedIn'
 import UtilsNavigator from './utils'
 
 export const RootNavigator = () =>

@@ -3,7 +3,8 @@ import {
 	View,
 	Text,
     Image,
-    SafeAreaView,
+	SafeAreaView,
+	TouchableOpacity,
 	ImageBackground,
 	ScrollView,
 	Dimensions,
@@ -619,7 +620,10 @@ export default class Products extends Component {
 								/>
 							</View>
 						</View>
-						<View
+						<TouchableOpacity
+							onPress={() =>
+								this.props.navigation.navigate('Housers')
+							}
 							style={{
 								flex: 1,
 								flexDirection: 'column',
@@ -655,7 +659,7 @@ export default class Products extends Component {
 								}}>
 								for real estate investments.
 							</Text>
-						</View>
+						</TouchableOpacity>
 					</View>
 				</ScrollView>
 			</SafeAreaView>
