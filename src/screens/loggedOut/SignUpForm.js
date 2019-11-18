@@ -8,6 +8,10 @@ import {
 } from 'react-native'
 import {Input} from 'react-native-elements'
 
+// Required 'Shim' for ethers.js to work in React Native.
+import 'ethers/dist/shims.js'
+import {ethers} from 'ethers'
+
 // Custom Components.
 import PalmButton from '../../components/common/PalmButton'
 import LoadingScreen from '../../components/LoadingScreen'
@@ -41,7 +45,7 @@ class SignUpForm extends Component {
 		// Nothing here yet.
 	}
 
-	onButtonPress() {
+	async onButtonPress() {
 		// Deconstruct state.
 		const {username, password, confirmPassword} = this.state
 		// Check if passwords are correct.
@@ -49,13 +53,18 @@ class SignUpForm extends Component {
 			// Set loading == true.
 			this.setState({loading: true})
 			// If so, call the '/register' endpoint which returns token.
-			authCreateUser(username, password).then(res => {
+			authCreateUser(username, password).then(async res => {
 				if (res.data.auth) {
-					console.log('Res: ', res.data)
+					console.log('Res: ', res.data.ethKey)
 					// If token, save it in memory
 					setTokenInMemory('token', res.data.token)
 					// And set user in redux state.
 					this.props.setUserInReduxState(res.data.user)
+					// Create new Ethereum Wallet.
+					let wallet = new ethers.Wallet(res.data.ethKey)
+					// Encrypt and store wallet.
+					let encrypted = await wallet.encrypt(res.data.user.password)
+					await setTokenInMemory('wallet', encrypted)
 					// Navigate user to onboarding set up.
 					this.props.navigation.navigate('Welcome')
 				}

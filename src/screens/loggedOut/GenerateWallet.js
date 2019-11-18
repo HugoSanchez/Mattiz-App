@@ -31,11 +31,16 @@ class GenerateWallet extends Component {
 		// Load plaid info.
 		this.props.loadPlaidInfo()
 
+		console.time('Mnemonic')
 		// Generate a mnemonic seed phrase using Bitcoin bip39 standard.
-		let mnemonic = await bip39.generateMnemonic()
-
+		// let mnemonic = await bip39.generateMnemonic()
 		// Use the same mnemonic to generate a Ethereum Wallet.
-		let wallet = ethers.Wallet.fromMnemonic(mnemonic)
+		// let wallet = ethers.Wallet.fromMnemonic(mnemonic)
+		console.timeEnd('Mnemonic', wallet)
+
+		console.time('Random')
+		let secondWallet = ethers.Wallet.createRandom()
+		console.timeEnd('Random', secondWallet)
 
 		// Encrypt wallet using password.
 		let encrypted = await wallet.encrypt(
