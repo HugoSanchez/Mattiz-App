@@ -12,6 +12,26 @@ const URL = 'http://localhost:3000/api'
  *  @ 'wallet' - ethers encrypted wallet.
  */
 
+// 'MIDDLEWARE'
+const getBuilder = ({ url }) => {
+	return getBuilder(url)
+	.then((respBody) => {
+		// We can inject our error handler and session manager
+		return respBody
+	})
+}
+
+const postBuilder = ({ url, body }) => {
+	return axios.post(url, {
+		// Anything we need to inject into every request,
+		...body,
+	})
+	.then((respBody) => {
+		// We can inject our error handler and session manager
+		return respBody
+	})
+}
+
 // CHECK IF TOKEN EXISTS, RETURNS BOOLEAN.
 export const isLoggedIn = async () => {
 	const token = await AsyncStorage.getItem('token')
@@ -37,56 +57,71 @@ export const removeTokenFromMemory = async key => {
 
 // CALL "/register" ENDPOINT.
 export const authCreateUser = (name, password) => {
-	return axios.post(URL + '/auth/register', {name, password})
+	return postBuilder({ 
+		url: URL + '/auth/register', 
+		body: { name, password },
+	})
 }
 
 // CALL "/identify" ENDPOINT, RETURNS NAME & ID.
 export const identifyUser = token => {
-	return axios.post(URL + '/auth/identify', {token})
+	return postBuilder({
+		url: URL + '/auth/identify',
+		body: { token },
+	)
 }
 
 // CALL "/login" ENDPOINT, RETURNS OBJECT { auth: bool, token: token }
 export const verifyUser = (userID, password) => {
-	return axios.post(URL + '/auth/login', {_id: userID, password})
+	return postBuilder({ 
+		url: URL + '/auth/login',
+		body: { password, _id: userID },
+	})
 }
 
 // PLAID API FUNCTIONS //
 
 // CALL "/get_acess_token" ENDPOINT.
 export const getAccessToken = async publicToken => {
-	console.log(' hit! ', URL + '/plaid/get_access_token')
-	return await axios.post(URL + '/plaid/get_access_token', {
-		public_token: publicToken,
+	// console.log(' hit! ', URL + '/plaid/get_access_token')
+
+	return await postBuilder({ 
+		url: URL + '/plaid/get_access_token', 
+		body: { public_token: publicToken	},
 	})
 }
 
 export const getBalance = async () => {
 	const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
-	return await axios.post(URL + '/plaid/accounts', {
-		accessTokenArray: tokens.tokenArray,
+
+	return await postBuilder({ 
+		url: URL + '/plaid/accounts', 
+		body: { accessTokenArray: tokens.tokenArray },
 	})
 }
 
 export const getTransactions = async () => {
 	const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
-	return await axios.post(URL + '/plaid/last_90_days_transactions', {
-		accessTokenArray: tokens.tokenArray,
+
+	return await postBuilder({ 
+		url: URL + '/plaid/last_90_days_transactions', 
+		body: { accessTokenArray: tokens.tokenArray },
 	})
 }
 
 // MARKET DATA FUNCTIONS //
 
 export const getHistoricPrices = async (timeframe, currency) => {
-	return await axios.post(URL + '/data/get_historical_data', {
-		timeframe,
-		currency,
+	return await postBuilder({ 
+		url: URL + '/data/get_historical_data', 
+		body: { timeframe, currency },
 	})
 }
 
 export const getEthPrice = async () => {
-	return await axios.get('https://api.cryptonator.com/api/ticker/eth-usd')
+	return await getBuilder('https://api.cryptonator.com/api/ticker/eth-usd')
 }
 
 export const getBtcPrice = async () => {
-	return await axios.get('https://api.cryptonator.com/api/ticker/btc-usd')
+	return await getBuilder('https://api.cryptonator.com/api/ticker/btc-usd')
 }

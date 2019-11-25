@@ -20,19 +20,25 @@ class InitialLoadingScreen extends Component {
         // Get token from memory if there is one.
         let token = await getTokenFromMemory('token')
         // Check if there is token
-        !token ?
-        // If there is no token, go to signUpForm.
-        this.props.navigation.navigate('Onboarding')
-        :
         // If there is, call '/identify' endpoint.
+        console.log("I should definitely log")
         identifyUser(token).then(res => {
-           // Set user in redux state.
-           this.props.setUserInReduxState(res.data)
-           // Set the token in redux state. 
-           this.props.setTokeninReduxState(token)
-           // Go to Login page.
-           this.props.navigation.navigate('Login')
-       });
+            // Set user in redux state.
+            console.log("Got response")
+            console.log(res)
+            if(res.data.auth) {
+                this.props.setUserInReduxState(res.data.user)
+                // Set the token in redux state. 
+                this.props.setTokeninReduxState(token)
+                // Go to Login page.
+                this.props.navigation.navigate('Login')
+            } else {
+                this.props.navigation.navigate('Onboarding')
+            }
+       })
+       .catch( err => {
+            console.log("NEED TO HANDLE ERRORS CORRECTLY: \n", err)
+       })
     }
 
     render() {
