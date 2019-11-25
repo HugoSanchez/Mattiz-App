@@ -2,18 +2,29 @@ import React, { Component } from 'react';
 import { View, Image, StyleSheet, } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
+import { requestSecConn, establishSecConn } from '../../api/index'
 
 import colors from '../../constants/colors';
  
 // Auth Actions & Functions
-import { getTokenFromMemory, identifyUser } from '../../api/auth';
+import { getTokenFromMemory, identifyUser,  } from '../../api';
 import { setUserInReduxState, setTokeninReduxState } from '../../actions';
 
 class InitialLoadingScreen extends Component {
 
     async componentDidMount() {
          // This is just to test the interaction 
-         setTimeout(this.initiateFunction.bind(this), 4000)
+        //  setTimeout(this.initiateFunction.bind(this), 4000)
+        console.log("COMPONENT DID MOUNT")
+        console.log(requestSecConn)
+        
+        const { data } = await requestSecConn()
+        console.log("Requested SC: ", data)
+
+        const resp = await establishSecConn(data, this.props.navigator)
+
+        console.log("resp: ", resp)
+        this.initiateFunction.bind(this)()
     }
 
     async initiateFunction() {

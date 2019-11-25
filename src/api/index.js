@@ -30,9 +30,7 @@ const getBuilder = ({ url, navigation }) => {
 }
 
 const postBuilder = ({ url, body, navigation }) => {
-	debugger
-	
-	return axios.post( BASE_URL + url, body )
+	return axios.post( BASE_URL + url, encryptData(body) )
 	.catch( resp => masterMiddleWare(resp, navigation) )
 }
 
@@ -41,7 +39,6 @@ const masterMiddleWare = async (resp, navigation) => {
 }
 
 const sessionMiddleWare = async (resp, navigation) => {
-	debugger
 	if(resp.status === 401) {
 		navigation.navigate('SignUp')
 	}
@@ -147,17 +144,19 @@ export const getBtcPrice = async () => {
 
 // ESTABLISH SC
 export const requestSecConn = async () => {
+		console.log("REQUEST SECURE CONNECTION")
     return await getBuilder({ url: ESC_EXT })
 }
 
-export const establishSecConn = async ({ key, prime, generator, sessionId }) => {
+export const establishSecConn = async ({ key, prime, generator }) => {
+		console.log("ESTABLISH SECURE CONNECTION")
     const { cKey, secret } = establishDH(key, prime, generator)
 		// globalSecret = secret.toString('hex')
 		
     AsyncStorage.setItem('secret', secret.toString('hex')) // NEED TO MORE SECURE FORM OF STORAGE
-		AsyncStorage.setItem('sessionId', sessionId)
+		// AsyncStorage.setItem('sessionId', sessionId)
 		
     // console.log("cKey: ", cKey)
     // console.log("sessionId: ", sessionId)
-    return await axios.post(ESC_EXT, { cKey, sessionId })
+    return await axios.post( BASE_URL + ESC_EXT, { cKey } )
 }
