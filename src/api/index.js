@@ -1,5 +1,8 @@
-import {AsyncStorage} from 'react-native'
+import { AsyncStorage } from 'react-native'
 import axios from 'axios'
+
+import { establishDH, encryptData } from './helper'
+// const crypto = require('crypto')
 
 const CRYPTO_BASE_URL = 'https://api.cryptonator.com/api/ticker'
 
@@ -17,18 +20,20 @@ const PLAID_EXT = API_EXT + '/plaid'
  *  @ 'token' - unique user token returned from the auth backend.
  *  @ 'plaid-tokens' - array of plaid access_tokens.
  *  @ 'wallet' - ethers encrypted wallet.
+ *  @ 'secret' - secure connection secret
  */
 
 // 'MIDDLEWARE'
 const getBuilder = ({ url, navigation }) => {
-	return axios.get(BASE_URL + url)
-	// .catch( resp => masterMiddleWare(resp, navigation) )
+	return axios.get( BASE_URL + url )
+	.catch (resp => masterMiddleWare(resp, navigation) )
 }
 
 const postBuilder = ({ url, body, navigation }) => {
 	debugger
-	return axios.post(BASE_URL + url, body)
-	// .catch( resp => masterMiddleWare(resp, navigation) )
+	
+	return axios.post( BASE_URL + url, body )
+	.catch( resp => masterMiddleWare(resp, navigation) )
 }
 
 const masterMiddleWare = async (resp, navigation) => {
@@ -38,7 +43,7 @@ const masterMiddleWare = async (resp, navigation) => {
 const sessionMiddleWare = async (resp, navigation) => {
 	debugger
 	if(resp.status === 401) {
-		navigation.navigate('Login')
+		navigation.navigate('SignUp')
 	}
 
 	return resp
@@ -68,10 +73,11 @@ export const removeTokenFromMemory = async key => {
 // AUTH API FUNCTIONS //
 
 // CALL "/register" ENDPOINT.
-export const authCreateUser = (name, password) => {
+export const authCreateUser = (name, password, navigation) => {
 	return postBuilder({ 
-		url: URL + '/auth/register', 
+		url: AUTH_EXT + '/register', 
 		body: { name, password },
+		navigation,
 	})
 }
 
@@ -80,13 +86,14 @@ export const identifyUser = (token, navigation) => {
 	return postBuilder({
 		url: AUTH_EXT + '/identify',
 		body: { token },
+		navigation,
 	})
 }
 
 // CALL "/login" ENDPOINT, RETURNS OBJECT { auth: bool, token: token }
 export const verifyUser = (userID, password) => {
 	return postBuilder({ 
-		url: URL + '/auth/login',
+		url: AUTH_EXT + '/login',
 		body: { password, _id: userID },
 	})
 }
@@ -95,10 +102,10 @@ export const verifyUser = (userID, password) => {
 
 // CALL "/get_acess_token" ENDPOINT.
 export const getAccessToken = async publicToken => {
-	// console.log(' hit! ', URL + '/plaid/get_access_token')
+	// console.log(' hit! ', URL + plaid/get_access_token')
 
 	return await postBuilder({ 
-		url: URL + '/plaid/get_access_token', 
+		url: PLAID_EXT + '/get_access_token', 
 		body: { public_token: publicToken	},
 	})
 }
@@ -107,7 +114,7 @@ export const getBalance = async () => {
 	const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
 
 	return await postBuilder({ 
-		url: URL + '/plaid/accounts', 
+		url: PLAID_EXT + '/accounts', 
 		body: { accessTokenArray: tokens.tokenArray },
 	})
 }
@@ -116,7 +123,7 @@ export const getTransactions = async () => {
 	const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
 
 	return await postBuilder({ 
-		url: URL + '/plaid/last_90_days_transactions', 
+		url: PLAID_EXT + '/last_90_days_transactions', 
 		body: { accessTokenArray: tokens.tokenArray },
 	})
 }
@@ -125,15 +132,32 @@ export const getTransactions = async () => {
 
 export const getHistoricPrices = async (timeframe, currency) => {
 	return await postBuilder({ 
-		url: URL + '/data/get_historical_data', 
+		url: MARKET_DATA_EXT + '/get_historical_data', // NOT SURE IF NEED TO MAKE IT AN _EXT CONSTANT
 		body: { timeframe, currency },
 	})
 }
 
 export const getEthPrice = async () => {
-	return await getBuilder('https://api.cryptonator.com/api/ticker/eth-usd')
+	return await getBuilder({ url: CRYPTO_BASE_URL + '/eth-usd' })
 }
 
 export const getBtcPrice = async () => {
-	return await getBuilder('https://api.cryptonator.com/api/ticker/btc-usd')
+    return await getBuilder({ url: CRYPTO_BASE_URL + '/btc-usd' })
+}
+
+// ESTABLISH SC
+export const requestSecConn = async () => {
+    return await getBuilder({ url: ESC_EXT })
+}
+
+export const establishSecConn = async ({ key, prime, generator, sessionId }) => {
+    const { cKey, secret } = establishDH(key, prime, generator)
+		// globalSecret = secret.toString('hex')
+		
+    AsyncStorage.setItem('secret', secret.toString('hex')) // NEED TO MORE SECURE FORM OF STORAGE
+		AsyncStorage.setItem('sessionId', sessionId)
+		
+    // console.log("cKey: ", cKey)
+    // console.log("sessionId: ", sessionId)
+    return await axios.post(ESC_EXT, { cKey, sessionId })
 }
