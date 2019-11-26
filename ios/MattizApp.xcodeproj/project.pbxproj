@@ -410,7 +410,7 @@
 						TestTargetID = 13B07F861A680F5B00A75B9A;
 					};
 					13B07F861A680F5B00A75B9A = {
-						DevelopmentTeam = 2T2JL5F698;
+						DevelopmentTeam = R8SL6ZQ8UD;
 					};
 				};
 			};
@@ -734,7 +734,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
-				DEVELOPMENT_TEAM = 2T2JL5F698;
+				DEVELOPMENT_TEAM = R8SL6ZQ8UD;
 				INFOPLIST_FILE = MattizApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -742,7 +742,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.MattizAppG;
 				PRODUCT_NAME = MattizApp;
 				VERSIONING_SYSTEM = "apple-generic";
 			};
@@ -754,7 +754,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 2T2JL5F698;
+				DEVELOPMENT_TEAM = R8SL6ZQ8UD;
 				INFOPLIST_FILE = MattizApp/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -762,7 +762,7 @@
 					"-ObjC",
 					"-lc++",
 				);
-				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
+				PRODUCT_BUNDLE_IDENTIFIER = org.reactjs.native.example.MattizAppG;
 				PRODUCT_NAME = MattizApp;
 				VERSIONING_SYSTEM = "apple-generic";
 			};

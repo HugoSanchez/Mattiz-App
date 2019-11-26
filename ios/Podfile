@@ -36,12 +36,12 @@ target 'MattizApp' do
   use_native_modules!
 end
 
-target 'MattizApp-tvOS' do
-  # Pods for MattizApp-tvOS
+# target 'MattizApp-tvOS' do
+#   # Pods for MattizApp-tvOS
 
-  target 'MattizApp-tvOSTests' do
-    inherit! :search_paths
-    # Pods for testing
-  end
+#   target 'MattizApp-tvOSTests' do
+#     inherit! :search_paths
+#     # Pods for testing
+#   end
 
-end
+# end
