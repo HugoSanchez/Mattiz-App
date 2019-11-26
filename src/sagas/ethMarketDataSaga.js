@@ -18,7 +18,7 @@ import {
 import {
     getEthPrice,
     getHistoricPrices
-} from '../api/auth';
+} from '../api';
 
 // Crypto imports
 import 'ethers/dist/shims.js'; 

@@ -17,7 +17,7 @@ import {
 import {
     getBtcPrice,
     getHistoricPrices
-} from '../api/auth';
+} from '../api';
 
 const timeframeState = state => state.timeframe;
 

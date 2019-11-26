@@ -1,7 +1,7 @@
 import { takeEvery, put, call, fork } from 'redux-saga/effects';
 
 import { LOAD_PLAID_INFO } from '../actions/types';
-import { getBalance, getTransactions } from '../api/auth';
+import { getBalance, getTransactions } from '../api';
 import { 
     setBalanceInReduxState, 
     setTransactionsInReduxState, 

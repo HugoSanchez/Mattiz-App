@@ -16,14 +16,13 @@ class InitialLoadingScreen extends Component {
          // This is just to test the interaction 
         //  setTimeout(this.initiateFunction.bind(this), 4000)
         console.log("COMPONENT DID MOUNT")
-        console.log(requestSecConn)
         
         const { data } = await requestSecConn()
-        console.log("Requested SC: ", data)
 
-        const resp = await establishSecConn(data, this.props.navigator)
+        const resp = await establishSecConn(data)
 
-        console.log("resp: ", resp)
+        console.log("CONNECTION SECURED")
+
         this.initiateFunction.bind(this)()
     }
 
@@ -32,11 +31,9 @@ class InitialLoadingScreen extends Component {
         let token = await getTokenFromMemory('token')
         // Check if there is token
         // If there is, call '/identify' endpoint.
-        console.log("I should definitely log")
+
         identifyUser(token).then(res => {
             // Set user in redux state.
-            console.log("Got response")
-            console.log(res)
             if(res.data.auth) {
                 this.props.setUserInReduxState(res.data.user)
                 // Set the token in redux state. 
@@ -46,10 +43,10 @@ class InitialLoadingScreen extends Component {
             } else {
                 this.props.navigation.navigate('Onboarding')
             }
-       })
-       .catch( err => {
-            console.log("NEED TO HANDLE ERRORS CORRECTLY: \n", err)
-       })
+        })
+        // .catch( err => {
+        //         console.log("NEED TO HANDLE ERRORS CORRECTLY: \n", err)
+        // })
     }
 
     render() {

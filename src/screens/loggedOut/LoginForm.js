@@ -8,7 +8,7 @@ import LoadingScreen from '../../components/LoadingScreen';
 import PalmButton from '../../components/common/PalmButton';
 
 // Auth & Actions.
-import { verifyUser } from '../../api/auth';
+import { verifyUser } from '../../api';
 import { loadPlaidInfo, setUserInReduxState } from '../../actions';
 
 import colors from '../../constants/colors';
@@ -41,16 +41,16 @@ class LoginForm extends Component {
         verifyUser(this.props.user._id, this.state.password).then(res => {
             // If succesful,
             if (res.data.auth) {
-                console.log('Verify: ', res.data)
+                // console.log('Verify: ', res.data)
                 // Fire Plaid API calls.
                 this.props.loadPlaidInfo();
-                console.log('1')
+                // console.log('1')
                 // Set user in Redux State.
                 this.props.setUserInReduxState(res.data.user)
-                console.log('2')
+                // console.log('2')
                 // Navigate user inside the app.
                 this.props.navigation.navigate('Dashboard')
-                console.log('3')
+                // console.log('3')
             } else {
                 // In not, re-render form and show error message.
                 this.setState({ loading: false, error: 'Invalid credentials, please try again.'})

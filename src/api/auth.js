@@ -26,7 +26,6 @@ const getBuilder = ({ url, navigation }) => {
 }
 
 const postBuilder = ({ url, body, navigation }) => {
-	debugger
 	return axios.post(BASE_URL + url, body)
 	// .catch( resp => masterMiddleWare(resp, navigation) )
 }
@@ -36,7 +35,6 @@ const masterMiddleWare = async (resp, navigation) => {
 }
 
 const sessionMiddleWare = async (resp, navigation) => {
-	debugger
 	if(resp.status === 401) {
 		navigation.navigate('Login')
 	}

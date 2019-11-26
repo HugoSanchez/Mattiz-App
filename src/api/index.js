@@ -1,17 +1,16 @@
 import { AsyncStorage } from 'react-native'
 import axios from 'axios'
 
-import { establishDH, encryptData } from './helper'
+import { calculateDH, encryptData, decryptData } from './helper'
 // const crypto = require('crypto')
 
 const CRYPTO_BASE_URL = 'https://api.cryptonator.com/api/ticker'
 
-const BASE_URL = 'http://localhost:3000'
-const API_EXT = '/api'
-const AUTH_EXT = API_EXT + '/auth'
+const BASE_URL = 'http://localhost:3000/api'
+const AUTH_EXT = '/auth'
 const ESC_EXT = '/esc'
-const MARKET_DATA_EXT = API_EXT + '/data'
-const PLAID_EXT = API_EXT + '/plaid'
+const MARKET_DATA_EXT = '/data'
+const PLAID_EXT = '/plaid'
 
 // ASYNCSTORAGE TOKEN FUNCTIONS //
 
@@ -26,24 +25,38 @@ const PLAID_EXT = API_EXT + '/plaid'
 // 'MIDDLEWARE'
 const getBuilder = ({ url, navigation }) => {
 	return axios.get( BASE_URL + url )
-	.catch (resp => masterMiddleWare(resp, navigation) )
+	// .then( masterMiddleWare )
+	.catch(resp => errorMiddleWare(resp, navigation) )
 }
 
-const postBuilder = ({ url, body, navigation }) => {
-	return axios.post( BASE_URL + url, encryptData(body) )
-	.catch( resp => masterMiddleWare(resp, navigation) )
+const postBuilder = async ({ url, body, navigation }) => {
+	const encData = await encryptData(body)
+
+	return await axios.post( BASE_URL + url, encData )
+	// .then( masterMiddleWare )
+	.catch( resp => errorMiddleWare(resp, navigation) )
 }
 
-const masterMiddleWare = async (resp, navigation) => {
-	await sessionMiddleWare(resp, navigation)
+const masterMiddleWare = async (resp) => {
+	// await sessionMiddleWare(resp, navigation)
+	console.log("NEW resp:", resp)
+	return decryptData(resp.data)
 }
 
-const sessionMiddleWare = async (resp, navigation) => {
-	if(resp.status === 401) {
-		navigation.navigate('SignUp')
+const errorMiddleWare = (resp, navigation) => {
+	// if(resp.status === 401) {
+	// 	navigation.navigate('SignUp')
+	// }
+
+	// return resp
+	switch(resp.status) {
+		case 401:
+			navigation.navigate('SignUp')
+			break
+		default:
+			// navigation.navigate('404')
+			return null
 	}
-
-	return resp
 }
 
 // CHECK IF TOKEN EXISTS, RETURNS BOOLEAN.
@@ -135,28 +148,24 @@ export const getHistoricPrices = async (timeframe, currency) => {
 }
 
 export const getEthPrice = async () => {
-	return await getBuilder({ url: CRYPTO_BASE_URL + '/eth-usd' })
+	return await axios.get( CRYPTO_BASE_URL + '/eth-usd' )
 }
 
 export const getBtcPrice = async () => {
-    return await getBuilder({ url: CRYPTO_BASE_URL + '/btc-usd' })
+    return await axios.get(CRYPTO_BASE_URL + '/btc-usd' )
 }
 
 // ESTABLISH SC
 export const requestSecConn = async () => {
 		console.log("REQUEST SECURE CONNECTION")
-    return await getBuilder({ url: ESC_EXT })
+    return await axios.get( BASE_URL + ESC_EXT )
 }
 
 export const establishSecConn = async ({ key, prime, generator }) => {
 		console.log("ESTABLISH SECURE CONNECTION")
-    const { cKey, secret } = establishDH(key, prime, generator)
-		// globalSecret = secret.toString('hex')
-		
+    const { cKey, secret } = calculateDH(key, prime, generator)
+
     AsyncStorage.setItem('secret', secret.toString('hex')) // NEED TO MORE SECURE FORM OF STORAGE
-		// AsyncStorage.setItem('sessionId', sessionId)
-		
-    // console.log("cKey: ", cKey)
-    // console.log("sessionId: ", sessionId)
+
     return await axios.post( BASE_URL + ESC_EXT, { cKey } )
 }

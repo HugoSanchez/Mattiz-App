@@ -3,7 +3,7 @@ import {View, Text, ImageBackground, Image, StyleSheet} from 'react-native'
 import {withNavigationFocus} from 'react-navigation'
 import {connect} from 'react-redux'
 
-import {setTokenInMemory} from '../../api/auth'
+import {setTokenInMemory} from '../../api'
 import {loadPlaidInfo} from '../../actions'
 
 // Crypto imports

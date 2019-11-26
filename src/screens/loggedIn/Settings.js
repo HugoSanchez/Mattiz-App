@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import Icon from 'react-native-vector-icons/SimpleLineIcons'
 
 // Files import.
-import {removeTokenFromMemory} from '../../api/auth'
+import {removeTokenFromMemory} from '../../api'
 import {deleteUserFromReduxState} from '../../actions'
 
 import colors from '../../constants/colors'

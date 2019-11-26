@@ -37,17 +37,17 @@ const generateDecipher = (password, ivString) => {
 const encryptData = async (data) => {
   const password = await AsyncStorage.getItem('secret')
   const plainText = JSON.stringify(data)
-  const cipher = generateCipher(password, "IVString")
+  const cipher = generateCipher(password, "IdeallyCryptographicallyRandom")
 
   let encrypted = cipher.update(plainText, 'binary', 'hex')
   encrypted += cipher.final('hex')
 
-  return { data: encrypted, sessionId: await AsyncStorage.getItem('sessionId') }
+  return { data: encrypted }
 }
 
 const decryptData = async (cipherText) => {
   const password = await AsyncStorage.getItem('secret')
-  const decipher = generateDecipher(password, "IVString")
+  const decipher = generateDecipher(password, "IdeallyCryptographicallyRandom")
 
   let decrypted = decipher.update(cipherText, 'hex', 'binary')
   decrypted += decipher.final('binary')
@@ -56,27 +56,28 @@ const decryptData = async (cipherText) => {
 }
 ////////////////////////////////////////////////////////////////
 
-const establishDH = (sKey, prime, generator) => {
+const calculateDH = (sKey, prime, generator) => {
   const keyBuffer = Buffer.from(sKey.data)
   const primeBuffer = Buffer.from(prime.data)
   const generatorBuffer = Buffer.from(generator.data)
 
-  console.time("\n2nd DiffieHellman\n")
+  // console.time("\n2nd DiffieHellman\n")
   const dH = crypto.createDiffieHellman(primeBuffer, generatorBuffer)
-  console.timeEnd("\n2nd DiffieHellman\n")
+  // console.timeEnd("\n2nd DiffieHellman\n")
 
-  console.time("\nclientKey\n")
+  // console.time("\nclientKey\n")
   const cKey = dH.generateKeys()
-  console.timeEnd("\nclientKey\n")
+  // console.timeEnd("\nclientKey\n")
 
-  console.time("\ncomputeSecret\n")
+  // console.time("\ncomputeSecret\n")
   const secret = dH.computeSecret(keyBuffer)
-  console.timeEnd("\ncomputeSecret\n")
+  // console.timeEnd("\ncomputeSecret\n")
 
-  console.log("ServerKey: ", keyBuffer.toString('hex'))
-  console.log("prime: ", primeBuffer.toString('hex'))
-  console.log("generator: ", generatorBuffer.toString('hex'))
-  console.log("ClientKey: ", cKey.toString('hex'))
+  console.log("ServerKey: ", keyBuffer)
+  console.log("prime: ", primeBuffer)
+  console.log("generator: ", generatorBuffer)
+  console.log("ClientKey: ", cKey)
+  console.log("Secret: ", secret)
 
   return {
     cKey,
@@ -90,5 +91,5 @@ const establishDH = (sKey, prime, generator) => {
 module.exports = {
   encryptData,
   decryptData,
-  establishDH,
+  calculateDH,
 }
