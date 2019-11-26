@@ -2,52 +2,36 @@ import React, { Component } from 'react';
 import { View, Image, StyleSheet, } from 'react-native';
 import * as Animatable from 'react-native-animatable';
 import { connect } from 'react-redux';
-import { requestSecConn, establishSecConn } from '../../api/index'
+import { requestSecConn, establishSecConn, getTokenFromMemory, identifyUser } from '../../api'
 
-import colors from '../../constants/colors';
- 
 // Auth Actions & Functions
-import { getTokenFromMemory, identifyUser,  } from '../../api';
-import { setUserInReduxState, setTokeninReduxState } from '../../actions';
+import {setUserInReduxState, setTokeninReduxState} from '../../actions'
 
 class InitialLoadingScreen extends Component {
-
     async componentDidMount() {
-         // This is just to test the interaction 
-        //  setTimeout(this.initiateFunction.bind(this), 4000)
-        console.log("COMPONENT DID MOUNT")
-        
-        const { data } = await requestSecConn()
-
-        const resp = await establishSecConn(data)
-
-        console.log("CONNECTION SECURED")
+				const { data } = await requestSecConn()
+				await establishSecConn(data)
 
         this.initiateFunction.bind(this)()
     }
-
-    async initiateFunction() {
-        // Get token from memory if there is one.
-        let token = await getTokenFromMemory('token')
-        // Check if there is token
-        // If there is, call '/identify' endpoint.
-
-        identifyUser(token).then(res => {
-            // Set user in redux state.
-            if(res.data.auth) {
-                this.props.setUserInReduxState(res.data.user)
-                // Set the token in redux state. 
-                this.props.setTokeninReduxState(token)
-                // Go to Login page.
-                this.props.navigation.navigate('Login')
-            } else {
-                this.props.navigation.navigate('Onboarding')
-            }
-        })
-        // .catch( err => {
-        //         console.log("NEED TO HANDLE ERRORS CORRECTLY: \n", err)
-        // })
-    }
+		
+		async initiateFunction() {
+			// Get token from memory if there is one.
+			let token = await getTokenFromMemory('token')
+			// Check if there is token
+			!token
+				? // If there is no token, go to signUpForm.
+					this.props.navigation.navigate('Onboarding')
+				: // If there is, call '/identify' endpoint.
+					identifyUser(token).then(res => {
+						// Set user in redux state.
+						this.props.setUserInReduxState(res.data.user)
+						// Set the token in redux state.
+						this.props.setTokeninReduxState(token)
+						// Go to Login page.
+						this.props.navigation.navigate('Login')
+					})
+		}
 
     render() {
         return (
@@ -69,27 +53,30 @@ class InitialLoadingScreen extends Component {
 }
 
 const MapStateToProps = state => {
-    const { user, token, error } = state.auth;
-    return {
-        user,
-        token,
-        error
-    };
+	const {user, token, error} = state.auth
+	return {
+		user,
+		token,
+		error,
+	}
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 1, 
-        backgroundColor: '#FFF',
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    viewStyle: {
-        flex: 1,
-        alignSelf: 'stretch',
-        justifyContent: 'center',
-        alignItems: 'center',
-    }
-});
+	container: {
+		flex: 1,
+		backgroundColor: '#FFF',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+	viewStyle: {
+		flex: 1,
+		alignSelf: 'stretch',
+		justifyContent: 'center',
+		alignItems: 'center',
+	},
+})
 
-export default connect(MapStateToProps, { setUserInReduxState, setTokeninReduxState })(InitialLoadingScreen);
+export default connect(
+	MapStateToProps,
+	{setUserInReduxState, setTokeninReduxState},
+)(InitialLoadingScreen)

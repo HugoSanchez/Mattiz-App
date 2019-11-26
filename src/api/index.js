@@ -157,12 +157,11 @@ export const getBtcPrice = async () => {
 
 // ESTABLISH SC
 export const requestSecConn = async () => {
-		console.log("REQUEST SECURE CONNECTION")
+		console.log('requestSecConn running')
     return await axios.get( BASE_URL + ESC_EXT )
 }
 
 export const establishSecConn = async ({ key, prime, generator }) => {
-		console.log("ESTABLISH SECURE CONNECTION")
     const { cKey, secret } = calculateDH(key, prime, generator)
 
     AsyncStorage.setItem('secret', secret.toString('hex')) // NEED TO MORE SECURE FORM OF STORAGE
