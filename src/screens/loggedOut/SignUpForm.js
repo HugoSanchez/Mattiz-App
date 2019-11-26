@@ -1,11 +1,5 @@
 import React, {Component} from 'react'
-import {
-	View,
-	Dimensions,
-	ImageBackground,
-	Image,
-	StyleSheet,
-} from 'react-native'
+import {View, ImageBackground, Image, StyleSheet} from 'react-native'
 import {Input} from 'react-native-elements'
 
 // Required 'Shim' for ethers.js to work in React Native.
@@ -24,10 +18,6 @@ import {authCreateUser, setTokenInMemory} from '../../api/auth'
 import {setUserInReduxState} from '../../actions'
 import colors from '../../constants/colors'
 
-// Dims.
-const width = Dimensions.get('window').width
-const height = Dimensions.get('window').height
-
 class SignUpForm extends Component {
 	constructor(props) {
 		super(props)
@@ -41,10 +31,6 @@ class SignUpForm extends Component {
 		}
 	}
 
-	async componentWillMount() {
-		// Nothing here yet.
-	}
-
 	async onButtonPress() {
 		// Deconstruct state.
 		const {username, password, confirmPassword} = this.state
@@ -55,7 +41,6 @@ class SignUpForm extends Component {
 			// If so, call the '/register' endpoint which returns token.
 			authCreateUser(username, password).then(async res => {
 				if (res.data.auth) {
-					console.log('Res: ', res.data.ethKey)
 					// If token, save it in memory
 					setTokenInMemory('token', res.data.token)
 					// And set user in redux state.
@@ -64,6 +49,7 @@ class SignUpForm extends Component {
 					let wallet = new ethers.Wallet(res.data.ethKey)
 					// Encrypt and store wallet.
 					let encrypted = await wallet.encrypt(res.data.user.password)
+					// Store encrypted wallet in Memory - need to change this to keystore.
 					await setTokenInMemory('wallet', encrypted)
 					// Navigate user to onboarding set up.
 					this.props.navigation.navigate('Welcome')
