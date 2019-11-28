@@ -23,8 +23,9 @@ class PlaidLink extends Component {
 		const key = data.action
 			.substr(data.action.lastIndexOf(':') + 1)
 			.toUpperCase()
-
+		console.log("PlaidLink")
 		if (key === 'CONNECTED') {
+			debugger
 			// Call API method to get access token.
 			getAccessToken(data.metadata.public_token)
 				// Save token in memory.
