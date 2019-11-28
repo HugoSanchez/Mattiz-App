@@ -25,7 +25,7 @@ const PLAID_EXT = '/plaid'
 // 'MIDDLEWARE'
 const getBuilder = ({ url, navigation }) => {
 	return axios.get( BASE_URL + url )
-	// .then( masterMiddleWare )
+	.then( masterMiddleWare )
 	.catch(resp => errorMiddleWare(resp, navigation) )
 }
 
@@ -33,14 +33,21 @@ const postBuilder = async ({ url, body, navigation }) => {
 	const encData = await encryptData(body)
 
 	return await axios.post( BASE_URL + url, encData )
-	// .then( masterMiddleWare )
+	.then( masterMiddleWare )
 	.catch( resp => errorMiddleWare(resp, navigation) )
 }
 
 const masterMiddleWare = async (resp) => {
 	// await sessionMiddleWare(resp, navigation)
+	const { decryptData } = require('./../api/helper') 
 	console.log("NEW resp:", resp)
-	return decryptData(resp.data)
+	console.log("..............")
+
+	const decryptedData = await decryptData(resp.data.data)
+
+	console.log("Descrypted: ", decryptedData)
+	debugger
+	return decryptedData // Should refactor to not have `data.data`
 }
 
 const errorMiddleWare = (resp, navigation) => {
@@ -164,7 +171,7 @@ export const requestSecConn = async () => {
 export const establishSecConn = async ({ key, prime, generator }) => {
     const { cKey, secret } = calculateDH(key, prime, generator)
 
-    AsyncStorage.setItem('secret', secret.toString('hex')) // NEED TO MORE SECURE FORM OF STORAGE
+    await AsyncStorage.setItem('secret', secret.toString('hex')) // NEED TO MORE SECURE FORM OF STORAGE
 
     return await axios.post( BASE_URL + ESC_EXT, { cKey } )
 }

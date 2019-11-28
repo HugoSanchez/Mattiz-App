@@ -46,12 +46,18 @@ const encryptData = async (data) => {
 }
 
 const decryptData = async (cipherText) => {
+  const { AsyncStorage } = require('react-native')
+  console.log("I ran")
+  console.log(await AsyncStorage.getAllKeys())
+  debugger
   const password = await AsyncStorage.getItem('secret')
+  debugger
   const decipher = generateDecipher(password, "IdeallyCryptographicallyRandom")
-
+  debugger
   let decrypted = decipher.update(cipherText, 'hex', 'binary')
+  debugger
   decrypted += decipher.final('binary')
-
+  debugger
   return JSON.parse(decrypted)
 }
 ////////////////////////////////////////////////////////////////
