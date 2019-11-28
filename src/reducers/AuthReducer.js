@@ -1,13 +1,15 @@
 import { 
     SET_TOKEN, 
     SET_USER, 
+    SET_SECRET,
     LOGOUT_USER 
 } from '../actions/types';
 
 const INITIAL_STATE = {
     user: { name: 'Pepito', password: 'superSecretPassword' },
     token: false, 
-    error: null
+    error: null,
+    secret: null,
 }
 
 export default (state = INITIAL_STATE, action) => {
@@ -16,6 +18,8 @@ export default (state = INITIAL_STATE, action) => {
             return { ...state, user: action.payload}
         case SET_TOKEN:
             return { ...state, token: action.payload };
+        case SET_SECRET:
+            return { ...state, secret: action.payload };
         case LOGOUT_USER:
             return { ...INITIAL_STATE };
         default:

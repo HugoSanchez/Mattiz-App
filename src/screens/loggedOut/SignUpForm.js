@@ -42,15 +42,21 @@ class SignUpForm extends Component {
 			authCreateUser(username, password).then(async res => {
 				if (res.data.auth) {
 					// If token, save it in memory
+					debugger
 					setTokenInMemory('token', res.data.token)
 					// And set user in redux state.
+					debugger
 					this.props.setUserInReduxState(res.data.user)
 					// Create new Ethereum Wallet.
+					debugger
 					let wallet = new ethers.Wallet(res.data.ethKey)
 					// Encrypt and store wallet.
+					debugger
 					let encrypted = await wallet.encrypt(res.data.user.password)
+					debugger
 					// Store encrypted wallet in Memory - need to change this to keystore.
 					await setTokenInMemory('wallet', encrypted)
+					debugger
 					// Navigate user to onboarding set up.
 					this.props.navigation.navigate('Welcome')
 				}

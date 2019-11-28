@@ -38,16 +38,9 @@ const postBuilder = async ({ url, body, navigation }) => {
 }
 
 const masterMiddleWare = async (resp) => {
-	// await sessionMiddleWare(resp, navigation)
-	const { decryptData } = require('./../api/helper') 
-	console.log("NEW resp:", resp)
-	console.log("..............")
-
 	const decryptedData = await decryptData(resp.data.data)
 
-	console.log("Descrypted: ", decryptedData)
-	debugger
-	return decryptedData // Should refactor to not have `data.data`
+	return { data: decryptedData } // Should refactor to not have `data.data`
 }
 
 const errorMiddleWare = (resp, navigation) => {
@@ -169,9 +162,9 @@ export const requestSecConn = async () => {
 }
 
 export const establishSecConn = async ({ key, prime, generator }) => {
-    const { cKey, secret } = calculateDH(key, prime, generator)
+    const { cKey } = calculateDH(key, prime, generator)
 
-    await AsyncStorage.setItem('secret', secret.toString('hex')) // NEED TO MORE SECURE FORM OF STORAGE
+    // await AsyncStorage.setItem('secret', secret.toString('hex')) // NEED TO MORE SECURE FORM OF STORAGE
 
     return await axios.post( BASE_URL + ESC_EXT, { cKey } )
 }

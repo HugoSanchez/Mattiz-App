@@ -1,5 +1,9 @@
 import crypto from 'crypto'
-import { AsyncStorage } from 'react-native'
+import configureStore from '../store'
+import { setSessionSecretInReduxState } from '../actions'
+import { AsyncStorage } from '@react-native-community/async-storage'
+
+const store = configureStore()
 
 const generateKey = (password) => {
   return crypto.createHash('sha256')
@@ -35,7 +39,9 @@ const generateDecipher = (password, ivString) => {
 }
 
 const encryptData = async (data) => {
-  const password = await AsyncStorage.getItem('secret')
+  const state = store.getState()
+  const password = state.auth.secret
+
   const plainText = JSON.stringify(data)
   const cipher = generateCipher(password, "IdeallyCryptographicallyRandom")
 
@@ -46,48 +52,35 @@ const encryptData = async (data) => {
 }
 
 const decryptData = async (cipherText) => {
-  const { AsyncStorage } = require('react-native')
-  console.log("I ran")
-  console.log(await AsyncStorage.getAllKeys())
-  debugger
-  const password = await AsyncStorage.getItem('secret')
-  debugger
+  const state = store.getState()
+  const password = state.auth.secret
+
   const decipher = generateDecipher(password, "IdeallyCryptographicallyRandom")
-  debugger
+
   let decrypted = decipher.update(cipherText, 'hex', 'binary')
-  debugger
   decrypted += decipher.final('binary')
-  debugger
+
   return JSON.parse(decrypted)
 }
 ////////////////////////////////////////////////////////////////
 
 const calculateDH = (sKey, prime, generator) => {
+  
   const keyBuffer = Buffer.from(sKey.data)
   const primeBuffer = Buffer.from(prime.data)
   const generatorBuffer = Buffer.from(generator.data)
 
-  // console.time("\n2nd DiffieHellman\n")
   const dH = crypto.createDiffieHellman(primeBuffer, generatorBuffer)
-  // console.timeEnd("\n2nd DiffieHellman\n")
-
-  // console.time("\nclientKey\n")
   const cKey = dH.generateKeys()
-  // console.timeEnd("\nclientKey\n")
-
-  // console.time("\ncomputeSecret\n")
   const secret = dH.computeSecret(keyBuffer)
-  // console.timeEnd("\ncomputeSecret\n")
 
-  console.log("ServerKey: ", keyBuffer)
-  console.log("prime: ", primeBuffer)
-  console.log("generator: ", generatorBuffer)
-  console.log("ClientKey: ", cKey)
-  console.log("Secret: ", secret)
+  store.dispatch(setSessionSecretInReduxState(secret.toString('hex')))
+  const state = store.getState()
+  console.log('State: ', state)
+
 
   return {
     cKey,
-    secret,
   }
 }
 

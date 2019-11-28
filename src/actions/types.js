@@ -3,6 +3,7 @@
 export const SET_TOKEN                      = 'set_token';
 export const SET_USER                       = 'set_user';
 export const LOGOUT_USER                    = 'logout_user';
+export const SET_SECRET                     = 'set_session_secret';
 
     // PLAID ACTIONS // 
 export const LOAD_PLAID_INFO                = 'load_plaid_info'
