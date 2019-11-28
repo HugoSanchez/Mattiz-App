@@ -1,7 +1,7 @@
-import { AsyncStorage } from 'react-native'
+import {AsyncStorage} from 'react-native'
 import axios from 'axios'
 
-import { calculateDH, encryptData, decryptData } from './helper'
+import {calculateDH, encryptData, decryptData} from './helper'
 // const crypto = require('crypto')
 
 const CRYPTO_BASE_URL = 'https://api.cryptonator.com/api/ticker'
@@ -23,24 +23,41 @@ const PLAID_EXT = '/plaid'
  */
 
 // 'MIDDLEWARE'
-const getBuilder = ({ url, navigation }) => {
-	return axios.get( BASE_URL + url )
-	.then( masterMiddleWare )
-	.catch(resp => errorMiddleWare(resp, navigation) )
+const getBuilder = ({url, navigation}) => {
+	return axios
+		.get(BASE_URL + url)
+		.then(masterMiddleWare)
+		.catch(resp => errorMiddleWare(resp, navigation))
 }
 
-const postBuilder = async ({ url, body, navigation }) => {
+const postBuilder = async ({url, body, navigation}) => {
+	console.log('Hit! postBuilder', BASE_URL + url)
+
 	const encData = await encryptData(body)
+	console.log('ENCREYPTED DATA: ', encData)
 
-	return await axios.post( BASE_URL + url, encData )
-	.then( masterMiddleWare )
-	.catch( resp => errorMiddleWare(resp, navigation) )
+	return fetch(BASE_URL + url, {
+		method: 'POST',
+		headers: {
+			'Content-Type': 'application/json',
+		},
+		body: JSON.stringify(encData)
+	})
+	.then(res => res.json())
+	.then(masterMiddleWare)
+	.catch(resp => errorMiddleWare(resp, navigation))
+	/** 
+	return await axios
+		.post(BASE_URL + url, encData)
+		.then(masterMiddleWare)
+		.catch(resp => errorMiddleWare(resp, navigation))
+		*/
 }
 
-const masterMiddleWare = async (resp) => {
+const masterMiddleWare = async resp => {
 	const decryptedData = await decryptData(resp.data.data)
 
-	return { data: decryptedData } // Should refactor to not have `data.data`
+	return {data: decryptedData} // Should refactor to not have `data.data`
 }
 
 const errorMiddleWare = (resp, navigation) => {
@@ -49,7 +66,7 @@ const errorMiddleWare = (resp, navigation) => {
 	// }
 
 	// return resp
-	switch(resp.status) {
+	switch (resp.status) {
 		case 401:
 			navigation.navigate('SignUp')
 			break
@@ -84,9 +101,9 @@ export const removeTokenFromMemory = async key => {
 
 // CALL "/register" ENDPOINT.
 export const authCreateUser = (name, password, navigation) => {
-	return postBuilder({ 
-		url: AUTH_EXT + '/register', 
-		body: { name, password },
+	return postBuilder({
+		url: AUTH_EXT + '/register',
+		body: {name, password},
 		navigation,
 	})
 }
@@ -95,76 +112,75 @@ export const authCreateUser = (name, password, navigation) => {
 export const identifyUser = (token, navigation) => {
 	return postBuilder({
 		url: AUTH_EXT + '/identify',
-		body: { token },
+		body: {token},
 		navigation,
 	})
 }
 
 // CALL "/login" ENDPOINT, RETURNS OBJECT { auth: bool, token: token }
 export const verifyUser = (userID, password) => {
-	return postBuilder({ 
+	return postBuilder({
 		url: AUTH_EXT + '/login',
-		body: { password, _id: userID },
+		body: {password, _id: userID},
 	})
 }
 
 // PLAID API FUNCTIONS //
 
 // CALL "/get_acess_token" ENDPOINT.
-export const getAccessToken = async publicToken => {
-	// console.log(' hit! ', URL + plaid/get_access_token')
-
-	return await postBuilder({ 
-		url: PLAID_EXT + '/get_access_token', 
-		body: { public_token: publicToken	},
+export const getPlaidAccessToken = async publicToken => {
+	console.log('Hit! getPlaidAccessToken')
+	return await postBuilder({
+		url: PLAID_EXT + '/get_access_token',
+		body: {public_token: publicToken},
 	})
 }
 
 export const getBalance = async () => {
 	const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
 
-	return await postBuilder({ 
-		url: PLAID_EXT + '/accounts', 
-		body: { accessTokenArray: tokens.tokenArray },
+	return await postBuilder({
+		url: PLAID_EXT + '/accounts',
+		body: {accessTokenArray: tokens.tokenArray},
 	})
 }
 
 export const getTransactions = async () => {
 	const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
 
-	return await postBuilder({ 
-		url: PLAID_EXT + '/last_90_days_transactions', 
-		body: { accessTokenArray: tokens.tokenArray },
+	return await postBuilder({
+		url: PLAID_EXT + '/last_90_days_transactions',
+		body: {accessTokenArray: tokens.tokenArray},
 	})
 }
 
 // MARKET DATA FUNCTIONS //
 
 export const getHistoricPrices = async (timeframe, currency) => {
-	return await postBuilder({ 
+	return await postBuilder({
 		url: MARKET_DATA_EXT + '/get_historical_data', // NOT SURE IF NEED TO MAKE IT AN _EXT CONSTANT
-		body: { timeframe, currency },
+		body: {timeframe, currency},
 	})
 }
 
 export const getEthPrice = async () => {
-	return await axios.get( CRYPTO_BASE_URL + '/eth-usd' )
+	return await axios.get(CRYPTO_BASE_URL + '/eth-usd')
 }
 
 export const getBtcPrice = async () => {
-    return await axios.get(CRYPTO_BASE_URL + '/btc-usd' )
+	return await axios.get(CRYPTO_BASE_URL + '/btc-usd')
 }
 
 // ESTABLISH SC
 export const requestSecConn = async () => {
-		console.log('requestSecConn running')
-    return await axios.get( BASE_URL + ESC_EXT )
+	console.log('requestSecConn running')
+	return await axios.get(BASE_URL + ESC_EXT)
 }
 
-export const establishSecConn = async ({ key, prime, generator }) => {
-    const { cKey } = calculateDH(key, prime, generator)
+export const establishSecConn = async ({key, prime, generator}) => {
+	const {cKey} = calculateDH(key, prime, generator)
 
-    // await AsyncStorage.setItem('secret', secret.toString('hex')) // NEED TO MORE SECURE FORM OF STORAGE
+	// await AsyncStorage.setItem('secret', secret.toString('hex')) // NEED TO MORE SECURE FORM OF STORAGE
 
-    return await axios.post( BASE_URL + ESC_EXT, { cKey } )
+	return await axios.post(BASE_URL + ESC_EXT, {cKey})
 }

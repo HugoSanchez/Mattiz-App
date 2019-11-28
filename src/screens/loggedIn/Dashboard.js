@@ -3,14 +3,11 @@ import {
 	View,
 	Text,
 	Image,
-	Modal,
-	TouchableOpacity,
 	ScrollView,
 	Dimensions,
 	StyleSheet,
 } from 'react-native'
 import {withNavigationFocus} from 'react-navigation'
-import Icon from 'react-native-vector-icons/SimpleLineIcons'
 import {connect} from 'react-redux'
 
 // Components.
@@ -47,17 +44,6 @@ class Dashboard extends Component {
 		this.state = {
 			renderButton: true,
 		}
-	}
-
-	static navigationOptions = {
-		title: 'Dashboard',
-		drawerIcon: ({focused}) => (
-			<Icon
-				name={'home'}
-				size={20}
-				color={focused ? colors.palleteDarkGreen : colors.paletteGray}
-			/>
-		),
 	}
 
 	componentWillMount() {

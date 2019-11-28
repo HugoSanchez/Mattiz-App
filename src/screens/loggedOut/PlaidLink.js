@@ -3,7 +3,7 @@ import React, {Component} from 'react'
 import {WebView} from 'react-native-webview'
 
 import {
-	getAccessToken,
+	getPlaidAccessToken,
 	setTokenInMemory,
 	getTokenFromMemory,
 } from '../../api'
@@ -18,60 +18,56 @@ const countryCodes = ['US,GB,ES,FR']
 
 const uri = `https://cdn.plaid.com/link/v2/stable/link.html?key=${publicKey}&countryCodes=${countryCodes}&apiVersion=v2&env=${env}&product=${product}&clientName=${clientName}&isWebView=true&isMobile=true&selectAccount=${selectAccount}`
 class PlaidLink extends Component {
-	onMessage = e => {
+	onMessage = async e => {
 		const data = JSON.parse(e.nativeEvent.data)
 		const key = data.action
 			.substr(data.action.lastIndexOf(':') + 1)
 			.toUpperCase()
 
+		console.log('KEY: ', key)
+
 		if (key === 'CONNECTED') {
-			// Call API method to get access token.
-			getAccessToken(data.metadata.public_token)
-				// Save token in memory.
-				.then(async res => {
-					// First check if there already exists a 'plaid-token' item in memory.
-					await getTokenFromMemory('plaid-tokens').then(
-						async tokens => {
-							// If so,
-							if (tokens) {
-								// Parse it to get the token array,
-								const tokenObject = JSON.parse(tokens)
-								// Push the new token
-								tokenObject.tokenArray.push(
-									res.data.access_token,
-								)
-								// And save again.
-								await setTokenInMemory(
-									'plaid-tokens',
-									JSON.stringify(tokenObject),
-								)
-								// If not,
-							} else {
-								// Create the token object and array
-								const tokenObject = {tokenArray: []}
-								// And push the first token into it.
-								tokenObject.tokenArray.push(
-									res.data.access_token,
-								)
-								// Then save it in memory.
-								await setTokenInMemory(
-									'plaid-tokens',
-									JSON.stringify(tokenObject),
-								)
-							}
-							this.refs[WEBVIEW_REF].reload()
-							// Finally, navigate user to OnboardingTransition screen.
-							this.props.navigation.navigate(
-								'OnboardingTransition',
-							)
-						},
-					)
-				})
-				.catch(error => {
-					// Navigate to transition screen
-					// if (error) { this.props.navigation.navigate('OnboardingTransition') }
-				})
+			console.log('About to call access token', getPlaidAccessToken)
+			let res = await getPlaidAccessToken(data.metadata.public_token)
+			console.log('res: ', res)
+			let response = await eschangePublicToken(data.metadata.public_token)
+			console.log('response: ', response)
+			let accessToken = response.data.access_token
+			// First check if there already exists a 'plaid-token' item in memory.
+			let tokens = await getTokenFromMemory('plaid-tokens')
+			// If so,
+			if (tokens) {
+				pushAndSaveNewTokenToTokenArray(tokens, accessToken)
+				// If not,
+			} else {
+				createTokenArray(res.data.access_token)
+			}
+			this.refs[WEBVIEW_REF].reload()
+			// Finally, navigate user to OnboardingTransition screen.
+			this.props.navigation.navigate('OnboardingTransition')
 		}
+	}
+
+	// Echange public for access token.
+	async eschangePublicToken(token) {
+		// eslint-disable-next-line prettier/prettier
+		try { await getAccessToken(token)} 
+			// eslint-disable-next-line prettier/prettier
+		catch (e) {console.error(e)}
+	}
+
+	// Parse token array and store new token.
+	async pushAndSaveNewTokenToTokenArray(tokens, accessToken) {
+		const tokenObject = JSON.parse(tokens)
+		tokenObject.tokenArray.push(accessToken)
+		await setTokenInMemory('plaid-tokens', JSON.stringify(tokenObject))
+	}
+
+	// Create token array and store new token.
+	async createTokenArray(accessToken) {
+		const tokenObject = {tokenArray: []}
+		tokenObject.tokenArray.push(accessToken)
+		await setTokenInMemory('plaid-tokens', JSON.stringify(tokenObject))
 	}
 
 	render() {
