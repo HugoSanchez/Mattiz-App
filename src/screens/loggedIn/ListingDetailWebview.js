@@ -19,10 +19,6 @@ class ListingDetailWebview extends Component {
 					style={{flex: 1, borderWidth: 3, borderColor: '#000'}}
 					source={{uri: this.props.navigation.getParam('url')}}
 					useWebKit
-					onLoad={() => console.log('loaded')}
-					onLoadProgress={() => console.log('Progressing...')}
-					onLoadStart={() => console.log('Load Starting!')}
-					onLoadEnd={() => console.log('Load Ended!')}
 				/>
 			</View>
 		)

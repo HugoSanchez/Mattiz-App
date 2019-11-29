@@ -52,10 +52,13 @@ function* handleEthPriceLoad() {
     // Call cryptonator API. 
     let res = yield getEthPrice()
     // Parse result. 
+    debugger
     let ethPrice = parseFloat(res.data.ticker.price).toFixed(2)
     // Set result in redux state.
+    debugger
     yield put(setCurrentEthPriceInReduxState(ethPrice))
     // Move to next function.
+    debugger
     yield* handlegasPriceAndFees(ethPrice)
 }
 

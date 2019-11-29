@@ -23,9 +23,8 @@ class PlaidLink extends Component {
 		const key = data.action
 			.substr(data.action.lastIndexOf(':') + 1)
 			.toUpperCase()
-		console.log("PlaidLink")
+
 		if (key === 'CONNECTED') {
-			debugger
 			// Call API method to get access token.
 			getAccessToken(data.metadata.public_token)
 				// Save token in memory.
@@ -62,9 +61,7 @@ class PlaidLink extends Component {
 							}
 							this.refs[WEBVIEW_REF].reload()
 							// Finally, navigate user to OnboardingTransition screen.
-							this.props.navigation.navigate(
-								'OnboardingTransition',
-							)
+							this.props.navigation.navigate('OnboardingTransition')
 						},
 					)
 				})
@@ -82,10 +79,10 @@ class PlaidLink extends Component {
 				source={{uri}}
 				onMessage={this.onMessage}
 				useWebKit
-				onLoad={() => console.log('loaded')}
-				onLoadProgress={() => console.log('Progressing...')}
-				onLoadStart={() => console.log('Load Starting!')}
-				onLoadEnd={() => console.log('Load Ended!')}
+				onLoad={() => null}
+				onLoadProgress={() => null}
+				onLoadStart={() => null}
+				onLoadEnd={() => null}
 			/>
 		)
 	}

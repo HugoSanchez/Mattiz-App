@@ -49,17 +49,6 @@ class Dashboard extends Component {
 		}
 	}
 
-	static navigationOptions = {
-		title: 'Dashboard',
-		drawerIcon: ({focused}) => (
-			<Icon
-				name={'home'}
-				size={20}
-				color={focused ? colors.palleteDarkGreen : colors.paletteGray}
-			/>
-		),
-	}
-
 	componentWillMount() {
 		this.props.loadPlaidInfo()
 		this.props.loadMarketDataETH(this.props.timeframe)

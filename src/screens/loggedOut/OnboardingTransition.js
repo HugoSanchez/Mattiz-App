@@ -12,7 +12,6 @@ const OnboardingTransition = props => {
 
 	return (
 		<View style={container}>
-			{console.log('transition!')}
 			<View
 				style={{
 					alignItems: 'center',

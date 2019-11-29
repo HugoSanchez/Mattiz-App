@@ -31,7 +31,7 @@ const getBuilder = ({ url, navigation }) => {
 
 const postBuilder = async ({ url, body, navigation }) => {
 	const encData = await encryptData(body)
-
+	
 	return await axios.post( BASE_URL + url, encData )
 	.then( masterMiddleWare )
 	.catch( resp => errorMiddleWare(resp, navigation) )
@@ -51,7 +51,7 @@ const errorMiddleWare = (resp, navigation) => {
 	// return resp
 	switch(resp.status) {
 		case 401:
-			navigation.navigate('SignUp')
+			navigation.navigate('InitialLoading')
 			break
 		default:
 			// navigation.navigate('404')
@@ -112,8 +112,6 @@ export const verifyUser = (userID, password) => {
 
 // CALL "/get_acess_token" ENDPOINT.
 export const getAccessToken = async publicToken => {
-	// console.log(' hit! ', URL + plaid/get_access_token')
-
 	return await postBuilder({ 
 		url: PLAID_EXT + '/get_access_token', 
 		body: { public_token: publicToken	},
@@ -148,23 +146,27 @@ export const getHistoricPrices = async (timeframe, currency) => {
 }
 
 export const getEthPrice = async () => {
+	console.log(CRYPTO_BASE_URL + '/eth-usd')
+	debugger
+	return await fetch( CRYPTO_BASE_URL + '/eth-usd' )
+	.then( resp => resp.json() )
+
 	return await axios.get( CRYPTO_BASE_URL + '/eth-usd' )
 }
 
 export const getBtcPrice = async () => {
-    return await axios.get(CRYPTO_BASE_URL + '/btc-usd' )
+    return await axios.get( CRYPTO_BASE_URL + '/btc-usd' )
 }
 
 // ESTABLISH SC
 export const requestSecConn = async () => {
-		console.log('requestSecConn running')
+		// console.log('requestSecConn running')
     return await axios.get( BASE_URL + ESC_EXT )
 }
 
-export const establishSecConn = async ({ key, prime, generator }) => {
-    const { cKey } = calculateDH(key, prime, generator)
+export const establishSecConn = async ({ pubKey, prime, generator }) => {
+		// console.log('establishSecConn running')
+    const key = calculateDH(pubKey, prime, generator)
 
-    // await AsyncStorage.setItem('secret', secret.toString('hex')) // NEED TO MORE SECURE FORM OF STORAGE
-
-    return await axios.post( BASE_URL + ESC_EXT, { cKey } )
+    return await axios.post( BASE_URL + ESC_EXT, { key } )
 }

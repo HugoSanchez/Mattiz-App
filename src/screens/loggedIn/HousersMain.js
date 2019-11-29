@@ -31,7 +31,6 @@ class HousersMain extends Component {
 							<View style={{marginBottom: 15}}>
 								<HousersListingCard
 									onDetailPress={() => {
-										console.log('pressed')
 										this.props.navigation.navigate(
 											'ListingDetailWebview',
 											{url: l.url},
