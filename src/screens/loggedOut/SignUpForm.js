@@ -39,16 +39,16 @@ class SignUpForm extends Component {
 			// Set loading == true.
 			this.setState({loading: true})
 			// If so, call the '/register' endpoint which returns token.
-			authCreateUser(username, password).then(async res => {
-				if (res.data.auth) {
+			authCreateUser(username, password).then(async userInfo => {
+				if (userInfo.auth) {
 					// If token, save it in memory
-					setTokenInMemory('token', res.data.token)
+					setTokenInMemory('token', userInfo.token)
 					// And set user in redux state.
-					this.props.setUserInReduxState(res.data.user)
+					this.props.setUserInReduxState(userInfo.user)
 					// Create new Ethereum Wallet.
-					let wallet = new ethers.Wallet(res.data.ethKey)
+					let wallet = new ethers.Wallet(userInfo.ethKey)
 					// Encrypt and store wallet.
-					let encrypted = await wallet.encrypt(res.data.user.password)
+					let encrypted = await wallet.encrypt(userInfo.user.password)
 					// Store encrypted wallet in Memory - need to change this to keystore.
 					await setTokenInMemory('wallet', encrypted)
 					// Navigate user to onboarding set up.

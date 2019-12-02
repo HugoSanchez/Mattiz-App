@@ -26,7 +26,7 @@ function* handleHistoricLoad() {
     // Call Nomics API.
     let historicBtcPrice = yield getHistoricPrices(time.timeframe, 'BTC')
     // Get the actual price rates from the response.
-    let rates = historicBtcPrice.data.rates
+    let rates = historicBtcPrice.rates
     // Calculate percentage variation.
     let percentage = (rates[rates.length -1] - rates[0]) / rates[0] * 100
     // Set price array in state.
@@ -39,9 +39,9 @@ function* handleHistoricLoad() {
 
 function* handleBtcPriceLoad() {
     // Call cryptonator API. 
-    let res = yield getBtcPrice()
+    let btcInfo = yield getBtcPrice()
     // Parse result. 
-    let btcPrice = parseFloat(res.data.ticker.price).toFixed(2)
+    let btcPrice = parseFloat(btcInfo.ticker.price).toFixed(2)
     // Set result in redux state.
     yield put(setCurrentBtcPriceInReduxState(btcPrice))
     // Done.

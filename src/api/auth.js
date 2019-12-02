@@ -1,5 +1,6 @@
 import {AsyncStorage} from 'react-native'
 import axios from 'axios'
+import {calculateDH, encryptData, decryptData } from './helper'
 
 const URL = 'http://localhost:3000/api'
 
@@ -11,6 +12,36 @@ const URL = 'http://localhost:3000/api'
  *  @ 'plaid-tokens' - array of plaid access_tokens.
  *  @ 'wallet' - ethers encrypted wallet.
  */
+
+ // CONNECTION REQUEST
+export const requestSC = async () => {
+	return await axios.get(URL + '/esc')
+}
+
+export const establishSC = async ({ id, prime, generator, pubKey }) => {
+	await AsyncStorage.setItem('id', id)
+
+	const key = calculateDH(prime, generator, pubKey)
+
+	return await axios.post(URL + '/esc', { id, key })
+}
+
+const getBuilder = (url) => {
+	return axios.get(url)
+	.then( middleWare )
+}
+
+const postBuilder = async (url, body) => {
+	return await axios.post(url, {
+		id: await AsyncStorage.getItem('id'),
+		data: encryptData(body),
+	})
+	.then( middleWare )
+}
+
+const middleWare = (resp) => {
+	return decryptData(resp.data.data)
+}
 
 // CHECK IF TOKEN EXISTS, RETURNS BOOLEAN.
 export const isLoggedIn = async () => {
@@ -37,16 +68,22 @@ export const removeTokenFromMemory = async key => {
 
 // CALL "/register" ENDPOINT.
 export const authCreateUser = (name, password) => {
+	return postBuilder(URL + '/auth/register', {name, password})
+
 	return axios.post(URL + '/auth/register', {name, password})
 }
 
 // CALL "/identify" ENDPOINT, RETURNS NAME & ID.
 export const identifyUser = token => {
+	return postBuilder(URL + '/auth/identify', {token})
+	
 	return axios.post(URL + '/auth/identify', {token})
 }
 
 // CALL "/login" ENDPOINT, RETURNS OBJECT { auth: bool, token: token }
 export const verifyUser = (userID, password) => {
+	return postBuilder(URL + '/auth/login', {_id: userID, password})
+	
 	return axios.post(URL + '/auth/login', {_id: userID, password})
 }
 
@@ -54,7 +91,10 @@ export const verifyUser = (userID, password) => {
 
 // CALL "/get_acess_token" ENDPOINT.
 export const getAccessToken = async publicToken => {
-	console.log(' hit! ', URL + '/plaid/get_access_token')
+	return await postBuilder(URL + '/plaid/get_access_token', {
+		public_token: publicToken,
+	})
+	
 	return await axios.post(URL + '/plaid/get_access_token', {
 		public_token: publicToken,
 	})
@@ -62,6 +102,10 @@ export const getAccessToken = async publicToken => {
 
 export const getBalance = async () => {
 	const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
+	return await postBuilder(URL + '/plaid/accounts', {
+		accessTokenArray: tokens.tokenArray,
+	})
+	
 	return await axios.post(URL + '/plaid/accounts', {
 		accessTokenArray: tokens.tokenArray,
 	})
@@ -69,6 +113,10 @@ export const getBalance = async () => {
 
 export const getTransactions = async () => {
 	const tokens = JSON.parse(await getTokenFromMemory('plaid-tokens'))
+	return await postBuilder(URL + '/plaid/last_90_days_transactions', {
+		accessTokenArray: tokens.tokenArray,
+	})
+	
 	return await axios.post(URL + '/plaid/last_90_days_transactions', {
 		accessTokenArray: tokens.tokenArray,
 	})
@@ -77,6 +125,11 @@ export const getTransactions = async () => {
 // MARKET DATA FUNCTIONS //
 
 export const getHistoricPrices = async (timeframe, currency) => {
+	return await postBuilder(URL + '/data/get_historical_data', {
+		timeframe,
+		currency,
+	})
+	
 	return await axios.post(URL + '/data/get_historical_data', {
 		timeframe,
 		currency,

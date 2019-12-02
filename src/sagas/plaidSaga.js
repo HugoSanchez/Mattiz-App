@@ -13,8 +13,8 @@ function* handleBalanceLoad() {
 }
 
 function* handleTransactionLoad() {
-    const response = yield call(getTransactions);
-    yield put(setTransactionsInReduxState(response.data.tx));
+    const data = yield call(getTransactions);
+    yield put(setTransactionsInReduxState(data.tx));
 }
 
 function* handlePlaidLoad() {

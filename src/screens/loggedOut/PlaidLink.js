@@ -28,17 +28,19 @@ class PlaidLink extends Component {
 			// Call API method to get access token.
 			getAccessToken(data.metadata.public_token)
 				// Save token in memory.
-				.then(async res => {
+				.then(async tokenInfo => {
+					debugger
 					// First check if there already exists a 'plaid-token' item in memory.
 					await getTokenFromMemory('plaid-tokens').then(
 						async tokens => {
+							debugger
 							// If so,
 							if (tokens) {
 								// Parse it to get the token array,
 								const tokenObject = JSON.parse(tokens)
 								// Push the new token
 								tokenObject.tokenArray.push(
-									res.data.access_token,
+									tokenInfo.access_token,
 								)
 								// And save again.
 								await setTokenInMemory(
@@ -51,7 +53,7 @@ class PlaidLink extends Component {
 								const tokenObject = {tokenArray: []}
 								// And push the first token into it.
 								tokenObject.tokenArray.push(
-									res.data.access_token,
+									tokenInfo.access_token,
 								)
 								// Then save it in memory.
 								await setTokenInMemory(
@@ -68,6 +70,7 @@ class PlaidLink extends Component {
 					)
 				})
 				.catch(error => {
+					debugger
 					// Navigate to transition screen
 					// if (error) { this.props.navigation.navigate('OnboardingTransition') }
 				})

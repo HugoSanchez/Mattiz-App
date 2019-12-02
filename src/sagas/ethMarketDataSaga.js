@@ -28,7 +28,7 @@ function* handleHistoricLoad() {
 	// Call Nomics API.
 	let historicEthPrice = yield getHistoricPrices(time.timeframe, 'ETH')
 	// Get the actual price rates from the response.
-	let rates = historicEthPrice.data.rates
+	let rates = historicEthPrice.rates
 	// Calculate percentage variation.
 	let percentage = ((rates[rates.length - 1] - rates[0]) / rates[0]) * 100
 	// Set price array in state.
@@ -43,7 +43,7 @@ function* handleEthPriceLoad() {
 	// Call cryptonator API.
 	let res = yield getEthPrice()
 	// Parse result.
-	let ethPrice = parseFloat(res.data.ticker.price).toFixed(2)
+	let ethPrice = parseFloat(res.ticker.price).toFixed(2)
 	// Set result in redux state.
 	yield put(setCurrentEthPriceInReduxState(ethPrice))
 	// Move to next function.

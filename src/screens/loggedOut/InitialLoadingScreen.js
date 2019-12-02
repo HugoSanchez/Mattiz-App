@@ -6,11 +6,16 @@ import {connect} from 'react-redux'
 // Auth Actions & Functions
 import {getTokenFromMemory, identifyUser} from '../../api/auth'
 import {setUserInReduxState, setTokeninReduxState} from '../../actions'
+import {requestSC, establishSC} from '../../api/auth'
 
 class InitialLoadingScreen extends Component {
 	async componentDidMount() {
 		// This is just to test the interaction
-		setTimeout(this.initiateFunction.bind(this), 4000)
+
+		const data = await requestSC()
+		await establishSC( data.data )
+
+		this.initiateFunction.bind(this)()
 	}
 
 	async initiateFunction() {
