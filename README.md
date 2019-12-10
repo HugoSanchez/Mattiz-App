@@ -11,6 +11,9 @@
 5. Run rn-nodeify hack:
 ```./node_modules/.bin/rn-nodeify --hack --install```
 
+5. Install pods:
+```cd ios && pod install && cd ..```
+
 6. ```npm start -- --reset-cache```
 
 7. on another terminal window run 
