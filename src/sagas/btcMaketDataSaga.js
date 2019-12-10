@@ -41,7 +41,7 @@ function* handleBtcPriceLoad() {
     // Call cryptonator API. 
     let btcInfo = yield getBtcPrice()
     // Parse result. 
-    let btcPrice = parseFloat(btcInfo.ticker.price).toFixed(2)
+    let btcPrice = parseFloat(btcInfo.data.ticker.price).toFixed(2)
     // Set result in redux state.
     yield put(setCurrentBtcPriceInReduxState(btcPrice))
     // Done.

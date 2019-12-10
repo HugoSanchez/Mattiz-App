@@ -9,7 +9,7 @@ import {
 
 function* handleBalanceLoad() {
     const response = yield call(getBalance);
-    yield put(setBalanceInReduxState(JSON.parse(response.data.balance)))
+    yield put(setBalanceInReduxState(JSON.parse(response.balance)))
 }
 
 function* handleTransactionLoad() {

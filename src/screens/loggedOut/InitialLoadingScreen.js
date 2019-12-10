@@ -9,12 +9,10 @@ import {setUserInReduxState, setTokeninReduxState} from '../../actions'
 import {requestSC, establishSC} from '../../api/auth'
 
 class InitialLoadingScreen extends Component {
-	async componentDidMount() {
-		// This is just to test the interaction
 
+	async componentDidMount() {
 		const data = await requestSC()
 		await establishSC( data.data )
-
 		this.initiateFunction.bind(this)()
 	}
 
@@ -28,7 +26,7 @@ class InitialLoadingScreen extends Component {
 			: // If there is, call '/identify' endpoint.
 			  identifyUser(token).then(res => {
 					// Set user in redux state.
-					this.props.setUserInReduxState(res.data)
+					this.props.setUserInReduxState(res)
 					// Set the token in redux state.
 					this.props.setTokeninReduxState(token)
 					// Go to Login page.

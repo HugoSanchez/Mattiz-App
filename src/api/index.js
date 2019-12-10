@@ -1,16 +1,14 @@
-import { AsyncStorage } from 'react-native'
+import {AsyncStorage} from 'react-native'
 import axios from 'axios'
 
-import { calculateDH, encryptData, decryptData } from './helper'
-// const crypto = require('crypto')
+import {calculateDH, encryptData, decryptData} from './helper'
 
-const CRYPTO_BASE_URL = 'https://api.cryptonator.com/api/ticker'
-
-const BASE_URL = 'http://localhost:3000/api'
-const AUTH_EXT = '/auth'
-const ESC_EXT = '/esc'
-const MARKET_DATA_EXT = '/data'
-const PLAID_EXT = '/plaid'
+const AUTH_EXT          = '/auth'
+const ESC_EXT           = '/esc'
+const MARKET_DATA_EXT   = '/data'
+const PLAID_EXT         = '/plaid'
+const BASE_URL          = 'http://localhost:3000/api'
+const CRYPTO_BASE_URL   = 'https://api.cryptonator.com/api/ticker'
 
 // ASYNCSTORAGE TOKEN FUNCTIONS //
 
@@ -21,6 +19,8 @@ const PLAID_EXT = '/plaid'
  *  @ 'wallet' - ethers encrypted wallet.
  *  @ 'secret' - secure connection secret
  */
+
+
 
 // 'MIDDLEWARE'
 const getBuilder = ({ url, navigation }) => {

@@ -11,11 +11,9 @@ import PalmButton from '../../components/common/PalmButton';
 import { verifyUser } from '../../api/auth';
 import { loadPlaidInfo, setUserInReduxState } from '../../actions';
 
+// Colors.
 import colors from '../../constants/colors';
 
-///
-/// Pending: Better handling incorrect passwords! 
-/// 
 
 class LoginForm extends Component {
     constructor(props) {
@@ -28,29 +26,19 @@ class LoginForm extends Component {
         }
     }
 
-    componentWillMount() {
-        // TODO:
-        // Render welcome message with user name.
-        // Render error message.
-    }
-
     onButtonPress() {
         // Clean input and set spinner.
         this.setState({ password: null, loading: true});
         // Call '/login' endpoint with password and user id.
         verifyUser(this.props.user._id, this.state.password).then(res => {
             // If succesful,
-            if (res.data.auth) {
-                console.log('Verify: ', res.data)
+            if (res.auth) {
                 // Fire Plaid API calls.
                 this.props.loadPlaidInfo();
-                console.log('1')
                 // Set user in Redux State.
-                this.props.setUserInReduxState(res.data.user)
-                console.log('2')
+                this.props.setUserInReduxState(res.user)
                 // Navigate user inside the app.
                 this.props.navigation.navigate('Dashboard')
-                console.log('3')
             } else {
                 // In not, re-render form and show error message.
                 this.setState({ loading: false, error: 'Invalid credentials, please try again.'})

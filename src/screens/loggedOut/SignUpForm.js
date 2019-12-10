@@ -41,6 +41,7 @@ class SignUpForm extends Component {
 			// If so, call the '/register' endpoint which returns token.
 			authCreateUser(username, password).then(async userInfo => {
 				if (userInfo.auth) {
+					console.log('User: ', userInfo)
 					// If token, save it in memory
 					setTokenInMemory('token', userInfo.token)
 					// And set user in redux state.

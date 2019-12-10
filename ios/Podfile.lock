@@ -58,17 +58,17 @@ PODS:
     - React-cxxreact (= 0.60.5)
     - React-jsi (= 0.60.5)
   - React-jsinspector (0.60.5)
-  - react-native-camera (3.4.0):
+  - react-native-camera (3.14.0):
     - React
-    - react-native-camera/RCT (= 3.4.0)
-    - react-native-camera/RN (= 3.4.0)
-  - react-native-camera/RCT (3.4.0):
+    - react-native-camera/RCT (= 3.14.0)
+    - react-native-camera/RN (= 3.14.0)
+  - react-native-camera/RCT (3.14.0):
     - React
-  - react-native-camera/RN (3.4.0):
+  - react-native-camera/RN (3.14.0):
     - React
   - react-native-randombytes (3.5.3):
     - React
-  - react-native-spinkit (1.0.2):
+  - react-native-spinkit (1.4.1):
     - React
   - react-native-udp (2.6.1):
     - React
@@ -97,11 +97,15 @@ PODS:
     - React-Core (= 0.60.5)
   - React-RCTWebSocket (0.60.5):
     - React-Core (= 0.60.5)
-  - RNGestureHandler (1.4.1):
+  - RNGestureHandler (1.5.2):
     - React
-  - RNSVG (9.9.4):
+  - RNOS (1.2.6):
+    - React
+  - RNSVG (9.13.5):
     - React
   - RNVectorIcons (6.6.0):
+    - React
+  - TcpSockets (3.3.2):
     - React
   - yoga (0.60.5.React)
 
@@ -133,12 +137,14 @@ DEPENDENCIES:
   - React-RCTVibration (from `../node_modules/react-native/Libraries/Vibration`)
   - React-RCTWebSocket (from `../node_modules/react-native/Libraries/WebSocket`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNOS (from `../node_modules/react-native-os`)
   - RNSVG (from `../node_modules/react-native-svg`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
+  - TcpSockets (from `../node_modules/react-native-tcp`)
   - yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  trunk:
     - boost-for-react-native
 
 EXTERNAL SOURCES:
@@ -196,10 +202,14 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/Libraries/WebSocket"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNOS:
+    :path: "../node_modules/react-native-os"
   RNSVG:
     :path: "../node_modules/react-native-svg"
   RNVectorIcons:
     :path: "../node_modules/react-native-vector-icons"
+  TcpSockets:
+    :path: "../node_modules/react-native-tcp"
   yoga:
     :path: "../node_modules/react-native/ReactCommon/yoga"
 
@@ -216,9 +226,9 @@ SPEC CHECKSUMS:
   React-jsi: 4d8c9efb6312a9725b18d6fc818ffc103f60fec2
   React-jsiexecutor: 90ad2f9db09513fc763bc757fdc3c4ff8bde2a30
   React-jsinspector: e08662d1bf5b129a3d556eb9ea343a3f40353ae4
-  react-native-camera: 203091b4bf99d48b788a0682ad573e8718724893
+  react-native-camera: 8861e6c0ca7a2ed62999d6b93c4fbc3d72eada15
   react-native-randombytes: 991545e6eaaf700b4ee384c291ef3d572e0b2ca8
-  react-native-spinkit: 9a5d2f95aa975d5660fd3e76b7eac38e7329e46c
+  react-native-spinkit: da294fd828216ad211fe36a5c14c1e09f09e62db
   react-native-udp: 4a750f0802d4597252f2cae4a2b3302ee5cfa4fc
   react-native-webview: ddb2a971d18cdfe03b42052926576b1483c96be0
   React-RCTActionSheet: b0f1ea83f4bf75fb966eae9bfc47b78c8d3efd90
@@ -231,11 +241,13 @@ SPEC CHECKSUMS:
   React-RCTText: b074d89033583d4f2eb5faf7ea2db3a13c7553a2
   React-RCTVibration: 2105b2e0e2b66a6408fc69a46c8a7fb5b2fdade0
   React-RCTWebSocket: cd932a16b7214898b6b7f788c8bddb3637246ac4
-  RNGestureHandler: 4cb47a93019c1a201df2644413a0a1569a51c8aa
-  RNSVG: 435cda60cd9e1ea6188eb0e21c12fc0f85def8e8
+  RNGestureHandler: 946a7691e41df61e2c4b1884deab41a4cdc3afff
+  RNOS: 6f2f9a70895bbbfbdad7196abd952e7b01d45027
+  RNSVG: 65fc5d2a10c6071b3d5bdf893d27663619d21186
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
+  TcpSockets: 8d839b9b14f6f344d98e4642ded13ab3112b462d
   yoga: 312528f5bbbba37b4dcea5ef00e8b4033fdd9411
 
 PODFILE CHECKSUM: 990955a7ace7ee4e569c016bfd3d291ddf66afcb
 
-COCOAPODS: 1.7.5
+COCOAPODS: 1.8.4
